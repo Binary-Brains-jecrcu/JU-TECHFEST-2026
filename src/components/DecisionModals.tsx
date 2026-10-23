@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   X, 
   AlertTriangle, 
@@ -23,7 +23,11 @@ import {
   ChevronRight,
   ShieldCheck,
   RefreshCw,
-  FileCheck2
+  FileCheck2,
+  BookOpen,
+  PenTool,
+  Filter,
+  Search
 } from 'lucide-react';
 import { PatientContext, PrescriptionDrug, SafetyAnalysisResult } from '../types';
 import { PATIENT_PROFILES } from '../data/mockData';
@@ -324,16 +328,39 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
   onClose,
   onLoadCustomPrescription,
 }) => {
-  const [activeTab, setActiveTab] = useState<'scan' | 'manual'>('scan');
+  const [activeTab, setActiveTab] = useState<'scan' | 'benchmark' | 'manual'>('scan');
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string>('/prescriptions/sample_rx_warfarin.png');
-  const [selectedSampleId, setSelectedSampleId] = useState<string>('warfarin_fluconazole');
+  const [previewUrl, setPreviewUrl] = useState<string>('/prescriptions/ekacare/page_018.png');
+  const [selectedSampleId, setSelectedSampleId] = useState<string>('page_018');
   
   // Pipeline Progress State
   const [isProcessing, setIsProcessing] = useState(false);
   const [activeStep, setActiveStep] = useState<1 | 2 | 3>(1);
   const [statusMessage, setStatusMessage] = useState<string>('');
   
+  // 70-Page Dataset Catalog
+  interface CatalogItem {
+    page: number;
+    pageId: string;
+    rxCode: string;
+    rowNum: string;
+    image: string;
+    isHandwritten: boolean;
+    category: string;
+    diagnosis: string;
+    rawPreview: string;
+  }
+  const [catalog, setCatalog] = useState<CatalogItem[]>([]);
+  const [catalogFilter, setCatalogFilter] = useState<'all' | 'handwritten' | 'acute' | 'chronic' | 'pediatric'>('all');
+  const [catalogSearch, setCatalogSearch] = useState('');
+
+  useEffect(() => {
+    fetch('/prescriptions/ekacare_catalog.json')
+      .then(res => res.json())
+      .then(data => setCatalog(data))
+      .catch(err => console.error('Error loading catalog:', err));
+  }, []);
+
   // Extraction Output Data
   interface ExtractedData {
     drugs: PrescriptionDrug[];
@@ -408,14 +435,20 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
     setUploadedFile(null);
     setExtractedData(null);
 
-    const sampleFileMap: Record<string, string> = {
-      warfarin_fluconazole: '/prescriptions/sample_rx_warfarin.png',
-      apixaban_celecoxib: '/prescriptions/sample_rx_apixaban_celecoxib.png',
-      augmentin_ketorolac: '/prescriptions/sample_rx_augmentin_ketorolac.png'
-    };
-    const fileUrl = sampleFileMap[sampleId] || '/prescriptions/sample_rx_warfarin.png';
+    let fileUrl = '';
+    if (sampleId.startsWith('page_')) {
+      fileUrl = `/prescriptions/ekacare/${sampleId}.png`;
+    } else {
+      const sampleFileMap: Record<string, string> = {
+        warfarin_fluconazole: '/prescriptions/sample_rx_warfarin.png',
+        apixaban_celecoxib: '/prescriptions/sample_rx_apixaban_celecoxib.png',
+        augmentin_ketorolac: '/prescriptions/sample_rx_augmentin_ketorolac.png'
+      };
+      fileUrl = sampleFileMap[sampleId] || `/prescriptions/ekacare/${sampleId}.png`;
+    }
     setPreviewUrl(fileUrl);
-    runExtraction({ sampleId, fileName: fileUrl.split('/').pop() || 'prescription.png' });
+    setActiveTab('scan');
+    runExtraction({ sampleId, fileName: `${sampleId}.png` });
   };
 
   const runExtraction = async (payload: { imageBase64?: string; sampleId?: string; fileName?: string }) => {
@@ -556,10 +589,10 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
         )}
 
         {/* Tab switcher */}
-        <div className="px-6 pt-3 flex gap-3 border-b border-[#E1EAE5] bg-white">
+        <div className="px-6 pt-3 flex gap-3 border-b border-[#E1EAE5] bg-white overflow-x-auto">
           <button
             onClick={() => setActiveTab('scan')}
-            className={`pb-2 text-xs font-semibold border-b-2 flex items-center gap-1.5 transition-all ${
+            className={`pb-2 text-xs font-semibold border-b-2 flex items-center gap-1.5 transition-all whitespace-nowrap ${
               activeTab === 'scan'
                 ? 'border-[#087F5B] text-[#075E4B]'
                 : 'border-transparent text-[#64756D] hover:text-[#172B25]'
@@ -569,8 +602,22 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
             PaddleOCR + Qwen-VL Vision Extraction
           </button>
           <button
+            onClick={() => setActiveTab('benchmark')}
+            className={`pb-2 text-xs font-semibold border-b-2 flex items-center gap-1.5 transition-all whitespace-nowrap ${
+              activeTab === 'benchmark'
+                ? 'border-[#087F5B] text-[#075E4B]'
+                : 'border-transparent text-[#64756D] hover:text-[#172B25]'
+            }`}
+          >
+            <BookOpen className="w-3.5 h-3.5" />
+            70-Page Real-World Clinical Benchmark
+            <span className="ml-1 px-1.5 py-0.2 bg-[#DDF5EA] text-[#075E4B] text-[10px] font-bold rounded-full">
+              70 Pages
+            </span>
+          </button>
+          <button
             onClick={() => setActiveTab('manual')}
-            className={`pb-2 text-xs font-semibold border-b-2 flex items-center gap-1.5 transition-all ${
+            className={`pb-2 text-xs font-semibold border-b-2 flex items-center gap-1.5 transition-all whitespace-nowrap ${
               activeTab === 'manual'
                 ? 'border-[#087F5B] text-[#075E4B]'
                 : 'border-transparent text-[#64756D] hover:text-[#172B25]'
@@ -587,57 +634,73 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
             <div className="space-y-4">
               
               {/* Preset Selector & File Upload Row */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
                 {/* Upload tile */}
-                <label className="border-2 border-dashed border-[#B6E8D3] hover:border-[#087F5B] bg-[#F7FAF8] hover:bg-[#F0F7F4] rounded-xl p-3.5 text-center cursor-pointer flex flex-col items-center justify-center transition-all group">
+                <label className="border-2 border-dashed border-[#B6E8D3] hover:border-[#087F5B] bg-[#F7FAF8] hover:bg-[#F0F7F4] rounded-xl p-2.5 text-center cursor-pointer flex flex-col items-center justify-center transition-all group">
                   <input
                     type="file"
                     accept=".pdf,.png,.jpg,.jpeg,.webp"
                     onChange={handleFileUpload}
                     className="hidden"
                   />
-                  <div className="w-8 h-8 rounded-full bg-[#DDF5EA] text-[#087F5B] flex items-center justify-center mb-1.5 group-hover:scale-105 transition-transform">
-                    <Upload className="w-4 h-4" />
+                  <div className="w-7 h-7 rounded-full bg-[#DDF5EA] text-[#087F5B] flex items-center justify-center mb-1 group-hover:scale-105 transition-transform">
+                    <Upload className="w-3.5 h-3.5" />
                   </div>
                   <div className="text-xs font-bold text-[#172B25]">
-                    Upload Custom Scan / PDF
+                    Upload Custom Scan
                   </div>
                   <div className="text-[10px] text-[#64756D]">
-                    Drop hospital order, e-script, or slip
+                    PDF, JPG, PNG
                   </div>
                 </label>
 
                 {/* Verified Presets */}
                 <div 
-                  onClick={() => handleSelectSample('warfarin_fluconazole')}
-                  className={`p-3 rounded-xl border cursor-pointer transition-all ${
-                    selectedSampleId === 'warfarin_fluconazole'
+                  onClick={() => handleSelectSample('page_018')}
+                  className={`p-2.5 rounded-xl border cursor-pointer transition-all ${
+                    selectedSampleId === 'page_018'
                       ? 'border-[#087F5B] bg-[#F0F7F4] ring-1 ring-[#087F5B]'
                       : 'border-[#E1EAE5] bg-white hover:border-[#CBDAD4]'
                   }`}
                 >
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] font-bold text-[#087F5B] uppercase tracking-wider">Inpatient ICU Rx</span>
-                    <span className="text-[9px] font-semibold px-1.5 py-0.2 bg-red-100 text-red-700 rounded">DDI Hazard</span>
+                  <div className="flex items-center justify-between mb-0.5">
+                    <span className="text-[10px] font-bold text-amber-700 uppercase tracking-wider">✍️ Doctor Cursive</span>
+                    <span className="text-[9px] font-semibold px-1 py-0.2 bg-red-100 text-red-700 rounded">MTX Toxicity</span>
                   </div>
-                  <div className="text-xs font-bold text-[#172B25]">Warfarin + Fluconazole</div>
-                  <div className="text-[10px] text-[#64756D] mt-0.5">Eleanor Vance (Age 71) • CrCl 32 mL/min</div>
+                  <div className="text-xs font-bold text-[#172B25] truncate">Page 18: Folitrax + Retoz</div>
+                  <div className="text-[10px] text-[#64756D] truncate mt-0.5">Methotrexate + NSAID Bone Marrow Hazard</div>
                 </div>
 
                 <div 
-                  onClick={() => handleSelectSample('apixaban_celecoxib')}
-                  className={`p-3 rounded-xl border cursor-pointer transition-all ${
-                    selectedSampleId === 'apixaban_celecoxib'
+                  onClick={() => handleSelectSample('page_007')}
+                  className={`p-2.5 rounded-xl border cursor-pointer transition-all ${
+                    selectedSampleId === 'page_007'
                       ? 'border-[#087F5B] bg-[#F0F7F4] ring-1 ring-[#087F5B]'
                       : 'border-[#E1EAE5] bg-white hover:border-[#CBDAD4]'
                   }`}
                 >
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] font-bold text-[#087F5B] uppercase tracking-wider">Cardiology Outpatient</span>
-                    <span className="text-[9px] font-semibold px-1.5 py-0.2 bg-amber-100 text-amber-700 rounded">Bleed + Sulfa</span>
+                  <div className="flex items-center justify-between mb-0.5">
+                    <span className="text-[10px] font-bold text-amber-700 uppercase tracking-wider">✍️ Handwritten Note</span>
+                    <span className="text-[9px] font-semibold px-1 py-0.2 bg-red-100 text-red-700 rounded">FDE Allergy</span>
                   </div>
-                  <div className="text-xs font-bold text-[#172B25]">Eliquis + Celebrex</div>
-                  <div className="text-[10px] text-[#64756D] mt-0.5">Arthur Pendelton (Age 68) • Sulfa Allergy</div>
+                  <div className="text-xs font-bold text-[#172B25] truncate">Page 07: Fixed Drug Eruption</div>
+                  <div className="text-[10px] text-[#64756D] truncate mt-0.5">'Avoid Norfloxacin/Ciprofloxacin' note</div>
+                </div>
+
+                <div 
+                  onClick={() => handleSelectSample('page_015')}
+                  className={`p-2.5 rounded-xl border cursor-pointer transition-all ${
+                    selectedSampleId === 'page_015'
+                      ? 'border-[#087F5B] bg-[#F0F7F4] ring-1 ring-[#087F5B]'
+                      : 'border-[#E1EAE5] bg-white hover:border-[#CBDAD4]'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-0.5">
+                    <span className="text-[10px] font-bold text-[#087F5B] uppercase tracking-wider">Nephropathy Precaution</span>
+                    <span className="text-[9px] font-semibold px-1 py-0.2 bg-amber-100 text-amber-800 rounded">CKD 3b</span>
+                  </div>
+                  <div className="text-xs font-bold text-[#172B25] truncate">Page 15: Type 2 DM + Cr-1.94</div>
+                  <div className="text-[10px] text-[#64756D] truncate mt-0.5">Renal diet & Avoid Painkillers rule</div>
                 </div>
               </div>
 
@@ -735,7 +798,7 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                   {/* Manual Run button if not already extracted */}
                   {!extractedData && !isProcessing && (
                     <button
-                      onClick={() => runExtraction({ sampleId: selectedSampleId || 'warfarin_fluconazole' })}
+                      onClick={() => runExtraction({ sampleId: selectedSampleId || 'page_018' })}
                       className="w-full py-2 bg-[#087F5B] hover:bg-[#075E4B] text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all"
                     >
                       <Sparkles className="w-3.5 h-3.5" />
@@ -858,7 +921,7 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                         Ready for Clinical Extraction
                       </div>
                       <p className="text-[11px] max-w-xs">
-                        Select a verified test prescription above or upload a custom image/PDF order. PaddleOCR and Qwen-VL will extract active drugs, patient allergy context, and calculate safety findings.
+                        Select a verified test prescription above or browse the 70-page benchmark dataset. PaddleOCR and Qwen-VL will extract active drugs, patient allergy context, and calculate safety findings.
                       </p>
                     </div>
                   )}
@@ -866,6 +929,124 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                 </div>
               </div>
 
+            </div>
+          ) : activeTab === 'benchmark' ? (
+            /* 70-Page Real-World Clinical Benchmark View */
+            <div className="space-y-4">
+              <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between bg-gradient-to-r from-[#F0F7F4] to-[#F7FAF8] border border-[#B6E8D3] p-3.5 rounded-xl">
+                <div>
+                  <div className="text-xs font-bold text-[#075E4B] flex items-center gap-1.5">
+                    <BookOpen className="w-4 h-4 text-[#087F5B]" />
+                    70-Page Real-World Clinical Prescription Benchmark (ekacare validation set)
+                  </div>
+                  <div className="text-[11px] text-[#64756D] mt-0.5">
+                    Trained across doctor cursive handwriting, Indian dosing formats (1-0-1, OD, BD, SOS), and hospital discharge summaries.
+                  </div>
+                </div>
+
+                <div className="relative w-full sm:w-56">
+                  <Search className="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-[#64756D]" />
+                  <input
+                    type="text"
+                    placeholder="Search page or diagnosis..."
+                    value={catalogSearch}
+                    onChange={(e) => setCatalogSearch(e.target.value)}
+                    className="w-full pl-8 pr-3 py-1.5 bg-white border border-[#CBDAD4] rounded-lg text-xs text-[#172B25] focus:outline-none focus:ring-1 focus:ring-[#087F5B]"
+                  />
+                </div>
+              </div>
+
+              {/* Filter Pills */}
+              <div className="flex flex-wrap gap-2 text-xs">
+                {[
+                  { id: 'all', label: `All 70 Pages (${catalog.length})` },
+                  { id: 'handwritten', label: '✍️ Doctor Handwriting & Cursive (11)' },
+                  { id: 'acute', label: '⚡ Inpatient & Acute Care' },
+                  { id: 'chronic', label: '🩺 Chronic Disease & Renal' },
+                  { id: 'pediatric', label: '👶 Pediatric & Antibiotic' },
+                ].map((f) => (
+                  <button
+                    key={f.id}
+                    onClick={() => setCatalogFilter(f.id as any)}
+                    className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
+                      catalogFilter === f.id
+                        ? 'bg-[#087F5B] text-white shadow-2xs font-semibold'
+                        : 'bg-white border border-[#CBDAD4] text-[#64756D] hover:text-[#172B25] hover:bg-gray-50'
+                    }`}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* 70 Pages Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-h-[440px] overflow-y-auto pr-1">
+                {catalog
+                  .filter((item) => {
+                    if (catalogFilter === 'handwritten' && !item.isHandwritten) return false;
+                    if (catalogFilter === 'acute' && item.category !== 'Inpatient & Acute Care') return false;
+                    if (catalogFilter === 'chronic' && item.category !== 'Chronic Disease & Renal Care') return false;
+                    if (catalogFilter === 'pediatric' && item.category !== 'Pediatric & Antimicrobial') return false;
+                    if (catalogSearch.trim()) {
+                      const q = catalogSearch.toLowerCase();
+                      return (
+                        item.rxCode.toLowerCase().includes(q) ||
+                        item.diagnosis.toLowerCase().includes(q) ||
+                        item.category.toLowerCase().includes(q) ||
+                        String(item.page).includes(q)
+                      );
+                    }
+                    return true;
+                  })
+                  .map((item) => (
+                    <div
+                      key={item.pageId}
+                      onClick={() => handleSelectSample(item.pageId)}
+                      className={`group bg-white border rounded-xl overflow-hidden cursor-pointer transition-all hover:shadow-md hover:border-[#087F5B] flex flex-col ${
+                        selectedSampleId === item.pageId ? 'ring-2 ring-[#087F5B] border-[#087F5B]' : 'border-[#E1EAE5]'
+                      }`}
+                    >
+                      <div className="h-32 bg-gray-50 border-b border-[#E1EAE5] relative overflow-hidden flex items-center justify-center">
+                        <img
+                          src={item.image}
+                          alt={`Page ${item.page}`}
+                          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform"
+                          loading="lazy"
+                        />
+                        {item.isHandwritten && (
+                          <span className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-500 text-white shadow-xs">
+                            ✍️ Handwriting
+                          </span>
+                        )}
+                        <span className="absolute bottom-1.5 left-1.5 px-1.5 py-0.2 rounded text-[9px] font-mono font-semibold bg-black/60 text-white">
+                          Page {item.page}
+                        </span>
+                      </div>
+
+                      <div className="p-2.5 flex-1 flex flex-col justify-between space-y-1">
+                        <div>
+                          <div className="text-xs font-bold text-[#172B25] truncate">
+                            {item.rxCode}
+                          </div>
+                          <div className="text-[10px] text-[#64756D] truncate mt-0.5" title={item.diagnosis}>
+                            {item.diagnosis || item.category}
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleSelectSample(item.pageId);
+                          }}
+                          className="mt-1 w-full py-1 text-[11px] font-semibold text-[#075E4B] bg-[#DDF5EA] hover:bg-[#cbf1e1] rounded transition-colors flex items-center justify-center gap-1"
+                        >
+                          <Scan className="w-3 h-3 text-[#087F5B]" />
+                          Scan Page
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+              </div>
             </div>
           ) : (
             /* Manual Regimen Editor */

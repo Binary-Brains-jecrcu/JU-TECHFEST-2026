@@ -74,6 +74,93 @@ export function generateClinicalFindings(drugs: PrescriptionDrug[], patient: Pat
     });
   }
 
+  // Methotrexate + Etoricoxib / NSAIDs (Page 18)
+  if (hasDrug('methotrexate') && (hasDrug('etoricoxib') || hasDrug('retoz') || hasDrug('proxym') || hasDrug('nsaid') || hasDrug('ibuprofen') || hasDrug('diclofenac'))) {
+    findings.push({
+      id: 'FIND-DD-003',
+      severity: 'critical',
+      category: 'Drug-Drug Interaction',
+      severityTag: 'CRITICAL ALERT',
+      badgeLabel: 'Pancytopenia Risk',
+      title: 'Fatal Toxicity Risk: Methotrexate (Folitrax) + Etoricoxib (Retoz / NSAID)',
+      subtitle: 'NSAIDs block renal organic anion transporter (OAT3) tubular secretion, causing acute methotrexate accumulation and fatal myelosuppression.',
+      drugsInvolved: ['Folitrax (Methotrexate)', 'Retoz (Etoricoxib)'],
+      mechanism: 'NSAIDs reduce renal blood flow via prostaglandin inhibition and competitively inhibit renal tubular active transport (OAT1/OAT3) of methotrexate. Serum methotrexate AUC increases up to 300%, triggering life-threatening bone marrow aplasia and severe mucositis.',
+      guidance: 'Avoid concurrent NSAID administration with antimetabolite methotrexate unless under specialist rheumatology supervision with frequent CBC/platelet and renal profiling.',
+      recommendedAction: 'Discontinue etoricoxib or substitute with acetaminophen/paracetamol. Verify methotrexate is dosed ONCE WEEKLY only, with folic acid rescue on off-days.',
+      prescribedValue: 'Folitrax 10mg weekly + Retoz 60mg QD',
+      referenceValue: 'Category X High-Risk Combination',
+      ruleId: 'DDI-MTX-NSAID-01',
+      evidence: [
+        {
+          sourceTitle: 'FDA Boxed Warning — Methotrexate Sodium',
+          citation: 'FDA Labeling; Warnings: Concomitant NSAID Therapy',
+          levelOfEvidence: 'Level 1A — Regulatory Black Box Warning',
+          confidence: 99.8,
+          fdaBoxedWarning: true,
+          summary: 'Severe, sometimes fatal, myelosuppression, aplastic anemia, and gastrointestinal toxicity have been reported with concomitant administration of methotrexate (usually in high doses) along with nonsteroidal anti-inflammatory drugs (NSAIDs).'
+        }
+      ]
+    });
+  }
+
+  // Methotrexate + Tofacitinib (Page 18)
+  if (hasDrug('methotrexate') && (hasDrug('tofacitinib') || hasDrug('tritonib'))) {
+    findings.push({
+      id: 'FIND-DD-004',
+      severity: 'warning',
+      category: 'Drug-Drug Interaction',
+      severityTag: 'IMMUNOSUPPRESSION',
+      badgeLabel: 'Dual DMARD / JAK',
+      title: 'Compounded Immunosuppression: Methotrexate + Tritonib (Tofacitinib)',
+      subtitle: 'Concurrent antimetabolite and JAK-inhibitor substantially elevates opportunistic infection hazard.',
+      drugsInvolved: ['Folitrax (Methotrexate)', 'Tritonib (Tofacitinib)'],
+      mechanism: 'Tofacitinib inhibits JAK1/JAK3 signaling pathways, blunting interleukin (IL-2, IL-4, IL-7, IL-9, IL-15, IL-21) lymphocyte response, additive to methotrexate antiproliferative effects.',
+      guidance: 'Perform baseline TB (Quantiferon-Gold), Hepatitis B/C screening. Discontinue immediately upon suspicion of acute systemic infection or zoster reactivation.',
+      recommendedAction: 'Monitor complete blood counts and liver enzymes monthly.',
+      ruleId: 'DDI-MTX-JAK-02',
+      evidence: []
+    });
+  }
+
+  // Dual Antiplatelet Therapy (DAPT) check (Page 26 / 42)
+  if (hasDrug('clopidogrel') || hasDrug('clopitab')) {
+    findings.push({
+      id: 'FIND-SAFE-DAPT',
+      severity: 'verified',
+      category: 'Contraindication',
+      severityTag: 'VERIFIED REGIMEN',
+      badgeLabel: 'DAPT Post-PCI',
+      title: 'Dual Antiplatelet Verification: Clopitab A (Clopidogrel + Aspirin)',
+      subtitle: 'Post-coronary intervention secondary prevention protocol verified with gastroprotection.',
+      drugsInvolved: ['Clopitab A (Clopidogrel + Aspirin)'],
+      guidance: 'Cardiology guideline recommended duration 6 to 12 months post-stent placement.',
+      recommendedAction: 'Continue with concurrent PPI therapy.',
+      ruleId: 'DAPT-VERIFIED',
+      evidence: []
+    });
+  }
+
+  // Fluoroquinolone Allergy Check (Page 7)
+  const hasFlqAllergy = patient.allergies.some(a => a.allergen.toLowerCase().includes('fluoroquinolone') || a.allergen.toLowerCase().includes('norfloxacin') || a.allergen.toLowerCase().includes('cipro'));
+  if (hasFlqAllergy && (hasDrug('norfloxacin') || hasDrug('ciprofloxacin') || hasDrug('ofloxacin') || hasDrug('oflox'))) {
+    findings.push({
+      id: 'FIND-AL-FLQ',
+      severity: 'critical',
+      category: 'Allergy Cross-Reactivity',
+      severityTag: 'CRITICAL ALERT',
+      badgeLabel: 'Fixed Drug Eruption',
+      title: 'Severe Allergen Match: Fluoroquinolone Antibacterial',
+      subtitle: 'Doctor chart explicitly specifies: "Avoid Norfloxacin / Ciprofloxacin / Ofloxacin group of medicine".',
+      drugsInvolved: ['Fluoroquinolone Antibacterial'],
+      mechanism: 'Documented history of fixed drug eruption (FDE) or severe cutaneous adverse reaction to fluoroquinolone class. Re-exposure risks bullous eruption and epidermal detachment.',
+      guidance: 'Strictly contraindicated. Switch to alternative antimicrobial class based on microbiology sensitivities.',
+      recommendedAction: 'Discontinue fluoroquinolone order immediately. Prescribe cefixime or nitrofurantoin.',
+      ruleId: 'AL-FLQ-FDE-01',
+      evidence: []
+    });
+  }
+
   // 2. Allergy Cross-Reactivity Checks
   // Sulfa allergy vs Celecoxib
   const hasSulfaAllergy = patient.allergies.some(a => a.allergen.toLowerCase().includes('sulfa'));

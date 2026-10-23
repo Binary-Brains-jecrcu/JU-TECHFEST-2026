@@ -1,17 +1,12 @@
 import React from 'react';
 import { 
   Printer, 
-  Plus, 
-  History, 
-  Database, 
-  Info, 
-  LayoutDashboard, 
-  Layers
+  Plus
 } from 'lucide-react';
 
 interface NavbarProps {
-  currentView: 'workspace' | 'landing' | 'history' | 'database' | 'about';
-  onNavigate: (view: 'workspace' | 'landing' | 'history' | 'database' | 'about') => void;
+  currentView?: 'workspace' | 'landing' | 'history' | 'database' | 'about';
+  onNavigate?: (view: 'workspace' | 'landing' | 'history' | 'database' | 'about') => void;
   onNewCheck: () => void;
   onPrint: () => void;
 }
@@ -29,7 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Left: Brand & Clinical Indicator */}
         <div className="flex items-center gap-6">
           <div 
-            onClick={() => onNavigate('landing')}
+            onClick={() => onNavigate && onNavigate('landing')}
             className="flex items-center gap-3 cursor-pointer group"
           >
             <div className="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center p-1.5 shadow-sm group-hover:scale-105 transition-transform">
@@ -54,69 +49,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </div>
         </div>
-
-        {/* Center: Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1 bg-[#F7FAF8] p-1 rounded-lg border border-[#E1EAE5]">
-          <button
-            onClick={() => onNavigate('landing')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-              currentView === 'landing'
-                ? 'bg-white text-[#075E4B] shadow-sm font-semibold'
-                : 'text-[#64756D] hover:text-[#172B25]'
-            }`}
-          >
-            <Layers className="w-3.5 h-3.5" />
-            Product Overview
-          </button>
-
-          <button
-            onClick={() => onNavigate('workspace')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-              currentView === 'workspace'
-                ? 'bg-white text-[#075E4B] shadow-sm font-semibold'
-                : 'text-[#64756D] hover:text-[#172B25]'
-            }`}
-          >
-            <LayoutDashboard className="w-3.5 h-3.5" />
-            CDS Workspace
-          </button>
-
-          <button
-            onClick={() => onNavigate('history')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-              currentView === 'history'
-                ? 'bg-white text-[#075E4B] shadow-sm font-semibold'
-                : 'text-[#64756D] hover:text-[#172B25]'
-            }`}
-          >
-            <History className="w-3.5 h-3.5" />
-            Analysis History
-          </button>
-
-          <button
-            onClick={() => onNavigate('database')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-              currentView === 'database'
-                ? 'bg-white text-[#075E4B] shadow-sm font-semibold'
-                : 'text-[#64756D] hover:text-[#172B25]'
-            }`}
-          >
-            <Database className="w-3.5 h-3.5" />
-            Medicine DB
-          </button>
-
-          <button
-            onClick={() => onNavigate('about')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-              currentView === 'about'
-                ? 'bg-white text-[#075E4B] shadow-sm font-semibold'
-                : 'text-[#64756D] hover:text-[#172B25]'
-            }`}
-          >
-            <Info className="w-3.5 h-3.5" />
-            CDS Rules & Tech
-          </button>
-        </nav>
 
         {/* Right: Actions & Clinician Avatar */}
         <div className="flex items-center gap-3">

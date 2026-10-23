@@ -105,7 +105,7 @@ class handler(BaseHTTPRequestHandler):
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path.rstrip("/")
 
-        if path in ("/api/health", "/api"):
+        if path in ("/api/health", "/api", "/api/health/"):
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.send_header("Access-Control-Allow-Origin", "*")
@@ -119,6 +119,23 @@ class handler(BaseHTTPRequestHandler):
                 "dataset_size": 70,
                 "timestamp": time.time()
             }).encode("utf-8"))
+            return
+
+        elif path in ("/api/catalog", "/api/catalog/"):
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            try:
+                import os
+                cat_path = "public/prescriptions/ekacare_catalog.json"
+                if os.path.isfile(cat_path):
+                    with open(cat_path, "rb") as f:
+                        self.wfile.write(f.read())
+                        return
+            except Exception:
+                pass
+            self.wfile.write(json.dumps([]).encode("utf-8"))
             return
 
         elif path == "/api/samples":
@@ -165,7 +182,7 @@ class handler(BaseHTTPRequestHandler):
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path.rstrip("/")
 
-        if path == "/api/scan-prescription":
+        if path in ("/api/scan-prescription", "/api/scan_prescription", "/api/scan"):
             start_time = time.time()
             content_length = int(self.headers.get("Content-Length", 0))
             body_bytes = self.rfile.read(content_length) if content_length > 0 else b"{}"

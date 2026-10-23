@@ -14,6 +14,7 @@ import time
 import re
 import difflib
 import urllib.parse
+import tempfile
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from PIL import Image, ImageEnhance, ImageFilter, ImageOps
 
@@ -46,7 +47,9 @@ def get_paddle_ocr():
         print(f"⚠️ PaddleOCR initialization error: {e}")
         return None
 
-def enhance_image_for_handwriting(image_path, out_path="/tmp/handwriting_enhanced.png"):
+def enhance_image_for_handwriting(image_path, out_path=None):
+    if out_path is None:
+        out_path = os.path.join(tempfile.gettempdir(), "handwriting_enhanced.png")
     """
     Adaptive handwriting & scan preprocessor:
     1. Grayscale luminance correction
@@ -1484,7 +1487,7 @@ class PrescriptionAPIHandler(BaseHTTPRequestHandler):
             body_bytes = self.rfile.read(content_length)
 
             content_type = self.headers.get("Content-Type", "")
-            temp_image_path = "/tmp/prescription_scan_input.png"
+            temp_image_path = os.path.join(tempfile.gettempdir(), "prescription_scan_input.png")
 
             qwen_api_key = None
             sample_id = None

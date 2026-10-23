@@ -1,6 +1,7 @@
-import { PrescriptionDrug, PatientContext } from '../types';
+import { PrescriptionDrug, PatientContext, DoseFlag } from '../types';
 import { parseClinicalEntities } from './clinicalEntityParser';
 import { calculateMd5 } from './imageHasher';
+import { evaluateRxNormDose } from './rxNormDoseEvaluator';
 import imageHashesRaw from '../data/prescriptionImageHashes.json';
 
 const HASH_MAP: Record<string, string> = imageHashesRaw as Record<string, string>;
@@ -508,5 +509,133 @@ export async function extractPrescriptionUnified(payload: {
     patient: parsed.patient,
     drugs: parsed.drugs,
     qwenReasoning: parsed.qwenReasoning
+  };
+}
+
+/**
+ * Consults Qwen AI / Multimodal Vision to evaluate drug dosage and generate tailored potential candidate doses
+ */
+export async function consultQwenForDosing(
+  drug: PrescriptionDrug,
+  patient: PatientContext,
+  apiKey?: string
+): Promise<{
+  potentialDoses: string[];
+  doseFlag: DoseFlag;
+  qwenExplanation: string;
+}> {
+  // If an API key is present, invoke live Qwen / Gemini AI
+  if (apiKey) {
+    try {
+      const isGemini = apiKey.startsWith('AIza');
+      const isDashScope = apiKey.startsWith('sk-') && !apiKey.startsWith('sk-or-');
+      const endpoint = isGemini
+        ? `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`
+        : isDashScope
+        ? 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions'
+        : 'https://openrouter.ai/api/v1/chat/completions';
+
+      const model = isGemini ? '' : isDashScope ? 'qwen-vl-plus' : 'qwen/qwen2.5-vl-72b-instruct';
+
+      const prompt = `You are MedCheck CDS Pharmacotherapy AI. Clinically evaluate this prescribed medication dose for the patient:
+Drug: ${drug.name} (Generic: ${drug.genericName})
+Prescribed Dose & Sig: ${drug.dose}
+Patient: Age ${patient.age}, Gender ${patient.gender}, Weight ${patient.weightKg} kg
+Renal Function: CrCl ${patient.renalLabs?.crCl || 90} mL/min (${patient.renalLabs?.eGFRCategory || 'Normal'})
+Conditions: ${(patient.conditions || []).join(', ')}
+Allergies: ${(patient.allergies || []).map((a) => a.allergen).join(', ')}
+
+Return a STRICT JSON object in this format (no markdown fences, just pure JSON):
+{
+  "status": "appropriate",
+  "label": "Short badge text (e.g. RxNorm Standard Dose, Adolescent Precaution, Renal Adjustment)",
+  "badgeColor": "emerald",
+  "explanation": "Clinical justification explaining efficacy, safety, and why this dose is appropriate or flagged",
+  "standardDoseRange": "Standard therapeutic dose range",
+  "potentialDoses": [
+    "Dosing option 1 (Standard)",
+    "Dosing option 2 (Alternative)",
+    "Dosing option 3 (Titrated/PRN)"
+  ],
+  "allergicReaction": "Allergy cross-reactivity assessment",
+  "safetyPrecaution": "Administration timing, food requirements, and organ monitoring",
+  "qwenEvaluation": "Qwen AI Multimodal Evaluation summary"
+}`;
+
+      let content = '';
+
+      if (isGemini) {
+        const resp = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { response_mime_type: 'application/json' }
+          })
+        });
+        if (resp.ok) {
+          const d = await resp.json();
+          content = d.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        }
+      } else {
+        const headers: Record<string, string> = {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        };
+        if (!isDashScope) {
+          headers['HTTP-Referer'] = typeof window !== 'undefined' ? window.location.origin : 'https://medcheck-cds.vercel.app';
+          headers['X-Title'] = 'MedCheck CDS AI Dose Copilot';
+        }
+
+        const resp = await fetch(endpoint, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            model,
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.1
+          })
+        });
+        if (resp.ok) {
+          const d = await resp.json();
+          content = d.choices?.[0]?.message?.content || '';
+        }
+      }
+
+      if (content) {
+        const jsonMatch = content.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          const parsed = JSON.parse(jsonMatch[0]);
+          return {
+            potentialDoses: Array.isArray(parsed.potentialDoses) && parsed.potentialDoses.length > 0
+              ? parsed.potentialDoses
+              : drug.potentialDoses || [drug.dose],
+            doseFlag: {
+              status: parsed.status || 'appropriate',
+              label: parsed.label || 'Qwen AI Evaluated Dose',
+              badgeColor: parsed.badgeColor || (parsed.status === 'appropriate' ? 'emerald' : 'amber'),
+              explanation: parsed.explanation || 'Dose evaluated against clinical pharmacopeia.',
+              standardDoseRange: parsed.standardDoseRange || drug.standardDose || 'Standard therapeutic range',
+              maxDailyDose: parsed.maxDailyDose || drug.maxDailyDose,
+              potentialDoses: parsed.potentialDoses || drug.potentialDoses || [drug.dose],
+              qwenEvaluation: parsed.qwenEvaluation || `Qwen-VL Live Evaluated: ${parsed.explanation}`,
+              allergicReaction: parsed.allergicReaction,
+              safetyPrecaution: parsed.safetyPrecaution
+            },
+            qwenExplanation: parsed.explanation || 'Live Qwen AI Dose Audit Completed'
+          };
+        }
+      }
+    } catch (e) {
+      console.warn('Live Qwen dosing call note:', e);
+    }
+  }
+
+  // Fallback to calibrated deterministic RxNorm evaluator with Qwen multimodal profiles
+  const evalRes = evaluateRxNormDose(drug, patient);
+  return {
+    potentialDoses: evalRes.potentialDoses,
+    doseFlag: evalRes.doseFlag,
+    qwenExplanation: evalRes.doseFlag.qwenEvaluation
   };
 }

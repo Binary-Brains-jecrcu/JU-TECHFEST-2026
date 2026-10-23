@@ -31,7 +31,7 @@ import {
 } from 'lucide-react';
 import { PatientContext, PrescriptionDrug, SafetyAnalysisResult } from '../types';
 import { PATIENT_PROFILES } from '../data/mockData';
-import { extractPrescriptionUnified } from '../utils/clientOcrEngine';
+import { extractPrescriptionUnified, consultQwenForDosing } from '../utils/clientOcrEngine';
 import { evaluateRxNormDose } from '../utils/rxNormDoseEvaluator';
 
 /* ================= 1. OVERRIDE WITH JUSTIFICATION MODAL ================= */
@@ -383,6 +383,8 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
   // Settings
   const [qwenApiKey, setQwenApiKey] = useState<string>(() => localStorage.getItem('medcheck_qwen_api_key') || '');
   const [showSettings, setShowSettings] = useState(false);
+  const [optimizingIdx, setOptimizingIdx] = useState<number | null>(null);
+  const [isOptimizingAll, setIsOptimizingAll] = useState(false);
 
   // Manual drug list state
   const [manualDrugs, setManualDrugs] = useState<PrescriptionDrug[]>([
@@ -507,6 +509,57 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
       clearTimeout(stepTimer2);
     } finally {
       setIsProcessing(false);
+    }
+  };
+
+  const handleOptimizeDrugWithQwen = async (idx: number) => {
+    if (!extractedData || !extractedData.drugs[idx]) return;
+    setOptimizingIdx(idx);
+    try {
+      const drug = extractedData.drugs[idx];
+      const qwenRes = await consultQwenForDosing(drug, extractedData.patient, qwenApiKey || undefined);
+      const updatedDrugs = [...extractedData.drugs];
+      updatedDrugs[idx] = {
+        ...updatedDrugs[idx],
+        potentialDoses: qwenRes.potentialDoses,
+        doseFlag: qwenRes.doseFlag,
+        allergicReaction: qwenRes.doseFlag.allergicReaction,
+        safetyPrecaution: qwenRes.doseFlag.safetyPrecaution
+      };
+      setExtractedData({
+        ...extractedData,
+        drugs: updatedDrugs
+      });
+    } catch (err) {
+      console.warn('Qwen drug optimization error:', err);
+    } finally {
+      setOptimizingIdx(null);
+    }
+  };
+
+  const handleOptimizeAllWithQwen = async () => {
+    if (!extractedData || extractedData.drugs.length === 0) return;
+    setIsOptimizingAll(true);
+    try {
+      const updatedDrugs = [...extractedData.drugs];
+      for (let i = 0; i < updatedDrugs.length; i++) {
+        const qwenRes = await consultQwenForDosing(updatedDrugs[i], extractedData.patient, qwenApiKey || undefined);
+        updatedDrugs[i] = {
+          ...updatedDrugs[i],
+          potentialDoses: qwenRes.potentialDoses,
+          doseFlag: qwenRes.doseFlag,
+          allergicReaction: qwenRes.doseFlag.allergicReaction,
+          safetyPrecaution: qwenRes.doseFlag.safetyPrecaution
+        };
+      }
+      setExtractedData({
+        ...extractedData,
+        drugs: updatedDrugs
+      });
+    } catch (err) {
+      console.warn('Qwen batch optimization error:', err);
+    } finally {
+      setIsOptimizingAll(false);
     }
   };
 
@@ -903,8 +956,18 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                       {/* Regimen Cards */}
                       <div className="space-y-1.5">
                         <div className="flex items-center justify-between text-xs">
-                          <span className="font-bold text-[#172B25] uppercase text-[11px] tracking-wider flex items-center gap-1.5">
+                          <span className="font-bold text-[#172B25] uppercase text-[11px] tracking-wider flex items-center gap-1.5 flex-wrap">
                             <span>Extracted Regimen ({extractedData.drugs.length} Drugs)</span>
+                            <button
+                              type="button"
+                              onClick={handleOptimizeAllWithQwen}
+                              disabled={isOptimizingAll}
+                              className="text-[10px] text-[#087F5B] hover:text-[#075E4B] font-bold flex items-center gap-1 bg-[#DDF5EA] hover:bg-[#cbf1e1] px-2 py-0.5 rounded border border-[#B6E8D3] transition-colors shadow-2xs"
+                              title="Ask Qwen AI to clinically audit and optimize doses for all extracted drugs"
+                            >
+                              <Sparkles className={`w-3 h-3 text-[#087F5B] ${isOptimizingAll ? 'animate-spin' : ''}`} />
+                              <span>{isOptimizingAll ? 'Qwen Auditing Doses...' : '✨ Qwen Dose Audit All'}</span>
+                            </button>
                             <button
                               type="button"
                               onClick={() => {
@@ -1052,8 +1115,20 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                                     {/* Potential RxNorm Doses Pill Selector */}
                                     {drug.potentialDoses && drug.potentialDoses.length > 0 && (
                                       <div className="pt-1.5 border-t border-black/5">
-                                        <div className="text-[9px] uppercase font-bold tracking-wider opacity-75 mb-1">
-                                          Potential RxNorm Candidate Doses (Click to Apply):
+                                        <div className="flex items-center justify-between gap-1 mb-1">
+                                          <div className="text-[9px] uppercase font-bold tracking-wider opacity-75">
+                                            Potential Candidate Doses (Click to Apply):
+                                          </div>
+                                          <button
+                                            type="button"
+                                            onClick={() => handleOptimizeDrugWithQwen(idx)}
+                                            disabled={optimizingIdx === idx}
+                                            className="text-[9px] text-[#087F5B] hover:text-[#075E4B] font-bold flex items-center gap-1 bg-white px-1.5 py-0.5 rounded border border-[#CBDAD4] hover:border-[#087F5B] transition-colors shadow-2xs"
+                                            title="Ask Qwen AI to clinically re-evaluate and optimize candidate doses"
+                                          >
+                                            <Sparkles className={`w-2.5 h-2.5 text-[#087F5B] ${optimizingIdx === idx ? 'animate-spin' : ''}`} />
+                                            <span>{optimizingIdx === idx ? 'Qwen Optimizing...' : '✨ Qwen Dose Copilot'}</span>
+                                          </button>
                                         </div>
                                         <div className="flex flex-wrap gap-1">
                                           {drug.potentialDoses.map((potDose, pIdx) => {

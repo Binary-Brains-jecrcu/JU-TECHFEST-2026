@@ -28,3 +28,5 @@ __pycache__/
 *.py[cod]
 *$py.class
 public/prescriptions/enhanced/
+
+.vercel

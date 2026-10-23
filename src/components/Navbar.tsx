@@ -45,14 +45,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               />
             </div>
             <div className="flex flex-col">
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-[#172B25] text-lg tracking-tight font-sans">
-                  MedCheck
-                </span>
-                <span className="text-[10px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded bg-[#DDF5EA] text-[#075E4B] border border-[#20A88A]/30">
-                  CLINICAL
-                </span>
-              </div>
+              <span className="font-bold text-[#172B25] text-lg tracking-tight font-sans">
+                MedCheck
+              </span>
               <span className="text-[11px] text-[#64756D] leading-tight hidden sm:inline">
                 Prescription Safety Verification
               </span>

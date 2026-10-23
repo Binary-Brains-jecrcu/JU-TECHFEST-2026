@@ -1,3 +1,14 @@
+export interface LynxVerdict {
+  drug_name?: string;
+  verdict: string;
+  hallucination_detected?: boolean;
+  hallucination_score: number;
+  explanation?: string;
+  reasoning?: string;
+  grounded_in_rules?: boolean;
+  audit_trail?: string;
+}
+
 export type SeverityLevel = 'critical' | 'warning' | 'info' | 'verified' | 'unverified';
 
 export interface DoseFlag {
@@ -11,6 +22,8 @@ export interface DoseFlag {
   qwenEvaluation: string;
   allergicReaction?: string;
   safetyPrecaution?: string;
+  audit_trail?: string;
+  execution_path?: string;
 }
 
 export interface PrescriptionDrug {
@@ -30,6 +43,8 @@ export interface PrescriptionDrug {
   doseFlag?: DoseFlag;
   allergicReaction?: string;
   safetyPrecaution?: string;
+  audit_trail?: string;
+  execution_path?: string;
 }
 
 export interface AllergyItem {

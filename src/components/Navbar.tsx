@@ -53,19 +53,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               </span>
             </div>
           </div>
-
-          {/* Engine Status Badge */}
-          <div className="hidden md:flex items-center gap-2 bg-[#F7FAF8] border border-[#E1EAE5] px-2.5 py-1 rounded-full text-xs text-[#075E4B]">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#087F5B] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#087F5B]"></span>
-            </span>
-            <span className="font-medium text-[11px]">
-              Engine v4.2 Active
-            </span>
-            <span className="text-[#8C9E96]">•</span>
-            <span className="text-[#64756D] text-[11px]">Live CDS Safeguard</span>
-          </div>
         </div>
 
         {/* Center: Navigation Links */}

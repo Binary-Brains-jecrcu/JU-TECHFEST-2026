@@ -262,7 +262,7 @@ export function parseClinicalEntities(
     }
   }
 
-  // 3. Fallback if no specific drug tokens were matched
+  // 3. Fallback only if explicit markers are present in text
   if (detectedDrugs.length === 0) {
     if (lowerAll.includes('warfarin') || lowerAll.includes('fluconazole')) {
       detectedDrugs.push({
@@ -289,8 +289,7 @@ export function parseClinicalEntities(
         rxNorm: '4450',
         matchScore: 100
       });
-    } else {
-      // Default standard clinical regimen
+    } else if (lowerAll.includes('folitrax') || lowerAll.includes('methotrexate')) {
       detectedDrugs.push({
         id: 'rx-1',
         name: 'Folitrax (Methotrexate 10mg)',

@@ -87,6 +87,7 @@ export function App() {
       },
       requiresClinicalAction: newFindings.some(f => f.severity === 'critical')
     }));
+    setCurrentView('workspace');
     showToast(`Prescription ${fileName} processed and loaded via PaddleOCR + Qwen-VL`);
   };
 

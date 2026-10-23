@@ -339,7 +339,7 @@ export async function extractPrescriptionUnified(payload: {
   try {
     const apiBase = (import.meta as any).env?.VITE_API_BASE_URL || '';
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
+    const timeoutId = setTimeout(() => controller.abort(), 45000); // 45 seconds for dual-pass PaddleOCR + Qwen-VL
 
     const response = await fetch(`${apiBase}/api/scan-prescription`, {
       method: 'POST',
@@ -357,7 +357,7 @@ export async function extractPrescriptionUnified(payload: {
 
     if (response.ok) {
       const data = await response.json();
-      if (data && data.success && (data.drugs?.length > 0 || data.ocrLines?.length > 0)) {
+      if (data && data.success && data.drugs && data.drugs.length > 0) {
         return data as ExtractionResult;
       }
     }

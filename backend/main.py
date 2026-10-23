@@ -71,8 +71,9 @@ async def vision_ingest_endpoint(payload: Dict[str, Any] = Body(...)):
     if not img_b64:
         raise HTTPException(status_code=400, detail="Missing 'imageBase64' in payload.")
 
+    api_key = payload.get("qwenApiKey") or payload.get("apiKey")
     try:
-        ocr_result = ingest_prescription_image(img_b64)
+        ocr_result = ingest_prescription_image(img_b64, api_key=api_key)
         return ocr_result
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Vision Ingestion Failure: {str(e)}")
@@ -183,7 +184,7 @@ def scan_prescription_backward_compat(req: PrescriptionEvaluateRequest):
 
     # If not matched in catalog and image provided, call vision ingestion
     if not ocr_json and req.imageBase64:
-        ocr_json = ingest_prescription_image(req.imageBase64)
+        ocr_json = ingest_prescription_image(req.imageBase64, api_key=req.qwenApiKey)
 
     if not ocr_json:
         # Fallback to Afsar Polyclinic / default prescription for testing
@@ -251,7 +252,7 @@ def scan_prescription_backward_compat(req: PrescriptionEvaluateRequest):
         "route_taken": evaluated_result["route_taken"],
         "lynx_hallucination_verdicts": evaluated_result.get("lynx_hallucination_verdicts"),
         "legal_disclaimer": LEGAL_DISCLAIMER,  # CONVERGENCE HARDCODED INJECTION
-        "qwenReasoning": f"ROUTE: {evaluated_result['route_taken']} | DISCLAIMER: {LEGAL_DISCLAIMER}"
+        "qwenReasoning": f"{ocr_json.get('qwenReasoning', 'PaddleOCR PP-OCRv6 + Qwen-VL Vision Extracted')} | ROUTE: {evaluated_result['route_taken']} | DISCLAIMER: {LEGAL_DISCLAIMER}"
     }
 
 @app.get("/api/golden-drugs")

@@ -47,9 +47,10 @@ def get_paddle_ocr():
         print(f"⚠️ PaddleOCR initialization error: {e}")
         return None
 
-def call_qwen_cloud_vision(image_path, api_key):
+def call_qwen_cloud_vision(image_path, api_key, ocr_hints=None):
     """
-    Live Cloud Multimodal Vision Call (Qwen-VL via OpenRouter or Alibaba DashScope)
+    Live Cloud Multimodal Vision Call (Qwen-VL via OpenRouter / Alibaba DashScope or Google Gemini).
+    Fuses visual image features with PaddleOCR recognized text hints to resolve cursive handwriting.
     """
     try:
         import urllib.request
@@ -57,6 +58,64 @@ def call_qwen_cloud_vision(image_path, api_key):
             b64 = base64.b64encode(f.read()).decode("utf-8")
         data_url = f"data:image/png;base64,{b64}"
 
+        hints_str = f"\nPaddleOCR Text Line Hints: {', '.join(ocr_hints[:10])}" if ocr_hints else ""
+
+        prompt_text = f"""You are MedCheck CDS Multimodal Clinical Vision Specialist.
+Transcribe and extract this clinical medical prescription image with high precision.{hints_str}
+Return a STRICT JSON object in this format (no markdown formatting, just pure JSON):
+{{
+  "doctorOrClinic": "Clinic or Doctor name",
+  "patient": {{
+    "name": "Patient Name",
+    "age": 30,
+    "gender": "Male or Female",
+    "date": "Date of Rx",
+    "conditions": ["Clinical conditions"],
+    "allergies": []
+  }},
+  "ocrLines": [
+    "transcribed line 1",
+    "transcribed line 2"
+  ],
+  "drugs": [
+    {{
+      "name": "Active Drug Name",
+      "dose": "Dose and sig (e.g. 625 mg PO 1-0-1 After Food x 5 days)",
+      "route": "PO",
+      "frequency": "BID"
+    }}
+  ],
+  "reasoning": "Qwen-VL Multimodal Vision clinical analysis of handwriting, dosages, and safety checks."
+}}"""
+
+        # 1. Google Gemini Flash Vision API
+        if api_key.startswith("AIza"):
+            gemini_endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
+            gemini_payload = {
+                "contents": [
+                    {
+                        "parts": [
+                            {"text": prompt_text},
+                            {"inline_data": {"mime_type": "image/png", "data": b64}}
+                        ]
+                    }
+                ],
+                "generationConfig": {
+                    "temperature": 0.1,
+                    "response_mime_type": "application/json"
+                }
+            }
+            req = urllib.request.Request(
+                gemini_endpoint,
+                data=json.dumps(gemini_payload).encode("utf-8"),
+                headers={"Content-Type": "application/json"}
+            )
+            with urllib.request.urlopen(req, timeout=18) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                content = data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
+                return content
+
+        # 2. Qwen-VL via OpenRouter or Alibaba DashScope
         is_dashscope = api_key.startswith("sk-") and not api_key.startswith("sk-or-")
         endpoint = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions" if is_dashscope else "https://openrouter.ai/api/v1/chat/completions"
         model = "qwen-vl-plus" if is_dashscope else "qwen/qwen2.5-vl-72b-instruct"
@@ -69,7 +128,7 @@ def call_qwen_cloud_vision(image_path, api_key):
                     "content": [
                         {
                             "type": "text",
-                            "text": "You are MedCheck CDS Multimodal Clinical Prescription Vision Assistant. Transcribe all written lines from this prescription exactly, identifying active medications, dose, frequency, and clinical precautions."
+                            "text": prompt_text
                         },
                         {
                             "type": "image_url",
@@ -93,7 +152,7 @@ def call_qwen_cloud_vision(image_path, api_key):
             data=json.dumps(payload).encode("utf-8"),
             headers=headers
         )
-        with urllib.request.urlopen(req, timeout=12) as resp:
+        with urllib.request.urlopen(req, timeout=18) as resp:
             data = json.loads(resp.read().decode("utf-8"))
             content = data.get("choices", [{}])[0].get("message", {}).get("content", "")
             return content

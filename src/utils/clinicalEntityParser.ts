@@ -1,5 +1,6 @@
 import { PrescriptionDrug, PatientContext, AllergyItem } from '../types';
 import drugDbRaw from '../data/drugKnowledgeBase.json';
+import { evaluateRxNormDose } from './rxNormDoseEvaluator';
 
 interface DrugEntry {
   name: string;
@@ -412,6 +413,15 @@ export function parseClinicalEntities(
     conditions: ['Clinical Prescribing Review', 'Hypertension Risk'],
     currentMedications: detectedDrugs.map(d => d.name)
   };
+
+  // Evaluate RxNorm dosages and attach clinical dosage flags
+  for (const drug of detectedDrugs) {
+    const evaluation = evaluateRxNormDose(drug, patientContext);
+    drug.standardDose = evaluation.standardDose;
+    drug.maxDailyDose = evaluation.maxDailyDose;
+    drug.potentialDoses = evaluation.potentialDoses;
+    drug.doseFlag = evaluation.doseFlag;
+  }
 
   return {
     patient: patientContext,

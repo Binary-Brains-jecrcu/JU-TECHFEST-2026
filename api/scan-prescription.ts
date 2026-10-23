@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import drugDbRaw from '../src/data/drugKnowledgeBase.json';
 import imageHashes from '../src/data/prescriptionImageHashes.json';
 import ocrDatabase from '../src/data/ekacare_ocr_database.json';
+import { evaluateRxNormDose } from '../src/utils/rxNormDoseEvaluator';
 
 interface DrugEntry {
   name: string;
@@ -411,6 +412,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             : ['Medical Evaluation'],
           currentMedications: groundedDrugs.map((d) => d.name)
         };
+
+        // Enrich every extracted drug with potential RxNorm doses & clinical dosage flags
+        for (const drug of groundedDrugs) {
+          const evalRes = evaluateRxNormDose(drug, patientData as any);
+          (drug as any).standardDose = evalRes.standardDose;
+          (drug as any).maxDailyDose = evalRes.maxDailyDose;
+          (drug as any).potentialDoses = evalRes.potentialDoses;
+          (drug as any).doseFlag = evalRes.doseFlag;
+        }
 
         return res.status(200).json({
           success: true,

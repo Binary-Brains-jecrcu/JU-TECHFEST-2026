@@ -32,6 +32,7 @@ import {
 import { PatientContext, PrescriptionDrug, SafetyAnalysisResult } from '../types';
 import { PATIENT_PROFILES } from '../data/mockData';
 import { extractPrescriptionUnified } from '../utils/clientOcrEngine';
+import { evaluateRxNormDose } from '../utils/rxNormDoseEvaluator';
 
 /* ================= 1. OVERRIDE WITH JUSTIFICATION MODAL ================= */
 interface OverrideModalProps {
@@ -952,52 +953,128 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                             </button>
                           </div>
                         ) : (
-                          <div className="space-y-1.5 max-h-[160px] overflow-y-auto pr-1">
+                          <div className="space-y-2.5 max-h-[280px] overflow-y-auto pr-1">
                             {extractedData.drugs.map((drug, idx) => (
                               <div 
                                 key={idx}
-                                className="bg-white border border-[#E1EAE5] rounded-lg p-2.5 flex items-center justify-between gap-2 shadow-2xs hover:border-[#087F5B] transition-colors"
+                                className="bg-white border border-[#E1EAE5] rounded-xl p-3 shadow-2xs hover:border-[#087F5B] transition-colors"
                               >
-                                <div className="flex items-center gap-2">
-                                  <span className="w-2 h-2 rounded-full bg-[#087F5B] flex-shrink-0" />
-                                  <div>
-                                    <div className="text-xs font-bold text-[#172B25] flex items-center gap-1.5 flex-wrap">
-                                      <span>{drug.name}</span>
-                                      {drug.rxNorm && (
-                                        <span className="text-[10px] font-mono bg-emerald-50 text-[#075E4B] border border-emerald-200 px-1 py-0.2 rounded font-medium">
-                                          RxNorm: {drug.rxNorm}
-                                        </span>
-                                      )}
-                                      {drug.ndc && (
-                                        <span className="text-[10px] font-mono text-[#64756D] font-normal">
-                                          (NDC: {drug.ndc})
-                                        </span>
-                                      )}
+                                <div className="flex items-start justify-between gap-2">
+                                  <div className="flex items-start gap-2">
+                                    <span className="w-2 h-2 rounded-full bg-[#087F5B] flex-shrink-0 mt-1" />
+                                    <div>
+                                      <div className="text-xs font-bold text-[#172B25] flex items-center gap-1.5 flex-wrap">
+                                        <span>{drug.name}</span>
+                                        {drug.rxNorm && (
+                                          <span className="text-[10px] font-mono bg-emerald-50 text-[#075E4B] border border-emerald-200 px-1 py-0.2 rounded font-medium">
+                                            RxNorm: {drug.rxNorm}
+                                          </span>
+                                        )}
+                                        {drug.ndc && (
+                                          <span className="text-[10px] font-mono text-[#64756D] font-normal">
+                                            (NDC: {drug.ndc})
+                                          </span>
+                                        )}
+                                      </div>
+                                      <div className="text-[10px] text-[#64756D]">
+                                        {drug.category}
+                                      </div>
                                     </div>
-                                    <div className="text-[10px] text-[#64756D]">
-                                      {drug.category}
+                                  </div>
+
+                                  <div className="flex items-center gap-2 flex-shrink-0">
+                                    <div className="px-2 py-0.5 bg-[#F7FAF8] border border-[#CBDAD4] rounded text-[11px] font-mono font-semibold text-[#172B25] whitespace-nowrap">
+                                      {drug.dose}
                                     </div>
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        setExtractedData({
+                                          ...extractedData,
+                                          drugs: extractedData.drugs.filter((_, i) => i !== idx)
+                                        });
+                                      }}
+                                      className="text-gray-300 hover:text-red-500 p-0.5"
+                                      title="Remove medication"
+                                    >
+                                      <Trash2 className="w-3 h-3" />
+                                    </button>
                                   </div>
                                 </div>
 
-                                <div className="flex items-center gap-2">
-                                  <div className="px-2 py-0.5 bg-[#F7FAF8] border border-[#CBDAD4] rounded text-[11px] font-mono font-semibold text-[#172B25] whitespace-nowrap">
-                                    {drug.dose}
+                                {/* RxNorm Dose Evaluation Flag & Potential Candidate Doses */}
+                                {drug.doseFlag && (
+                                  <div className={`mt-2.5 p-2 rounded-lg border text-[11px] space-y-1.5 ${
+                                    drug.doseFlag.status === 'appropriate'
+                                      ? 'bg-emerald-50/60 border-emerald-200 text-emerald-900'
+                                      : drug.doseFlag.status === 'schedule_warning' || drug.doseFlag.status === 'high'
+                                      ? 'bg-red-50/70 border-red-200 text-red-900'
+                                      : 'bg-amber-50/70 border-amber-200 text-amber-900'
+                                  }`}>
+                                    <div className="flex items-center justify-between gap-1 flex-wrap">
+                                      <span className="font-bold flex items-center gap-1">
+                                        {drug.doseFlag.status === 'appropriate' ? (
+                                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                                        ) : (
+                                          <AlertTriangle className="w-3.5 h-3.5 text-amber-600 flex-shrink-0" />
+                                        )}
+                                        <span>{drug.doseFlag.label}</span>
+                                      </span>
+                                      <span className="text-[10px] font-mono opacity-85">
+                                        Ref: {drug.doseFlag.standardDoseRange}
+                                      </span>
+                                    </div>
+
+                                    <p className="text-[10px] leading-relaxed opacity-90">
+                                      {drug.doseFlag.explanation}
+                                    </p>
+
+                                    {/* Potential RxNorm Doses Pill Selector */}
+                                    {drug.potentialDoses && drug.potentialDoses.length > 0 && (
+                                      <div className="pt-1.5 border-t border-black/5">
+                                        <div className="text-[9px] uppercase font-bold tracking-wider opacity-75 mb-1">
+                                          Potential RxNorm Candidate Doses (Click to Apply):
+                                        </div>
+                                        <div className="flex flex-wrap gap-1">
+                                          {drug.potentialDoses.map((potDose, pIdx) => {
+                                            const isSelected = drug.dose.toLowerCase().includes(potDose.toLowerCase().split(' ')[0]);
+                                            return (
+                                              <button
+                                                key={pIdx}
+                                                type="button"
+                                                onClick={() => {
+                                                  const copy = [...extractedData.drugs];
+                                                  copy[idx].dose = potDose;
+                                                  const reval = evaluateRxNormDose(copy[idx], extractedData.patient);
+                                                  copy[idx].doseFlag = reval.doseFlag;
+                                                  setExtractedData({
+                                                    ...extractedData,
+                                                    drugs: copy
+                                                  });
+                                                }}
+                                                className={`px-2 py-0.5 rounded text-[10px] font-mono transition-all ${
+                                                  isSelected
+                                                    ? 'bg-[#087F5B] text-white font-bold shadow-2xs'
+                                                    : 'bg-white border border-[#CBDAD4] text-[#172B25] hover:border-[#087F5B] hover:bg-emerald-50/50'
+                                                }`}
+                                              >
+                                                {potDose}
+                                              </button>
+                                            );
+                                          })}
+                                        </div>
+                                      </div>
+                                    )}
+
+                                    {/* Qwen-VL Vision Handwriting Evaluation */}
+                                    {drug.doseFlag.qwenEvaluation && (
+                                      <div className="text-[10px] italic text-[#2C3E37] bg-white/70 p-1.5 rounded border border-black/5 flex items-start gap-1 mt-1">
+                                        <Sparkles className="w-3 h-3 text-[#087F5B] flex-shrink-0 mt-0.5" />
+                                        <span>{drug.doseFlag.qwenEvaluation}</span>
+                                      </div>
+                                    )}
                                   </div>
-                                  <button
-                                    type="button"
-                                    onClick={() => {
-                                      setExtractedData({
-                                        ...extractedData,
-                                        drugs: extractedData.drugs.filter((_, i) => i !== idx)
-                                      });
-                                    }}
-                                    className="text-gray-300 hover:text-red-500 p-0.5"
-                                    title="Remove medication"
-                                  >
-                                    <Trash2 className="w-3 h-3" />
-                                  </button>
-                                </div>
+                                )}
                               </div>
                             ))}
                           </div>

@@ -246,36 +246,61 @@ export const PrescriptionSafetyWorkspace: React.FC<WorkspaceProps> = ({
                   {analysis.drugs.map((drug) => (
                     <div
                       key={drug.id}
-                      className="bg-white border border-[#E1EAE5] rounded-lg p-3 flex items-center justify-between gap-3 hover:border-[#CBDAD4] transition-colors"
+                      className="bg-white border border-[#E1EAE5] rounded-xl p-3 hover:border-[#087F5B] transition-colors shadow-2xs space-y-2"
                     >
-                      <div className="flex items-center gap-2.5">
-                        <span className="w-2 h-2 rounded-full bg-[#087F5B]" />
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs font-bold text-[#172B25]">
-                              {drug.name}
-                            </span>
-                            {drug.rxNorm && (
-                              <span className="text-[10px] font-mono bg-emerald-50 text-[#075E4B] border border-emerald-200 px-1.5 py-0.2 rounded font-medium">
-                                RxNorm: {drug.rxNorm}
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-2.5">
+                          <span className="w-2 h-2 rounded-full bg-[#087F5B] flex-shrink-0" />
+                          <div>
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="text-xs font-bold text-[#172B25]">
+                                {drug.name}
                               </span>
-                            )}
+                              {drug.rxNorm && (
+                                <span className="text-[10px] font-mono bg-emerald-50 text-[#075E4B] border border-emerald-200 px-1.5 py-0.2 rounded font-medium">
+                                  RxNorm: {drug.rxNorm}
+                                </span>
+                              )}
+                            </div>
+                            <div className="text-[11px] text-[#64756D] flex items-center gap-2">
+                              <span>{drug.category}</span>
+                              {drug.ndc && (
+                                <>
+                                  <span>•</span>
+                                  <span className="font-mono text-[10px]">NDC: {drug.ndc}</span>
+                                </>
+                              )}
+                            </div>
                           </div>
-                          <div className="text-[11px] text-[#64756D] flex items-center gap-2">
-                            <span>{drug.category}</span>
-                            {drug.ndc && (
-                              <>
-                                <span>•</span>
-                                <span className="font-mono text-[10px]">NDC: {drug.ndc}</span>
-                              </>
-                            )}
-                          </div>
+                        </div>
+
+                        <div className="px-2.5 py-1 bg-[#F7FAF8] border border-[#CBDAD4] rounded text-xs font-mono font-semibold text-[#172B25] whitespace-nowrap">
+                          {drug.dose}
                         </div>
                       </div>
 
-                      <div className="px-2.5 py-1 bg-[#F7FAF8] border border-[#E1EAE5] rounded text-xs font-mono font-semibold text-[#172B25] whitespace-nowrap">
-                        {drug.dose}
-                      </div>
+                      {/* RxNorm Potential Doses & Qwen-VL Evaluation */}
+                      {drug.doseFlag && (
+                        <div className="pt-2 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between text-[10px] gap-1.5">
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <span className={`px-1.5 py-0.5 rounded font-semibold text-[9px] ${
+                              drug.doseFlag.status === 'appropriate'
+                                ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                                : 'bg-amber-50 text-amber-800 border border-amber-200'
+                            }`}>
+                              {drug.doseFlag.label}
+                            </span>
+                            <span className="text-[#64756D]">
+                              RxNorm Range: <span className="font-medium text-[#172B25]">{drug.doseFlag.standardDoseRange}</span>
+                            </span>
+                          </div>
+                          {drug.doseFlag.qwenEvaluation && (
+                            <span className="text-[#075E4B] italic text-[9px] truncate max-w-sm" title={drug.doseFlag.qwenEvaluation}>
+                              👁️ {drug.doseFlag.qwenEvaluation}
+                            </span>
+                          )}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>

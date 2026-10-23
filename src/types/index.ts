@@ -1,5 +1,16 @@
 export type SeverityLevel = 'critical' | 'warning' | 'info' | 'verified' | 'unverified';
 
+export interface DoseFlag {
+  status: 'appropriate' | 'warning' | 'high' | 'low' | 'renal_adjustment' | 'schedule_warning';
+  label: string; // e.g. "RxNorm Standard Dose", "High Dose Alert", "Weekly Dosing Enforced", "Renal Dose Adjustment"
+  badgeColor: 'emerald' | 'amber' | 'red' | 'blue';
+  explanation: string;
+  standardDoseRange: string;
+  maxDailyDose?: string;
+  potentialDoses: string[];
+  qwenEvaluation: string;
+}
+
 export interface PrescriptionDrug {
   id: string;
   name: string;
@@ -11,6 +22,10 @@ export interface PrescriptionDrug {
   ndc: string;
   rxNorm?: string;
   matchScore: number;
+  standardDose?: string;
+  maxDailyDose?: string;
+  potentialDoses?: string[];
+  doseFlag?: DoseFlag;
 }
 
 export interface AllergyItem {

@@ -16,7 +16,6 @@ import {
   CheckCircle2, 
   Info,
   Clock,
-  Sparkles,
   Search,
   BookOpen,
   Scan
@@ -99,59 +98,6 @@ export const PrescriptionSafetyWorkspace: React.FC<WorkspaceProps> = ({
   return (
     <div className="max-w-[1440px] mx-auto px-4 lg:px-8 py-6 space-y-6">
       
-      {/* Top Scenario Quick-Switcher for Demo Speed */}
-      <div className="bg-white border border-[#E1EAE5] rounded-xl p-3 flex flex-wrap items-center justify-between gap-3 shadow-sm no-print">
-        <div className="flex items-center gap-2 text-xs text-[#172B25] font-medium">
-          <Sparkles className="w-4 h-4 text-[#087F5B]" />
-          <span>Demo Presets (1-Click Judge Scenarios):</span>
-        </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <button
-            onClick={() => onSelectScenario('RX-78492')}
-            className={`text-xs px-2.5 py-1.5 rounded-lg border transition-all ${
-              analysis.orderId === 'RX-78492'
-                ? 'bg-[#DDF5EA] text-[#075E4B] border-[#20A88A] font-semibold shadow-xs'
-                : 'bg-[#F7FAF8] text-[#64756D] border-[#E1EAE5] hover:text-[#172B25]'
-            }`}
-          >
-            #RX-78492 (Warfarin + Fluconazole DDI)
-          </button>
-
-          <button
-            onClick={() => onSelectScenario('RX-92015')}
-            className={`text-xs px-2.5 py-1.5 rounded-lg border transition-all ${
-              analysis.orderId === 'RX-92015'
-                ? 'bg-[#DDF5EA] text-[#075E4B] border-[#20A88A] font-semibold shadow-xs'
-                : 'bg-[#F7FAF8] text-[#64756D] border-[#E1EAE5] hover:text-[#172B25]'
-            }`}
-          >
-            #RX-92015 (DOAC + NSAID Elderly Bleed)
-          </button>
-
-          <button
-            onClick={() => onSelectScenario('RX-45129')}
-            className={`text-xs px-2.5 py-1.5 rounded-lg border transition-all ${
-              analysis.orderId === 'RX-45129'
-                ? 'bg-[#DDF5EA] text-[#075E4B] border-[#20A88A] font-semibold shadow-xs'
-                : 'bg-[#F7FAF8] text-[#64756D] border-[#E1EAE5] hover:text-[#172B25]'
-            }`}
-          >
-            #RX-45129 (Penicillin Allergy Cross-React)
-          </button>
-
-          <button
-            onClick={() => onSelectScenario('RX-32890')}
-            className={`text-xs px-2.5 py-1.5 rounded-lg border transition-all ${
-              analysis.orderId === 'RX-32890'
-                ? 'bg-[#DDF5EA] text-[#075E4B] border-[#20A88A] font-semibold shadow-xs'
-                : 'bg-[#F7FAF8] text-[#64756D] border-[#E1EAE5] hover:text-[#172B25]'
-            }`}
-          >
-            #RX-32890 (Verified Clean Pass)
-          </button>
-        </div>
-      </div>
-
       {/* Workspace Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E1EAE5]">
         <div>

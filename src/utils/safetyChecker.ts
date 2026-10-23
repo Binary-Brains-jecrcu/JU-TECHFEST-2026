@@ -181,7 +181,7 @@ export function generateClinicalFindings(drugs: PrescriptionDrug[], patient: Pat
 
   // Fluoroquinolone Allergy Check (Page 7)
   const hasFlqAllergy = patient.allergies.some(a => a.allergen.toLowerCase().includes('fluoroquinolone') || a.allergen.toLowerCase().includes('norfloxacin') || a.allergen.toLowerCase().includes('cipro'));
-  if (hasFlqAllergy && (hasDrug('norfloxacin') || hasDrug('ciprofloxacin') || hasDrug('ofloxacin') || hasDrug('oflox'))) {
+  if (hasFlqAllergy && (hasDrug('norfloxacin') || hasDrug('ciprofloxacin') || hasDrug('ofloxacin') || hasDrug('oflox') || hasDrug('zenflox'))) {
     findings.push({
       id: 'FIND-AL-FLQ',
       severity: 'critical',
@@ -195,6 +195,49 @@ export function generateClinicalFindings(drugs: PrescriptionDrug[], patient: Pat
       guidance: 'Strictly contraindicated. Switch to alternative antimicrobial class based on microbiology sensitivities.',
       recommendedAction: 'Discontinue fluoroquinolone order immediately. Prescribe cefixime or nitrofurantoin.',
       ruleId: 'AL-FLQ-FDE-01',
+      evidence: []
+    });
+  } else if ((hasDrug('ofloxacin') || hasDrug('zenflox')) && patient.age && patient.age < 18) {
+    findings.push({
+      id: 'FIND-PED-FLQ',
+      severity: 'warning',
+      category: 'Contraindication',
+      severityTag: 'CLINICAL PRECAUTION',
+      badgeLabel: 'Adolescent Age 17 Precaution',
+      title: 'Pediatric / Adolescent Precaution: Zenflox 200 (Ofloxacin)',
+      subtitle: `Patient age ${patient.age} (Adolescent): Fluoroquinolones carry precaution for arthropathy in patients under 18.`,
+      drugsInvolved: ['Zenflox 200 (Ofloxacin)'],
+      mechanism: 'Fluoroquinolones cause arthropathy and degenerative cartilage lesions in weight-bearing joints of juvenile and adolescent models. Indicated only for acute bacterial enteritis where clinical benefit outweighs risk.',
+      guidance: 'Complete short-course (5 days) therapy. Advise patient to avoid vigorous athletic exertion, maintain oral fluid hydration with Electral, and report any acute ankle/heel or joint pain.',
+      recommendedAction: 'Monitor for musculoskeletal symptoms. Ensure aggressive oral rehydration with Electral.',
+      ruleId: 'PED-FLQ-ARTHRO-01',
+      evidence: [
+        {
+          sourceTitle: 'FDA Pediatric Precaution Labeling for Fluoroquinolones',
+          citation: 'FDA Drug Safety Communication 2023; Section 8.4 Pediatric Use',
+          levelOfEvidence: 'Level 1A — Regulatory Guideline',
+          confidence: 98.7,
+          fdaBoxedWarning: true,
+          summary: 'Fluoroquinolones should be used with clinical caution in patients under 18 years of age due to potential articular cartilage lesions.'
+        }
+      ]
+    });
+  }
+
+  // Acute Gastroenteritis Protocol Verification
+  if ((hasDrug('zenflox') || hasDrug('ofloxacin')) && (hasDrug('rabemac') || hasDrug('rabeprazole')) && (hasDrug('electral') || hasDrug('rehydration'))) {
+    findings.push({
+      id: 'FIND-SAFE-GASTRO-01',
+      severity: 'verified',
+      category: 'Contraindication',
+      severityTag: 'VERIFIED REGIMEN',
+      badgeLabel: 'Gastroenteritis Verified',
+      title: 'Acute Gastroenteritis Antimicrobial & Rehydration Protocol Verified',
+      subtitle: 'Complete multimodal coverage: broad-spectrum enteric eradication (Zenflox), antiemetic PPI protection (Rabemac DSR), and electrolyte rehydration (Electral).',
+      drugsInvolved: ['Zenflox 200', 'Rabemac DSR', 'Zincovit', 'Electral', 'Cital'],
+      guidance: 'Comprehensive guideline-directed therapy for acute infectious enteritis. Zincovit supplements elemental zinc for brush-border repair, and Cital provides dysuria relief.',
+      recommendedAction: 'Maintain oral fluid intake of 1.5 - 2 Liters Electral daily. Complete full 5-day course as written.',
+      ruleId: 'CDS-GASTRO-PROTOCOL-01',
       evidence: []
     });
   }

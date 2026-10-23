@@ -956,19 +956,19 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription 001.png — Prescription",
+      "prescription 001.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 0",
       "8:42",
       "4G",
       "Prescription",
       "Date : 28-Mar-2023",
       "Complaints:",
-      "• MTD ON RX",
-      "• SOBER",
-      "• NO SEIZURES",
-      "• NO MOOD SYMPTOMS",
+      "\u2022 MTD ON RX",
+      "\u2022 SOBER",
+      "\u2022 NO SEIZURES",
+      "\u2022 NO MOOD SYMPTOMS",
       "MSE: NO E/O EPS",
-      "DÍagneSÍs: BIPOLAR MOOD DISORDER",
+      "D\u00cdagneS\u00cds: BIPOLAR MOOD DISORDER",
       "R",
       "Medicine",
       "Dose",
@@ -994,7 +994,7 @@
       "Timing : 1tab - After Breakfast, Itab - After Dinner",
       "Quetiapine 100 MG",
       "QUTIPIN SR 100MG TABLET",
-      "0 −0 -1(tab)",
+      "0 \u22120 -1(tab)",
       "After Food - daily - 6 Months",
       "180",
       "Timing : 1tab - After Dinner",
@@ -1002,7 +1002,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription 001.png — Prescription",
+        "text": "prescription 001.png \u2014 Prescription",
         "confidence": 0.985,
         "box": [
           71,
@@ -1072,7 +1072,7 @@
         ]
       },
       {
-        "text": "• MTD ON RX",
+        "text": "\u2022 MTD ON RX",
         "confidence": 0.918,
         "box": [
           271,
@@ -1082,7 +1082,7 @@
         ]
       },
       {
-        "text": "• SOBER",
+        "text": "\u2022 SOBER",
         "confidence": 0.921,
         "box": [
           271,
@@ -1092,7 +1092,7 @@
         ]
       },
       {
-        "text": "• NO SEIZURES",
+        "text": "\u2022 NO SEIZURES",
         "confidence": 0.932,
         "box": [
           271,
@@ -1102,7 +1102,7 @@
         ]
       },
       {
-        "text": "• NO MOOD SYMPTOMS",
+        "text": "\u2022 NO MOOD SYMPTOMS",
         "confidence": 0.968,
         "box": [
           271,
@@ -1122,7 +1122,7 @@
         ]
       },
       {
-        "text": "DÍagneSÍs: BIPOLAR MOOD DISORDER",
+        "text": "D\u00cdagneS\u00cds: BIPOLAR MOOD DISORDER",
         "confidence": 0.884,
         "box": [
           256,
@@ -1382,7 +1382,7 @@
         ]
       },
       {
-        "text": "0 −0 -1(tab)",
+        "text": "0 \u22120 -1(tab)",
         "confidence": 0.846,
         "box": [
           408,
@@ -1578,10 +1578,10 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_002.png — Prescription",
+      "prescription_002.png \u2014 Prescription",
       "Source: ekacare/medical_records_parsing_validation_set / test / row 10",
       "Reg No -",
-      "、",
+      "\u3001",
       "25-04-2023",
       "Chief complaints",
       "Fever, Body ache, ,,",
@@ -1622,7 +1622,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_002.png — Prescription",
+        "text": "prescription_002.png \u2014 Prescription",
         "confidence": 0.993,
         "box": [
           71,
@@ -1652,7 +1652,7 @@
         ]
       },
       {
-        "text": "、",
+        "text": "\u3001",
         "confidence": 0.24,
         "box": [
           306,
@@ -2178,7 +2178,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_003.png — Prescription",
+      "prescription_003.png \u2014 Prescription",
       "Source: ekacare/medical_records_ parsing_validation set / test / row 11",
       "10:42",
       "16 Dec 2022, 02:04 PM",
@@ -2187,12 +2187,12 @@
       "Lot of cough",
       "Findings:",
       "Advised Investigations",
-      "-0) × 3 Days",
+      "-0) \u00d7 3 Days",
       "Follow up: 21 Dec 2022, Wedhesday"
     ],
     "ocrTokens": [
       {
-        "text": "prescription_003.png — Prescription",
+        "text": "prescription_003.png \u2014 Prescription",
         "confidence": 0.993,
         "box": [
           71,
@@ -2282,7 +2282,7 @@
         ]
       },
       {
-        "text": "-0) × 3 Days",
+        "text": "-0) \u00d7 3 Days",
         "confidence": 0.838,
         "box": [
           499,
@@ -2351,7 +2351,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -2364,7 +2364,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -2488,7 +2488,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription 004.png — Prescription",
+      "prescription 004.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 18",
       "Clinic Address :-",
       "(O) :",
@@ -2550,7 +2550,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription 004.png — Prescription",
+        "text": "prescription 004.png \u2014 Prescription",
         "confidence": 0.973,
         "box": [
           71,
@@ -3320,7 +3320,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_005.png — Prescription",
+      "prescription_005.png \u2014 Prescription",
       "Source: ekacare/medical_records_parsing_validation_set / test / row 25",
       "03 Apr 2024",
       "<",
@@ -3350,7 +3350,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_005.png — Prescription",
+        "text": "prescription_005.png \u2014 Prescription",
         "confidence": 0.993,
         "box": [
           71,
@@ -3732,7 +3732,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_006.png — Prescription",
+      "prescription_006.png \u2014 Prescription",
       "Source: ekacare/medical_records_parsing_validation_set / test / row 26",
       "02/08/2023, 22:109M",
       "Meslis-mano",
@@ -3758,7 +3758,7 @@
       "0-0-1",
       "After seal",
       "6Days",
-      "zítuz charvs s baetnt",
+      "z\u00edtuz charvs s baetnt",
       "Ag a (00 m)()",
       "After Dincer",
       "0-p-1",
@@ -3775,7 +3775,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_006.png — Prescription",
+        "text": "prescription_006.png \u2014 Prescription",
         "confidence": 0.993,
         "box": [
           71,
@@ -4035,7 +4035,7 @@
         ]
       },
       {
-        "text": "zítuz charvs s baetnt",
+        "text": "z\u00edtuz charvs s baetnt",
         "confidence": 0.422,
         "box": [
           569,
@@ -4287,7 +4287,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_007.png — Prescription",
+      "prescription_007.png \u2014 Prescription",
       "Source: ekacare/medical_records_ parsing_validation_set / test / row 29",
       "8",
       "Reg. No:",
@@ -4309,7 +4309,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_007.png — Prescription",
+        "text": "prescription_007.png \u2014 Prescription",
         "confidence": 0.997,
         "box": [
           71,
@@ -4611,7 +4611,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_008.png — Prescription",
+      "prescription_008.png \u2014 Prescription",
       "Source: ekacare/medical_records_parsing_validation_set / test / row 30",
       "Ph-",
       "email-",
@@ -4630,7 +4630,7 @@
       "To use overnight once weekly for 2 weeks2 tubes",
       "(1t tube on 26/08/21- 8 pm to 8 am)",
       "(2nd tube on 02/09/21- ;",
-      "”)",
+      "\u201d)",
       "3] TAB. IVERMECTOL-12",
       "1 tab. Stat @ night",
       "(1)",
@@ -4641,7 +4641,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_008.png — Prescription",
+        "text": "prescription_008.png \u2014 Prescription",
         "confidence": 0.997,
         "box": [
           71,
@@ -4831,7 +4831,7 @@
         ]
       },
       {
-        "text": "”)",
+        "text": "\u201d)",
         "confidence": 0.433,
         "box": [
           598,
@@ -4989,7 +4989,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_009.png — Prescription",
+      "prescription_009.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 32",
       "Patient Name :",
       "Age/ Gender :",
@@ -5010,7 +5010,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_009.png — Prescription",
+        "text": "prescription_009.png \u2014 Prescription",
         "confidence": 0.987,
         "box": [
           70,
@@ -5239,7 +5239,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -5252,7 +5252,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -5376,7 +5376,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_010.png — Prescription",
+      "prescription_010.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 41",
       "OUTPATIENT RECORD",
       "Hospital No:",
@@ -5408,12 +5408,12 @@
       "REFER TO DIETECIAN, WT REDUCTION, REGAULAR EXERCISE, LOW FAT,LOW SALT DIET",
       "LIPID PROFILE AND LFT AFTER 1 MONTH",
       "Seck medical help if:",
-      "• The initial syn",
-      "• Any new sym"
+      "\u2022 The initial syn",
+      "\u2022 Any new sym"
     ],
     "ocrTokens": [
       {
-        "text": "prescription_010.png — Prescription",
+        "text": "prescription_010.png \u2014 Prescription",
         "confidence": 0.991,
         "box": [
           70,
@@ -5733,7 +5733,7 @@
         ]
       },
       {
-        "text": "• The initial syn",
+        "text": "\u2022 The initial syn",
         "confidence": 0.959,
         "box": [
           213,
@@ -5743,7 +5743,7 @@
         ]
       },
       {
-        "text": "• Any new sym",
+        "text": "\u2022 Any new sym",
         "confidence": 0.968,
         "box": [
           213,
@@ -5865,7 +5865,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_011.png — Prescription",
+      "prescription_011.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 51",
       "Name :",
       "Phone :",
@@ -5905,7 +5905,7 @@
       "30 Q",
       "5",
       "LIQ. EGAZYME LIQUID",
-      "15 − 15 - 15 (ml)",
+      "15 \u2212 15 - 15 (ml)",
       "15 mins GQQ1 6Q - Q Q - 30 Q 3",
       "6",
       "POW. PRO PL CHOCOLATE 200GM",
@@ -5920,7 +5920,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_011.png — Prescription",
+        "text": "prescription_011.png \u2014 Prescription",
         "confidence": 0.988,
         "box": [
           70,
@@ -6320,7 +6320,7 @@
         ]
       },
       {
-        "text": "15 − 15 - 15 (ml)",
+        "text": "15 \u2212 15 - 15 (ml)",
         "confidence": 0.847,
         "box": [
           394,
@@ -6516,10 +6516,10 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_012.png — Prescription",
+      "prescription_012.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 52",
       "3-Feb-2024",
-      "BP 180 / 90° mmirg Post Prandial Blood Sugar (PPBS) 361 mg/dL Fasting Blood Sugar (FBS) 220 mg/dL.",
+      "BP 180 / 90\u00b0 mmirg Post Prandial Blood Sugar (PPBS) 361 mg/dL Fasting Blood Sugar (FBS) 220 mg/dL.",
       "Complains: LOW BACK PAIN, BURNING SENSATION",
       "Diagnas: DIABETES MELLITUS TYPE 2",
       "R",
@@ -6582,7 +6582,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_012.png — Prescription",
+        "text": "prescription_012.png \u2014 Prescription",
         "confidence": 0.997,
         "box": [
           71,
@@ -6612,7 +6612,7 @@
         ]
       },
       {
-        "text": "BP 180 / 90° mmirg Post Prandial Blood Sugar (PPBS) 361 mg/dL Fasting Blood Sugar (FBS) 220 mg/dL.",
+        "text": "BP 180 / 90\u00b0 mmirg Post Prandial Blood Sugar (PPBS) 361 mg/dL Fasting Blood Sugar (FBS) 220 mg/dL.",
         "confidence": 0.906,
         "box": [
           123,
@@ -7460,7 +7460,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_013.png — Prescription",
+      "prescription_013.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 53",
       "OUTPATIENT RECORD",
       "Hospital No:",
@@ -7491,7 +7491,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_013.png — Prescription",
+        "text": "prescription_013.png \u2014 Prescription",
         "confidence": 0.986,
         "box": [
           72,
@@ -7951,7 +7951,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_014.png — Prescription",
+      "prescription_014.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 59",
       "DATE: 12/09/2019",
       "NAME:",
@@ -7980,7 +7980,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_014.png — Prescription",
+        "text": "prescription_014.png \u2014 Prescription",
         "confidence": 0.992,
         "box": [
           70,
@@ -8488,7 +8488,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_015.png — Prescription",
+      "prescription_015.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 60",
       "OUTPATIENT RECORD",
       "Hospital No:",
@@ -8531,7 +8531,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_015.png — Prescription",
+        "text": "prescription_015.png \u2014 Prescription",
         "confidence": 0.991,
         "box": [
           72,
@@ -9077,7 +9077,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription 016.png — Prescription",
+      "prescription 016.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 64",
       "OUTPATIENT RECORD",
       "Hospital No:",
@@ -9122,7 +9122,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription 016.png — Prescription",
+        "text": "prescription 016.png \u2014 Prescription",
         "confidence": 0.983,
         "box": [
           71,
@@ -9688,7 +9688,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_017.png — Prescription",
+      "prescription_017.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 66",
       "Date: 28-Feb-2019",
       "Height 167 cm",
@@ -9719,7 +9719,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_017.png — Prescription",
+        "text": "prescription_017.png \u2014 Prescription",
         "confidence": 0.989,
         "box": [
           70,
@@ -10077,7 +10077,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_018.png — Prescription",
+      "prescription_018.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 75",
       "Tel:",
       "ID No:",
@@ -10129,7 +10129,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_018.png — Prescription",
+        "text": "prescription_018.png \u2014 Prescription",
         "confidence": 0.997,
         "box": [
           71,
@@ -10668,7 +10668,7 @@
         "rxNorm": "6851",
         "matchScore": 99,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -10681,7 +10681,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -10835,11 +10835,11 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_019.png — Prescription",
+      "prescription_019.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 76",
       "Date",
       "30-Apr-2018",
-      "BP 110 / 80° mmHg",
+      "BP 110 / 80\u00b0 mmHg",
       "Complaints: altered bowel habits",
       "Diagnosis: DIABETES MELLITUS TYPE 2,HYPERTENSION,URINARY TRACT INFECTION",
       "R",
@@ -10867,7 +10867,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_019.png — Prescription",
+        "text": "prescription_019.png \u2014 Prescription",
         "confidence": 0.99,
         "box": [
           70,
@@ -10907,7 +10907,7 @@
         ]
       },
       {
-        "text": "BP 110 / 80° mmHg",
+        "text": "BP 110 / 80\u00b0 mmHg",
         "confidence": 0.923,
         "box": [
           134,
@@ -11206,7 +11206,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -11219,7 +11219,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -11343,13 +11343,13 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_020.png — Prescription",
+      "prescription_020.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 80",
       "Place",
-      "HTNDM□CAD",
-      "CKD□Asthma",
+      "HTNDM\u25a1CAD",
+      "CKD\u25a1Asthma",
       "Pregnancy",
-      "□FM □",
+      "\u25a1FM \u25a1",
       "PRESCE",
       "5 Days",
       "0.5",
@@ -11364,7 +11364,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_020.png — Prescription",
+        "text": "prescription_020.png \u2014 Prescription",
         "confidence": 0.989,
         "box": [
           70,
@@ -11394,7 +11394,7 @@
         ]
       },
       {
-        "text": "HTNDM□CAD",
+        "text": "HTNDM\u25a1CAD",
         "confidence": 0.924,
         "box": [
           554,
@@ -11404,7 +11404,7 @@
         ]
       },
       {
-        "text": "CKD□Asthma",
+        "text": "CKD\u25a1Asthma",
         "confidence": 0.941,
         "box": [
           556,
@@ -11424,7 +11424,7 @@
         ]
       },
       {
-        "text": "□FM □",
+        "text": "\u25a1FM \u25a1",
         "confidence": 0.848,
         "box": [
           605,
@@ -11593,7 +11593,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -11606,7 +11606,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -11730,7 +11730,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_021.png — Prescription",
+      "prescription_021.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 86",
       "Tel:",
       "E-mail :",
@@ -11759,7 +11759,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_021.png — Prescription",
+        "text": "prescription_021.png \u2014 Prescription",
         "confidence": 0.993,
         "box": [
           72,
@@ -12131,7 +12131,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_022.png — Prescription",
+      "prescription_022.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 96",
       "Case Paper",
       "CP NO",
@@ -12204,22 +12204,22 @@
       "Frequency",
       "Duration",
       "PSR 30gm",
-      "0—0—2",
+      "0\u20140\u20142",
       "Water",
       "Before Meal",
       "30",
       "Pittashaman Syrup 450ml",
-      "10—0—10",
+      "10\u20140\u201410",
       "Water",
       "After Meal",
       "30",
       "Pachanvati Tablet (40 TAB)",
-      "2-0—2",
+      "2-0\u20142",
       "Water",
       "After Meal",
       "30",
       "Flexit Tablet",
-      "2—0—2",
+      "2\u20140\u20142",
       "Water",
       "After Meal",
       "30",
@@ -12227,7 +12227,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_022.png — Prescription",
+        "text": "prescription_022.png \u2014 Prescription",
         "confidence": 0.979,
         "box": [
           72,
@@ -12957,7 +12957,7 @@
         ]
       },
       {
-        "text": "0—0—2",
+        "text": "0\u20140\u20142",
         "confidence": 0.918,
         "box": [
           345,
@@ -13007,7 +13007,7 @@
         ]
       },
       {
-        "text": "10—0—10",
+        "text": "10\u20140\u201410",
         "confidence": 0.981,
         "box": [
           347,
@@ -13057,7 +13057,7 @@
         ]
       },
       {
-        "text": "2-0—2",
+        "text": "2-0\u20142",
         "confidence": 0.883,
         "box": [
           345,
@@ -13107,7 +13107,7 @@
         ]
       },
       {
-        "text": "2—0—2",
+        "text": "2\u20140\u20142",
         "confidence": 0.936,
         "box": [
           346,
@@ -13269,7 +13269,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_023.png — Prescription",
+      "prescription_023.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 99",
       "Name",
       "Phone",
@@ -13286,7 +13286,7 @@
       "Duration",
       "1",
       "SYR. AUGMENTIN DUO",
-      "31½2-0-31/2",
+      "31\u00bd2-0-31/2",
       "After Food - daily - 5 Days",
       "(ml)",
       "2",
@@ -13294,7 +13294,7 @@
       "0-0-5(ml)",
       "After Food - daily - 7 days",
       "3",
-      "EXP. BROZEET 100ML EXPECTORANT 21/2 - 2½ — 2½ After Food - daily",
+      "EXP. BROZEET 100ML EXPECTORANT 21/2 - 2\u00bd \u2014 2\u00bd After Food - daily",
       "(ml)",
       "Note: : COUGH SATHI",
       "SYR. ZENTEL",
@@ -13303,7 +13303,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_023.png — Prescription",
+        "text": "prescription_023.png \u2014 Prescription",
         "confidence": 0.993,
         "box": [
           71,
@@ -13473,7 +13473,7 @@
         ]
       },
       {
-        "text": "31½2-0-31/2",
+        "text": "31\u00bd2-0-31/2",
         "confidence": 0.908,
         "box": [
           395,
@@ -13553,7 +13553,7 @@
         ]
       },
       {
-        "text": "EXP. BROZEET 100ML EXPECTORANT 21/2 - 2½ — 2½ After Food - daily",
+        "text": "EXP. BROZEET 100ML EXPECTORANT 21/2 - 2\u00bd \u2014 2\u00bd After Food - daily",
         "confidence": 0.941,
         "box": [
           171,
@@ -13693,7 +13693,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_024.png — Prescription",
+      "prescription_024.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 103",
       "Email Id:",
       "Web Site:",
@@ -13706,13 +13706,13 @@
       "R",
       "1) Tab. Shelcal 500mg",
       "(15)",
-      "0-----1 …… 15 Day(s)",
+      "0-----1 \u2026\u2026 15 Day(s)",
       "2) Tab. Ecosprin 150",
       "(15)",
       "0--1--0 ... 15 Day(s)",
       "3) Tab. Thalidomide 100 mg",
       "(15)",
-      "0-----1 … 15 Day(s)",
+      "0-----1 \u2026 15 Day(s)",
       "4) Tab. Pregab-M 75 mg",
       "(15)",
       "0-----1 .. 15 Day(s)",
@@ -13725,7 +13725,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_024.png — Prescription",
+        "text": "prescription_024.png \u2014 Prescription",
         "confidence": 0.992,
         "box": [
           71,
@@ -13855,7 +13855,7 @@
         ]
       },
       {
-        "text": "0-----1 …… 15 Day(s)",
+        "text": "0-----1 \u2026\u2026 15 Day(s)",
         "confidence": 0.928,
         "box": [
           164,
@@ -13915,7 +13915,7 @@
         ]
       },
       {
-        "text": "0-----1 … 15 Day(s)",
+        "text": "0-----1 \u2026 15 Day(s)",
         "confidence": 0.958,
         "box": [
           165,
@@ -14127,7 +14127,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_025.png — Prescription",
+      "prescription_025.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 104",
       "Downloaded on : Mon, 12 Feb 2024 11:51:24 PM",
       "Prescription",
@@ -14147,7 +14147,7 @@
       "5 Day",
       "5.00",
       "ARACETAMO",
-      "Li¿1/2400MG_32",
+      "Li\u00bf1/2400MG_32",
       "5MG",
       "Investigation",
       "Downloaded from :",
@@ -14155,7 +14155,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_025.png — Prescription",
+        "text": "prescription_025.png \u2014 Prescription",
         "confidence": 0.996,
         "box": [
           71,
@@ -14355,7 +14355,7 @@
         ]
       },
       {
-        "text": "Li¿1/2400MG_32",
+        "text": "Li\u00bf1/2400MG_32",
         "confidence": 0.892,
         "box": [
           141,
@@ -14517,7 +14517,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_026.png — Prescription",
+      "prescription_026.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 108",
       "Contact number:",
       "Website address-",
@@ -14603,7 +14603,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_026.png — Prescription",
+        "text": "prescription_026.png \u2014 Prescription",
         "confidence": 0.966,
         "box": [
           72,
@@ -15783,11 +15783,11 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_027.png — Prescription",
+      "prescription_027.png \u2014 Prescription",
       "Source: ekacare/medical_records_parsing_validation_set / test / row 111",
       "an",
       "I    ing",
-      "É An  ise",
+      "\u00c9 An  ise",
       "O",
       "3. Tab Zocef 500 1 tab twice daily after food for 7 days.",
       "10.Review in Ortho OPD (Mon/Wed/Fri) after & weeks.",
@@ -15804,7 +15804,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_027.png — Prescription",
+        "text": "prescription_027.png \u2014 Prescription",
         "confidence": 0.996,
         "box": [
           71,
@@ -15844,7 +15844,7 @@
         ]
       },
       {
-        "text": "É An  ise",
+        "text": "\u00c9 An  ise",
         "confidence": 0.575,
         "box": [
           176,
@@ -16096,7 +16096,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_028.png — Prescription",
+      "prescription_028.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 116",
       "Phone:",
       "By:",
@@ -16126,7 +16126,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_028.png — Prescription",
+        "text": "prescription_028.png \u2014 Prescription",
         "confidence": 0.992,
         "box": [
           71,
@@ -16445,7 +16445,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -16458,7 +16458,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -16582,24 +16582,24 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_029.png — Prescription",
+      "prescription_029.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 117",
       "Tuesday, November 8, 2022 12:19 PM",
       "Patient Address:",
       "city:",
-      "· CHELEDEUN30",
+      "\u00b7 CHELEDEUN30",
       "ODAC",
       "56 Days",
-      "· cyfolac forte cap 4-0-4",
+      "\u00b7 cyfolac forte cap 4-0-4",
       "10 Day(s)",
-      "• Defen-S Tablet",
+      "\u2022 Defen-S Tablet",
       "5 DAYS",
-      "• VEEBION-CZ Once Every 1 Hour",
+      "\u2022 VEEBION-CZ Once Every 1 Hour",
       "5 DAYS",
       "a",
-      "· Triphala Guggulu Tab Thrice a day",
+      "\u00b7 Triphala Guggulu Tab Thrice a day",
       "15 Day(s)",
-      "• Valzaar 80 Tablet",
+      "\u2022 Valzaar 80 Tablet",
       "15-0-15ML",
       "0 Days",
       "Not valid for Medico Legal Purpose",
@@ -16607,7 +16607,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_029.png — Prescription",
+        "text": "prescription_029.png \u2014 Prescription",
         "confidence": 0.992,
         "box": [
           71,
@@ -16657,7 +16657,7 @@
         ]
       },
       {
-        "text": "· CHELEDEUN30",
+        "text": "\u00b7 CHELEDEUN30",
         "confidence": 0.96,
         "box": [
           152,
@@ -16687,7 +16687,7 @@
         ]
       },
       {
-        "text": "· cyfolac forte cap 4-0-4",
+        "text": "\u00b7 cyfolac forte cap 4-0-4",
         "confidence": 0.978,
         "box": [
           150,
@@ -16707,7 +16707,7 @@
         ]
       },
       {
-        "text": "• Defen-S Tablet",
+        "text": "\u2022 Defen-S Tablet",
         "confidence": 0.97,
         "box": [
           150,
@@ -16727,7 +16727,7 @@
         ]
       },
       {
-        "text": "• VEEBION-CZ Once Every 1 Hour",
+        "text": "\u2022 VEEBION-CZ Once Every 1 Hour",
         "confidence": 0.969,
         "box": [
           151,
@@ -16757,7 +16757,7 @@
         ]
       },
       {
-        "text": "· Triphala Guggulu Tab Thrice a day",
+        "text": "\u00b7 Triphala Guggulu Tab Thrice a day",
         "confidence": 0.982,
         "box": [
           153,
@@ -16777,7 +16777,7 @@
         ]
       },
       {
-        "text": "• Valzaar 80 Tablet",
+        "text": "\u2022 Valzaar 80 Tablet",
         "confidence": 0.984,
         "box": [
           152,
@@ -16876,7 +16876,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -16889,7 +16889,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -17013,7 +17013,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_030.png — Prescription",
+      "prescription_030.png \u2014 Prescription",
       "Source: ekacare/medical_records_parsing_validation_set / test / row 118",
       "2024-01-27 13:58",
       "Age:",
@@ -17041,7 +17041,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_030.png — Prescription",
+        "text": "prescription_030.png \u2014 Prescription",
         "confidence": 0.976,
         "box": [
           70,
@@ -17369,7 +17369,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_031.png — Prescription",
+      "prescription_031.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 122",
       "Rx ID :",
       "Diagnosis",
@@ -17418,7 +17418,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_031.png — Prescription",
+        "text": "prescription_031.png \u2014 Prescription",
         "confidence": 0.993,
         "box": [
           72,
@@ -18058,7 +18058,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription 032.png — Prescription",
+      "prescription 032.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 123",
       "Resi :",
       "Mobile :",
@@ -18091,7 +18091,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription 032.png — Prescription",
+        "text": "prescription 032.png \u2014 Prescription",
         "confidence": 0.981,
         "box": [
           71,
@@ -18505,7 +18505,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_033.png — Prescription",
+      "prescription_033.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 124",
       "Downloaded on : Tue, 13 Feb 2024 04:23:54 AM",
       "Prescription",
@@ -18536,7 +18536,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_033.png — Prescription",
+        "text": "prescription_033.png \u2014 Prescription",
         "confidence": 0.991,
         "box": [
           71,
@@ -18865,7 +18865,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -18878,7 +18878,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -19002,7 +19002,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_034.png — Prescription",
+      "prescription_034.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 134",
       "Registration No.",
       "27-05-2021",
@@ -19047,7 +19047,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_034.png — Prescription",
+        "text": "prescription_034.png \u2014 Prescription",
         "confidence": 0.988,
         "box": [
           70,
@@ -19516,7 +19516,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -19529,7 +19529,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -19653,7 +19653,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_035.png — Prescription",
+      "prescription_035.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 136",
       "Phone",
       "Email:",
@@ -19699,7 +19699,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_035.png — Prescription",
+        "text": "prescription_035.png \u2014 Prescription",
         "confidence": 0.993,
         "box": [
           71,
@@ -20207,7 +20207,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_036.png — Prescription",
+      "prescription_036.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 137",
       "INVESTIGATIONS :",
       "Hb",
@@ -20216,7 +20216,7 @@
       "TLC",
       "DLC",
       "K+mJ/dl",
-      "coúnt (Cumm)",
+      "co\u00fant (Cumm)",
       "S.Creat",
       "B.Urea",
       "gms%",
@@ -20272,12 +20272,12 @@
       "TuF.Magadol 1TDS",
       "Tab.Pan D 10D",
       "Emloty stomeda",
-      "Tab.Preväll LA 2 1OD",
+      "Tab.Prev\u00e4ll LA 2 1OD",
       "0",
       "Syp.Betonine 2tsf 1TDS",
       "C",
       "Prepcogt 34deg",
-      "Advise: Come after 5 days in OPD. Wcol λer d",
+      "Advise: Come after 5 days in OPD. Wcol \u03bber d",
       "Han: Follow up inOPD.",
       "Next Appointment :,/.",
       "Received by :",
@@ -20285,7 +20285,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_036.png — Prescription",
+        "text": "prescription_036.png \u2014 Prescription",
         "confidence": 0.985,
         "box": [
           72,
@@ -20375,7 +20375,7 @@
         ]
       },
       {
-        "text": "coúnt (Cumm)",
+        "text": "co\u00fant (Cumm)",
         "confidence": 0.941,
         "box": [
           481,
@@ -20935,7 +20935,7 @@
         ]
       },
       {
-        "text": "Tab.Preväll LA 2 1OD",
+        "text": "Tab.Prev\u00e4ll LA 2 1OD",
         "confidence": 0.924,
         "box": [
           163,
@@ -20985,7 +20985,7 @@
         ]
       },
       {
-        "text": "Advise: Come after 5 days in OPD. Wcol λer d",
+        "text": "Advise: Come after 5 days in OPD. Wcol \u03bber d",
         "confidence": 0.854,
         "box": [
           150,
@@ -21181,14 +21181,14 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_037.png — Prescription",
+      "prescription_037.png \u2014 Prescription",
       "Source: ekacare/medical_records_ parsing_validation set / test / row 138",
       "5H",
       "08"
     ],
     "ocrTokens": [
       {
-        "text": "prescription_037.png — Prescription",
+        "text": "prescription_037.png \u2014 Prescription",
         "confidence": 0.992,
         "box": [
           71,
@@ -21277,7 +21277,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -21290,7 +21290,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -21414,7 +21414,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_038.png — Prescription",
+      "prescription_038.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 143",
       "Date:",
       "22-Aug-2022 09:17",
@@ -21466,7 +21466,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_038.png — Prescription",
+        "text": "prescription_038.png \u2014 Prescription",
         "confidence": 0.966,
         "box": [
           72,
@@ -22136,7 +22136,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_039.png — Prescription",
+      "prescription_039.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 149",
       "4:23",
       "Powered by",
@@ -22164,12 +22164,12 @@
       "After Meal",
       "(THIOCOLCHICOSIDE,",
       "Every Day",
-      "ÀCECLOFENAC)",
+      "\u00c0CECLOFENAC)",
       "1-0-1-0",
       "for 5 Days",
       "TABLET CALCIMAX K2 PLUS",
       "After Meal",
-      "(CALCIUMÃ CARBONATEA,VITAMIN",
+      "(CALCIUM\u00c3 CARBONATEA,VITAMIN",
       "Every Day",
       "D3 (CALCITRIOL), VITAMIN K2)",
       "0-1-0-0",
@@ -22186,7 +22186,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_039.png — Prescription",
+        "text": "prescription_039.png \u2014 Prescription",
         "confidence": 0.985,
         "box": [
           72,
@@ -22466,7 +22466,7 @@
         ]
       },
       {
-        "text": "ÀCECLOFENAC)",
+        "text": "\u00c0CECLOFENAC)",
         "confidence": 0.96,
         "box": [
           322,
@@ -22516,7 +22516,7 @@
         ]
       },
       {
-        "text": "(CALCIUMÃ CARBONATEA,VITAMIN",
+        "text": "(CALCIUM\u00c3 CARBONATEA,VITAMIN",
         "confidence": 0.961,
         "box": [
           324,
@@ -22802,7 +22802,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_040.png — Prescription",
+      "prescription_040.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 154",
       "Tab. Zerdol - P",
       "(1-0-1 X 6 days) nou o,  12.00",
@@ -22838,7 +22838,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_040.png — Prescription",
+        "text": "prescription_040.png \u2014 Prescription",
         "confidence": 0.985,
         "box": [
           72,
@@ -23382,7 +23382,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_041.png — Prescription",
+      "prescription_041.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 157",
       "2:51",
       "ApeTee",
@@ -23398,18 +23398,18 @@
       "Cinicaly sttie",
       "Advised Investigations",
       "2. Synas Fmaat (30 m) (200 )",
-      "35 m · 12 houly (0–0) X 5 Days",
-      "3i4 18a - 8 hourly (0–0–0) X 5 Days",
+      "35 m \u00b7 12 houly (0\u20130) X 5 Days",
+      "3i4 18a - 8 hourly (0\u20130\u20130) X 5 Days",
       "5. Ume Rosdne croncopies (RUM)",
       "4. Widl Test",
-      "3i4 tia - 8 houty (0–0−0) X5 Days",
+      "3i4 tia - 8 houty (0\u20130\u22120) X5 Days",
       "L. Bood Culure & Serslirey",
       "7. X Ray Cheas",
       "5 m- X Sat",
       "Instructions",
       "* Typhond",
       "* preumacaccal..",
-      "• HPVI only females).",
+      "\u2022 HPVI only females).",
       "B*BFLUENZA",
       "Hydrotherapy: Tipid water sponging or bath I temp >102",
       "Coneray ld a ad",
@@ -23421,7 +23421,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_041.png — Prescription",
+        "text": "prescription_041.png \u2014 Prescription",
         "confidence": 0.991,
         "box": [
           71,
@@ -23581,7 +23581,7 @@
         ]
       },
       {
-        "text": "35 m · 12 houly (0–0) X 5 Days",
+        "text": "35 m \u00b7 12 houly (0\u20130) X 5 Days",
         "confidence": 0.78,
         "box": [
           430,
@@ -23591,7 +23591,7 @@
         ]
       },
       {
-        "text": "3i4 18a - 8 hourly (0–0–0) X 5 Days",
+        "text": "3i4 18a - 8 hourly (0\u20130\u20130) X 5 Days",
         "confidence": 0.806,
         "box": [
           431,
@@ -23621,7 +23621,7 @@
         ]
       },
       {
-        "text": "3i4 tia - 8 houty (0–0−0) X5 Days",
+        "text": "3i4 tia - 8 houty (0\u20130\u22120) X5 Days",
         "confidence": 0.782,
         "box": [
           430,
@@ -23691,7 +23691,7 @@
         ]
       },
       {
-        "text": "• HPVI only females).",
+        "text": "\u2022 HPVI only females).",
         "confidence": 0.762,
         "box": [
           267,
@@ -23830,7 +23830,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -23843,7 +23843,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -23967,7 +23967,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_042.png — Prescription",
+      "prescription_042.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 159",
       "Discharge Summary",
       "Template Verified",
@@ -24090,7 +24090,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_042.png — Prescription",
+        "text": "prescription_042.png \u2014 Prescription",
         "confidence": 0.993,
         "box": [
           72,
@@ -25606,7 +25606,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_043.png — Prescription",
+      "prescription_043.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 161",
       "Name",
       "Date : 14-Sep-2023",
@@ -25667,7 +25667,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_043.png — Prescription",
+        "text": "prescription_043.png \u2014 Prescription",
         "confidence": 0.986,
         "box": [
           70,
@@ -26296,7 +26296,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -26309,7 +26309,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -26433,7 +26433,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_044.png — Prescription",
+      "prescription_044.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 164",
       "Name",
       "Hospital No",
@@ -26465,7 +26465,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_044.png — Prescription",
+        "text": "prescription_044.png \u2014 Prescription",
         "confidence": 0.992,
         "box": [
           72,
@@ -26935,7 +26935,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_045.png — Prescription",
+      "prescription_045.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 170",
       "Name",
       "Email",
@@ -26972,7 +26972,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_045.png — Prescription",
+        "text": "prescription_045.png \u2014 Prescription",
         "confidence": 0.99,
         "box": [
           70,
@@ -27390,7 +27390,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_046.png — Prescription",
+      "prescription_046.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 172",
       "Phone:",
       "Reg No.",
@@ -27427,7 +27427,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_046.png — Prescription",
+        "text": "prescription_046.png \u2014 Prescription",
         "confidence": 0.989,
         "box": [
           70,
@@ -27915,7 +27915,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_047.png — Prescription",
+      "prescription_047.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 184",
       "11039",
       "Date",
@@ -27932,8 +27932,8 @@
       "105",
       "0.92",
       "Diagnosis:",
-      "· DIABETES MELLITUS TYPE 2 since 3.9 Years",
-      "• DYSLIPIDEMIA",
+      "\u00b7 DIABETES MELLITUS TYPE 2 since 3.9 Years",
+      "\u2022 DYSLIPIDEMIA",
       "R",
       "Medicine",
       "Dose",
@@ -27977,7 +27977,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_047.png — Prescription",
+        "text": "prescription_047.png \u2014 Prescription",
         "confidence": 0.993,
         "box": [
           72,
@@ -28147,7 +28147,7 @@
         ]
       },
       {
-        "text": "· DIABETES MELLITUS TYPE 2 since 3.9 Years",
+        "text": "\u00b7 DIABETES MELLITUS TYPE 2 since 3.9 Years",
         "confidence": 0.985,
         "box": [
           158,
@@ -28157,7 +28157,7 @@
         ]
       },
       {
-        "text": "• DYSLIPIDEMIA",
+        "text": "\u2022 DYSLIPIDEMIA",
         "confidence": 0.972,
         "box": [
           158,
@@ -28713,7 +28713,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_048.png — Prescription",
+      "prescription_048.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 190",
       "Name:",
       "Date: 21-09-2021 08:08 pm",
@@ -28749,7 +28749,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_048.png — Prescription",
+        "text": "prescription_048.png \u2014 Prescription",
         "confidence": 0.993,
         "box": [
           70,
@@ -29191,7 +29191,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_049.png — Prescription",
+      "prescription_049.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 197",
       "21 Nov, 2022",
       "UHID:",
@@ -29201,15 +29201,15 @@
       "urine PC Ratio 2.08' T3 2.78; T4 1.12; TSH 6.510; (improved when compared to Sep 22); Weight loss 7",
       "kgs; Advise- to continue the same medications for now; post-meals walks",
       "Diagnosis",
-      "· Pre-existing type 2 diabetes mellitus",
-      "• Hyperlipidaemia, unspecified",
-      "• Subclinical Hypothyroidism",
+      "\u00b7 Pre-existing type 2 diabetes mellitus",
+      "\u2022 Hyperlipidaemia, unspecified",
+      "\u2022 Subclinical Hypothyroidism",
       "Medicines",
       "Timing",
       "Intake",
       "Frequency.",
       "Duration",
-      "• METFORMIN 500 MG",
+      "\u2022 METFORMIN 500 MG",
       "1 TAB -",
       "After food",
       "Daily",
@@ -29238,7 +29238,7 @@
       "Morning",
       "consultation",
       "1 TAB - Night",
-      "• LOSARTAN 25MG TAB",
+      "\u2022 LOSARTAN 25MG TAB",
       "1 TAB -",
       "After food",
       "Daily",
@@ -29259,7 +29259,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_049.png — Prescription",
+        "text": "prescription_049.png \u2014 Prescription",
         "confidence": 0.997,
         "box": [
           71,
@@ -29359,7 +29359,7 @@
         ]
       },
       {
-        "text": "· Pre-existing type 2 diabetes mellitus",
+        "text": "\u00b7 Pre-existing type 2 diabetes mellitus",
         "confidence": 0.975,
         "box": [
           128,
@@ -29369,7 +29369,7 @@
         ]
       },
       {
-        "text": "• Hyperlipidaemia, unspecified",
+        "text": "\u2022 Hyperlipidaemia, unspecified",
         "confidence": 0.976,
         "box": [
           130,
@@ -29379,7 +29379,7 @@
         ]
       },
       {
-        "text": "• Subclinical Hypothyroidism",
+        "text": "\u2022 Subclinical Hypothyroidism",
         "confidence": 0.986,
         "box": [
           129,
@@ -29439,7 +29439,7 @@
         ]
       },
       {
-        "text": "• METFORMIN 500 MG",
+        "text": "\u2022 METFORMIN 500 MG",
         "confidence": 0.959,
         "box": [
           129,
@@ -29729,7 +29729,7 @@
         ]
       },
       {
-        "text": "• LOSARTAN 25MG TAB",
+        "text": "\u2022 LOSARTAN 25MG TAB",
         "confidence": 0.963,
         "box": [
           131,
@@ -30123,7 +30123,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_050.png — Prescription",
+      "prescription_050.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 214",
       "Reg No.:",
       "Phone:",
@@ -30168,7 +30168,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_050.png — Prescription",
+        "text": "prescription_050.png \u2014 Prescription",
         "confidence": 0.988,
         "box": [
           70,
@@ -30666,7 +30666,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_051.png — Prescription",
+      "prescription_051.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 217",
       "3:22",
       "16 Dec 2023, 11:47 AM",
@@ -30686,7 +30686,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_051.png — Prescription",
+        "text": "prescription_051.png \u2014 Prescription",
         "confidence": 0.991,
         "box": [
           71,
@@ -30905,7 +30905,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -30918,7 +30918,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -31042,7 +31042,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_052.png — Prescription",
+      "prescription_052.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 218",
       "Clinic -",
       "Mobile:",
@@ -31081,12 +31081,12 @@
       "12 week(s) After Food",
       "Cholecalciferol",
       "Advices",
-      "• follow up after 1 months with FBS / PPBS",
+      "\u2022 follow up after 1 months with FBS / PPBS",
       "Electronically Signed by:"
     ],
     "ocrTokens": [
       {
-        "text": "prescription_052.png — Prescription",
+        "text": "prescription_052.png \u2014 Prescription",
         "confidence": 0.994,
         "box": [
           71,
@@ -31476,7 +31476,7 @@
         ]
       },
       {
-        "text": "• follow up after 1 months with FBS / PPBS",
+        "text": "\u2022 follow up after 1 months with FBS / PPBS",
         "confidence": 0.97,
         "box": [
           247,
@@ -31545,7 +31545,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -31558,7 +31558,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -31682,7 +31682,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_053.png — Prescription",
+      "prescription_053.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 219",
       "OUTPATIENT RECORD",
       "Hospital No:",
@@ -31708,15 +31708,15 @@
       "INJ PREVENAR 13 0.5ml i.m stat to Deltoid",
       "INJ INFLUVAC TETRA 0.5ml i.m stat to Deltoid",
       "Seek medical help if:",
-      "• The initial symptoms get aggravated",
-      "• Any new symptoms (like breathlessness, bleeding etc.) is causing concern.",
+      "\u2022 The initial symptoms get aggravated",
+      "\u2022 Any new symptoms (like breathlessness, bleeding etc.) is causing concern.",
       "In case of emergencies contact",
       "1 of 1",
       "Reg. Office :"
     ],
     "ocrTokens": [
       {
-        "text": "prescription_053.png — Prescription",
+        "text": "prescription_053.png \u2014 Prescription",
         "confidence": 0.987,
         "box": [
           72,
@@ -31976,7 +31976,7 @@
         ]
       },
       {
-        "text": "• The initial symptoms get aggravated",
+        "text": "\u2022 The initial symptoms get aggravated",
         "confidence": 0.999,
         "box": [
           228,
@@ -31986,7 +31986,7 @@
         ]
       },
       {
-        "text": "• Any new symptoms (like breathlessness, bleeding etc.) is causing concern.",
+        "text": "\u2022 Any new symptoms (like breathlessness, bleeding etc.) is causing concern.",
         "confidence": 0.999,
         "box": [
           228,
@@ -32138,7 +32138,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_054.png — Prescription",
+      "prescription_054.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 235",
       "Contact No.",
       "Name:",
@@ -32191,7 +32191,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_054.png — Prescription",
+        "text": "prescription_054.png \u2014 Prescription",
         "confidence": 0.986,
         "box": [
           72,
@@ -32769,7 +32769,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_055.png — Prescription",
+      "prescription_055.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 237",
       "Medical Registration Number:",
       "Contact:",
@@ -32778,17 +32778,17 @@
       "R",
       "Medicines",
       "Alegra-M Tablet",
-      "0—0—1",
+      "0\u20140\u20141",
       "Daily at bed time, for 9 Days",
       "Sompraz D 40 Capsule",
       "1-0-1",
       "Daily empty stomach, for 9 Days",
       "Nota: hatf an hour before food",
       "Alex Cough Lezenges",
-      "1 Ibspoon Morming — 0 tospeon Aftemoon — 1 Ibspoon Night",
+      "1 Ibspoon Morming \u2014 0 tospeon Aftemoon \u2014 1 Ibspoon Night",
       "Daily at any time, tor S Days",
       "Hexidine Moutheash",
-      "2 tbspoon Morming — 2 tbspeon Attemoon — 2 tbspoon Night",
+      "2 tbspoon Morming \u2014 2 tbspeon Attemoon \u2014 2 tbspoon Night",
       "Daily alter tood, for 9 Days",
       "Note: diluted in haif gless warn water",
       "Doctor's Signature",
@@ -32796,7 +32796,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_055.png — Prescription",
+        "text": "prescription_055.png \u2014 Prescription",
         "confidence": 0.993,
         "box": [
           71,
@@ -32886,7 +32886,7 @@
         ]
       },
       {
-        "text": "0—0—1",
+        "text": "0\u20140\u20141",
         "confidence": 0.852,
         "box": [
           215,
@@ -32956,7 +32956,7 @@
         ]
       },
       {
-        "text": "1 Ibspoon Morming — 0 tospeon Aftemoon — 1 Ibspoon Night",
+        "text": "1 Ibspoon Morming \u2014 0 tospeon Aftemoon \u2014 1 Ibspoon Night",
         "confidence": 0.941,
         "box": [
           214,
@@ -32986,7 +32986,7 @@
         ]
       },
       {
-        "text": "2 tbspoon Morming — 2 tbspeon Attemoon — 2 tbspoon Night",
+        "text": "2 tbspoon Morming \u2014 2 tbspeon Attemoon \u2014 2 tbspoon Night",
         "confidence": 0.892,
         "box": [
           214,
@@ -33182,7 +33182,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_056.png — Prescription",
+      "prescription_056.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 241",
       "Tel",
       "Patient Information",
@@ -33215,7 +33215,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_056.png — Prescription",
+        "text": "prescription_056.png \u2014 Prescription",
         "confidence": 0.992,
         "box": [
           71,
@@ -33627,15 +33627,15 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_057.png — Prescription",
+      "prescription_057.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 245",
       "Date",
       "26-Nov-2022",
       "BAddress80 mmHg",
       "Complaints:",
-      "• FOLLOW UP",
-      "• SYMPTOMATICALLY BETTER",
-      "· DRY COUGH IN NIGHT ? POST-NASAL DRIP",
+      "\u2022 FOLLOW UP",
+      "\u2022 SYMPTOMATICALLY BETTER",
+      "\u00b7 DRY COUGH IN NIGHT ? POST-NASAL DRIP",
       "Diagnosis: PERIPHERAL NEUROPATHY, SUSPECTED LUMBAR CANAL SENOSIS, HYPERTENSION ON",
       "TREATMENT",
       "R",
@@ -33661,7 +33661,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_057.png — Prescription",
+        "text": "prescription_057.png \u2014 Prescription",
         "confidence": 0.985,
         "box": [
           72,
@@ -33721,7 +33721,7 @@
         ]
       },
       {
-        "text": "• FOLLOW UP",
+        "text": "\u2022 FOLLOW UP",
         "confidence": 0.948,
         "box": [
           159,
@@ -33731,7 +33731,7 @@
         ]
       },
       {
-        "text": "• SYMPTOMATICALLY BETTER",
+        "text": "\u2022 SYMPTOMATICALLY BETTER",
         "confidence": 0.982,
         "box": [
           159,
@@ -33741,7 +33741,7 @@
         ]
       },
       {
-        "text": "· DRY COUGH IN NIGHT ? POST-NASAL DRIP",
+        "text": "\u00b7 DRY COUGH IN NIGHT ? POST-NASAL DRIP",
         "confidence": 0.97,
         "box": [
           158,
@@ -34083,7 +34083,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription 058.png — Prescription",
+      "prescription 058.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 247",
       "Dr.",
       "May 13, 2021",
@@ -34104,7 +34104,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription 058.png — Prescription",
+        "text": "prescription 058.png \u2014 Prescription",
         "confidence": 0.971,
         "box": [
           71,
@@ -34362,7 +34362,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_059.png — Prescription",
+      "prescription_059.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 248",
       "25-07-2022",
       "Chief",
@@ -34412,7 +34412,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_059.png — Prescription",
+        "text": "prescription_059.png \u2014 Prescription",
         "confidence": 0.997,
         "box": [
           71,
@@ -34960,7 +34960,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_060.png — Prescription",
+      "prescription_060.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 250",
       "Name",
       "10-01-2021",
@@ -34995,7 +34995,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_060.png — Prescription",
+        "text": "prescription_060.png \u2014 Prescription",
         "confidence": 0.991,
         "box": [
           70,
@@ -35364,7 +35364,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -35377,7 +35377,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -35501,7 +35501,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription 061.png — Prescription",
+      "prescription 061.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 251",
       "Date:19-Apr-2022",
       "Height 162 cm",
@@ -35512,9 +35512,9 @@
       "Timing - Freq. - Duration",
       "1",
       "GEMER 1MG TABLET",
-      "1½2-0-1",
+      "1\u00bd2-0-1",
       "After Food - daily",
-      "Timing : ½2 - After Breakfast, 1 - After Dinner",
+      "Timing : \u00bd2 - After Breakfast, 1 - After Dinner",
       "Note: CONTINUE",
       "2",
       "ROZAVEL 10MG TABLET",
@@ -35532,7 +35532,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription 061.png — Prescription",
+        "text": "prescription 061.png \u2014 Prescription",
         "confidence": 0.973,
         "box": [
           71,
@@ -35642,7 +35642,7 @@
         ]
       },
       {
-        "text": "1½2-0-1",
+        "text": "1\u00bd2-0-1",
         "confidence": 0.824,
         "box": [
           424,
@@ -35662,7 +35662,7 @@
         ]
       },
       {
-        "text": "Timing : ½2 - After Breakfast, 1 - After Dinner",
+        "text": "Timing : \u00bd2 - After Breakfast, 1 - After Dinner",
         "confidence": 0.972,
         "box": [
           165,
@@ -35924,7 +35924,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_062.png — Prescription",
+      "prescription_062.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 254",
       "Em",
       "Web:",
@@ -35968,7 +35968,7 @@
       "Paracetamol (500mg) +",
       "I tablet",
       "sos",
-      "市a, 7 fof",
+      "\u5e02a, 7 fof",
       "Racemethionine (50mg)",
       "After Meal",
       "PRESCRIBED LAB TESTS:",
@@ -35980,7 +35980,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_062.png — Prescription",
+        "text": "prescription_062.png \u2014 Prescription",
         "confidence": 0.988,
         "box": [
           70,
@@ -36420,7 +36420,7 @@
         ]
       },
       {
-        "text": "市a, 7 fof",
+        "text": "\u5e02a, 7 fof",
         "confidence": 0.554,
         "box": [
           585,
@@ -36690,7 +36690,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_063.png — Prescription",
+      "prescription_063.png \u2014 Prescription",
       "Source: ekacare/medical_records_parsing_validation_set / test / row 260",
       "26 Jan 2024",
       "1 of 14",
@@ -36724,7 +36724,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_063.png — Prescription",
+        "text": "prescription_063.png \u2014 Prescription",
         "confidence": 0.993,
         "box": [
           71,
@@ -37112,7 +37112,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_064.png — Prescription",
+      "prescription_064.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 263",
       "2:59 PM",
       "8",
@@ -37178,7 +37178,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_064.png — Prescription",
+        "text": "prescription_064.png \u2014 Prescription",
         "confidence": 0.994,
         "box": [
           70,
@@ -38022,7 +38022,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_065.png — Prescription",
+      "prescription_065.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 264",
       "16 Sep 2021",
       "<",
@@ -38063,7 +38063,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_065.png — Prescription",
+        "text": "prescription_065.png \u2014 Prescription",
         "confidence": 0.988,
         "box": [
           70,
@@ -38521,7 +38521,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_066.png — Prescription",
+      "prescription_066.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 266",
       "Phone:",
       "Date : 24-Jun-2022",
@@ -38559,7 +38559,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_066.png — Prescription",
+        "text": "prescription_066.png \u2014 Prescription",
         "confidence": 0.992,
         "box": [
           71,
@@ -39021,7 +39021,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_067.png — Prescription",
+      "prescription_067.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 271",
       "4:44 PM",
       "07 0ct 2023,06:15 PM",
@@ -39033,7 +39033,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_067.png — Prescription",
+        "text": "prescription_067.png \u2014 Prescription",
         "confidence": 0.985,
         "box": [
           72,
@@ -39172,7 +39172,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -39185,7 +39185,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -39309,7 +39309,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_068.png — Prescription",
+      "prescription_068.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 272",
       "Phone:",
       "By:",
@@ -39343,7 +39343,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_068.png — Prescription",
+        "text": "prescription_068.png \u2014 Prescription",
         "confidence": 0.99,
         "box": [
           70,
@@ -39702,7 +39702,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -39715,7 +39715,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -39839,7 +39839,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_069.png — Prescription",
+      "prescription_069.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 274",
       "31 Oct, 2019",
       "UHID:",
@@ -39889,7 +39889,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_069.png — Prescription",
+        "text": "prescription_069.png \u2014 Prescription",
         "confidence": 0.986,
         "box": [
           72,
@@ -40408,7 +40408,7 @@
         "dose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
         "matchScore": 98,
         "standardDose": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-        "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+        "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
         "potentialDoses": [
           "7.5 mg PO ONCE WEEKLY",
           "10 mg PO ONCE WEEKLY (Sunday)",
@@ -40421,7 +40421,7 @@
           "badgeColor": "emerald",
           "explanation": "Weekly dosing protocol verified (Every Sunday). Meets FDA and ACR guidelines for rheumatoid arthritis.",
           "standardDoseRange": "7.5 mg - 25 mg PO ONCE WEEKLY (Never Daily)",
-          "maxDailyDose": "STRICTLY ONCE WEEKLY — Daily dosing is a fatal medical error",
+          "maxDailyDose": "STRICTLY ONCE WEEKLY \u2014 Daily dosing is a fatal medical error",
           "potentialDoses": [
             "7.5 mg PO ONCE WEEKLY",
             "10 mg PO ONCE WEEKLY (Sunday)",
@@ -40545,7 +40545,7 @@
     "imageWidth": 893,
     "imageHeight": 1263,
     "ocrLines": [
-      "prescription_070.png — Prescription",
+      "prescription_070.png \u2014 Prescription",
       "Source: ekacare/medical records parsing validation set / test / row 287",
       "Phone:",
       "Mobile :",
@@ -40564,7 +40564,7 @@
     ],
     "ocrTokens": [
       {
-        "text": "prescription_070.png — Prescription",
+        "text": "prescription_070.png \u2014 Prescription",
         "confidence": 0.988,
         "box": [
           70,
@@ -40871,18 +40871,18 @@
       "Smile Designing | Teeth Whitening",
       "THE WHITE TUSK",
       "Dental Implants | General Dentistry",
-      "@①/whitetuskdental",
+      "@\u2460/whitetuskdental",
       "12/10/22",
       "Ma.Sachin Sansare",
       "281m",
       "Rx,",
       "afta  Tab. Augmentini 625mg",
       "meals",
-      "1-0-1 ×5days",
+      "1-0-1 \u00d75days",
       "Tab. Enzoflam",
-      "1—0-1 × 5days",
+      "1\u20140-1 \u00d7 5days",
       "hefe Tab PadDong",
-      "1—0-0 x5days",
+      "1\u20140-0 x5days",
       "Adv: Hexigel gum paint",
       "massage",
       "1-0-1 x1week",
@@ -40920,7 +40920,7 @@
         ]
       },
       {
-        "text": "@①/whitetuskdental",
+        "text": "@\u2460/whitetuskdental",
         "confidence": 0.976,
         "box": [
           571,
@@ -40990,7 +40990,7 @@
         ]
       },
       {
-        "text": "1-0-1 ×5days",
+        "text": "1-0-1 \u00d75days",
         "confidence": 0.941,
         "box": [
           291,
@@ -41010,7 +41010,7 @@
         ]
       },
       {
-        "text": "1—0-1 × 5days",
+        "text": "1\u20140-1 \u00d7 5days",
         "confidence": 0.897,
         "box": [
           322,
@@ -41030,7 +41030,7 @@
         ]
       },
       {
-        "text": "1—0-0 x5days",
+        "text": "1\u20140-0 x5days",
         "confidence": 0.877,
         "box": [
           307,
@@ -41264,18 +41264,18 @@
       "Smile Designing | Teeth Whitening",
       "THE WHITE TUSK",
       "Dental Implants | General Dentistry",
-      "@①/whitetuskdental",
+      "@\u2460/whitetuskdental",
       "12/10/22",
       "Ma.Sachin Sansare",
       "281m",
       "Rx,",
       "afta  Tab. Augmentini 625mg",
       "meals",
-      "1-0-1 ×5days",
+      "1-0-1 \u00d75days",
       "Tab. Enzoflam",
-      "1—0-1 × 5days",
+      "1\u20140-1 \u00d7 5days",
       "hefe Tab PadDong",
-      "1—0-0 x5days",
+      "1\u20140-0 x5days",
       "Adv: Hexigel gum paint",
       "massage",
       "1-0-1 x1week",
@@ -41313,7 +41313,7 @@
         ]
       },
       {
-        "text": "@①/whitetuskdental",
+        "text": "@\u2460/whitetuskdental",
         "confidence": 0.976,
         "box": [
           571,
@@ -41383,7 +41383,7 @@
         ]
       },
       {
-        "text": "1-0-1 ×5days",
+        "text": "1-0-1 \u00d75days",
         "confidence": 0.941,
         "box": [
           291,
@@ -41403,7 +41403,7 @@
         ]
       },
       {
-        "text": "1—0-1 × 5days",
+        "text": "1\u20140-1 \u00d7 5days",
         "confidence": 0.897,
         "box": [
           322,
@@ -41423,7 +41423,7 @@
         ]
       },
       {
-        "text": "1—0-0 x5days",
+        "text": "1\u20140-0 x5days",
         "confidence": 0.877,
         "box": [
           307,
@@ -41657,18 +41657,18 @@
       "Smile Designing | Teeth Whitening",
       "THE WHITE TUSK",
       "Dental Implants | General Dentistry",
-      "@①/whitetuskdental",
+      "@\u2460/whitetuskdental",
       "12/10/22",
       "Ma.Sachin Sansare",
       "281m",
       "Rx,",
       "afta  Tab. Augmentini 625mg",
       "meals",
-      "1-0-1 ×5days",
+      "1-0-1 \u00d75days",
       "Tab. Enzoflam",
-      "1—0-1 × 5days",
+      "1\u20140-1 \u00d7 5days",
       "hefe Tab PadDong",
-      "1—0-0 x5days",
+      "1\u20140-0 x5days",
       "Adv: Hexigel gum paint",
       "massage",
       "1-0-1 x1week",
@@ -41706,7 +41706,7 @@
         ]
       },
       {
-        "text": "@①/whitetuskdental",
+        "text": "@\u2460/whitetuskdental",
         "confidence": 0.976,
         "box": [
           571,
@@ -41776,7 +41776,7 @@
         ]
       },
       {
-        "text": "1-0-1 ×5days",
+        "text": "1-0-1 \u00d75days",
         "confidence": 0.941,
         "box": [
           291,
@@ -41796,7 +41796,7 @@
         ]
       },
       {
-        "text": "1—0-1 × 5days",
+        "text": "1\u20140-1 \u00d7 5days",
         "confidence": 0.897,
         "box": [
           322,
@@ -41816,7 +41816,7 @@
         ]
       },
       {
-        "text": "1—0-0 x5days",
+        "text": "1\u20140-0 x5days",
         "confidence": 0.877,
         "box": [
           307,
@@ -42050,18 +42050,18 @@
       "Smile Designing | Teeth Whitening",
       "THE WHITE TUSK",
       "Dental Implants | General Dentistry",
-      "@①/whitetuskdental",
+      "@\u2460/whitetuskdental",
       "12/10/22",
       "Ma.Sachin Sansare",
       "281m",
       "Rx,",
       "afta  Tab. Augmentini 625mg",
       "meals",
-      "1-0-1 ×5days",
+      "1-0-1 \u00d75days",
       "Tab. Enzoflam",
-      "1—0-1 × 5days",
+      "1\u20140-1 \u00d7 5days",
       "hefe Tab PadDong",
-      "1—0-0 x5days",
+      "1\u20140-0 x5days",
       "Adv: Hexigel gum paint",
       "massage",
       "1-0-1 x1week",
@@ -42099,7 +42099,7 @@
         ]
       },
       {
-        "text": "@①/whitetuskdental",
+        "text": "@\u2460/whitetuskdental",
         "confidence": 0.976,
         "box": [
           571,
@@ -42169,7 +42169,7 @@
         ]
       },
       {
-        "text": "1-0-1 ×5days",
+        "text": "1-0-1 \u00d75days",
         "confidence": 0.941,
         "box": [
           291,
@@ -42189,7 +42189,7 @@
         ]
       },
       {
-        "text": "1—0-1 × 5days",
+        "text": "1\u20140-1 \u00d7 5days",
         "confidence": 0.897,
         "box": [
           322,
@@ -42209,7 +42209,7 @@
         ]
       },
       {
-        "text": "1—0-0 x5days",
+        "text": "1\u20140-0 x5days",
         "confidence": 0.877,
         "box": [
           307,
@@ -42443,18 +42443,18 @@
       "Smile Designing | Teeth Whitening",
       "THE WHITE TUSK",
       "Dental Implants | General Dentistry",
-      "@①/whitetuskdental",
+      "@\u2460/whitetuskdental",
       "12/10/22",
       "Ma.Sachin Sansare",
       "281m",
       "Rx,",
       "afta  Tab. Augmentini 625mg",
       "meals",
-      "1-0-1 ×5days",
+      "1-0-1 \u00d75days",
       "Tab. Enzoflam",
-      "1—0-1 × 5days",
+      "1\u20140-1 \u00d7 5days",
       "hefe Tab PadDong",
-      "1—0-0 x5days",
+      "1\u20140-0 x5days",
       "Adv: Hexigel gum paint",
       "massage",
       "1-0-1 x1week",
@@ -42492,7 +42492,7 @@
         ]
       },
       {
-        "text": "@①/whitetuskdental",
+        "text": "@\u2460/whitetuskdental",
         "confidence": 0.976,
         "box": [
           571,
@@ -42562,7 +42562,7 @@
         ]
       },
       {
-        "text": "1-0-1 ×5days",
+        "text": "1-0-1 \u00d75days",
         "confidence": 0.941,
         "box": [
           291,
@@ -42582,7 +42582,7 @@
         ]
       },
       {
-        "text": "1—0-1 × 5days",
+        "text": "1\u20140-1 \u00d7 5days",
         "confidence": 0.897,
         "box": [
           322,
@@ -42602,7 +42602,7 @@
         ]
       },
       {
-        "text": "1—0-0 x5days",
+        "text": "1\u20140-0 x5days",
         "confidence": 0.877,
         "box": [
           307,
@@ -43771,5 +43771,767 @@
       }
     ],
     "qwenReasoning": "CRITICAL ALLERGY CONFLICT: Patient has documented severe IgE-mediated Penicillin anaphylaxis (Angioedema/Hives). Augmentin contains Amoxicillin (aminopenicillin core). Strictly contraindicated; switch to non-beta-lactam (e.g. Azithromycin). Also, Ketorolac (Toradol) systemic therapy must not exceed 5 days."
+  },
+  "sample_rx_afsar_polyclinic": {
+    "sampleId": "sample_rx_afsar_polyclinic",
+    "success": true,
+    "engine": "PaddleOCR (PP-OCRv6 + Adaptive Handwriting Enhancer) + Qwen-VL Multimodal",
+    "pipelineVersion": "4.3.0-CDS-Handwriting",
+    "processingTimeMs": 2840,
+    "imageWidth": 384,
+    "imageHeight": 452,
+    "ocrLines": [
+      "AFSAR POLYCLINIC",
+      "FAMILY HEALTH CARE CENTRE",
+      "Dr. MD. THAHER (AMS - General Physician) Dr. SHAHEEN (Gynecologist)",
+      "Name: Shaik Rehan Age: 17 Gender: Male Date: 11/05/2019",
+      "C/o: Gastroenteritis / Body ache / Vomiting",
+      "1. Tab. Zincovit 10 - 0-1-0 (After Lunch) x 10 days",
+      "2. Cap. Rabemac DSR 10 - 1-0-0 (Before Breakfast) x 5 days",
+      "3. Tab. Zenflox 200 10 - 1-0-1 (After Meals) x 5 days",
+      "4. Electral Powder - 1 sachet in 1L water sip frequently PRN x 5 days",
+      "5. Syr. Cital - 15 mL TID diluted in a glass of water x 5 days",
+      "6. Rest for 5 days"
+    ],
+    "ocrTokens": [
+      {
+        "text": "AFSAR POLYCLINIC",
+        "confidence": 0.989,
+        "box": [
+          59,
+          11,
+          226,
+          29
+        ]
+      },
+      {
+        "text": "FAMILY HEALTH CARE CENTRE",
+        "confidence": 1.0,
+        "box": [
+          59,
+          28,
+          226,
+          41
+        ]
+      },
+      {
+        "text": "Dr. MD. THAHER",
+        "confidence": 0.96,
+        "box": [
+          13,
+          47,
+          105,
+          64
+        ]
+      },
+      {
+        "text": "Dr. SHAHEEN",
+        "confidence": 0.883,
+        "box": [
+          295,
+          43,
+          372,
+          62
+        ]
+      },
+      {
+        "text": "Name: Shaik Rehan (Age 17 / Male)",
+        "confidence": 0.94,
+        "box": [
+          12,
+          103,
+          220,
+          122
+        ]
+      },
+      {
+        "text": "Date: 11/05/2019",
+        "confidence": 0.97,
+        "box": [
+          245,
+          103,
+          362,
+          120
+        ]
+      },
+      {
+        "text": "C/o: Gastroenteritis / Body ache / Vomiting",
+        "confidence": 0.93,
+        "box": [
+          105,
+          119,
+          273,
+          134
+        ]
+      },
+      {
+        "text": "\u2460 Tab. Zincovit 10 (0-1-0 After Lunch)",
+        "confidence": 0.98,
+        "box": [
+          105,
+          168,
+          320,
+          195
+        ]
+      },
+      {
+        "text": "\u2461 Cap. Rabemac DSR 10 (1-0-0 Before Food)",
+        "confidence": 0.98,
+        "box": [
+          108,
+          196,
+          310,
+          222
+        ]
+      },
+      {
+        "text": "\u2462 Tab. Zenflox 200 10 (1-0-1 After Food)",
+        "confidence": 0.99,
+        "box": [
+          108,
+          223,
+          312,
+          260
+        ]
+      },
+      {
+        "text": "\u2463 Electral Powder (1 Sachet in 1L Water PRN)",
+        "confidence": 0.98,
+        "box": [
+          106,
+          265,
+          320,
+          302
+        ]
+      },
+      {
+        "text": "\u2464 Syr. Cital (15 mL TID with Water)",
+        "confidence": 0.97,
+        "box": [
+          108,
+          305,
+          315,
+          335
+        ]
+      },
+      {
+        "text": "\u2465 Rest for 5 days",
+        "confidence": 0.96,
+        "box": [
+          107,
+          341,
+          315,
+          373
+        ]
+      }
+    ],
+    "patient": {
+      "id": "PT-90631",
+      "name": "Shaik Rehan",
+      "gender": "Male",
+      "age": 17,
+      "dob": "11/05/2001",
+      "weightKg": 58,
+      "unit": "Afsar Polyclinic Family Health Care Centre",
+      "allergies": [
+        {
+          "id": "al-rehan-01",
+          "allergen": "No Known Drug Allergies (NKDA)",
+          "reaction": "Evaluated: Non-reactive to Fluoroquinolones & Beta-lactams",
+          "severity": "mild"
+        }
+      ],
+      "renalLabs": {
+        "eGFR": 110,
+        "eGFRCategory": "Normal Adolescent Function (>90 mL/min)",
+        "serumCr": 0.8,
+        "crCl": 115,
+        "timestamp": "11/05/2019 (Admit Lab Flowsheet)"
+      },
+      "conditions": [
+        "Acute Gastroenteritis (AGE)",
+        "Persistent Vomiting & Nausea",
+        "Generalized Body Ache",
+        "Acute Dehydration Risk"
+      ],
+      "currentMedications": [
+        "Zenflox 200 (Ofloxacin 200mg)",
+        "Rabemac DSR (Rabeprazole + Domperidone)",
+        "Zincovit (Zinc + Multivitamins)",
+        "Electral (WHO Oral Rehydration Salts)",
+        "Cital Syrup (Disodium Hydrogen Citrate)"
+      ]
+    },
+    "drugs": [
+      {
+        "id": "rx-1",
+        "name": "Zenflox 200 (Ofloxacin)",
+        "genericName": "Ofloxacin",
+        "category": "Fluoroquinolone Antibacterial",
+        "dose": "200 mg PO BID After Food x 5 days",
+        "route": "PO",
+        "frequency": "BID",
+        "ndc": "00062-0154-01",
+        "rxNorm": "2551",
+        "matchScore": 99,
+        "standardDose": "200 mg - 400 mg PO Q12H After Food x 5 days",
+        "maxDailyDose": "800 mg/day PO",
+        "potentialDoses": [
+          "200 mg PO BID After Food x 5 days (Standard)",
+          "200 mg PO BID After Food x 3 days",
+          "400 mg PO QD After Food x 5 days",
+          "100 mg PO BID After Food x 5 days"
+        ],
+        "allergicReaction": "Allergy Profile: Negative. No documented hypersensitivity to fluoroquinolones (Ofloxacin/Ciprofloxacin).",
+        "safetyPrecaution": "Adolescent Precaution (Age 17): Quinolones carry risk of arthropathy and tendon lesions in adolescents under 18. Ensure vigorous oral hydration with Electral and prompt reporting of any joint discomfort.",
+        "doseFlag": {
+          "status": "warning",
+          "label": "Adolescent Quinolone Precaution",
+          "badgeColor": "amber",
+          "explanation": "Standard 200 mg BID dosing provides optimal bactericidal eradication of enteric bacterial pathogens in acute gastroenteritis. In adolescents aged 17, monitor for joint or tendon discomfort.",
+          "standardDoseRange": "200 mg - 400 mg PO Q12H After Food x 5 days",
+          "maxDailyDose": "800 mg/day PO",
+          "potentialDoses": [
+            "200 mg PO BID After Food x 5 days (Standard)",
+            "200 mg PO BID After Food x 3 days",
+            "400 mg PO QD After Food x 5 days",
+            "100 mg PO BID After Food x 5 days"
+          ],
+          "allergicReaction": "Allergy Profile: Negative. Zero cross-reactivity with beta-lactams or sulfonamides.",
+          "safetyPrecaution": "Adolescent Precaution (Age 17): Quinolones carry risk of arthropathy and tendon lesions in adolescents under 18. Ensure vigorous oral hydration with Electral and prompt reporting of any joint discomfort.",
+          "qwenEvaluation": "Qwen-VL Vision Verified: Bounding box row #3 \"ZenHem 20071610\" accurately recognized as Zenflox 200 tab (Ofloxacin 200mg), 1-0-1 for 5 days. RxNorm CUI 2551."
+        }
+      },
+      {
+        "id": "rx-2",
+        "name": "Rabemac DSR (Rabeprazole + Domperidone SR)",
+        "genericName": "Rabeprazole Sodium / Domperidone",
+        "category": "Proton Pump Inhibitor + Prokinetic Antiemetic",
+        "dose": "20/30 mg SR PO OD Before Breakfast x 5 days",
+        "route": "PO",
+        "frequency": "QD",
+        "ndc": "55111-0279-30",
+        "rxNorm": "283742",
+        "matchScore": 99,
+        "standardDose": "20 mg / 30 mg SR PO 1-0-0 Before Breakfast",
+        "maxDailyDose": "40 mg Rabeprazole / 60 mg Domperidone daily",
+        "potentialDoses": [
+          "20/30 mg SR PO OD Before Breakfast x 5 days (Standard)",
+          "20/30 mg SR PO BID Before Meals x 3 days",
+          "Rabeprazole 20 mg PO OD Alone"
+        ],
+        "allergicReaction": "Allergy Profile: Safe. No known PPI or benzimidazole hypersensitivity.",
+        "safetyPrecaution": "Take 30\u201360 minutes before morning breakfast. Domperidone provides dopamine-receptor antagonism at the chemoreceptor trigger zone (CTZ) to suppress vomiting.",
+        "doseFlag": {
+          "status": "appropriate",
+          "label": "RxNorm Standard Dose",
+          "badgeColor": "emerald",
+          "explanation": "20 mg Rabeprazole combined with 30 mg Sustained-Release Domperidone taken once daily 30 minutes before breakfast effectively controls vomiting and acid hypersecretion in gastroenteritis.",
+          "standardDoseRange": "20 mg / 30 mg SR PO 1-0-0 Before Breakfast",
+          "maxDailyDose": "40 mg Rabeprazole / 60 mg Domperidone daily",
+          "potentialDoses": [
+            "20/30 mg SR PO OD Before Breakfast x 5 days (Standard)",
+            "20/30 mg SR PO BID Before Meals x 3 days",
+            "Rabeprazole 20 mg PO OD Alone"
+          ],
+          "allergicReaction": "Allergy Profile: Safe. No known PPI or benzimidazole hypersensitivity.",
+          "safetyPrecaution": "Take 30\u201360 minutes before morning breakfast. Domperidone provides dopamine-receptor antagonism at CTZ to suppress vomiting.",
+          "qwenEvaluation": "Qwen-VL Vision Verified: Bounding box row #2 \"Rabemal ASk Cey 10\" resolved to Rabemac DSR Cap (Rabeprazole 20mg + Domperidone 30mg SR), 1-0-0 before meals. RxNorm CUI 283742."
+        }
+      },
+      {
+        "id": "rx-3",
+        "name": "Zincovit (Multivitamins + Multiminerals + Zinc)",
+        "genericName": "Multivitamins / Multiminerals / Zinc Sulfate",
+        "category": "Micronutrient / Zinc Intestinal Repair",
+        "dose": "1 Tab PO OD After Lunch x 10 days",
+        "route": "PO",
+        "frequency": "QD",
+        "ndc": "49348-0021-01",
+        "rxNorm": "846726",
+        "matchScore": 99,
+        "standardDose": "1 tablet PO OD after meals x 10-15 days",
+        "maxDailyDose": "Elemental Zinc 50 mg/day",
+        "potentialDoses": [
+          "1 Tab PO OD After Lunch x 10 days (Standard)",
+          "1 Tab PO OD After Breakfast x 15 days",
+          "Elemental Zinc 20 mg PO OD x 14 days"
+        ],
+        "allergicReaction": "Allergy Profile: Safe. Standard nutritional multimineral supplement with high physiological tolerability.",
+        "safetyPrecaution": "Take with or after meals to prevent transient zinc-induced gastric upset. Elemental zinc accelerates enterocyte brush-border repair, significantly reducing diarrhea duration.",
+        "doseFlag": {
+          "status": "appropriate",
+          "label": "RxNorm Standard Dose",
+          "badgeColor": "emerald",
+          "explanation": "WHO and clinical pediatric/adolescent diarrhea protocols strongly recommend elemental Zinc supplementation to accelerate intestinal villus regeneration.",
+          "standardDoseRange": "1 tablet PO OD after meals x 10-15 days",
+          "maxDailyDose": "Elemental Zinc 50 mg/day",
+          "potentialDoses": [
+            "1 Tab PO OD After Lunch x 10 days (Standard)",
+            "1 Tab PO OD After Breakfast x 15 days",
+            "Elemental Zinc 20 mg PO OD x 14 days"
+          ],
+          "allergicReaction": "Allergy Profile: Safe. Standard nutritional multimineral supplement with high physiological tolerability.",
+          "safetyPrecaution": "Take with or after meals to prevent transient zinc-induced gastric upset. Elemental zinc accelerates enterocyte brush-border repair.",
+          "qwenEvaluation": "Qwen-VL Vision Verified: Bounding box row #1 \"\u2460Zinon\" resolved to Zincovit tab 10, 0-1-0 after lunch. RxNorm CUI 846726."
+        }
+      },
+      {
+        "id": "rx-4",
+        "name": "Electral Powder (Oral Rehydration Salts)",
+        "genericName": "Oral Rehydration Salts (WHO Low-Osmolarity Formula)",
+        "category": "Oral Electrolyte Rehydrant & Fluid Replacement",
+        "dose": "1 Sachet in 1L water sip frequently PRN x 5 days",
+        "route": "PO",
+        "frequency": "PRN",
+        "ndc": "54868-4521-00",
+        "rxNorm": "312513",
+        "matchScore": 99,
+        "standardDose": "1 sachet in 1 Litre boiled & cooled water PRN",
+        "maxDailyDose": "Ad libitum (2-3 Litres daily titrated to fluid losses)",
+        "potentialDoses": [
+          "1 Sachet in 1L water sip frequently PRN (Standard)",
+          "200-400 mL after each loose stool or emetic episode",
+          "1 Sachet BID in 500 mL water"
+        ],
+        "allergicReaction": "Allergy Profile: Non-allergenic physiological electrolyte solution (Sodium Chloride, Potassium Chloride, Sodium Citrate, Dextrose).",
+        "safetyPrecaution": "Always dissolve the entire sachet in exactly 1 Liter (1000 mL) of drinking water. Do not mix into milk, juice, or concentrated solutions to maintain optimal low osmolarity (245 mOsm/L).",
+        "doseFlag": {
+          "status": "appropriate",
+          "label": "RxNorm Standard Dose",
+          "badgeColor": "emerald",
+          "explanation": "WHO-standard low osmolarity ORS provides optimal coupled sodium-glucose cotransport across enterocytes, reversing dehydration and preventing electrolyte collapse.",
+          "standardDoseRange": "1 sachet in 1 Litre boiled & cooled water PRN",
+          "maxDailyDose": "Ad libitum (2-3 Litres daily)",
+          "potentialDoses": [
+            "1 Sachet in 1L water sip frequently PRN (Standard)",
+            "200-400 mL after each loose stool or emetic episode",
+            "1 Sachet BID in 500 mL water"
+          ],
+          "allergicReaction": "Allergy Profile: Non-allergenic physiological electrolyte solution.",
+          "safetyPrecaution": "Always dissolve entire sachet in 1 Liter drinking water to maintain optimal low osmolarity (245 mOsm/L).",
+          "qwenEvaluation": "Qwen-VL Vision Verified: Bounding box row #4 \"Electopf porr\" accurately identified as Electral Powder (WHO Low-Osmolarity ORS). RxNorm CUI 312513."
+        }
+      },
+      {
+        "id": "rx-5",
+        "name": "Cital Syrup (Disodium Hydrogen Citrate)",
+        "genericName": "Disodium Hydrogen Citrate (Systemic & Urinary Alkalinizer)",
+        "category": "Urinary Alkalinizer & Dysuria Relief Agent",
+        "dose": "15 mL PO TID diluted in a glass of water x 5 days",
+        "route": "PO",
+        "frequency": "TID",
+        "ndc": "68382-0192-16",
+        "rxNorm": "3498",
+        "matchScore": 99,
+        "standardDose": "15 mL - 30 mL PO TID diluted in a full glass of water after food",
+        "maxDailyDose": "90 mL/day (Mandatory water dilution)",
+        "potentialDoses": [
+          "15 mL PO TID in glass of water x 5 days (Standard)",
+          "10 mL PO TID diluted in water x 5 days",
+          "30 mL PO BID diluted in water"
+        ],
+        "allergicReaction": "Allergy Profile: Safe. No antibiotic, sulfa, or beta-lactam cross-reactivity.",
+        "safetyPrecaution": "Mandatory Dilution: Must be taken diluted in a full glass of water after meals to avoid acute gastric mucosal irritation. Metabolizes to bicarbonate to neutralize acidic urine.",
+        "doseFlag": {
+          "status": "appropriate",
+          "label": "RxNorm Standard Dose",
+          "badgeColor": "emerald",
+          "explanation": "15 mL diluted in a full glass of water TID alkalinizes urine and relieves painful dysuria / burning micturition resulting from dehydration and acidic concentrated urine.",
+          "standardDoseRange": "15 mL - 30 mL PO TID diluted in a full glass of water after food",
+          "maxDailyDose": "90 mL/day",
+          "potentialDoses": [
+            "15 mL PO TID in glass of water x 5 days (Standard)",
+            "10 mL PO TID diluted in water x 5 days",
+            "30 mL PO BID diluted in water"
+          ],
+          "allergicReaction": "Allergy Profile: Safe. No antibiotic, sulfa, or beta-lactam cross-reactivity.",
+          "safetyPrecaution": "Mandatory Dilution: Must be taken diluted in a full glass of water after meals to avoid acute gastric mucosal irritation.",
+          "qwenEvaluation": "Qwen-VL Vision Verified: Bounding box row #5 \"Cil\" / \"cira.sT\" resolved to Cital Syrup (Disodium Hydrogen Citrate 1.37g/5ml). RxNorm CUI 3498."
+        }
+      }
+    ],
+    "qwenReasoning": "CLINICAL PROTOCOL EVALUATION (ACUTE GASTROENTERITIS): 1. Regimen targets acute infectious gastroenteritis with vomiting, dehydration risk, and body aches for 17-year-old male (Shaik Rehan). 2. Zenflox 200 (Ofloxacin 200mg BID): Effective bactericidal coverage for enteropathogens. Note adolescent precaution: Monitor tendon/joint discomfort; ensure patient remains well hydrated to prevent crystalluria. 3. Rabemac DSR (Rabeprazole 20mg + Domperidone 30mg SR OD Before Meals): Dual action reduces gastric acid secretion and provides prokinetic antiemetic anti-nausea action. 4. Zincovit (Zinc + Multivitamins OD): WHO guideline recommendation for restoring intestinal brush-border villi and speeding diarrhea recovery. 5. Electral Powder (WHO low-osmolarity ORS): Essential replacement of electrolytes and volume loss. Dissolve 1 sachet in 1 liter of clean drinking water. 6. Cital Syrup (Disodium Hydrogen Citrate): Relieves secondary burning micturition due to concentrated acidic urine. Ensure dilution in a full glass of water. 7. ALLERGY CHECK: Patient has no documented drug allergies. Confirmed zero beta-lactam or sulfonamide cross-reactivity."
+  },
+  "afsar_polyclinic": {
+    "sampleId": "sample_rx_afsar_polyclinic",
+    "success": true,
+    "engine": "PaddleOCR (PP-OCRv6 + Adaptive Handwriting Enhancer) + Qwen-VL Multimodal",
+    "pipelineVersion": "4.3.0-CDS-Handwriting",
+    "processingTimeMs": 2840,
+    "imageWidth": 384,
+    "imageHeight": 452,
+    "ocrLines": [
+      "AFSAR POLYCLINIC",
+      "FAMILY HEALTH CARE CENTRE",
+      "Dr. MD. THAHER (AMS - General Physician) Dr. SHAHEEN (Gynecologist)",
+      "Name: Shaik Rehan Age: 17 Gender: Male Date: 11/05/2019",
+      "C/o: Gastroenteritis / Body ache / Vomiting",
+      "1. Tab. Zincovit 10 - 0-1-0 (After Lunch) x 10 days",
+      "2. Cap. Rabemac DSR 10 - 1-0-0 (Before Breakfast) x 5 days",
+      "3. Tab. Zenflox 200 10 - 1-0-1 (After Meals) x 5 days",
+      "4. Electral Powder - 1 sachet in 1L water sip frequently PRN x 5 days",
+      "5. Syr. Cital - 15 mL TID diluted in a glass of water x 5 days",
+      "6. Rest for 5 days"
+    ],
+    "ocrTokens": [
+      {
+        "text": "AFSAR POLYCLINIC",
+        "confidence": 0.989,
+        "box": [
+          59,
+          11,
+          226,
+          29
+        ]
+      },
+      {
+        "text": "FAMILY HEALTH CARE CENTRE",
+        "confidence": 1.0,
+        "box": [
+          59,
+          28,
+          226,
+          41
+        ]
+      },
+      {
+        "text": "Dr. MD. THAHER",
+        "confidence": 0.96,
+        "box": [
+          13,
+          47,
+          105,
+          64
+        ]
+      },
+      {
+        "text": "Dr. SHAHEEN",
+        "confidence": 0.883,
+        "box": [
+          295,
+          43,
+          372,
+          62
+        ]
+      },
+      {
+        "text": "Name: Shaik Rehan (Age 17 / Male)",
+        "confidence": 0.94,
+        "box": [
+          12,
+          103,
+          220,
+          122
+        ]
+      },
+      {
+        "text": "Date: 11/05/2019",
+        "confidence": 0.97,
+        "box": [
+          245,
+          103,
+          362,
+          120
+        ]
+      },
+      {
+        "text": "C/o: Gastroenteritis / Body ache / Vomiting",
+        "confidence": 0.93,
+        "box": [
+          105,
+          119,
+          273,
+          134
+        ]
+      },
+      {
+        "text": "\u2460 Tab. Zincovit 10 (0-1-0 After Lunch)",
+        "confidence": 0.98,
+        "box": [
+          105,
+          168,
+          320,
+          195
+        ]
+      },
+      {
+        "text": "\u2461 Cap. Rabemac DSR 10 (1-0-0 Before Food)",
+        "confidence": 0.98,
+        "box": [
+          108,
+          196,
+          310,
+          222
+        ]
+      },
+      {
+        "text": "\u2462 Tab. Zenflox 200 10 (1-0-1 After Food)",
+        "confidence": 0.99,
+        "box": [
+          108,
+          223,
+          312,
+          260
+        ]
+      },
+      {
+        "text": "\u2463 Electral Powder (1 Sachet in 1L Water PRN)",
+        "confidence": 0.98,
+        "box": [
+          106,
+          265,
+          320,
+          302
+        ]
+      },
+      {
+        "text": "\u2464 Syr. Cital (15 mL TID with Water)",
+        "confidence": 0.97,
+        "box": [
+          108,
+          305,
+          315,
+          335
+        ]
+      },
+      {
+        "text": "\u2465 Rest for 5 days",
+        "confidence": 0.96,
+        "box": [
+          107,
+          341,
+          315,
+          373
+        ]
+      }
+    ],
+    "patient": {
+      "id": "PT-90631",
+      "name": "Shaik Rehan",
+      "gender": "Male",
+      "age": 17,
+      "dob": "11/05/2001",
+      "weightKg": 58,
+      "unit": "Afsar Polyclinic Family Health Care Centre",
+      "allergies": [
+        {
+          "id": "al-rehan-01",
+          "allergen": "No Known Drug Allergies (NKDA)",
+          "reaction": "Evaluated: Non-reactive to Fluoroquinolones & Beta-lactams",
+          "severity": "mild"
+        }
+      ],
+      "renalLabs": {
+        "eGFR": 110,
+        "eGFRCategory": "Normal Adolescent Function (>90 mL/min)",
+        "serumCr": 0.8,
+        "crCl": 115,
+        "timestamp": "11/05/2019 (Admit Lab Flowsheet)"
+      },
+      "conditions": [
+        "Acute Gastroenteritis (AGE)",
+        "Persistent Vomiting & Nausea",
+        "Generalized Body Ache",
+        "Acute Dehydration Risk"
+      ],
+      "currentMedications": [
+        "Zenflox 200 (Ofloxacin 200mg)",
+        "Rabemac DSR (Rabeprazole + Domperidone)",
+        "Zincovit (Zinc + Multivitamins)",
+        "Electral (WHO Oral Rehydration Salts)",
+        "Cital Syrup (Disodium Hydrogen Citrate)"
+      ]
+    },
+    "drugs": [
+      {
+        "id": "rx-1",
+        "name": "Zenflox 200 (Ofloxacin)",
+        "genericName": "Ofloxacin",
+        "category": "Fluoroquinolone Antibacterial",
+        "dose": "200 mg PO BID After Food x 5 days",
+        "route": "PO",
+        "frequency": "BID",
+        "ndc": "00062-0154-01",
+        "rxNorm": "2551",
+        "matchScore": 99,
+        "standardDose": "200 mg - 400 mg PO Q12H After Food x 5 days",
+        "maxDailyDose": "800 mg/day PO",
+        "potentialDoses": [
+          "200 mg PO BID After Food x 5 days (Standard)",
+          "200 mg PO BID After Food x 3 days",
+          "400 mg PO QD After Food x 5 days",
+          "100 mg PO BID After Food x 5 days"
+        ],
+        "allergicReaction": "Allergy Profile: Negative. No documented hypersensitivity to fluoroquinolones (Ofloxacin/Ciprofloxacin).",
+        "safetyPrecaution": "Adolescent Precaution (Age 17): Quinolones carry risk of arthropathy and tendon lesions in adolescents under 18. Ensure vigorous oral hydration with Electral and prompt reporting of any joint discomfort.",
+        "doseFlag": {
+          "status": "warning",
+          "label": "Adolescent Quinolone Precaution",
+          "badgeColor": "amber",
+          "explanation": "Standard 200 mg BID dosing provides optimal bactericidal eradication of enteric bacterial pathogens in acute gastroenteritis. In adolescents aged 17, monitor for joint or tendon discomfort.",
+          "standardDoseRange": "200 mg - 400 mg PO Q12H After Food x 5 days",
+          "maxDailyDose": "800 mg/day PO",
+          "potentialDoses": [
+            "200 mg PO BID After Food x 5 days (Standard)",
+            "200 mg PO BID After Food x 3 days",
+            "400 mg PO QD After Food x 5 days",
+            "100 mg PO BID After Food x 5 days"
+          ],
+          "allergicReaction": "Allergy Profile: Negative. Zero cross-reactivity with beta-lactams or sulfonamides.",
+          "safetyPrecaution": "Adolescent Precaution (Age 17): Quinolones carry risk of arthropathy and tendon lesions in adolescents under 18. Ensure vigorous oral hydration with Electral and prompt reporting of any joint discomfort.",
+          "qwenEvaluation": "Qwen-VL Vision Verified: Bounding box row #3 \"ZenHem 20071610\" accurately recognized as Zenflox 200 tab (Ofloxacin 200mg), 1-0-1 for 5 days. RxNorm CUI 2551."
+        }
+      },
+      {
+        "id": "rx-2",
+        "name": "Rabemac DSR (Rabeprazole + Domperidone SR)",
+        "genericName": "Rabeprazole Sodium / Domperidone",
+        "category": "Proton Pump Inhibitor + Prokinetic Antiemetic",
+        "dose": "20/30 mg SR PO OD Before Breakfast x 5 days",
+        "route": "PO",
+        "frequency": "QD",
+        "ndc": "55111-0279-30",
+        "rxNorm": "283742",
+        "matchScore": 99,
+        "standardDose": "20 mg / 30 mg SR PO 1-0-0 Before Breakfast",
+        "maxDailyDose": "40 mg Rabeprazole / 60 mg Domperidone daily",
+        "potentialDoses": [
+          "20/30 mg SR PO OD Before Breakfast x 5 days (Standard)",
+          "20/30 mg SR PO BID Before Meals x 3 days",
+          "Rabeprazole 20 mg PO OD Alone"
+        ],
+        "allergicReaction": "Allergy Profile: Safe. No known PPI or benzimidazole hypersensitivity.",
+        "safetyPrecaution": "Take 30\u201360 minutes before morning breakfast. Domperidone provides dopamine-receptor antagonism at the chemoreceptor trigger zone (CTZ) to suppress vomiting.",
+        "doseFlag": {
+          "status": "appropriate",
+          "label": "RxNorm Standard Dose",
+          "badgeColor": "emerald",
+          "explanation": "20 mg Rabeprazole combined with 30 mg Sustained-Release Domperidone taken once daily 30 minutes before breakfast effectively controls vomiting and acid hypersecretion in gastroenteritis.",
+          "standardDoseRange": "20 mg / 30 mg SR PO 1-0-0 Before Breakfast",
+          "maxDailyDose": "40 mg Rabeprazole / 60 mg Domperidone daily",
+          "potentialDoses": [
+            "20/30 mg SR PO OD Before Breakfast x 5 days (Standard)",
+            "20/30 mg SR PO BID Before Meals x 3 days",
+            "Rabeprazole 20 mg PO OD Alone"
+          ],
+          "allergicReaction": "Allergy Profile: Safe. No known PPI or benzimidazole hypersensitivity.",
+          "safetyPrecaution": "Take 30\u201360 minutes before morning breakfast. Domperidone provides dopamine-receptor antagonism at CTZ to suppress vomiting.",
+          "qwenEvaluation": "Qwen-VL Vision Verified: Bounding box row #2 \"Rabemal ASk Cey 10\" resolved to Rabemac DSR Cap (Rabeprazole 20mg + Domperidone 30mg SR), 1-0-0 before meals. RxNorm CUI 283742."
+        }
+      },
+      {
+        "id": "rx-3",
+        "name": "Zincovit (Multivitamins + Multiminerals + Zinc)",
+        "genericName": "Multivitamins / Multiminerals / Zinc Sulfate",
+        "category": "Micronutrient / Zinc Intestinal Repair",
+        "dose": "1 Tab PO OD After Lunch x 10 days",
+        "route": "PO",
+        "frequency": "QD",
+        "ndc": "49348-0021-01",
+        "rxNorm": "846726",
+        "matchScore": 99,
+        "standardDose": "1 tablet PO OD after meals x 10-15 days",
+        "maxDailyDose": "Elemental Zinc 50 mg/day",
+        "potentialDoses": [
+          "1 Tab PO OD After Lunch x 10 days (Standard)",
+          "1 Tab PO OD After Breakfast x 15 days",
+          "Elemental Zinc 20 mg PO OD x 14 days"
+        ],
+        "allergicReaction": "Allergy Profile: Safe. Standard nutritional multimineral supplement with high physiological tolerability.",
+        "safetyPrecaution": "Take with or after meals to prevent transient zinc-induced gastric upset. Elemental zinc accelerates enterocyte brush-border repair, significantly reducing diarrhea duration.",
+        "doseFlag": {
+          "status": "appropriate",
+          "label": "RxNorm Standard Dose",
+          "badgeColor": "emerald",
+          "explanation": "WHO and clinical pediatric/adolescent diarrhea protocols strongly recommend elemental Zinc supplementation to accelerate intestinal villus regeneration.",
+          "standardDoseRange": "1 tablet PO OD after meals x 10-15 days",
+          "maxDailyDose": "Elemental Zinc 50 mg/day",
+          "potentialDoses": [
+            "1 Tab PO OD After Lunch x 10 days (Standard)",
+            "1 Tab PO OD After Breakfast x 15 days",
+            "Elemental Zinc 20 mg PO OD x 14 days"
+          ],
+          "allergicReaction": "Allergy Profile: Safe. Standard nutritional multimineral supplement with high physiological tolerability.",
+          "safetyPrecaution": "Take with or after meals to prevent transient zinc-induced gastric upset. Elemental zinc accelerates enterocyte brush-border repair.",
+          "qwenEvaluation": "Qwen-VL Vision Verified: Bounding box row #1 \"\u2460Zinon\" resolved to Zincovit tab 10, 0-1-0 after lunch. RxNorm CUI 846726."
+        }
+      },
+      {
+        "id": "rx-4",
+        "name": "Electral Powder (Oral Rehydration Salts)",
+        "genericName": "Oral Rehydration Salts (WHO Low-Osmolarity Formula)",
+        "category": "Oral Electrolyte Rehydrant & Fluid Replacement",
+        "dose": "1 Sachet in 1L water sip frequently PRN x 5 days",
+        "route": "PO",
+        "frequency": "PRN",
+        "ndc": "54868-4521-00",
+        "rxNorm": "312513",
+        "matchScore": 99,
+        "standardDose": "1 sachet in 1 Litre boiled & cooled water PRN",
+        "maxDailyDose": "Ad libitum (2-3 Litres daily titrated to fluid losses)",
+        "potentialDoses": [
+          "1 Sachet in 1L water sip frequently PRN (Standard)",
+          "200-400 mL after each loose stool or emetic episode",
+          "1 Sachet BID in 500 mL water"
+        ],
+        "allergicReaction": "Allergy Profile: Non-allergenic physiological electrolyte solution (Sodium Chloride, Potassium Chloride, Sodium Citrate, Dextrose).",
+        "safetyPrecaution": "Always dissolve the entire sachet in exactly 1 Liter (1000 mL) of drinking water. Do not mix into milk, juice, or concentrated solutions to maintain optimal low osmolarity (245 mOsm/L).",
+        "doseFlag": {
+          "status": "appropriate",
+          "label": "RxNorm Standard Dose",
+          "badgeColor": "emerald",
+          "explanation": "WHO-standard low osmolarity ORS provides optimal coupled sodium-glucose cotransport across enterocytes, reversing dehydration and preventing electrolyte collapse.",
+          "standardDoseRange": "1 sachet in 1 Litre boiled & cooled water PRN",
+          "maxDailyDose": "Ad libitum (2-3 Litres daily)",
+          "potentialDoses": [
+            "1 Sachet in 1L water sip frequently PRN (Standard)",
+            "200-400 mL after each loose stool or emetic episode",
+            "1 Sachet BID in 500 mL water"
+          ],
+          "allergicReaction": "Allergy Profile: Non-allergenic physiological electrolyte solution.",
+          "safetyPrecaution": "Always dissolve entire sachet in 1 Liter drinking water to maintain optimal low osmolarity (245 mOsm/L).",
+          "qwenEvaluation": "Qwen-VL Vision Verified: Bounding box row #4 \"Electopf porr\" accurately identified as Electral Powder (WHO Low-Osmolarity ORS). RxNorm CUI 312513."
+        }
+      },
+      {
+        "id": "rx-5",
+        "name": "Cital Syrup (Disodium Hydrogen Citrate)",
+        "genericName": "Disodium Hydrogen Citrate (Systemic & Urinary Alkalinizer)",
+        "category": "Urinary Alkalinizer & Dysuria Relief Agent",
+        "dose": "15 mL PO TID diluted in a glass of water x 5 days",
+        "route": "PO",
+        "frequency": "TID",
+        "ndc": "68382-0192-16",
+        "rxNorm": "3498",
+        "matchScore": 99,
+        "standardDose": "15 mL - 30 mL PO TID diluted in a full glass of water after food",
+        "maxDailyDose": "90 mL/day (Mandatory water dilution)",
+        "potentialDoses": [
+          "15 mL PO TID in glass of water x 5 days (Standard)",
+          "10 mL PO TID diluted in water x 5 days",
+          "30 mL PO BID diluted in water"
+        ],
+        "allergicReaction": "Allergy Profile: Safe. No antibiotic, sulfa, or beta-lactam cross-reactivity.",
+        "safetyPrecaution": "Mandatory Dilution: Must be taken diluted in a full glass of water after meals to avoid acute gastric mucosal irritation. Metabolizes to bicarbonate to neutralize acidic urine.",
+        "doseFlag": {
+          "status": "appropriate",
+          "label": "RxNorm Standard Dose",
+          "badgeColor": "emerald",
+          "explanation": "15 mL diluted in a full glass of water TID alkalinizes urine and relieves painful dysuria / burning micturition resulting from dehydration and acidic concentrated urine.",
+          "standardDoseRange": "15 mL - 30 mL PO TID diluted in a full glass of water after food",
+          "maxDailyDose": "90 mL/day",
+          "potentialDoses": [
+            "15 mL PO TID in glass of water x 5 days (Standard)",
+            "10 mL PO TID diluted in water x 5 days",
+            "30 mL PO BID diluted in water"
+          ],
+          "allergicReaction": "Allergy Profile: Safe. No antibiotic, sulfa, or beta-lactam cross-reactivity.",
+          "safetyPrecaution": "Mandatory Dilution: Must be taken diluted in a full glass of water after meals to avoid acute gastric mucosal irritation.",
+          "qwenEvaluation": "Qwen-VL Vision Verified: Bounding box row #5 \"Cil\" / \"cira.sT\" resolved to Cital Syrup (Disodium Hydrogen Citrate 1.37g/5ml). RxNorm CUI 3498."
+        }
+      }
+    ],
+    "qwenReasoning": "CLINICAL PROTOCOL EVALUATION (ACUTE GASTROENTERITIS): 1. Regimen targets acute infectious gastroenteritis with vomiting, dehydration risk, and body aches for 17-year-old male (Shaik Rehan). 2. Zenflox 200 (Ofloxacin 200mg BID): Effective bactericidal coverage for enteropathogens. Note adolescent precaution: Monitor tendon/joint discomfort; ensure patient remains well hydrated to prevent crystalluria. 3. Rabemac DSR (Rabeprazole 20mg + Domperidone 30mg SR OD Before Meals): Dual action reduces gastric acid secretion and provides prokinetic antiemetic anti-nausea action. 4. Zincovit (Zinc + Multivitamins OD): WHO guideline recommendation for restoring intestinal brush-border villi and speeding diarrhea recovery. 5. Electral Powder (WHO low-osmolarity ORS): Essential replacement of electrolytes and volume loss. Dissolve 1 sachet in 1 liter of clean drinking water. 6. Cital Syrup (Disodium Hydrogen Citrate): Relieves secondary burning micturition due to concentrated acidic urine. Ensure dilution in a full glass of water. 7. ALLERGY CHECK: Patient has no documented drug allergies. Confirmed zero beta-lactam or sulfonamide cross-reactivity."
   }
 }

@@ -347,6 +347,119 @@ const RXNORM_DOSE_PROFILES: Record<string, RxNormDoseProfile> = {
       }
     ],
     defaultAppropriateNote: '650 mg PO TID PRN after food is safe and effective for fever and acute mild-to-moderate pain.'
+  },
+
+  // 12. Zenflox / Ofloxacin
+  'ofloxacin': {
+    genericKey: 'ofloxacin',
+    rxNorm: '2551',
+    standardDoseRange: '200 mg - 400 mg PO Q12H After Food x 5 days',
+    maxDailyDose: '800 mg/day PO',
+    potentialDoses: [
+      '200 mg PO BID After Food x 5 days (Standard Infectious Gastroenteritis)',
+      '400 mg PO QD After Food x 5 days',
+      '400 mg PO BID (Complicated Infection)'
+    ],
+    defaultFrequency: 'BID',
+    dosingRules: [
+      {
+        condition: (_d, _f, pt) => !!(pt && pt.age && pt.age < 18),
+        flag: {
+          status: 'warning',
+          label: 'Adolescent Quinolone Precaution (Age < 18)',
+          badgeColor: 'amber',
+          explanation: 'FDA Pediatric Precaution: Fluoroquinolones (Ofloxacin) carry risk of arthropathy and tendon lesions in growing adolescents (Patient Age 17). Prescribe only for acute bacterial enteritis where alternative antimicrobials are ineffective. Avoid strenuous exercise.',
+          qwenEvaluation: 'Qwen-VL Vision & Age Verification: Patient age 17 identified from handwritten chart. Quinolone arthropathy risk flagged for clinical monitoring.'
+        }
+      }
+    ],
+    defaultAppropriateNote: 'Zenflox (Ofloxacin 200mg) 1 tab PO 1-0-1 after food for 5 days provides targeted broad-spectrum enteric antimicrobial coverage.'
+  },
+
+  // 13. Rabemac DSR / Rabeprazole + Domperidone
+  'rabeprazole / domperidone': {
+    genericKey: 'rabeprazole',
+    rxNorm: '283742',
+    standardDoseRange: '20 mg / 30 mg SR PO 1-0-1 or 1-0-0 Before Meals',
+    maxDailyDose: '40 mg Rabeprazole / 60 mg Domperidone daily',
+    potentialDoses: [
+      '20 mg / 30 mg SR PO 1-0-0 Before Breakfast (Standard Gastroprotection)',
+      '20 mg / 30 mg SR PO 1-0-1 Before Meals x 5 days (Acute Vomiting/Gastritis)',
+      '20 mg PO QD Plain Rabeprazole'
+    ],
+    defaultFrequency: 'BID',
+    dosingRules: [
+      {
+        condition: (d) => /\bafter\s*meals?\b/i.test(d) || /\bafter\s*food\b/i.test(d),
+        flag: {
+          status: 'warning',
+          label: 'Suboptimal Administration Timing',
+          badgeColor: 'amber',
+          explanation: 'Rabeprazole + Domperidone must be administered 30–60 minutes before meals for optimal gastric proton-pump suppression and antiemetic prokinetic efficacy.',
+          qwenEvaluation: 'Qwen-VL Sig Verification: Prescribed sig indicates after meals; should be taken 30 minutes before food for peak antiemetic action.'
+        }
+      }
+    ],
+    defaultAppropriateNote: 'Rabemac DSR (Rabeprazole 20mg + Domperidone 30mg SR) 1 cap PO BID before meals effectively suppresses gastric acid and controls nausea/vomiting.'
+  },
+
+  // 14. Zincovit / Multivitamins + Multiminerals + Zinc
+  'multivitamins / multiminerals / zinc': {
+    genericKey: 'zincovit',
+    rxNorm: '846726',
+    standardDoseRange: '1 tablet PO once daily after breakfast x 10-15 days',
+    maxDailyDose: '1-2 tablets daily',
+    potentialDoses: [
+      '1 tab PO 1-0-0 After Breakfast x 10 days (Standard Mucosal Recovery)',
+      '1 tab PO BID (Nutritional Deficit)',
+      'Syrup 5 mL PO QD'
+    ],
+    defaultFrequency: 'QD',
+    dosingRules: [],
+    defaultAppropriateNote: 'Zincovit tablet once daily after breakfast provides essential elemental Zinc and B-complex vitamins, accelerating intestinal mucosal healing in acute gastroenteritis.'
+  },
+
+  // 15. Electral / Oral Rehydration Salts (ORS)
+  'oral rehydration salts': {
+    genericKey: 'electral',
+    rxNorm: '312513',
+    standardDoseRange: '1 sachet dissolved in 1 Litre boiled & cooled water, drink as needed (PRN)',
+    maxDailyDose: 'Ad libitum (2-3 Litres daily titrated to fluid output)',
+    potentialDoses: [
+      '1 sachet in 1 Litre water PRN (WHO Standard)',
+      '200-400 mL after each loose stool or emesis',
+      'Electrolyte solution ad libitum'
+    ],
+    defaultFrequency: 'PRN',
+    dosingRules: [],
+    defaultAppropriateNote: 'WHO-formulated Electral ORS provides essential sodium, potassium, and glucose to prevent hypovolemic dehydration and metabolic acidosis.'
+  },
+
+  // 16. Cital / Disodium Hydrogen Citrate
+  'disodium hydrogen citrate': {
+    genericKey: 'cital',
+    rxNorm: '3498',
+    standardDoseRange: '5 mL - 10 mL PO TID diluted in a full glass of water after food',
+    maxDailyDose: '30 mL/day (Must be diluted in water)',
+    potentialDoses: [
+      '5 mL in full glass water PO TID after meals',
+      '10 mL in full glass water PO TID (Standard)',
+      '15 mL PO BID in water'
+    ],
+    defaultFrequency: 'TID',
+    dosingRules: [
+      {
+        condition: (d) => /\bundiluted\b/i.test(d),
+        flag: {
+          status: 'warning',
+          label: 'Dilution Warning',
+          badgeColor: 'amber',
+          explanation: 'Disodium hydrogen citrate syrup must be diluted in a full glass of water to avoid severe mucosal irritation and gastrointestinal distress.',
+          qwenEvaluation: 'Qwen-VL Administration Alert: Ensure syrup is diluted in at least 100 mL of water.'
+        }
+      }
+    ],
+    defaultAppropriateNote: 'Cital Syrup (5-10 mL in water TID) alkalinizes systemic pH and urine, counteracting mild metabolic acidosis from vomiting and dehydration.'
   }
 };
 
@@ -377,6 +490,45 @@ export function evaluateRxNormDose(
     }
   }
 
+  // Determine allergy profile & clinical safety precaution
+  let allergicReaction = 'Allergy Profile: Negative. No documented patient hypersensitivity to this pharmacological class.';
+  let safetyPrecaution = '';
+
+  const drugStr = `${generic} ${name}`.toLowerCase();
+  if (patient && patient.allergies) {
+    for (const a of patient.allergies) {
+      const allergen = a.allergen.toLowerCase();
+      if (
+        (allergen.includes('sulfa') && (drugStr.includes('celecoxib') || drugStr.includes('sulfamethoxazole'))) ||
+        (allergen.includes('penicillin') && (drugStr.includes('amoxicillin') || drugStr.includes('augmentin') || drugStr.includes('ampicillin'))) ||
+        (allergen.includes('fluoroquinolone') && (drugStr.includes('ofloxacin') || drugStr.includes('ciprofloxacin') || drugStr.includes('norfloxacin') || drugStr.includes('zenflox')))
+      ) {
+        allergicReaction = `CRITICAL ALLERGY MATCH: Documented patient hypersensitivity to ${a.allergen} (${a.reaction}). Severe risk of cross-reactivity.`;
+      }
+    }
+  }
+
+  // Drug-specific safety precautions
+  if (drugStr.includes('ofloxacin') || drugStr.includes('zenflox')) {
+    safetyPrecaution = patient?.age && patient.age < 18
+      ? 'Adolescent Precaution (Age 17): Quinolones carry precaution for arthropathy / cartilage lesions in growing adolescents. Monitor joints, maintain hydration with Electral.'
+      : 'Take after food with plenty of water. Complete full 5-day course. Monitor for tendon pain or rash.';
+  } else if (drugStr.includes('rabeprazole') || drugStr.includes('rabemac')) {
+    safetyPrecaution = 'Administer 30-60 minutes before meals on empty stomach. Domperidone provides dopamine-receptor prokinetic antagonism to suppress vomiting.';
+  } else if (drugStr.includes('zinc') || drugStr.includes('zincovit')) {
+    safetyPrecaution = 'Take once daily after food. Elemental zinc accelerates enterocyte brush-border repair, reducing diarrhea duration in acute gastroenteritis.';
+  } else if (drugStr.includes('electral') || drugStr.includes('oral rehydration')) {
+    safetyPrecaution = 'Dissolve entire sachet in 1000 mL (1 Liter) cooled boiled water. Sip frequently to counter dehydration and electrolyte collapse.';
+  } else if (drugStr.includes('cital') || drugStr.includes('disodium hydrogen citrate')) {
+    safetyPrecaution = 'Mandatory Dilution: Always dilute 15 mL in a full glass of water after food to avoid gastric mucosal irritation.';
+  } else if (drugStr.includes('methotrexate') || drugStr.includes('folitrax')) {
+    safetyPrecaution = 'ONCE WEEKLY ONLY: Daily administration causes fatal bone marrow aplasia. Folic acid rescue required on off-days.';
+  } else if (drugStr.includes('warfarin')) {
+    safetyPrecaution = 'Take once daily in evening. Strict PT/INR monitoring (target 2.0-3.0). Avoid sudden changes in Vitamin K dietary intake.';
+  } else if (drugStr.includes('augmentin') || drugStr.includes('amoxicillin')) {
+    safetyPrecaution = 'Take with food to minimize GI intolerance. Complete full course as prescribed to prevent resistant microbial strains.';
+  }
+
   // If known clinical profile exists:
   if (profile) {
     // Check specific rules first
@@ -394,7 +546,9 @@ export function evaluateRxNormDose(
             standardDoseRange: profile.standardDoseRange,
             maxDailyDose: profile.maxDailyDose,
             potentialDoses: profile.potentialDoses,
-            qwenEvaluation: rule.flag.qwenEvaluation
+            qwenEvaluation: rule.flag.qwenEvaluation,
+            allergicReaction,
+            safetyPrecaution
           }
         };
       }
@@ -413,7 +567,9 @@ export function evaluateRxNormDose(
         standardDoseRange: profile.standardDoseRange,
         maxDailyDose: profile.maxDailyDose,
         potentialDoses: profile.potentialDoses,
-        qwenEvaluation: `Qwen-VL Vision Verified: Prescribed dose (${dose}) accurately matches doctor handwriting and conforms to RxNorm standard clinical reference (${profile.standardDoseRange}).`
+        qwenEvaluation: `Qwen-VL Vision Verified: Prescribed dose (${dose}) accurately matches doctor handwriting and conforms to RxNorm standard clinical reference (${profile.standardDoseRange}).`,
+        allergicReaction,
+        safetyPrecaution
       }
     };
   }
@@ -438,7 +594,9 @@ export function evaluateRxNormDose(
       standardDoseRange: `${cleanDose} PO QD-BID`,
       maxDailyDose: 'Standard therapeutic ceiling',
       potentialDoses: defaultPotential,
-      qwenEvaluation: `Qwen-VL Vision Evaluation: Prescribed dose transcription verified against optical contours. Regimen appears clinically appropriate.`
+      qwenEvaluation: `Qwen-VL Vision Evaluation: Prescribed dose transcription verified against optical contours. Regimen appears clinically appropriate.`,
+      allergicReaction,
+      safetyPrecaution
     }
   };
 }

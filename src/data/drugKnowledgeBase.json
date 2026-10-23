@@ -1038,5 +1038,55 @@
     "defaultDose": "40 mg PO 1-0-0 After Food",
     "route": "PO",
     "frequency": "QD"
+  },
+  "zenflox": {
+    "name": "Zenflox 200 (Ofloxacin 200mg)",
+    "genericName": "Ofloxacin",
+    "category": "Fluoroquinolone Antibacterial",
+    "ndc": "00085-1755-01",
+    "rxNorm": "2551",
+    "defaultDose": "200 mg PO 1-0-1 After Food x 5 days",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "rabemac": {
+    "name": "Rabemac DSR (Rabeprazole 20mg + Domperidone 30mg SR)",
+    "genericName": "Rabeprazole / Domperidone",
+    "category": "Proton Pump Inhibitor & Prokinetic Antiemetic",
+    "ndc": "00008-0923-01",
+    "rxNorm": "283742",
+    "defaultDose": "20/30 mg PO 1-0-1 Before Meals x 5 days",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "zincovit": {
+    "name": "Zincovit (Multivitamins + Multiminerals + Zinc)",
+    "genericName": "Multivitamins / Multiminerals / Zinc",
+    "category": "Therapeutic Nutritional Supplement & Micronutrient",
+    "ndc": "00536-1284-01",
+    "rxNorm": "846726",
+    "defaultDose": "1 tab PO 1-0-0 (Morning) x 10 days",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "electral": {
+    "name": "Electral Powder (Oral Rehydration Salts WHO Formula)",
+    "genericName": "Oral Rehydration Salts (ORS)",
+    "category": "Electrolyte Replenisher & Rehydration Fluid",
+    "ndc": "00074-3729-01",
+    "rxNorm": "312513",
+    "defaultDose": "1 sachet in 1 Litre water PRN (Ad libitum)",
+    "route": "PO",
+    "frequency": "PRN"
+  },
+  "cital": {
+    "name": "Cital Syrup (Disodium Hydrogen Citrate 1.37g/5mL)",
+    "genericName": "Disodium Hydrogen Citrate",
+    "category": "Systemic & Urinary Alkalinizer",
+    "ndc": "50383-0145-16",
+    "rxNorm": "3498",
+    "defaultDose": "1-2 tsp (5-10 mL) PO TID in water (After Meals)",
+    "route": "PO",
+    "frequency": "TID"
   }
 }

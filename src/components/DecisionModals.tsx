@@ -445,7 +445,10 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
         warfarin_fluconazole: '/prescriptions/sample_rx_warfarin.png',
         apixaban_celecoxib: '/prescriptions/sample_rx_apixaban_celecoxib.png',
         augmentin_ketorolac: '/prescriptions/sample_rx_augmentin_ketorolac.png',
-        white_tusk_dental: '/prescriptions/sample_rx_white_tusk_dental.png'
+        white_tusk_dental: '/prescriptions/sample_rx_white_tusk_dental.png',
+        sample_rx_white_tusk_dental: '/prescriptions/sample_rx_white_tusk_dental.png',
+        sample_rx_afsar_polyclinic: '/prescriptions/sample_rx_afsar_polyclinic.png',
+        afsar_polyclinic: '/prescriptions/sample_rx_afsar_polyclinic.png'
       };
       fileUrl = sampleFileMap[sampleId] || `/prescriptions/ekacare/${sampleId}.png`;
     }
@@ -692,6 +695,23 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                   </div>
                   <div className="text-xs font-bold text-[#172B25] truncate">Sachin Sansare (28M)</div>
                   <div className="text-[10px] text-[#64756D] truncate mt-0.5">Augmentin + Enzoflam + Pan-D + Hexigel</div>
+                </div>
+
+                {/* Afsar Polyclinic Real Rx */}
+                <div 
+                  onClick={() => handleSelectSample('sample_rx_afsar_polyclinic')}
+                  className={`p-2.5 rounded-xl border cursor-pointer transition-all ${
+                    selectedSampleId === 'sample_rx_afsar_polyclinic'
+                      ? 'border-[#087F5B] bg-[#F0F7F4] ring-1 ring-[#087F5B]'
+                      : 'border-[#E1EAE5] bg-white hover:border-[#CBDAD4]'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-0.5">
+                    <span className="text-[10px] font-bold text-[#087F5B] uppercase tracking-wider">🏥 Afsar Polyclinic</span>
+                    <span className="text-[9px] font-semibold px-1 py-0.2 bg-emerald-100 text-emerald-800 rounded">Gastroenteritis</span>
+                  </div>
+                  <div className="text-xs font-bold text-[#172B25] truncate">Shaik Rehan (17M)</div>
+                  <div className="text-[10px] text-[#64756D] truncate mt-0.5">Zenflox + Rabemac DSR + Zincovit + Electral + Cital</div>
                 </div>
 
                 {/* Verified Presets */}
@@ -1071,6 +1091,34 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                                       <div className="text-[10px] italic text-[#2C3E37] bg-white/70 p-1.5 rounded border border-black/5 flex items-start gap-1 mt-1">
                                         <Sparkles className="w-3 h-3 text-[#087F5B] flex-shrink-0 mt-0.5" />
                                         <span>{drug.doseFlag.qwenEvaluation}</span>
+                                      </div>
+                                    )}
+                                  </div>
+                                )}
+
+                                {/* Allergic Reaction & Safety Precaution Card */}
+                                {(drug.allergicReaction || drug.safetyPrecaution || drug.doseFlag?.allergicReaction || drug.doseFlag?.safetyPrecaution) && (
+                                  <div className={`mt-2 p-2 rounded-lg border text-[10px] space-y-1 ${
+                                    ((drug.allergicReaction || drug.doseFlag?.allergicReaction)?.toLowerCase().includes('critical') || (drug.allergicReaction || drug.doseFlag?.allergicReaction)?.toLowerCase().includes('contraindicated'))
+                                      ? 'bg-red-50/80 border-red-200 text-red-900'
+                                      : ((drug.safetyPrecaution || drug.doseFlag?.safetyPrecaution)?.toLowerCase().includes('precaution') || (drug.doseFlag?.label?.toLowerCase().includes('precaution')))
+                                      ? 'bg-amber-50/80 border-amber-200 text-amber-900'
+                                      : 'bg-emerald-50/70 border-emerald-200 text-emerald-900'
+                                  }`}>
+                                    <div className="flex items-center gap-1 font-bold">
+                                      <ShieldAlert className="w-3.5 h-3.5 text-current flex-shrink-0" />
+                                      <span>Allergy & Clinical Safety Guidance</span>
+                                    </div>
+                                    {(drug.allergicReaction || drug.doseFlag?.allergicReaction) && (
+                                      <div className="leading-relaxed">
+                                        <span className="font-semibold">Allergy Evaluation: </span>
+                                        <span>{drug.allergicReaction || drug.doseFlag?.allergicReaction}</span>
+                                      </div>
+                                    )}
+                                    {(drug.safetyPrecaution || drug.doseFlag?.safetyPrecaution) && (
+                                      <div className="leading-relaxed">
+                                        <span className="font-semibold">Administration & Safety: </span>
+                                        <span>{drug.safetyPrecaution || drug.doseFlag?.safetyPrecaution}</span>
                                       </div>
                                     )}
                                   </div>

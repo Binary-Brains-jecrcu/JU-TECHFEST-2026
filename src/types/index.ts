@@ -9,6 +9,8 @@ export interface DoseFlag {
   maxDailyDose?: string;
   potentialDoses: string[];
   qwenEvaluation: string;
+  allergicReaction?: string;
+  safetyPrecaution?: string;
 }
 
 export interface PrescriptionDrug {
@@ -26,6 +28,8 @@ export interface PrescriptionDrug {
   maxDailyDose?: string;
   potentialDoses?: string[];
   doseFlag?: DoseFlag;
+  allergicReaction?: string;
+  safetyPrecaution?: string;
 }
 
 export interface AllergyItem {

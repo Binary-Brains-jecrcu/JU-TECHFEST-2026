@@ -29,7 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Left: Brand & Clinical Indicator */}
         <div className="flex items-center gap-6">
           <div 
-            onClick={() => onNavigate('workspace')}
+            onClick={() => onNavigate('landing')}
             className="flex items-center gap-3 cursor-pointer group"
           >
             <div className="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center p-1.5 shadow-sm group-hover:scale-105 transition-transform">
@@ -76,18 +76,6 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Center: Navigation Links */}
         <nav className="hidden lg:flex items-center gap-1 bg-[#F7FAF8] p-1 rounded-lg border border-[#E1EAE5]">
           <button
-            onClick={() => onNavigate('workspace')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-              currentView === 'workspace'
-                ? 'bg-white text-[#075E4B] shadow-sm font-semibold'
-                : 'text-[#64756D] hover:text-[#172B25]'
-            }`}
-          >
-            <LayoutDashboard className="w-3.5 h-3.5" />
-            CDS Workspace
-          </button>
-
-          <button
             onClick={() => onNavigate('landing')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
               currentView === 'landing'
@@ -97,6 +85,18 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <Layers className="w-3.5 h-3.5" />
             Product Overview
+          </button>
+
+          <button
+            onClick={() => onNavigate('workspace')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+              currentView === 'workspace'
+                ? 'bg-white text-[#075E4B] shadow-sm font-semibold'
+                : 'text-[#64756D] hover:text-[#172B25]'
+            }`}
+          >
+            <LayoutDashboard className="w-3.5 h-3.5" />
+            CDS Workspace
           </button>
 
           <button

@@ -17,7 +17,7 @@ import { generateClinicalFindings } from './utils/safetyChecker';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
 
 export function App() {
-  const [currentView, setCurrentView] = useState<'workspace' | 'landing' | 'history' | 'database' | 'about'>('workspace');
+  const [currentView, setCurrentView] = useState<'workspace' | 'landing' | 'history' | 'database' | 'about'>('landing');
   const [currentAnalysis, setCurrentAnalysis] = useState<SafetyAnalysisResult>(DEMO_SCENARIOS['RX-78492']);
   
   // Modals

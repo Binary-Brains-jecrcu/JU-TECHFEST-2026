@@ -1,0 +1,972 @@
+{
+  "warfarin": {
+    "name": "Warfarin Sodium",
+    "genericName": "Warfarin",
+    "category": "Oral Anticoagulant (Vitamin K Antagonist)",
+    "ndc": "00056-0170-70",
+    "rxNorm": "11289",
+    "defaultDose": "5 mg PO QD at bedtime",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "eliquis": {
+    "name": "Eliquis (Apixaban)",
+    "genericName": "Apixaban",
+    "category": "Direct Factor Xa Inhibitor (DOAC)",
+    "ndc": "00087-5420-11",
+    "rxNorm": "1364430",
+    "defaultDose": "5 mg PO BID",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "apixaban": {
+    "name": "Eliquis (Apixaban)",
+    "genericName": "Apixaban",
+    "category": "Direct Factor Xa Inhibitor (DOAC)",
+    "ndc": "00087-5420-11",
+    "rxNorm": "1364430",
+    "defaultDose": "5 mg PO BID",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "ecosprin": {
+    "name": "Ecosprin (Aspirin)",
+    "genericName": "Aspirin",
+    "category": "Antiplatelet / Cyclooxygenase-1 Inhibitor",
+    "ndc": "00003-0894-21",
+    "rxNorm": "1191",
+    "defaultDose": "75 mg PO 0-1-0 After Lunch",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "aspirin": {
+    "name": "Ecosprin (Aspirin)",
+    "genericName": "Aspirin",
+    "category": "Antiplatelet / Cyclooxygenase-1 Inhibitor",
+    "ndc": "00003-0894-21",
+    "rxNorm": "1191",
+    "defaultDose": "75 mg PO QD",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "clopitab": {
+    "name": "Clopitab A (Clopidogrel + Aspirin)",
+    "genericName": "Clopidogrel / Aspirin",
+    "category": "Dual Antiplatelet Therapy (DAPT)",
+    "ndc": "00056-0200-75",
+    "rxNorm": "855332",
+    "defaultDose": "75/75 mg PO 0-1-0 After Food",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "clopidogrel": {
+    "name": "Clopidogrel Bisulfate",
+    "genericName": "Clopidogrel",
+    "category": "P2Y12 Platelet Inhibitor",
+    "ndc": "00093-7360-56",
+    "rxNorm": "32968",
+    "defaultDose": "75 mg PO QD",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "fluconazole": {
+    "name": "Fluconazole",
+    "genericName": "Fluconazole",
+    "category": "Systemic Azole Antifungal (Potent CYP2C9 Inhibitor)",
+    "ndc": "00049-3430-66",
+    "rxNorm": "4450",
+    "defaultDose": "200 mg PO QD",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "augmentin": {
+    "name": "Augmentin (Amoxicillin/Clavulanate)",
+    "genericName": "Amoxicillin / Clavulanate Potassium",
+    "category": "Beta-Lactam Antibacterial / Beta-Lactamase Inhibitor",
+    "ndc": "00029-6086-12",
+    "rxNorm": "18631",
+    "defaultDose": "875-125 mg PO 1-0-1",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "clavam": {
+    "name": "Clavam 625 (Amoxicillin/Clavulanate)",
+    "genericName": "Amoxicillin / Clavulanate Potassium",
+    "category": "Beta-Lactam Antibacterial",
+    "ndc": "00029-6086-12",
+    "rxNorm": "18631",
+    "defaultDose": "625 mg PO TID After Food",
+    "route": "PO",
+    "frequency": "TID"
+  },
+  "moxiforce": {
+    "name": "Moxiforce-CV-625",
+    "genericName": "Amoxicillin / Clavulanate Potassium",
+    "category": "Beta-Lactam Antibacterial",
+    "ndc": "00029-6086-12",
+    "rxNorm": "18631",
+    "defaultDose": "625 mg PO 1-0-1 After Food",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "novamox": {
+    "name": "Novamox 500 (Amoxicillin)",
+    "genericName": "Amoxicillin",
+    "category": "Aminopenicillin Antibacterial",
+    "ndc": "00093-3109-53",
+    "rxNorm": "723",
+    "defaultDose": "500 mg PO 1-1-1 After Food",
+    "route": "PO",
+    "frequency": "TID"
+  },
+  "amoxicillin": {
+    "name": "Amoxicillin Trihydrate",
+    "genericName": "Amoxicillin",
+    "category": "Aminopenicillin Antibacterial",
+    "ndc": "00093-3109-53",
+    "rxNorm": "723",
+    "defaultDose": "500 mg PO TID",
+    "route": "PO",
+    "frequency": "TID"
+  },
+  "zifi": {
+    "name": "Zifi AZ (Cefixime + Azithromycin)",
+    "genericName": "Cefixime / Azithromycin",
+    "category": "Broad-Spectrum Cephalosporin & Macrolide",
+    "ndc": "00069-3060-75",
+    "rxNorm": "203155",
+    "defaultDose": "1-0-1 After Food (2 Weeks)",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "taxim": {
+    "name": "Taxim O (Cefixime 100mg)",
+    "genericName": "Cefixime",
+    "category": "3rd Generation Cephalosporin Antibiotic",
+    "ndc": "00781-2244-01",
+    "rxNorm": "20680",
+    "defaultDose": "100 mg PO 1-0-1 After Meal",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "cefixime": {
+    "name": "Cefixime Oral Tablet",
+    "genericName": "Cefixime",
+    "category": "3rd Generation Cephalosporin Antibiotic",
+    "ndc": "00781-2244-01",
+    "rxNorm": "20680",
+    "defaultDose": "200 mg PO BID",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "zocef": {
+    "name": "Zocef 500 (Cefuroxime Axetil)",
+    "genericName": "Cefuroxime Axetil",
+    "category": "2nd Generation Cephalosporin Antibacterial",
+    "ndc": "00173-0406-00",
+    "rxNorm": "2193",
+    "defaultDose": "500 mg PO Twice daily for 7 days",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "covatil": {
+    "name": "Covatil CV 500mg",
+    "genericName": "Cefuroxime Axetil / Clavulanate",
+    "category": "2nd Generation Cephalosporin",
+    "ndc": "00173-0406-00",
+    "rxNorm": "2193",
+    "defaultDose": "500 mg PO 1BD",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "ceftum": {
+    "name": "Ceftum 250 (Cefuroxime)",
+    "genericName": "Cefuroxime",
+    "category": "Cephalosporin Antibiotic",
+    "ndc": "00173-0406-00",
+    "rxNorm": "2193",
+    "defaultDose": "250 mg PO BD for 5 days",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "azee": {
+    "name": "Azee 500 (Azithromycin)",
+    "genericName": "Azithromycin",
+    "category": "Macrolide Antibacterial",
+    "ndc": "00069-3060-75",
+    "rxNorm": "18631",
+    "defaultDose": "500 mg PO 1-0-0 x 5 days",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "azithromycin": {
+    "name": "Azithromycin 500mg",
+    "genericName": "Azithromycin",
+    "category": "Macrolide Antibacterial",
+    "ndc": "00069-3060-75",
+    "rxNorm": "18631",
+    "defaultDose": "500 mg PO QD",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "azithral": {
+    "name": "Azithral 100 Oral Suspension",
+    "genericName": "Azithromycin",
+    "category": "Macrolide Antibacterial",
+    "ndc": "00069-3060-75",
+    "rxNorm": "18631",
+    "defaultDose": "100 mg PO 4 times a day",
+    "route": "PO",
+    "frequency": "QID"
+  },
+  "flagyl": {
+    "name": "Flagyl (Metronidazole)",
+    "genericName": "Metronidazole",
+    "category": "Nitroimidazole Antimicrobial / Antiprotozoal",
+    "ndc": "00025-1821-31",
+    "rxNorm": "6922",
+    "defaultDose": "400 mg PO TID for 5 days",
+    "route": "PO",
+    "frequency": "TID"
+  },
+  "metronidazole": {
+    "name": "Metronidazole Oral Tablet",
+    "genericName": "Metronidazole",
+    "category": "Nitroimidazole Antimicrobial",
+    "ndc": "00025-1821-31",
+    "rxNorm": "6922",
+    "defaultDose": "400 mg PO TID",
+    "route": "PO",
+    "frequency": "TID"
+  },
+  "oflox": {
+    "name": "Oflox OZ (Ofloxacin + Ornidazole)",
+    "genericName": "Ofloxacin / Ornidazole",
+    "category": "Fluoroquinolone & Nitroimidazole Antibacterial",
+    "ndc": "00085-1755-01",
+    "rxNorm": "2551",
+    "defaultDose": "1 Tab PO 1BD",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "norfloxacin": {
+    "name": "Norfloxacin 400mg",
+    "genericName": "Norfloxacin",
+    "category": "Fluoroquinolone Antibacterial",
+    "ndc": "00085-1755-01",
+    "rxNorm": "7517",
+    "defaultDose": "400 mg PO BID",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "ciprofloxacin": {
+    "name": "Ciprofloxacin 500mg",
+    "genericName": "Ciprofloxacin",
+    "category": "Fluoroquinolone Antibacterial",
+    "ndc": "00085-1755-01",
+    "rxNorm": "2551",
+    "defaultDose": "500 mg PO BID",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "ivermectol": {
+    "name": "Ivermectol-12 (Ivermectin)",
+    "genericName": "Ivermectin",
+    "category": "Antiparasitic / Anthelmintic",
+    "ndc": "00006-0207-58",
+    "rxNorm": "6044",
+    "defaultDose": "12 mg 1 tab. Stat @ night",
+    "route": "PO",
+    "frequency": "Stat"
+  },
+  "dolo": {
+    "name": "Dolo 650 (Paracetamol)",
+    "genericName": "Paracetamol",
+    "category": "Antipyretic & Non-Opioid Analgesic",
+    "ndc": "00045-0501-60",
+    "rxNorm": "161",
+    "defaultDose": "650 mg PO 1-0-1 After Food",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "paracetamol": {
+    "name": "Paracetamol 500/650mg",
+    "genericName": "Paracetamol",
+    "category": "Antipyretic & Analgesic",
+    "ndc": "00045-0501-60",
+    "rxNorm": "161",
+    "defaultDose": "650 mg PO TID PRN",
+    "route": "PO",
+    "frequency": "TID"
+  },
+  "meftal": {
+    "name": "Meftal Forte (Mefenamic Acid + Paracetamol)",
+    "genericName": "Mefenamic Acid / Paracetamol",
+    "category": "NSAID & Antipyretic Combination",
+    "ndc": "00071-0540-24",
+    "rxNorm": "6699",
+    "defaultDose": "1/2-0-1/2 After Meal for 5 days",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "enzoflam": {
+    "name": "Enzoflam (Diclofenac + Paracetamol + Serratiopeptidase)",
+    "genericName": "Diclofenac / Paracetamol / Serratiopeptidase",
+    "category": "Anti-Inflammatory & Proteolytic Enzyme",
+    "ndc": "00028-0200-10",
+    "rxNorm": "3355",
+    "defaultDose": "1-1-1 After Food",
+    "route": "PO",
+    "frequency": "TID"
+  },
+  "zerodol": {
+    "name": "Zerodol TH 8 (Aceclofenac + Thiocolchicoside)",
+    "genericName": "Aceclofenac / Thiocolchicoside",
+    "category": "NSAID & Centrally Acting Muscle Relaxant",
+    "ndc": "00028-0200-10",
+    "rxNorm": "3355",
+    "defaultDose": "1-0-1-0 After Meal for 5 Days",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "hifenac": {
+    "name": "Hifenac P (Aceclofenac + Paracetamol)",
+    "genericName": "Aceclofenac / Paracetamol",
+    "category": "NSAID & Analgesic",
+    "ndc": "00028-0200-10",
+    "rxNorm": "3355",
+    "defaultDose": "1-0-1 After Food",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "toradol": {
+    "name": "Toradol (Ketorolac Tromethamine)",
+    "genericName": "Ketorolac",
+    "category": "Potent Nonsteroidal Anti-Inflammatory Drug (NSAID)",
+    "ndc": "00004-0058-01",
+    "rxNorm": "6142",
+    "defaultDose": "10 mg PO Q6H PRN (Max 5 days)",
+    "route": "PO",
+    "frequency": "Q6H PRN"
+  },
+  "ketorolac": {
+    "name": "Ketorolac Tromethamine",
+    "genericName": "Ketorolac",
+    "category": "Potent Nonsteroidal Anti-Inflammatory Drug (NSAID)",
+    "ndc": "00004-0058-01",
+    "rxNorm": "6142",
+    "defaultDose": "10 mg PO Q6H PRN (Max 5 days)",
+    "route": "PO",
+    "frequency": "Q6H PRN"
+  },
+  "celebrex": {
+    "name": "Celebrex (Celecoxib)",
+    "genericName": "Celecoxib",
+    "category": "COX-2 Selective NSAID (Sulfonamide Conjugate)",
+    "ndc": "00025-1520-31",
+    "rxNorm": "214199",
+    "defaultDose": "200 mg PO QD",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "celecoxib": {
+    "name": "Celebrex (Celecoxib)",
+    "genericName": "Celecoxib",
+    "category": "COX-2 Selective NSAID (Sulfonamide Conjugate)",
+    "ndc": "00025-1520-31",
+    "rxNorm": "214199",
+    "defaultDose": "200 mg PO QD",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "retoz": {
+    "name": "Retoz (Etoricoxib 60mg)",
+    "genericName": "Etoricoxib",
+    "category": "COX-2 Selective Inhibitor NSAID",
+    "ndc": "00025-1520-31",
+    "rxNorm": "214199",
+    "defaultDose": "60 mg PO 0-0-1 After Dinner",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "etoricoxib": {
+    "name": "Etoricoxib Oral Tablet",
+    "genericName": "Etoricoxib",
+    "category": "COX-2 Selective Inhibitor NSAID",
+    "ndc": "00025-1520-31",
+    "rxNorm": "214199",
+    "defaultDose": "60 mg PO QD",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "proxym": {
+    "name": "Proxym-ER (Etodolac Extended Release)",
+    "genericName": "Etodolac",
+    "category": "Anti-Inflammatory NSAID",
+    "ndc": "00046-0600-01",
+    "rxNorm": "4110",
+    "defaultDose": "1 tab twice daily after food for 10 days",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "folitrax": {
+    "name": "Folitrax (Methotrexate 10mg)",
+    "genericName": "Methotrexate",
+    "category": "Disease-Modifying Antirheumatic Drug (DMARD)",
+    "ndc": "00069-0260-20",
+    "rxNorm": "6851",
+    "defaultDose": "10 mg PO ONCE IN A WEEK (Every Sunday)",
+    "route": "PO",
+    "frequency": "Weekly"
+  },
+  "methotrexate": {
+    "name": "Methotrexate Sodium",
+    "genericName": "Methotrexate",
+    "category": "Antimetabolite / Antirheumatic / Immunosuppressant",
+    "ndc": "00069-0260-20",
+    "rxNorm": "6851",
+    "defaultDose": "10-15 mg PO ONCE WEEKLY",
+    "route": "PO",
+    "frequency": "Weekly"
+  },
+  "tritonib": {
+    "name": "Tritonib (Tofacitinib 5mg)",
+    "genericName": "Tofacitinib",
+    "category": "Janus Kinase (JAK) Inhibitor Immunosuppressant",
+    "ndc": "00069-1001-01",
+    "rxNorm": "134547",
+    "defaultDose": "5 mg PO 1-0-1 (Breakfast & Dinner)",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "tofacitinib": {
+    "name": "Tofacitinib Oral Tablet",
+    "genericName": "Tofacitinib",
+    "category": "Janus Kinase (JAK) Inhibitor",
+    "ndc": "00069-1001-01",
+    "rxNorm": "134547",
+    "defaultDose": "5 mg PO BID",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "folvite": {
+    "name": "Folvite (Folic Acid 5mg)",
+    "genericName": "Folic Acid",
+    "category": "Vitamin B9 / Antidote to MTX Toxicity",
+    "ndc": "00054-4299-25",
+    "rxNorm": "4511",
+    "defaultDose": "5 mg PO Alternate day (Avoid on MTX day)",
+    "route": "PO",
+    "frequency": "Alternate Days"
+  },
+  "wysolone": {
+    "name": "Wysolone (Prednisolone)",
+    "genericName": "Prednisolone",
+    "category": "Systemic Glucocorticoid / Corticosteroid",
+    "ndc": "00054-0017-25",
+    "rxNorm": "8640",
+    "defaultDose": "10 mg PO After Breakfast",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "omnacortil": {
+    "name": "Omnacortil (Prednisolone)",
+    "genericName": "Prednisolone",
+    "category": "Systemic Glucocorticoid / Corticosteroid",
+    "ndc": "00054-0017-25",
+    "rxNorm": "8640",
+    "defaultDose": "10 mg PO 1 tab twice a day",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "pan": {
+    "name": "Pan D (Pantoprazole + Domperidone)",
+    "genericName": "Pantoprazole / Domperidone",
+    "category": "Proton Pump Inhibitor & Prokinetic Agent",
+    "ndc": "00008-0923-01",
+    "rxNorm": "40790",
+    "defaultDose": "40 mg PO 1-0-0 Before Breakfast",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "pantocid": {
+    "name": "Pantocid DSR 40mg",
+    "genericName": "Pantoprazole / Domperidone",
+    "category": "Proton Pump Inhibitor & Prokinetic",
+    "ndc": "00008-0923-01",
+    "rxNorm": "40790",
+    "defaultDose": "40 mg PO 1-0-0 Before Food",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "pantadif": {
+    "name": "Pantadif (Pantoprazole 40mg)",
+    "genericName": "Pantoprazole",
+    "category": "Proton Pump Inhibitor (PPI)",
+    "ndc": "00008-0923-01",
+    "rxNorm": "40790",
+    "defaultDose": "40 mg PO 1-0-0 Empty stomach",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "rabekind": {
+    "name": "Rabekind DSR (Rabeprazole + Domperidone)",
+    "genericName": "Rabeprazole / Domperidone",
+    "category": "Proton Pump Inhibitor & Antiemetic",
+    "ndc": "00008-0923-01",
+    "rxNorm": "86183",
+    "defaultDose": "30mg+20mg PO 1-0-0 Before food",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "rabeloc": {
+    "name": "Rabeloc 20 (Rabeprazole)",
+    "genericName": "Rabeprazole",
+    "category": "Proton Pump Inhibitor",
+    "ndc": "00008-0923-01",
+    "rxNorm": "86183",
+    "defaultDose": "20 mg PO 1-0-0 Before Meal",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "nexpro": {
+    "name": "Nexpro Fast (Esomeprazole 40mg)",
+    "genericName": "Esomeprazole",
+    "category": "Proton Pump Inhibitor",
+    "ndc": "00186-5040-31",
+    "rxNorm": "283742",
+    "defaultDose": "40 mg PO Empty stomach",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "sompraz": {
+    "name": "Sompraz D 40 Capsule",
+    "genericName": "Esomeprazole / Domperidone",
+    "category": "PPI & Dopamine Antagonist Prokinetic",
+    "ndc": "00186-5040-31",
+    "rxNorm": "283742",
+    "defaultDose": "1-0-1 Daily empty stomach",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "ondansetron": {
+    "name": "Ondansetron ODT / Emeset",
+    "genericName": "Ondansetron",
+    "category": "5-HT3 Receptor Antagonist Antiemetic",
+    "ndc": "00173-0570-00",
+    "rxNorm": "7617",
+    "defaultDose": "4 mg PO Q8H PRN nausea",
+    "route": "PO",
+    "frequency": "Q8H PRN"
+  },
+  "emeset": {
+    "name": "Syrup Emeset (Ondansetron)",
+    "genericName": "Ondansetron",
+    "category": "5-HT3 Antiemetic",
+    "ndc": "00173-0570-00",
+    "rxNorm": "7617",
+    "defaultDose": "4 ml - Twice a day",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "duphalac": {
+    "name": "Duphalac Oral Solution (Lactulose)",
+    "genericName": "Lactulose",
+    "category": "Osmotic Laxative / Ammonia Detoxicant",
+    "ndc": "00032-0240-16",
+    "rxNorm": "6240",
+    "defaultDose": "15 ml at bedtime with warm water",
+    "route": "PO",
+    "frequency": "QHS"
+  },
+  "telmisartan": {
+    "name": "Telmisartan Oral Tablet",
+    "genericName": "Telmisartan",
+    "category": "Angiotensin II Receptor Blocker (ARB)",
+    "ndc": "00597-0026-60",
+    "rxNorm": "31676",
+    "defaultDose": "40 mg PO QD",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "sartel": {
+    "name": "Sartel 40 (Telmisartan)",
+    "genericName": "Telmisartan",
+    "category": "Angiotensin II Receptor Blocker (ARB)",
+    "ndc": "00597-0026-60",
+    "rxNorm": "31676",
+    "defaultDose": "40 mg PO 1-0-0 After Food",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "metoprolol": {
+    "name": "Metoprolol Tartrate",
+    "genericName": "Metoprolol",
+    "category": "Beta-1 Selective Adrenergic Blocker",
+    "ndc": "00078-0111-05",
+    "rxNorm": "6918",
+    "defaultDose": "25 mg PO BID with meals",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "vinicor": {
+    "name": "Vinicor D 50mg Tablet",
+    "genericName": "Metoprolol Succinate / Chlorthalidone",
+    "category": "Beta Blocker & Thiazide-like Diuretic",
+    "ndc": "00078-0111-05",
+    "rxNorm": "6918",
+    "defaultDose": "50 mg PO 1-0-0 After Breakfast",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "amlong": {
+    "name": "Amlong 10mg (Amlodipine)",
+    "genericName": "Amlodipine",
+    "category": "Dihydropyridine Calcium Channel Blocker",
+    "ndc": "00069-1540-68",
+    "rxNorm": "17767",
+    "defaultDose": "10 mg PO OD 9PM",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "cilacar": {
+    "name": "Cilacar 10mg (Cilnidipine)",
+    "genericName": "Cilnidipine",
+    "category": "L/N-Type Calcium Channel Blocker (Renoprotective)",
+    "ndc": "00069-1540-68",
+    "rxNorm": "17767",
+    "defaultDose": "10 mg PO 0-0-1 After Food",
+    "route": "PO",
+    "frequency": "QHS"
+  },
+  "nebicard": {
+    "name": "Nebicard 5mg (Nebivolol)",
+    "genericName": "Nebivolol",
+    "category": "3rd Gen Cardioselective Beta-Blocker (NO Vasodilation)",
+    "ndc": "00456-1405-30",
+    "rxNorm": "43213",
+    "defaultDose": "5 mg PO 1-0-1",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "concor": {
+    "name": "Concor 2.5mg (Bisoprolol)",
+    "genericName": "Bisoprolol Fumarate",
+    "category": "Beta-1 Adrenergic Receptor Blocker",
+    "ndc": "00078-0111-05",
+    "rxNorm": "16681",
+    "defaultDose": "2.5 mg PO ONE TABLET OD",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "dytor": {
+    "name": "Dytor 10mg (Torsemide)",
+    "genericName": "Torsemide",
+    "category": "Loop Diuretic (Potent Anti-Edema)",
+    "ndc": "00054-4822-25",
+    "rxNorm": "38413",
+    "defaultDose": "10 mg PO Morning",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "rapilif": {
+    "name": "Rapilif 4/8mg (Silodosin)",
+    "genericName": "Silodosin",
+    "category": "Selective Alpha-1A Adrenergic Antagonist",
+    "ndc": "00456-1405-30",
+    "rxNorm": "848243",
+    "defaultDose": "8 mg PO 1-0-0 After Meal",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "lisinopril": {
+    "name": "Lisinopril Oral Tablet",
+    "genericName": "Lisinopril",
+    "category": "Angiotensin-Converting Enzyme (ACE) Inhibitor",
+    "ndc": "00006-0207-58",
+    "rxNorm": "29046",
+    "defaultDose": "10 mg PO QD",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "glycomet": {
+    "name": "Glycomet GP 2mg Forte (Glimepiride + Metformin)",
+    "genericName": "Glimepiride / Metformin",
+    "category": "Sulfonylurea & Biguanide Antidiabetic",
+    "ndc": "00093-1048-01",
+    "rxNorm": "860975",
+    "defaultDose": "1 Tab PO 0-0-1 Before Dinner",
+    "route": "PO",
+    "frequency": "QHS"
+  },
+  "metformin": {
+    "name": "Metformin HCl 500mg",
+    "genericName": "Metformin",
+    "category": "Biguanide Antihyperglycemic",
+    "ndc": "00093-1048-01",
+    "rxNorm": "860975",
+    "defaultDose": "500 mg PO 1-0-1 After food",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "gemer": {
+    "name": "Gemer DS (Glimepiride 2mg + Metformin 1000mg)",
+    "genericName": "Glimepiride / Metformin",
+    "category": "Dual Oral Hypoglycemic Agent",
+    "ndc": "00093-1048-01",
+    "rxNorm": "860975",
+    "defaultDose": "1-0-0 Before Breakfast",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "glimisave": {
+    "name": "Glimisave M1 (Glimepiride + Metformin)",
+    "genericName": "Glimepiride / Metformin",
+    "category": "Antidiabetic Combination",
+    "ndc": "00093-1048-01",
+    "rxNorm": "860975",
+    "defaultDose": "1-0-1 Before Food",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "galvusmet": {
+    "name": "Galvusmet 50/1000mg (Vildagliptin + Metformin)",
+    "genericName": "Vildagliptin / Metformin",
+    "category": "DPP-4 Inhibitor & Biguanide",
+    "ndc": "00078-0470-15",
+    "rxNorm": "860975",
+    "defaultDose": "1 Tab PO 0-1-0 After Food",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "istavel": {
+    "name": "Istavel 50mg (Sitagliptin)",
+    "genericName": "Sitagliptin",
+    "category": "Dipeptidyl Peptidase-4 (DPP-4) Inhibitor",
+    "ndc": "00006-0277-31",
+    "rxNorm": "636367",
+    "defaultDose": "50 mg PO 1-0-0 After food",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "dapanorm": {
+    "name": "Dapanorm 10mg (Dapagliflozin)",
+    "genericName": "Dapagliflozin",
+    "category": "SGLT2 Inhibitor (Renal & Cardioprotective)",
+    "ndc": "00310-6110-30",
+    "rxNorm": "1488564",
+    "defaultDose": "10 mg PO 1-0-0 Before food (Drink 2 glasses water)",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "lantus": {
+    "name": "Inj Lantus (Insulin Glargine)",
+    "genericName": "Insulin Glargine",
+    "category": "Long-Acting Basal Insulin Analog",
+    "ndc": "00088-2220-33",
+    "rxNorm": "274783",
+    "defaultDose": "14 Units Subcutaneous at Bedtime (0-0-14)",
+    "route": "SC",
+    "frequency": "QHS"
+  },
+  "rosuvas": {
+    "name": "Rosuvas 10/20mg (Rosuvastatin)",
+    "genericName": "Rosuvastatin Calcium",
+    "category": "HMG-CoA Reductase Inhibitor (High-Intensity Statin)",
+    "ndc": "00310-0752-90",
+    "rxNorm": "309362",
+    "defaultDose": "10-20 mg PO 0-0-1 After Dinner",
+    "route": "PO",
+    "frequency": "QHS"
+  },
+  "rozavel": {
+    "name": "Rozavel 10/20mg (Rosuvastatin)",
+    "genericName": "Rosuvastatin Calcium",
+    "category": "HMG-CoA Reductase Inhibitor",
+    "ndc": "00310-0752-90",
+    "rxNorm": "309362",
+    "defaultDose": "20 mg PO 0-0-1 After Dinner",
+    "route": "PO",
+    "frequency": "QHS"
+  },
+  "qtripil": {
+    "name": "Qtripil SR 400mg (Quetiapine)",
+    "genericName": "Quetiapine Fumarate",
+    "category": "Atypical Antipsychotic / Mood Stabilizer",
+    "ndc": "00310-0271-10",
+    "rxNorm": "77022",
+    "defaultDose": "400 mg PO 0-0-1 After Dinner",
+    "route": "PO",
+    "frequency": "QHS"
+  },
+  "valparin": {
+    "name": "Valparin Chrono 500mg (Sodium Valproate + Valproic Acid)",
+    "genericName": "Divalproex Sodium / Valproic Acid",
+    "category": "Anticonvulsant & Mood Stabilizer",
+    "ndc": "00074-6211-13",
+    "rxNorm": "35827",
+    "defaultDose": "500 mg PO 0-0-1 After Dinner",
+    "route": "PO",
+    "frequency": "QHS"
+  },
+  "oleptal": {
+    "name": "Oleptal DT 300mg (Oxcarbazepine)",
+    "genericName": "Oxcarbazepine",
+    "category": "Antiepileptic / Voltage-Gated Sodium Channel Blocker",
+    "ndc": "00078-0357-05",
+    "rxNorm": "32630",
+    "defaultDose": "300 mg PO 1-0-1 (Breakfast & Dinner)",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "bupron": {
+    "name": "Bupron XL 150mg (Bupropion)",
+    "genericName": "Bupropion HCl",
+    "category": "Norepinephrine-Dopamine Reuptake Inhibitor (NDRI)",
+    "ndc": "00173-0715-00",
+    "rxNorm": "42347",
+    "defaultDose": "150 mg PO 1-0-0 Morning after breakfast",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "stalopam": {
+    "name": "Stalopam 20mg (Escitalopram)",
+    "genericName": "Escitalopram Oxalate",
+    "category": "Selective Serotonin Reuptake Inhibitor (SSRI)",
+    "ndc": "00456-2020-01",
+    "rxNorm": "352741",
+    "defaultDose": "20 mg PO 0-0-1 1 hour after dinner",
+    "route": "PO",
+    "frequency": "QHS"
+  },
+  "clonotril": {
+    "name": "Clonotril DT 0.25mg (Clonazepam)",
+    "genericName": "Clonazepam",
+    "category": "Benzodiazepine Anxiolytic / Anticonvulsant",
+    "ndc": "00004-0058-01",
+    "rxNorm": "2598",
+    "defaultDose": "0.25 mg PO at Bedtime SOS",
+    "route": "PO",
+    "frequency": "QHS PRN"
+  },
+  "maxgalin": {
+    "name": "Maxgalin NT (Pregabalin + Nortriptyline)",
+    "genericName": "Pregabalin / Nortriptyline",
+    "category": "Neuropathic Analgesic Combination",
+    "ndc": "00069-1560-68",
+    "rxNorm": "187832",
+    "defaultDose": "1 Tab PO 0-0-1 After Dinner 7PM",
+    "route": "PO",
+    "frequency": "QHS"
+  },
+  "fibrogesic": {
+    "name": "Fibrogesic SR 75mg (Methylcobalamin + Pregabalin)",
+    "genericName": "Pregabalin / Methylcobalamin",
+    "category": "Neuropathic Pain & Neuroprotective",
+    "ndc": "00069-1560-68",
+    "rxNorm": "187832",
+    "defaultDose": "75 mg PO 0-0-1 After Dinner",
+    "route": "PO",
+    "frequency": "QHS"
+  },
+  "montair": {
+    "name": "Montair-LC (Montelukast + Levocetirizine)",
+    "genericName": "Montelukast / Levocetirizine",
+    "category": "Leukotriene Receptor Antagonist & H1-Antihistamine",
+    "ndc": "00078-0111-05",
+    "rxNorm": "6699",
+    "defaultDose": "1 Tab PO 0-0-1 After Meal",
+    "route": "PO",
+    "frequency": "QHS"
+  },
+  "montek": {
+    "name": "Montek LC (Levocetirizine 5mg + Montelukast 10mg)",
+    "genericName": "Montelukast / Levocetirizine",
+    "category": "Allergic Rhinitis & Asthma Prophylaxis",
+    "ndc": "00078-0111-05",
+    "rxNorm": "6699",
+    "defaultDose": "1 Tab PO 0-0-1 After Dinner",
+    "route": "PO",
+    "frequency": "QHS"
+  },
+  "allegra": {
+    "name": "Allegra-M (Fexofenadine + Montelukast)",
+    "genericName": "Fexofenadine / Montelukast",
+    "category": "Non-Sedating Antihistamine & Anti-Leukotriene",
+    "ndc": "00088-1100-47",
+    "rxNorm": "86183",
+    "defaultDose": "1 Tab PO 0-0-1 at Bedtime",
+    "route": "PO",
+    "frequency": "QHS"
+  },
+  "esiflo": {
+    "name": "Esiflo 250 Inhaler (Fluticasone + Salmeterol)",
+    "genericName": "Fluticasone / Salmeterol",
+    "category": "Inhaled Corticosteroid & LABA Bronchodilator",
+    "ndc": "00173-0682-20",
+    "rxNorm": "896209",
+    "defaultDose": "2 Puffs BID through spacer",
+    "route": "Inhalation",
+    "frequency": "BID"
+  },
+  "thyronorm": {
+    "name": "Thyronorm 75mcg (Levothyroxine)",
+    "genericName": "Levothyroxine Sodium",
+    "category": "Synthetic Thyroid Hormone (T4)",
+    "ndc": "00074-3727-13",
+    "rxNorm": "10582",
+    "defaultDose": "75 mcg PO 1-0-0 Empty stomach early morning",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "thyrox": {
+    "name": "Thyrox 25mcg (Levothyroxine)",
+    "genericName": "Levothyroxine Sodium",
+    "category": "Synthetic Thyroid Hormone (T4)",
+    "ndc": "00074-3727-13",
+    "rxNorm": "10582",
+    "defaultDose": "25 mcg PO 1-0-0 Empty Stomach",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "shelcal": {
+    "name": "Shelcal 500 (Calcium Carbonate + Vitamin D3)",
+    "genericName": "Calcium Carbonate / Cholecalciferol",
+    "category": "Mineral Supplement & Bone Metabolism",
+    "ndc": "00003-0894-21",
+    "rxNorm": "10582",
+    "defaultDose": "500 mg PO 1-0-0 After Lunch",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "calcirol": {
+    "name": "Cap Calcirol 60K (Cholecalciferol)",
+    "genericName": "Cholecalciferol (Vitamin D3)",
+    "category": "High-Potency Vitamin D3",
+    "ndc": "00054-4299-25",
+    "rxNorm": "2418",
+    "defaultDose": "60,000 IU PO Once a week for 8 weeks",
+    "route": "PO",
+    "frequency": "Weekly"
+  },
+  "uprise": {
+    "name": "Uprise D3 60K (Cholecalciferol)",
+    "genericName": "Cholecalciferol (Vitamin D3)",
+    "category": "High-Potency Vitamin D3",
+    "ndc": "00054-4299-25",
+    "rxNorm": "2418",
+    "defaultDose": "60,000 IU PO Once a week",
+    "route": "PO",
+    "frequency": "Weekly"
+  },
+  "feburic": {
+    "name": "Feburic 40mg (Febuxostat)",
+    "genericName": "Febuxostat",
+    "category": "Xanthine Oxidase Inhibitor (Uric Acid Lowering)",
+    "ndc": "00064-0170-30",
+    "rxNorm": "848243",
+    "defaultDose": "40 mg PO 1-0-0 After Food",
+    "route": "PO",
+    "frequency": "QD"
+  }
+}

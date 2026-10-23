@@ -14,6 +14,11 @@ import urllib.parse
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import io
 
+# Ensure UTF-8 output on Windows consoles
+if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 # Ensure Python user site-packages are accessible for PaddleOCR, PyTorch & Transformers
 user_site = os.path.expanduser("~/Library/Python/3.9/lib/python/site-packages")
 if os.path.isdir(user_site) and user_site not in sys.path:

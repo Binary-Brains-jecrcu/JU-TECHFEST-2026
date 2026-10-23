@@ -45,31 +45,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               />
             </div>
             <div className="flex flex-col">
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-[#172B25] text-lg tracking-tight font-sans">
-                  MedCheck
-                </span>
-                <span className="text-[10px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded bg-[#DDF5EA] text-[#075E4B] border border-[#20A88A]/30">
-                  CLINICAL
-                </span>
-              </div>
+              <span className="font-bold text-[#172B25] text-lg tracking-tight font-sans">
+                MedCheck
+              </span>
               <span className="text-[11px] text-[#64756D] leading-tight hidden sm:inline">
                 Prescription Safety Verification
               </span>
             </div>
-          </div>
-
-          {/* Engine Status Badge */}
-          <div className="hidden md:flex items-center gap-2 bg-[#F7FAF8] border border-[#E1EAE5] px-2.5 py-1 rounded-full text-xs text-[#075E4B]">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#087F5B] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#087F5B]"></span>
-            </span>
-            <span className="font-medium text-[11px]">
-              Engine v4.2 Active
-            </span>
-            <span className="text-[#8C9E96]">•</span>
-            <span className="text-[#64756D] text-[11px]">Live CDS Safeguard</span>
           </div>
         </div>
 

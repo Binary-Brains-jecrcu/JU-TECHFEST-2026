@@ -470,7 +470,10 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
       const apiBase = (import.meta as any).env?.VITE_API_BASE_URL || '';
       const response = await fetch(`${apiBase}/api/scan-prescription`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Bypass-Tunnel-Reminder': 'true'
+        },
         body: JSON.stringify({
           ...payload,
           qwenApiKey: qwenApiKey || undefined

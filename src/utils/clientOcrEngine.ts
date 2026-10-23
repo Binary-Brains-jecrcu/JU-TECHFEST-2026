@@ -155,14 +155,33 @@ async function callCloudMultimodalVision(
       ? 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions'
       : 'https://openrouter.ai/api/v1/chat/completions';
 
-    const model = isDashScope ? 'qwen-vl-plus' : 'qwen/qwen-2.5-vl-72b-instruct';
+    // Official OpenRouter model slug is qwen/qwen2.5-vl-72b-instruct
+    const model = isDashScope ? 'qwen-vl-plus' : 'qwen/qwen2.5-vl-72b-instruct';
 
-    const response = await fetch(endpoint, {
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    };
+
+    if (!isDashScope) {
+      headers['HTTP-Referer'] = typeof window !== 'undefined' ? window.location.origin : 'https://medcheck-cds.vercel.app';
+      headers['X-Title'] = 'MedCheck CDS Vision Specialist';
+    }
+
+    const promptText = `You are MedCheck CDS Multimodal Clinical Vision Assistant. Analyze this clinical prescription document.
+Transcribe and extract this medical prescription document with high optical precision.
+Return a STRICT JSON object in this format (no markdown formatting, just pure JSON):
+{
+  "ocrLines": [
+    "transcribed line 1",
+    "transcribed line 2"
+  ],
+  "reasoning": "Clinical reasoning: active medications, dosing, contraindications, and drug interactions."
+}`;
+
+    let response = await fetch(endpoint, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
+      headers,
       body: JSON.stringify({
         model,
         messages: [
@@ -171,7 +190,7 @@ async function callCloudMultimodalVision(
             content: [
               {
                 type: 'text',
-                text: 'You are MedCheck CDS Clinical Vision Assistant. Analyze this clinical prescription document. 1. Transcribe all text lines exactly. 2. Identify active medications, dose, frequency, patient age, renal function, and allergies. 3. Provide clinical reasoning highlighting any contraindications or drug interactions.'
+                text: promptText
               },
               {
                 type: 'image_url',
@@ -184,13 +203,65 @@ async function callCloudMultimodalVision(
       })
     });
 
+    // DashScope Mainland fallback if international endpoint is unreachable
+    if (!response.ok && isDashScope && response.status !== 401) {
+      try {
+        const domesticEndpoint = 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions';
+        response = await fetch(domesticEndpoint, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            model: 'qwen-vl-plus',
+            messages: [
+              {
+                role: 'user',
+                content: [
+                  { type: 'text', text: promptText },
+                  { type: 'image_url', image_url: { url: dataUrl } }
+                ]
+              }
+            ],
+            temperature: 0.1
+          })
+        });
+      } catch (fallbackErr) {
+        console.warn('DashScope domestic fallback note:', fallbackErr);
+      }
+    }
+
     if (response.ok) {
       const data = await response.json();
       const content = data.choices?.[0]?.message?.content || '';
+      
+      let ocrLines: string[] = [];
+      let reasoning = content;
+
+      try {
+        const jsonMatch = content.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          const parsed = JSON.parse(jsonMatch[0]);
+          if (Array.isArray(parsed.ocrLines) && parsed.ocrLines.length > 0) {
+            ocrLines = parsed.ocrLines;
+          }
+          if (parsed.reasoning) {
+            reasoning = parsed.reasoning;
+          }
+        }
+      } catch (pErr) {
+        // Fallback to text lines
+      }
+
+      if (ocrLines.length === 0) {
+        ocrLines = content.split('\n').map((l: string) => l.trim()).filter((l: string) => l.length > 0);
+      }
+
       return {
-        ocrText: content,
-        reasoning: content
+        ocrText: ocrLines.join('\n'),
+        reasoning
       };
+    } else {
+      const errText = await response.text();
+      console.warn(`Qwen-VL Vision API call failed (${response.status}):`, errText);
     }
   } catch (err) {
     console.warn('Direct Cloud Multimodal Vision call failed:', err);

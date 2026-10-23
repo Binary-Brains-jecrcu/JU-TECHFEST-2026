@@ -47,6 +47,60 @@ def get_paddle_ocr():
         print(f"⚠️ PaddleOCR initialization error: {e}")
         return None
 
+def call_qwen_cloud_vision(image_path, api_key):
+    """
+    Live Cloud Multimodal Vision Call (Qwen-VL via OpenRouter or Alibaba DashScope)
+    """
+    try:
+        import urllib.request
+        with open(image_path, "rb") as f:
+            b64 = base64.b64encode(f.read()).decode("utf-8")
+        data_url = f"data:image/png;base64,{b64}"
+
+        is_dashscope = api_key.startswith("sk-") and not api_key.startswith("sk-or-")
+        endpoint = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions" if is_dashscope else "https://openrouter.ai/api/v1/chat/completions"
+        model = "qwen-vl-plus" if is_dashscope else "qwen/qwen2.5-vl-72b-instruct"
+
+        payload = {
+            "model": model,
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "You are MedCheck CDS Multimodal Clinical Prescription Vision Assistant. Transcribe all written lines from this prescription exactly, identifying active medications, dose, frequency, and clinical precautions."
+                        },
+                        {
+                            "type": "image_url",
+                            "image_url": {"url": data_url}
+                        }
+                    ]
+                }
+            ],
+            "temperature": 0.1
+        }
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}"
+        }
+        if not is_dashscope:
+            headers["HTTP-Referer"] = "http://localhost:3000"
+            headers["X-Title"] = "MedCheck CDS Vision Assistant"
+
+        req = urllib.request.Request(
+            endpoint,
+            data=json.dumps(payload).encode("utf-8"),
+            headers=headers
+        )
+        with urllib.request.urlopen(req, timeout=12) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            content = data.get("choices", [{}])[0].get("message", {}).get("content", "")
+            return content
+    except Exception as e:
+        print(f"Cloud Qwen-VL note: {e}")
+        return None
+
 def enhance_image_for_handwriting(image_path, out_path=None):
     if out_path is None:
         out_path = os.path.join(tempfile.gettempdir(), "handwriting_enhanced.png")
@@ -1927,6 +1981,23 @@ class PrescriptionAPIHandler(BaseHTTPRequestHandler):
 
             # 2. Extract clinical entities
             extracted_data = parse_clinical_entities_handwriting(ocr_lines, ocr_tokens)
+
+            # 3. Optional Live Qwen-VL Multimodal Enhancement if API key provided
+            active_qwen_key = qwen_api_key or os.environ.get("OPENROUTER_API_KEY") or os.environ.get("QWEN_API_KEY")
+            if active_qwen_key:
+                print("🧠 Invoking Live Qwen-VL Multimodal Vision API...")
+                cloud_text = call_qwen_cloud_vision(temp_image_path, active_qwen_key)
+                if cloud_text:
+                    c_lines = [l.strip() for l in cloud_text.split("\n") if len(l.strip()) > 3]
+                    added_count = 0
+                    for cl in c_lines:
+                        if not any(difflib.SequenceMatcher(None, cl.lower(), ol.lower()).ratio() > 0.8 for ol in ocr_lines):
+                            ocr_lines.append(cl)
+                            added_count += 1
+                    if added_count > 0:
+                        print(f"✅ Qwen-VL augmented {added_count} additional clinical lines.")
+                        extracted_data = parse_clinical_entities_handwriting(ocr_lines, ocr_tokens)
+                    extracted_data["qwenReasoning"] = f"{cloud_text[:240]}... | {extracted_data['qwenReasoning']}"
 
             elapsed_ms = int((time.time() - start_time) * 1000)
 

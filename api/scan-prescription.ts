@@ -235,14 +235,22 @@ Return a STRICT JSON object in this format (no markdown fences, just pure JSON):
       ? 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions'
       : 'https://openrouter.ai/api/v1/chat/completions';
 
-    const model = isDashScope ? 'qwen-vl-plus' : 'qwen/qwen-2.5-vl-72b-instruct';
+    // Official OpenRouter model slug is qwen/qwen2.5-vl-72b-instruct
+    const model = isDashScope ? 'qwen-vl-plus' : 'qwen/qwen2.5-vl-72b-instruct';
 
-    const resp = await fetch(endpoint, {
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    };
+
+    if (!isDashScope) {
+      headers['HTTP-Referer'] = 'https://medcheck-cds.vercel.app';
+      headers['X-Title'] = 'MedCheck CDS Vision Specialist';
+    }
+
+    let resp = await fetch(endpoint, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
+      headers,
       body: JSON.stringify({
         model,
         messages: [
@@ -258,18 +266,64 @@ Return a STRICT JSON object in this format (no markdown fences, just pure JSON):
       })
     });
 
+    // DashScope Mainland fallback if international endpoint fails
+    if (!resp.ok && isDashScope && resp.status !== 401) {
+      try {
+        const domesticEndpoint = 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions';
+        resp = await fetch(domesticEndpoint, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            model: 'qwen-vl-plus',
+            messages: [
+              {
+                role: 'user',
+                content: [
+                  { type: 'text', text: promptText },
+                  { type: 'image_url', image_url: { url: dataUrl } }
+                ]
+              }
+            ],
+            temperature: 0.1
+          })
+        });
+      } catch (e) {
+        console.warn('DashScope fallback note:', e);
+      }
+    }
+
     if (resp.ok) {
       const data = await resp.json();
       const content = data.choices?.[0]?.message?.content || '';
-      // Clean JSON markers if present
-      const cleaned = content.replace(/```json/gi, '').replace(/```/g, '').trim();
-      const parsed = JSON.parse(cleaned);
+
+      let parsed: any = null;
+      try {
+        const jsonMatch = content.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          parsed = JSON.parse(jsonMatch[0]);
+        } else {
+          parsed = JSON.parse(content.replace(/```json/gi, '').replace(/```/g, '').trim());
+        }
+      } catch (pErr) {
+        // Fallback to text lines if not pure JSON
+        const lines = content.split('\n').map((l: string) => l.trim()).filter((l: string) => l.length > 0);
+        return {
+          ocrLines: lines,
+          patient: {},
+          drugs: [],
+          reasoning: content
+        };
+      }
+
       return {
         ocrLines: parsed.ocrLines || [],
         patient: parsed.patient || {},
         drugs: parsed.drugs || [],
         reasoning: parsed.reasoning || `Extracted via Qwen-VL (${model}).`
       };
+    } else {
+      const errText = await resp.text();
+      console.warn(`Serverless Qwen-VL API call failed (${resp.status}):`, errText);
     }
   } catch (err) {
     console.warn('Multimodal vision call error in serverless handler:', err);

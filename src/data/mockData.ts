@@ -187,7 +187,7 @@ export const DEFAULT_ANALYSIS_RESULT: SafetyAnalysisResult = {
       title: 'Metformin Dose Evaluation: Mild Renal Impairment',
       subtitle: 'Patient eGFR 54 mL/min • Prescribed: 500 mg BID (1,000 mg daily)',
       drugsInvolved: ['Metformin HCl'],
-      guidance: 'Metformin is acceptable when eGFR is 45–59 mL/min, with a recommended maximum daily ceiling of 1,000 mg. Current regimen sits at the allowable ceiling. Safe to continue; monitor renal function every 3 months. Avoid dose escalation.',
+      guidance: 'KDIGO 2023 Clinical Practice Guideline (Kidney Int. 2023; 104:S1–S127) & ADA Standards of Care §10.4: Metformin is allowable in eGFR 45–59 mL/min (CKD 3a) with a maximum recommended therapeutic ceiling of 1,000 mg/day. Current order is at the upper reference limit; re-assess renal panel every 3–6 months.',
       recommendedAction: 'Maintain current dosage at 1,000 mg/day max. Confirm patient avoids acute dehydration and schedule follow-up eGFR in 90 days. Avoid introducing nephrotoxic contrast agents without temporary cessation.',
       prescribedValue: '1,000 mg/day (500 mg BID)',
       referenceValue: 'Max 1,000 mg/day for eGFR 45–59 mL/min (Contraindicated if eGFR < 30 mL/min)',
@@ -333,7 +333,7 @@ export const DEMO_SCENARIOS: Record<string, SafetyAnalysisResult> = {
         title: 'Triple Whammy Renal Hemodynamic Alert: NSAID + ACEi in CKD 3b',
         subtitle: 'Lisinopril + Celecoxib • eGFR 42 mL/min / CrCl 39 mL/min',
         drugsInvolved: ['Celecoxib', 'Lisinopril'],
-        guidance: 'Concurrent use of NSAIDs with ACE inhibitors impairs afferent and efferent arteriolar autoregulation, precipitating acute kidney injury (AKI) in elderly patients with pre-existing stage 3b CKD.',
+      guidance: 'BMJ 2013; 346:e8507 & KDIGO AKI Guidelines: Concurrent use of NSAIDs with ACE inhibitors impairs afferent and efferent arteriolar autoregulation, precipitating acute kidney injury (AKI) in elderly patients with pre-existing stage 3b CKD.',
         recommendedAction: 'Order Serum Creatinine and Potassium within 72 hours. Strongly recommend stopping Celecoxib to prevent acute hemodynamic nephrotoxicity.',
         ruleId: 'RENAL-HEMODYNAMIC-031',
         evidence: [

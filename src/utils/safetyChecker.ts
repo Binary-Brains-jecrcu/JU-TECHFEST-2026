@@ -147,7 +147,7 @@ export function generateClinicalFindings(drugs: PrescriptionDrug[], patient: Pat
         subtitle: `Patient CrCl ${crCl} mL/min • Impaired clearance requires 50% maintenance reduction.`,
         drugsInvolved: ['Fluconazole'],
         mechanism: 'Approximately 80% of fluconazole is excreted unchanged in urine. In patients with CrCl between 21 and 50 mL/min, drug half-life extends significantly from ~30 hours to over 60 hours, increasing toxicity and interaction potency.',
-        guidance: 'After initial loading dose of 200mg, maintenance dose should be decreased to 100mg PO QD or 50% of standard dose.',
+        guidance: 'Sanford Guide to Antimicrobial Therapy 2025 & FDA Diflucan Label §2.2: In renal impairment (CrCl 21–50 mL/min), maintenance dose ceiling is established at 50% of normal dosage following loading dose.',
         recommendedAction: 'Adjust maintenance fluconazole order to 100mg PO QD after Day 1 loading dose.',
         prescribedValue: '200 mg PO QD (100% dose)',
         referenceValue: '100 mg PO QD (50% adjustment for CrCl 21-50)',
@@ -177,7 +177,7 @@ export function generateClinicalFindings(drugs: PrescriptionDrug[], patient: Pat
       subtitle: 'FDA Boxed Warning: Combined duration of IV/oral ketorolac must not exceed 5 consecutive days.',
       drugsInvolved: ['Toradol (Ketorolac Tromethamine)'],
       mechanism: 'Ketorolac is a nonselective NSAID with exceptionally potent analgesic activity but high gastrointestinal and renal toxicity. Duration exceeding 5 days dramatically elevates risks of peptic ulcer perforation and acute kidney injury.',
-      guidance: 'Ketorolac is indicated only for acute short-term management of moderately severe acute pain. Limit prescription to 5 days maximum.',
+      guidance: 'FDA Boxed Warning (Toradol/Ketorolac Approved Labeling §1.1) & Beers Criteria 2023: Maximum duration referenced at 5 consecutive days due to accelerated GI bleed and acute renal tubular necrosis risks.',
       recommendedAction: 'Verify start date of ketorolac therapy; schedule transition to milder oral analgesic within 5 days.',
       ruleId: 'CEIL-KETO-5D',
       evidence: [

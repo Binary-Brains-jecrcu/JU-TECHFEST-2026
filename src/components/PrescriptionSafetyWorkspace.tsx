@@ -603,18 +603,6 @@ export const PrescriptionSafetyWorkspace: React.FC<WorkspaceProps> = ({
                             </div>
                           )}
 
-                          {finding.recommendedAction && (
-                            <div className="bg-[#FEF2F2] border border-[#FECACA] rounded-lg p-3 space-y-1">
-                              <div className="flex items-center gap-1.5 text-xs font-bold text-[#C62828] uppercase tracking-wider">
-                                <AlertTriangle className="w-3.5 h-3.5 text-[#C62828]" />
-                                Recommended Clinical Action:
-                              </div>
-                              <p className="text-xs text-[#C62828] leading-relaxed font-medium">
-                                {finding.recommendedAction}
-                              </p>
-                            </div>
-                          )}
-
                           {/* Expandable Clinical Evidence Accordion */}
                           {finding.evidence.length > 0 && (
                             <div className="pt-1">
@@ -719,18 +707,11 @@ export const PrescriptionSafetyWorkspace: React.FC<WorkspaceProps> = ({
                           {finding.guidance && (
                             <div className="bg-[#FFFBEB] border border-[#FDE68A] rounded-lg p-3 space-y-1">
                               <div className="text-xs font-bold text-[#D97706] uppercase tracking-wider">
-                                KDIGO / ADA Guidance:
+                                References:
                               </div>
                               <p className="text-xs text-[#172B25] leading-relaxed">
                                 {finding.guidance}
                               </p>
-                            </div>
-                          )}
-
-                          {finding.recommendedAction && (
-                            <div className="text-xs text-[#64756D]">
-                              <span className="font-semibold text-[#172B25]">Action: </span>
-                              {finding.recommendedAction}
                             </div>
                           )}
 

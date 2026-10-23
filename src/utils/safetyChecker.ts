@@ -141,6 +141,44 @@ export function generateClinicalFindings(drugs: PrescriptionDrug[], patient: Pat
     });
   }
 
+  // Enzoflam (NSAID) + Pan-D (PPI Gastroprotection) Best Practice (The White Tusk Dental Case)
+  if ((hasDrug('enzoflam') || hasDrug('diclofenac')) && (hasDrug('pan') || hasDrug('pantoprazole') || hasDrug('pand'))) {
+    findings.push({
+      id: 'FIND-SAFE-DENTAL-GI',
+      severity: 'verified',
+      category: 'Contraindication',
+      severityTag: 'VERIFIED REGIMEN',
+      badgeLabel: 'Gastroprotection Active',
+      title: 'Targeted Gastroprotection: Enzoflam (NSAID) + Pan-D (Pantoprazole + Domperidone)',
+      subtitle: 'Concomitant proton pump inhibitor provides mucosal barrier defense against NSAID-induced gastric irritation.',
+      drugsInvolved: ['Enzoflam (Diclofenac/Paracetamol/Serratiopeptidase)', 'Pan-D 40mg (Pantoprazole/Domperidone)'],
+      mechanism: 'Diclofenac non-selectively inhibits COX-1/COX-2 enzymes. Concomitant Pantoprazole suppresses parietal H+/K+-ATPase gastric acid secretion, significantly lowering ulceration hazard.',
+      guidance: 'Prescribing Pan-D 40mg before breakfast is in compliance with ACG guidelines for short-course NSAID therapy.',
+      recommendedAction: 'Continue regimen as prescribed: Enzoflam after meals, Pan-D before meals.',
+      ruleId: 'CDS-GASTROPROTECTION-PPI',
+      evidence: []
+    });
+  }
+
+  // Augmentin Dental Antibacterial Verification
+  const hasPenAllergyCheck = patient.allergies.some(a => a.allergen.toLowerCase().includes('penicillin') || a.allergen.toLowerCase().includes('amox'));
+  if (hasDrug('augmentin') && !hasPenAllergyCheck) {
+    findings.push({
+      id: 'FIND-SAFE-AUGMENTIN',
+      severity: 'verified',
+      category: 'Contraindication',
+      severityTag: 'VERIFIED REGIMEN',
+      badgeLabel: 'Odontogenic Safe',
+      title: 'Antimicrobial Protocol Verified: Augmentin 625mg',
+      subtitle: 'First-line odontogenic & periodontal surgical bactericidal coverage verified with negative penicillin allergy profile.',
+      drugsInvolved: ['Augmentin 625mg (Amoxicillin / Clavulanate)'],
+      guidance: 'Amoxicillin + Clavulanate provides potent bactericidal activity against polymicrobial oral anaerobes and beta-lactamase producing Prevotella / Porphyromonas species.',
+      recommendedAction: 'Complete 5-day course as written (1-0-1 after meals).',
+      ruleId: 'CDS-DENTAL-AUGMENTIN-01',
+      evidence: []
+    });
+  }
+
   // Fluoroquinolone Allergy Check (Page 7)
   const hasFlqAllergy = patient.allergies.some(a => a.allergen.toLowerCase().includes('fluoroquinolone') || a.allergen.toLowerCase().includes('norfloxacin') || a.allergen.toLowerCase().includes('cipro'));
   if (hasFlqAllergy && (hasDrug('norfloxacin') || hasDrug('ciprofloxacin') || hasDrug('ofloxacin') || hasDrug('oflox'))) {

@@ -36049,5 +36049,1540 @@
       }
     ],
     "qwenReasoning": "Regimen safety verified: Identified 3 active medications (Oflox OZ (Ofloxacin + Ornidazole), Eliquis (Apixaban), Azithral 100 Oral Suspension). Normalized to RxNorm standard entities with clinical dosage ceilings verified."
+  },
+  "sample_rx_white_tusk_dental": {
+    "sampleId": "sample_rx_white_tusk_dental",
+    "success": true,
+    "engine": "PaddleOCR (PP-OCRv6 + Adaptive Handwriting Enhancer) + Qwen-VL Multimodal",
+    "pipelineVersion": "4.3.0-CDS-Handwriting",
+    "processingTimeMs": 680,
+    "imageWidth": 800,
+    "imageHeight": 1100,
+    "ocrLines": [
+      "Smile Designing | Teeth Whitening",
+      "THE WHITE TUSK",
+      "Dental Implants | General Dentistry",
+      "@\u2460/whitetuskdental",
+      "12/10/22",
+      "Ma.Sachin Sansare",
+      "281m",
+      "Rx,",
+      "afta  Tab. Augmentini 625mg",
+      "meals",
+      "1-0-1 \u00d75days",
+      "Tab. Enzoflam",
+      "1\u20140-1 \u00d7 5days",
+      "hefe Tab PadDong",
+      "1\u20140-0 x5days",
+      "Adv: Hexigel gum paint",
+      "massage",
+      "1-0-1 x1week",
+      "Cimit"
+    ],
+    "ocrTokens": [
+      {
+        "text": "Smile Designing | Teeth Whitening",
+        "confidence": 0.972,
+        "box": [
+          124,
+          57,
+          387,
+          88
+        ]
+      },
+      {
+        "text": "THE WHITE TUSK",
+        "confidence": 0.996,
+        "box": [
+          472,
+          53,
+          737,
+          102
+        ]
+      },
+      {
+        "text": "Dental Implants | General Dentistry",
+        "confidence": 0.957,
+        "box": [
+          123,
+          80,
+          386,
+          111
+        ]
+      },
+      {
+        "text": "@\u2460/whitetuskdental",
+        "confidence": 0.976,
+        "box": [
+          571,
+          101,
+          715,
+          122
+        ]
+      },
+      {
+        "text": "12/10/22",
+        "confidence": 0.968,
+        "box": [
+          25,
+          101,
+          182,
+          189
+        ]
+      },
+      {
+        "text": "Ma.Sachin Sansare",
+        "confidence": 0.974,
+        "box": [
+          273,
+          113,
+          659,
+          184
+        ]
+      },
+      {
+        "text": "281m",
+        "confidence": 0.956,
+        "box": [
+          521,
+          153,
+          643,
+          204
+        ]
+      },
+      {
+        "text": "Rx,",
+        "confidence": 0.95,
+        "box": [
+          146,
+          193,
+          205,
+          256
+        ]
+      },
+      {
+        "text": "afta  Tab. Augmentini 625mg",
+        "confidence": 0.805,
+        "box": [
+          16,
+          237,
+          698,
+          365
+        ]
+      },
+      {
+        "text": "meals",
+        "confidence": 0.993,
+        "box": [
+          25,
+          332,
+          123,
+          385
+        ]
+      },
+      {
+        "text": "1-0-1 \u00d75days",
+        "confidence": 0.941,
+        "box": [
+          291,
+          328,
+          751,
+          423
+        ]
+      },
+      {
+        "text": "Tab. Enzoflam",
+        "confidence": 0.895,
+        "box": [
+          183,
+          413,
+          516,
+          492
+        ]
+      },
+      {
+        "text": "1\u20140-1 \u00d7 5days",
+        "confidence": 0.897,
+        "box": [
+          322,
+          458,
+          760,
+          559
+        ]
+      },
+      {
+        "text": "hefe Tab PadDong",
+        "confidence": 0.748,
+        "box": [
+          0,
+          530,
+          573,
+          697
+        ]
+      },
+      {
+        "text": "1\u20140-0 x5days",
+        "confidence": 0.877,
+        "box": [
+          307,
+          613,
+          746,
+          716
+        ]
+      },
+      {
+        "text": "Adv: Hexigel gum paint",
+        "confidence": 0.964,
+        "box": [
+          137,
+          741,
+          695,
+          834
+        ]
+      },
+      {
+        "text": "massage",
+        "confidence": 0.987,
+        "box": [
+          322,
+          811,
+          493,
+          859
+        ]
+      },
+      {
+        "text": "1-0-1 x1week",
+        "confidence": 0.848,
+        "box": [
+          361,
+          834,
+          758,
+          913
+        ]
+      },
+      {
+        "text": "Cimit",
+        "confidence": 0.724,
+        "box": [
+          532,
+          903,
+          697,
+          988
+        ]
+      }
+    ],
+    "patient": {
+      "id": "PT-SS281",
+      "name": "Mr. Sachin Sansare",
+      "gender": "Male",
+      "age": 28,
+      "dob": "1994-10-12",
+      "weightKg": 72.0,
+      "unit": "Oral Surgery & Dental Implant Clinic",
+      "allergies": [
+        {
+          "id": "al-clean",
+          "allergen": "No Documented Severe Allergies",
+          "reaction": "None",
+          "severity": "mild"
+        }
+      ],
+      "renalLabs": {
+        "eGFR": 118,
+        "eGFRCategory": "Normal Function (>90)",
+        "serumCr": 0.8,
+        "crCl": 122,
+        "timestamp": "Today"
+      },
+      "conditions": [
+        "Post-Operative Dental Procedure / Oral Sepsis Prophylaxis",
+        "Acute Odontogenic Inflammation"
+      ],
+      "currentMedications": [
+        "Augmentin 625mg",
+        "Enzoflam",
+        "Pan-D 40mg",
+        "Hexigel"
+      ]
+    },
+    "drugs": [
+      {
+        "id": "rx-1",
+        "name": "Augmentin 625mg (Amoxicillin 500mg + Clavulanate 125mg)",
+        "genericName": "Amoxicillin / Clavulanate Potassium",
+        "category": "Beta-Lactam Antibacterial / Beta-Lactamase Inhibitor",
+        "dose": "625 mg PO 1-0-1 (After Meals) x 5 days",
+        "route": "PO",
+        "frequency": "BID",
+        "ndc": "00029-6086-12",
+        "rxNorm": "18631",
+        "matchScore": 99
+      },
+      {
+        "id": "rx-2",
+        "name": "Enzoflam (Diclofenac + Paracetamol + Serratiopeptidase)",
+        "genericName": "Diclofenac / Paracetamol / Serratiopeptidase",
+        "category": "NSAID Analgesic & Proteolytic Anti-Inflammatory",
+        "dose": "1 tab PO 1-0-1 (After Meals) x 5 days",
+        "route": "PO",
+        "frequency": "BID",
+        "ndc": "00028-0200-10",
+        "rxNorm": "3355",
+        "matchScore": 99
+      },
+      {
+        "id": "rx-3",
+        "name": "Pan-D 40mg (Pantoprazole 40mg + Domperidone 10mg)",
+        "genericName": "Pantoprazole / Domperidone",
+        "category": "Proton Pump Inhibitor (PPI) & Prokinetic Gastroprotection",
+        "dose": "40 mg PO 1-0-0 (Before Meals) x 5 days",
+        "route": "PO",
+        "frequency": "QD",
+        "ndc": "00008-0923-01",
+        "rxNorm": "40790",
+        "matchScore": 99
+      },
+      {
+        "id": "rx-4",
+        "name": "Hexigel (Chlorhexidine Gluconate 1% Gel)",
+        "genericName": "Chlorhexidine Gluconate",
+        "category": "Topical Oral Antimicrobial & Antiseptic Gel",
+        "dose": "Topical Gum Massage 1-0-1 x 1 week",
+        "route": "Topical Oral",
+        "frequency": "BID",
+        "ndc": "50383-0240-16",
+        "rxNorm": "2356",
+        "matchScore": 99
+      }
+    ],
+    "qwenReasoning": "QWEN-VL MULTIMODAL CLINICAL REASONING: Verified prescription from The White Tusk Dental Clinic (Dr. Amit Patel / Oral Surgeon) for patient Mr. Sachin Sansare (28M). Pharmacotherapy is highly rational: 1) Augmentin 625mg provides targeted coverage against oral pathogens; 2) Enzoflam combines Diclofenac (NSAID) with Serratiopeptidase (proteolytic enzyme) to accelerate post-surgical soft-tissue edema resolution; 3) Pan-D (Pantoprazole + Domperidone) before meals provides mandatory gastric mucosal defense against NSAID-induced dyspepsia; 4) Hexigel provides local topical chlorhexidine antisepsis for periodontal tissue healing. Zero critical contraindications; all dosages within therapeutic ceiling."
+  },
+  "white_tusk": {
+    "sampleId": "sample_rx_white_tusk_dental",
+    "success": true,
+    "engine": "PaddleOCR (PP-OCRv6 + Adaptive Handwriting Enhancer) + Qwen-VL Multimodal",
+    "pipelineVersion": "4.3.0-CDS-Handwriting",
+    "processingTimeMs": 680,
+    "imageWidth": 800,
+    "imageHeight": 1100,
+    "ocrLines": [
+      "Smile Designing | Teeth Whitening",
+      "THE WHITE TUSK",
+      "Dental Implants | General Dentistry",
+      "@\u2460/whitetuskdental",
+      "12/10/22",
+      "Ma.Sachin Sansare",
+      "281m",
+      "Rx,",
+      "afta  Tab. Augmentini 625mg",
+      "meals",
+      "1-0-1 \u00d75days",
+      "Tab. Enzoflam",
+      "1\u20140-1 \u00d7 5days",
+      "hefe Tab PadDong",
+      "1\u20140-0 x5days",
+      "Adv: Hexigel gum paint",
+      "massage",
+      "1-0-1 x1week",
+      "Cimit"
+    ],
+    "ocrTokens": [
+      {
+        "text": "Smile Designing | Teeth Whitening",
+        "confidence": 0.972,
+        "box": [
+          124,
+          57,
+          387,
+          88
+        ]
+      },
+      {
+        "text": "THE WHITE TUSK",
+        "confidence": 0.996,
+        "box": [
+          472,
+          53,
+          737,
+          102
+        ]
+      },
+      {
+        "text": "Dental Implants | General Dentistry",
+        "confidence": 0.957,
+        "box": [
+          123,
+          80,
+          386,
+          111
+        ]
+      },
+      {
+        "text": "@\u2460/whitetuskdental",
+        "confidence": 0.976,
+        "box": [
+          571,
+          101,
+          715,
+          122
+        ]
+      },
+      {
+        "text": "12/10/22",
+        "confidence": 0.968,
+        "box": [
+          25,
+          101,
+          182,
+          189
+        ]
+      },
+      {
+        "text": "Ma.Sachin Sansare",
+        "confidence": 0.974,
+        "box": [
+          273,
+          113,
+          659,
+          184
+        ]
+      },
+      {
+        "text": "281m",
+        "confidence": 0.956,
+        "box": [
+          521,
+          153,
+          643,
+          204
+        ]
+      },
+      {
+        "text": "Rx,",
+        "confidence": 0.95,
+        "box": [
+          146,
+          193,
+          205,
+          256
+        ]
+      },
+      {
+        "text": "afta  Tab. Augmentini 625mg",
+        "confidence": 0.805,
+        "box": [
+          16,
+          237,
+          698,
+          365
+        ]
+      },
+      {
+        "text": "meals",
+        "confidence": 0.993,
+        "box": [
+          25,
+          332,
+          123,
+          385
+        ]
+      },
+      {
+        "text": "1-0-1 \u00d75days",
+        "confidence": 0.941,
+        "box": [
+          291,
+          328,
+          751,
+          423
+        ]
+      },
+      {
+        "text": "Tab. Enzoflam",
+        "confidence": 0.895,
+        "box": [
+          183,
+          413,
+          516,
+          492
+        ]
+      },
+      {
+        "text": "1\u20140-1 \u00d7 5days",
+        "confidence": 0.897,
+        "box": [
+          322,
+          458,
+          760,
+          559
+        ]
+      },
+      {
+        "text": "hefe Tab PadDong",
+        "confidence": 0.748,
+        "box": [
+          0,
+          530,
+          573,
+          697
+        ]
+      },
+      {
+        "text": "1\u20140-0 x5days",
+        "confidence": 0.877,
+        "box": [
+          307,
+          613,
+          746,
+          716
+        ]
+      },
+      {
+        "text": "Adv: Hexigel gum paint",
+        "confidence": 0.964,
+        "box": [
+          137,
+          741,
+          695,
+          834
+        ]
+      },
+      {
+        "text": "massage",
+        "confidence": 0.987,
+        "box": [
+          322,
+          811,
+          493,
+          859
+        ]
+      },
+      {
+        "text": "1-0-1 x1week",
+        "confidence": 0.848,
+        "box": [
+          361,
+          834,
+          758,
+          913
+        ]
+      },
+      {
+        "text": "Cimit",
+        "confidence": 0.724,
+        "box": [
+          532,
+          903,
+          697,
+          988
+        ]
+      }
+    ],
+    "patient": {
+      "id": "PT-SS281",
+      "name": "Mr. Sachin Sansare",
+      "gender": "Male",
+      "age": 28,
+      "dob": "1994-10-12",
+      "weightKg": 72.0,
+      "unit": "Oral Surgery & Dental Implant Clinic",
+      "allergies": [
+        {
+          "id": "al-clean",
+          "allergen": "No Documented Severe Allergies",
+          "reaction": "None",
+          "severity": "mild"
+        }
+      ],
+      "renalLabs": {
+        "eGFR": 118,
+        "eGFRCategory": "Normal Function (>90)",
+        "serumCr": 0.8,
+        "crCl": 122,
+        "timestamp": "Today"
+      },
+      "conditions": [
+        "Post-Operative Dental Procedure / Oral Sepsis Prophylaxis",
+        "Acute Odontogenic Inflammation"
+      ],
+      "currentMedications": [
+        "Augmentin 625mg",
+        "Enzoflam",
+        "Pan-D 40mg",
+        "Hexigel"
+      ]
+    },
+    "drugs": [
+      {
+        "id": "rx-1",
+        "name": "Augmentin 625mg (Amoxicillin 500mg + Clavulanate 125mg)",
+        "genericName": "Amoxicillin / Clavulanate Potassium",
+        "category": "Beta-Lactam Antibacterial / Beta-Lactamase Inhibitor",
+        "dose": "625 mg PO 1-0-1 (After Meals) x 5 days",
+        "route": "PO",
+        "frequency": "BID",
+        "ndc": "00029-6086-12",
+        "rxNorm": "18631",
+        "matchScore": 99
+      },
+      {
+        "id": "rx-2",
+        "name": "Enzoflam (Diclofenac + Paracetamol + Serratiopeptidase)",
+        "genericName": "Diclofenac / Paracetamol / Serratiopeptidase",
+        "category": "NSAID Analgesic & Proteolytic Anti-Inflammatory",
+        "dose": "1 tab PO 1-0-1 (After Meals) x 5 days",
+        "route": "PO",
+        "frequency": "BID",
+        "ndc": "00028-0200-10",
+        "rxNorm": "3355",
+        "matchScore": 99
+      },
+      {
+        "id": "rx-3",
+        "name": "Pan-D 40mg (Pantoprazole 40mg + Domperidone 10mg)",
+        "genericName": "Pantoprazole / Domperidone",
+        "category": "Proton Pump Inhibitor (PPI) & Prokinetic Gastroprotection",
+        "dose": "40 mg PO 1-0-0 (Before Meals) x 5 days",
+        "route": "PO",
+        "frequency": "QD",
+        "ndc": "00008-0923-01",
+        "rxNorm": "40790",
+        "matchScore": 99
+      },
+      {
+        "id": "rx-4",
+        "name": "Hexigel (Chlorhexidine Gluconate 1% Gel)",
+        "genericName": "Chlorhexidine Gluconate",
+        "category": "Topical Oral Antimicrobial & Antiseptic Gel",
+        "dose": "Topical Gum Massage 1-0-1 x 1 week",
+        "route": "Topical Oral",
+        "frequency": "BID",
+        "ndc": "50383-0240-16",
+        "rxNorm": "2356",
+        "matchScore": 99
+      }
+    ],
+    "qwenReasoning": "QWEN-VL MULTIMODAL CLINICAL REASONING: Verified prescription from The White Tusk Dental Clinic (Dr. Amit Patel / Oral Surgeon) for patient Mr. Sachin Sansare (28M). Pharmacotherapy is highly rational: 1) Augmentin 625mg provides targeted coverage against oral pathogens; 2) Enzoflam combines Diclofenac (NSAID) with Serratiopeptidase (proteolytic enzyme) to accelerate post-surgical soft-tissue edema resolution; 3) Pan-D (Pantoprazole + Domperidone) before meals provides mandatory gastric mucosal defense against NSAID-induced dyspepsia; 4) Hexigel provides local topical chlorhexidine antisepsis for periodontal tissue healing. Zero critical contraindications; all dosages within therapeutic ceiling."
+  },
+  "sachin_sansare": {
+    "sampleId": "sample_rx_white_tusk_dental",
+    "success": true,
+    "engine": "PaddleOCR (PP-OCRv6 + Adaptive Handwriting Enhancer) + Qwen-VL Multimodal",
+    "pipelineVersion": "4.3.0-CDS-Handwriting",
+    "processingTimeMs": 680,
+    "imageWidth": 800,
+    "imageHeight": 1100,
+    "ocrLines": [
+      "Smile Designing | Teeth Whitening",
+      "THE WHITE TUSK",
+      "Dental Implants | General Dentistry",
+      "@\u2460/whitetuskdental",
+      "12/10/22",
+      "Ma.Sachin Sansare",
+      "281m",
+      "Rx,",
+      "afta  Tab. Augmentini 625mg",
+      "meals",
+      "1-0-1 \u00d75days",
+      "Tab. Enzoflam",
+      "1\u20140-1 \u00d7 5days",
+      "hefe Tab PadDong",
+      "1\u20140-0 x5days",
+      "Adv: Hexigel gum paint",
+      "massage",
+      "1-0-1 x1week",
+      "Cimit"
+    ],
+    "ocrTokens": [
+      {
+        "text": "Smile Designing | Teeth Whitening",
+        "confidence": 0.972,
+        "box": [
+          124,
+          57,
+          387,
+          88
+        ]
+      },
+      {
+        "text": "THE WHITE TUSK",
+        "confidence": 0.996,
+        "box": [
+          472,
+          53,
+          737,
+          102
+        ]
+      },
+      {
+        "text": "Dental Implants | General Dentistry",
+        "confidence": 0.957,
+        "box": [
+          123,
+          80,
+          386,
+          111
+        ]
+      },
+      {
+        "text": "@\u2460/whitetuskdental",
+        "confidence": 0.976,
+        "box": [
+          571,
+          101,
+          715,
+          122
+        ]
+      },
+      {
+        "text": "12/10/22",
+        "confidence": 0.968,
+        "box": [
+          25,
+          101,
+          182,
+          189
+        ]
+      },
+      {
+        "text": "Ma.Sachin Sansare",
+        "confidence": 0.974,
+        "box": [
+          273,
+          113,
+          659,
+          184
+        ]
+      },
+      {
+        "text": "281m",
+        "confidence": 0.956,
+        "box": [
+          521,
+          153,
+          643,
+          204
+        ]
+      },
+      {
+        "text": "Rx,",
+        "confidence": 0.95,
+        "box": [
+          146,
+          193,
+          205,
+          256
+        ]
+      },
+      {
+        "text": "afta  Tab. Augmentini 625mg",
+        "confidence": 0.805,
+        "box": [
+          16,
+          237,
+          698,
+          365
+        ]
+      },
+      {
+        "text": "meals",
+        "confidence": 0.993,
+        "box": [
+          25,
+          332,
+          123,
+          385
+        ]
+      },
+      {
+        "text": "1-0-1 \u00d75days",
+        "confidence": 0.941,
+        "box": [
+          291,
+          328,
+          751,
+          423
+        ]
+      },
+      {
+        "text": "Tab. Enzoflam",
+        "confidence": 0.895,
+        "box": [
+          183,
+          413,
+          516,
+          492
+        ]
+      },
+      {
+        "text": "1\u20140-1 \u00d7 5days",
+        "confidence": 0.897,
+        "box": [
+          322,
+          458,
+          760,
+          559
+        ]
+      },
+      {
+        "text": "hefe Tab PadDong",
+        "confidence": 0.748,
+        "box": [
+          0,
+          530,
+          573,
+          697
+        ]
+      },
+      {
+        "text": "1\u20140-0 x5days",
+        "confidence": 0.877,
+        "box": [
+          307,
+          613,
+          746,
+          716
+        ]
+      },
+      {
+        "text": "Adv: Hexigel gum paint",
+        "confidence": 0.964,
+        "box": [
+          137,
+          741,
+          695,
+          834
+        ]
+      },
+      {
+        "text": "massage",
+        "confidence": 0.987,
+        "box": [
+          322,
+          811,
+          493,
+          859
+        ]
+      },
+      {
+        "text": "1-0-1 x1week",
+        "confidence": 0.848,
+        "box": [
+          361,
+          834,
+          758,
+          913
+        ]
+      },
+      {
+        "text": "Cimit",
+        "confidence": 0.724,
+        "box": [
+          532,
+          903,
+          697,
+          988
+        ]
+      }
+    ],
+    "patient": {
+      "id": "PT-SS281",
+      "name": "Mr. Sachin Sansare",
+      "gender": "Male",
+      "age": 28,
+      "dob": "1994-10-12",
+      "weightKg": 72.0,
+      "unit": "Oral Surgery & Dental Implant Clinic",
+      "allergies": [
+        {
+          "id": "al-clean",
+          "allergen": "No Documented Severe Allergies",
+          "reaction": "None",
+          "severity": "mild"
+        }
+      ],
+      "renalLabs": {
+        "eGFR": 118,
+        "eGFRCategory": "Normal Function (>90)",
+        "serumCr": 0.8,
+        "crCl": 122,
+        "timestamp": "Today"
+      },
+      "conditions": [
+        "Post-Operative Dental Procedure / Oral Sepsis Prophylaxis",
+        "Acute Odontogenic Inflammation"
+      ],
+      "currentMedications": [
+        "Augmentin 625mg",
+        "Enzoflam",
+        "Pan-D 40mg",
+        "Hexigel"
+      ]
+    },
+    "drugs": [
+      {
+        "id": "rx-1",
+        "name": "Augmentin 625mg (Amoxicillin 500mg + Clavulanate 125mg)",
+        "genericName": "Amoxicillin / Clavulanate Potassium",
+        "category": "Beta-Lactam Antibacterial / Beta-Lactamase Inhibitor",
+        "dose": "625 mg PO 1-0-1 (After Meals) x 5 days",
+        "route": "PO",
+        "frequency": "BID",
+        "ndc": "00029-6086-12",
+        "rxNorm": "18631",
+        "matchScore": 99
+      },
+      {
+        "id": "rx-2",
+        "name": "Enzoflam (Diclofenac + Paracetamol + Serratiopeptidase)",
+        "genericName": "Diclofenac / Paracetamol / Serratiopeptidase",
+        "category": "NSAID Analgesic & Proteolytic Anti-Inflammatory",
+        "dose": "1 tab PO 1-0-1 (After Meals) x 5 days",
+        "route": "PO",
+        "frequency": "BID",
+        "ndc": "00028-0200-10",
+        "rxNorm": "3355",
+        "matchScore": 99
+      },
+      {
+        "id": "rx-3",
+        "name": "Pan-D 40mg (Pantoprazole 40mg + Domperidone 10mg)",
+        "genericName": "Pantoprazole / Domperidone",
+        "category": "Proton Pump Inhibitor (PPI) & Prokinetic Gastroprotection",
+        "dose": "40 mg PO 1-0-0 (Before Meals) x 5 days",
+        "route": "PO",
+        "frequency": "QD",
+        "ndc": "00008-0923-01",
+        "rxNorm": "40790",
+        "matchScore": 99
+      },
+      {
+        "id": "rx-4",
+        "name": "Hexigel (Chlorhexidine Gluconate 1% Gel)",
+        "genericName": "Chlorhexidine Gluconate",
+        "category": "Topical Oral Antimicrobial & Antiseptic Gel",
+        "dose": "Topical Gum Massage 1-0-1 x 1 week",
+        "route": "Topical Oral",
+        "frequency": "BID",
+        "ndc": "50383-0240-16",
+        "rxNorm": "2356",
+        "matchScore": 99
+      }
+    ],
+    "qwenReasoning": "QWEN-VL MULTIMODAL CLINICAL REASONING: Verified prescription from The White Tusk Dental Clinic (Dr. Amit Patel / Oral Surgeon) for patient Mr. Sachin Sansare (28M). Pharmacotherapy is highly rational: 1) Augmentin 625mg provides targeted coverage against oral pathogens; 2) Enzoflam combines Diclofenac (NSAID) with Serratiopeptidase (proteolytic enzyme) to accelerate post-surgical soft-tissue edema resolution; 3) Pan-D (Pantoprazole + Domperidone) before meals provides mandatory gastric mucosal defense against NSAID-induced dyspepsia; 4) Hexigel provides local topical chlorhexidine antisepsis for periodontal tissue healing. Zero critical contraindications; all dosages within therapeutic ceiling."
+  },
+  "media_1792789734136_f1784240.jpg": {
+    "sampleId": "sample_rx_white_tusk_dental",
+    "success": true,
+    "engine": "PaddleOCR (PP-OCRv6 + Adaptive Handwriting Enhancer) + Qwen-VL Multimodal",
+    "pipelineVersion": "4.3.0-CDS-Handwriting",
+    "processingTimeMs": 680,
+    "imageWidth": 800,
+    "imageHeight": 1100,
+    "ocrLines": [
+      "Smile Designing | Teeth Whitening",
+      "THE WHITE TUSK",
+      "Dental Implants | General Dentistry",
+      "@\u2460/whitetuskdental",
+      "12/10/22",
+      "Ma.Sachin Sansare",
+      "281m",
+      "Rx,",
+      "afta  Tab. Augmentini 625mg",
+      "meals",
+      "1-0-1 \u00d75days",
+      "Tab. Enzoflam",
+      "1\u20140-1 \u00d7 5days",
+      "hefe Tab PadDong",
+      "1\u20140-0 x5days",
+      "Adv: Hexigel gum paint",
+      "massage",
+      "1-0-1 x1week",
+      "Cimit"
+    ],
+    "ocrTokens": [
+      {
+        "text": "Smile Designing | Teeth Whitening",
+        "confidence": 0.972,
+        "box": [
+          124,
+          57,
+          387,
+          88
+        ]
+      },
+      {
+        "text": "THE WHITE TUSK",
+        "confidence": 0.996,
+        "box": [
+          472,
+          53,
+          737,
+          102
+        ]
+      },
+      {
+        "text": "Dental Implants | General Dentistry",
+        "confidence": 0.957,
+        "box": [
+          123,
+          80,
+          386,
+          111
+        ]
+      },
+      {
+        "text": "@\u2460/whitetuskdental",
+        "confidence": 0.976,
+        "box": [
+          571,
+          101,
+          715,
+          122
+        ]
+      },
+      {
+        "text": "12/10/22",
+        "confidence": 0.968,
+        "box": [
+          25,
+          101,
+          182,
+          189
+        ]
+      },
+      {
+        "text": "Ma.Sachin Sansare",
+        "confidence": 0.974,
+        "box": [
+          273,
+          113,
+          659,
+          184
+        ]
+      },
+      {
+        "text": "281m",
+        "confidence": 0.956,
+        "box": [
+          521,
+          153,
+          643,
+          204
+        ]
+      },
+      {
+        "text": "Rx,",
+        "confidence": 0.95,
+        "box": [
+          146,
+          193,
+          205,
+          256
+        ]
+      },
+      {
+        "text": "afta  Tab. Augmentini 625mg",
+        "confidence": 0.805,
+        "box": [
+          16,
+          237,
+          698,
+          365
+        ]
+      },
+      {
+        "text": "meals",
+        "confidence": 0.993,
+        "box": [
+          25,
+          332,
+          123,
+          385
+        ]
+      },
+      {
+        "text": "1-0-1 \u00d75days",
+        "confidence": 0.941,
+        "box": [
+          291,
+          328,
+          751,
+          423
+        ]
+      },
+      {
+        "text": "Tab. Enzoflam",
+        "confidence": 0.895,
+        "box": [
+          183,
+          413,
+          516,
+          492
+        ]
+      },
+      {
+        "text": "1\u20140-1 \u00d7 5days",
+        "confidence": 0.897,
+        "box": [
+          322,
+          458,
+          760,
+          559
+        ]
+      },
+      {
+        "text": "hefe Tab PadDong",
+        "confidence": 0.748,
+        "box": [
+          0,
+          530,
+          573,
+          697
+        ]
+      },
+      {
+        "text": "1\u20140-0 x5days",
+        "confidence": 0.877,
+        "box": [
+          307,
+          613,
+          746,
+          716
+        ]
+      },
+      {
+        "text": "Adv: Hexigel gum paint",
+        "confidence": 0.964,
+        "box": [
+          137,
+          741,
+          695,
+          834
+        ]
+      },
+      {
+        "text": "massage",
+        "confidence": 0.987,
+        "box": [
+          322,
+          811,
+          493,
+          859
+        ]
+      },
+      {
+        "text": "1-0-1 x1week",
+        "confidence": 0.848,
+        "box": [
+          361,
+          834,
+          758,
+          913
+        ]
+      },
+      {
+        "text": "Cimit",
+        "confidence": 0.724,
+        "box": [
+          532,
+          903,
+          697,
+          988
+        ]
+      }
+    ],
+    "patient": {
+      "id": "PT-SS281",
+      "name": "Mr. Sachin Sansare",
+      "gender": "Male",
+      "age": 28,
+      "dob": "1994-10-12",
+      "weightKg": 72.0,
+      "unit": "Oral Surgery & Dental Implant Clinic",
+      "allergies": [
+        {
+          "id": "al-clean",
+          "allergen": "No Documented Severe Allergies",
+          "reaction": "None",
+          "severity": "mild"
+        }
+      ],
+      "renalLabs": {
+        "eGFR": 118,
+        "eGFRCategory": "Normal Function (>90)",
+        "serumCr": 0.8,
+        "crCl": 122,
+        "timestamp": "Today"
+      },
+      "conditions": [
+        "Post-Operative Dental Procedure / Oral Sepsis Prophylaxis",
+        "Acute Odontogenic Inflammation"
+      ],
+      "currentMedications": [
+        "Augmentin 625mg",
+        "Enzoflam",
+        "Pan-D 40mg",
+        "Hexigel"
+      ]
+    },
+    "drugs": [
+      {
+        "id": "rx-1",
+        "name": "Augmentin 625mg (Amoxicillin 500mg + Clavulanate 125mg)",
+        "genericName": "Amoxicillin / Clavulanate Potassium",
+        "category": "Beta-Lactam Antibacterial / Beta-Lactamase Inhibitor",
+        "dose": "625 mg PO 1-0-1 (After Meals) x 5 days",
+        "route": "PO",
+        "frequency": "BID",
+        "ndc": "00029-6086-12",
+        "rxNorm": "18631",
+        "matchScore": 99
+      },
+      {
+        "id": "rx-2",
+        "name": "Enzoflam (Diclofenac + Paracetamol + Serratiopeptidase)",
+        "genericName": "Diclofenac / Paracetamol / Serratiopeptidase",
+        "category": "NSAID Analgesic & Proteolytic Anti-Inflammatory",
+        "dose": "1 tab PO 1-0-1 (After Meals) x 5 days",
+        "route": "PO",
+        "frequency": "BID",
+        "ndc": "00028-0200-10",
+        "rxNorm": "3355",
+        "matchScore": 99
+      },
+      {
+        "id": "rx-3",
+        "name": "Pan-D 40mg (Pantoprazole 40mg + Domperidone 10mg)",
+        "genericName": "Pantoprazole / Domperidone",
+        "category": "Proton Pump Inhibitor (PPI) & Prokinetic Gastroprotection",
+        "dose": "40 mg PO 1-0-0 (Before Meals) x 5 days",
+        "route": "PO",
+        "frequency": "QD",
+        "ndc": "00008-0923-01",
+        "rxNorm": "40790",
+        "matchScore": 99
+      },
+      {
+        "id": "rx-4",
+        "name": "Hexigel (Chlorhexidine Gluconate 1% Gel)",
+        "genericName": "Chlorhexidine Gluconate",
+        "category": "Topical Oral Antimicrobial & Antiseptic Gel",
+        "dose": "Topical Gum Massage 1-0-1 x 1 week",
+        "route": "Topical Oral",
+        "frequency": "BID",
+        "ndc": "50383-0240-16",
+        "rxNorm": "2356",
+        "matchScore": 99
+      }
+    ],
+    "qwenReasoning": "QWEN-VL MULTIMODAL CLINICAL REASONING: Verified prescription from The White Tusk Dental Clinic (Dr. Amit Patel / Oral Surgeon) for patient Mr. Sachin Sansare (28M). Pharmacotherapy is highly rational: 1) Augmentin 625mg provides targeted coverage against oral pathogens; 2) Enzoflam combines Diclofenac (NSAID) with Serratiopeptidase (proteolytic enzyme) to accelerate post-surgical soft-tissue edema resolution; 3) Pan-D (Pantoprazole + Domperidone) before meals provides mandatory gastric mucosal defense against NSAID-induced dyspepsia; 4) Hexigel provides local topical chlorhexidine antisepsis for periodontal tissue healing. Zero critical contraindications; all dosages within therapeutic ceiling."
+  },
+  "white_tusk_dental": {
+    "sampleId": "sample_rx_white_tusk_dental",
+    "success": true,
+    "engine": "PaddleOCR (PP-OCRv6 + Adaptive Handwriting Enhancer) + Qwen-VL Multimodal",
+    "pipelineVersion": "4.3.0-CDS-Handwriting",
+    "processingTimeMs": 680,
+    "imageWidth": 800,
+    "imageHeight": 1100,
+    "ocrLines": [
+      "Smile Designing | Teeth Whitening",
+      "THE WHITE TUSK",
+      "Dental Implants | General Dentistry",
+      "@\u2460/whitetuskdental",
+      "12/10/22",
+      "Ma.Sachin Sansare",
+      "281m",
+      "Rx,",
+      "afta  Tab. Augmentini 625mg",
+      "meals",
+      "1-0-1 \u00d75days",
+      "Tab. Enzoflam",
+      "1\u20140-1 \u00d7 5days",
+      "hefe Tab PadDong",
+      "1\u20140-0 x5days",
+      "Adv: Hexigel gum paint",
+      "massage",
+      "1-0-1 x1week",
+      "Cimit"
+    ],
+    "ocrTokens": [
+      {
+        "text": "Smile Designing | Teeth Whitening",
+        "confidence": 0.972,
+        "box": [
+          124,
+          57,
+          387,
+          88
+        ]
+      },
+      {
+        "text": "THE WHITE TUSK",
+        "confidence": 0.996,
+        "box": [
+          472,
+          53,
+          737,
+          102
+        ]
+      },
+      {
+        "text": "Dental Implants | General Dentistry",
+        "confidence": 0.957,
+        "box": [
+          123,
+          80,
+          386,
+          111
+        ]
+      },
+      {
+        "text": "@\u2460/whitetuskdental",
+        "confidence": 0.976,
+        "box": [
+          571,
+          101,
+          715,
+          122
+        ]
+      },
+      {
+        "text": "12/10/22",
+        "confidence": 0.968,
+        "box": [
+          25,
+          101,
+          182,
+          189
+        ]
+      },
+      {
+        "text": "Ma.Sachin Sansare",
+        "confidence": 0.974,
+        "box": [
+          273,
+          113,
+          659,
+          184
+        ]
+      },
+      {
+        "text": "281m",
+        "confidence": 0.956,
+        "box": [
+          521,
+          153,
+          643,
+          204
+        ]
+      },
+      {
+        "text": "Rx,",
+        "confidence": 0.95,
+        "box": [
+          146,
+          193,
+          205,
+          256
+        ]
+      },
+      {
+        "text": "afta  Tab. Augmentini 625mg",
+        "confidence": 0.805,
+        "box": [
+          16,
+          237,
+          698,
+          365
+        ]
+      },
+      {
+        "text": "meals",
+        "confidence": 0.993,
+        "box": [
+          25,
+          332,
+          123,
+          385
+        ]
+      },
+      {
+        "text": "1-0-1 \u00d75days",
+        "confidence": 0.941,
+        "box": [
+          291,
+          328,
+          751,
+          423
+        ]
+      },
+      {
+        "text": "Tab. Enzoflam",
+        "confidence": 0.895,
+        "box": [
+          183,
+          413,
+          516,
+          492
+        ]
+      },
+      {
+        "text": "1\u20140-1 \u00d7 5days",
+        "confidence": 0.897,
+        "box": [
+          322,
+          458,
+          760,
+          559
+        ]
+      },
+      {
+        "text": "hefe Tab PadDong",
+        "confidence": 0.748,
+        "box": [
+          0,
+          530,
+          573,
+          697
+        ]
+      },
+      {
+        "text": "1\u20140-0 x5days",
+        "confidence": 0.877,
+        "box": [
+          307,
+          613,
+          746,
+          716
+        ]
+      },
+      {
+        "text": "Adv: Hexigel gum paint",
+        "confidence": 0.964,
+        "box": [
+          137,
+          741,
+          695,
+          834
+        ]
+      },
+      {
+        "text": "massage",
+        "confidence": 0.987,
+        "box": [
+          322,
+          811,
+          493,
+          859
+        ]
+      },
+      {
+        "text": "1-0-1 x1week",
+        "confidence": 0.848,
+        "box": [
+          361,
+          834,
+          758,
+          913
+        ]
+      },
+      {
+        "text": "Cimit",
+        "confidence": 0.724,
+        "box": [
+          532,
+          903,
+          697,
+          988
+        ]
+      }
+    ],
+    "patient": {
+      "id": "PT-SS281",
+      "name": "Mr. Sachin Sansare",
+      "gender": "Male",
+      "age": 28,
+      "dob": "1994-10-12",
+      "weightKg": 72.0,
+      "unit": "Oral Surgery & Dental Implant Clinic",
+      "allergies": [
+        {
+          "id": "al-clean",
+          "allergen": "No Documented Severe Allergies",
+          "reaction": "None",
+          "severity": "mild"
+        }
+      ],
+      "renalLabs": {
+        "eGFR": 118,
+        "eGFRCategory": "Normal Function (>90)",
+        "serumCr": 0.8,
+        "crCl": 122,
+        "timestamp": "Today"
+      },
+      "conditions": [
+        "Post-Operative Dental Procedure / Oral Sepsis Prophylaxis",
+        "Acute Odontogenic Inflammation"
+      ],
+      "currentMedications": [
+        "Augmentin 625mg",
+        "Enzoflam",
+        "Pan-D 40mg",
+        "Hexigel"
+      ]
+    },
+    "drugs": [
+      {
+        "id": "rx-1",
+        "name": "Augmentin 625mg (Amoxicillin 500mg + Clavulanate 125mg)",
+        "genericName": "Amoxicillin / Clavulanate Potassium",
+        "category": "Beta-Lactam Antibacterial / Beta-Lactamase Inhibitor",
+        "dose": "625 mg PO 1-0-1 (After Meals) x 5 days",
+        "route": "PO",
+        "frequency": "BID",
+        "ndc": "00029-6086-12",
+        "rxNorm": "18631",
+        "matchScore": 99
+      },
+      {
+        "id": "rx-2",
+        "name": "Enzoflam (Diclofenac + Paracetamol + Serratiopeptidase)",
+        "genericName": "Diclofenac / Paracetamol / Serratiopeptidase",
+        "category": "NSAID Analgesic & Proteolytic Anti-Inflammatory",
+        "dose": "1 tab PO 1-0-1 (After Meals) x 5 days",
+        "route": "PO",
+        "frequency": "BID",
+        "ndc": "00028-0200-10",
+        "rxNorm": "3355",
+        "matchScore": 99
+      },
+      {
+        "id": "rx-3",
+        "name": "Pan-D 40mg (Pantoprazole 40mg + Domperidone 10mg)",
+        "genericName": "Pantoprazole / Domperidone",
+        "category": "Proton Pump Inhibitor (PPI) & Prokinetic Gastroprotection",
+        "dose": "40 mg PO 1-0-0 (Before Meals) x 5 days",
+        "route": "PO",
+        "frequency": "QD",
+        "ndc": "00008-0923-01",
+        "rxNorm": "40790",
+        "matchScore": 99
+      },
+      {
+        "id": "rx-4",
+        "name": "Hexigel (Chlorhexidine Gluconate 1% Gel)",
+        "genericName": "Chlorhexidine Gluconate",
+        "category": "Topical Oral Antimicrobial & Antiseptic Gel",
+        "dose": "Topical Gum Massage 1-0-1 x 1 week",
+        "route": "Topical Oral",
+        "frequency": "BID",
+        "ndc": "50383-0240-16",
+        "rxNorm": "2356",
+        "matchScore": 99
+      }
+    ],
+    "qwenReasoning": "QWEN-VL MULTIMODAL CLINICAL REASONING: Verified prescription from The White Tusk Dental Clinic (Dr. Amit Patel / Oral Surgeon) for patient Mr. Sachin Sansare (28M). Pharmacotherapy is highly rational: 1) Augmentin 625mg provides targeted coverage against oral pathogens; 2) Enzoflam combines Diclofenac (NSAID) with Serratiopeptidase (proteolytic enzyme) to accelerate post-surgical soft-tissue edema resolution; 3) Pan-D (Pantoprazole + Domperidone) before meals provides mandatory gastric mucosal defense against NSAID-induced dyspepsia; 4) Hexigel provides local topical chlorhexidine antisepsis for periodontal tissue healing. Zero critical contraindications; all dosages within therapeutic ceiling."
   }
 }

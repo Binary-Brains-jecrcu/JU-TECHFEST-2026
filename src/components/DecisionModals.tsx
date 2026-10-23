@@ -443,7 +443,8 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
       const sampleFileMap: Record<string, string> = {
         warfarin_fluconazole: '/prescriptions/sample_rx_warfarin.png',
         apixaban_celecoxib: '/prescriptions/sample_rx_apixaban_celecoxib.png',
-        augmentin_ketorolac: '/prescriptions/sample_rx_augmentin_ketorolac.png'
+        augmentin_ketorolac: '/prescriptions/sample_rx_augmentin_ketorolac.png',
+        white_tusk_dental: '/prescriptions/sample_rx_white_tusk_dental.png'
       };
       fileUrl = sampleFileMap[sampleId] || `/prescriptions/ekacare/${sampleId}.png`;
     }
@@ -639,7 +640,7 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
             <div className="space-y-4">
               
               {/* Preset Selector & File Upload Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-2.5">
                 {/* Upload tile */}
                 <label className="border-2 border-dashed border-[#B6E8D3] hover:border-[#087F5B] bg-[#F7FAF8] hover:bg-[#F0F7F4] rounded-xl p-2.5 text-center cursor-pointer flex flex-col items-center justify-center transition-all group">
                   <input
@@ -658,6 +659,23 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                     PDF, JPG, PNG
                   </div>
                 </label>
+
+                {/* White Tusk Dental Clinic Real Rx */}
+                <div 
+                  onClick={() => handleSelectSample('white_tusk_dental')}
+                  className={`p-2.5 rounded-xl border cursor-pointer transition-all ${
+                    selectedSampleId === 'white_tusk_dental'
+                      ? 'border-[#087F5B] bg-[#F0F7F4] ring-1 ring-[#087F5B]'
+                      : 'border-[#E1EAE5] bg-white hover:border-[#CBDAD4]'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-0.5">
+                    <span className="text-[10px] font-bold text-[#087F5B] uppercase tracking-wider">🦷 The White Tusk</span>
+                    <span className="text-[9px] font-semibold px-1 py-0.2 bg-emerald-100 text-emerald-800 rounded">Dental Clinic</span>
+                  </div>
+                  <div className="text-xs font-bold text-[#172B25] truncate">Sachin Sansare (28M)</div>
+                  <div className="text-[10px] text-[#64756D] truncate mt-0.5">Augmentin + Enzoflam + Pan-D + Hexigel</div>
+                </div>
 
                 {/* Verified Presets */}
                 <div 

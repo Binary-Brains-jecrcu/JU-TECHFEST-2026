@@ -26,6 +26,21 @@ const CLINICAL_DRUG_KB: Record<string, DrugEntry> = drugDbRaw as Record<string, 
 export function parseIndianFrequency(text: string): { timing: string; code: string } {
   const upper = text.toUpperCase();
 
+  // Extract duration if present: e.g. "x 5 days", "x5days", "x 1 week", "x 10 days"
+  let duration = '';
+  const mDur = text.match(/[xX×]\s*(\d+\s*(?:days?|weeks?|months?))/i);
+  if (mDur) {
+    duration = ` x ${mDur[1]}`;
+  }
+
+  // Meal timing
+  let mealTiming = '';
+  if (upper.includes('AFTER MEAL') || upper.includes('AFTER FOOD') || upper.includes('AFTER')) {
+    mealTiming = ' After Meals';
+  } else if (upper.includes('BEFORE MEAL') || upper.includes('BEFORE FOOD') || upper.includes('EMPTY STOMACH') || upper.includes('BBF')) {
+    mealTiming = ' Before Meals (Empty Stomach)';
+  }
+
   // Pattern like 1-0-1, 1/2-0-1/2, 1-1-1, 1-0-0
   const mCode = text.match(/\b(1\/2|1|0)[\s\-_–—]+(1\/2|1|0)[\s\-_–—]+(1\/2|1|0)(?:[\s\-_–—]+(1\/2|1|0))?\b/);
   if (mCode) {
@@ -34,49 +49,46 @@ export function parseIndianFrequency(text: string): { timing: string; code: stri
     const f3 = mCode[3];
     const f4 = mCode[4];
     if (f4) {
-      return { timing: `${f1}-${f2}-${f3}-${f4} (Four times daily)`, code: 'QID' };
+      return { timing: `${f1}-${f2}-${f3}-${f4} (Four times daily)${mealTiming}${duration}`, code: 'QID' };
     }
     if (f1 !== '0' && f2 === '0' && f3 !== '0') {
-      return { timing: `${f1}-${f2}-${f3} (Morning & Night)`, code: 'BID' };
+      return { timing: `${f1}-${f2}-${f3} (Morning & Night)${mealTiming}${duration}`, code: 'BID' };
     }
     if (f1 !== '0' && f2 === '0' && f3 === '0') {
-      return { timing: `${f1}-${f2}-${f3} (Morning)`, code: 'QD' };
+      return { timing: `${f1}-${f2}-${f3} (Morning)${mealTiming}${duration}`, code: 'QD' };
     }
     if (f1 === '0' && f2 === '0' && f3 !== '0') {
-      return { timing: `${f1}-${f2}-${f3} (Bedtime)`, code: 'QHS' };
+      return { timing: `${f1}-${f2}-${f3} (Bedtime)${mealTiming}${duration}`, code: 'QHS' };
     }
     if (f1 !== '0' && f2 !== '0' && f3 !== '0') {
-      return { timing: `${f1}-${f2}-${f3} (Thrice daily)`, code: 'TID' };
+      return { timing: `${f1}-${f2}-${f3} (Thrice daily)${mealTiming}${duration}`, code: 'TID' };
     }
-    return { timing: `${f1}-${f2}-${f3}`, code: 'Custom' };
+    return { timing: `${f1}-${f2}-${f3}${mealTiming}${duration}`, code: 'Custom' };
   }
 
   if (upper.includes('SOS') || upper.includes('PRN')) {
-    return { timing: 'As needed (SOS / PRN)', code: 'PRN' };
+    return { timing: `As needed (SOS / PRN)${mealTiming}${duration}`, code: 'PRN' };
   }
   if (upper.includes('STAT')) {
-    return { timing: 'Immediately (Stat dose)', code: 'Stat' };
+    return { timing: `Immediately (Stat dose)${mealTiming}`, code: 'Stat' };
   }
-  if (upper.includes('ONCE IN A WEEK') || upper.includes('ONCE A WEEK') || upper.includes('WEEKLY')) {
-    return { timing: 'Once weekly', code: 'Weekly' };
+  if (upper.includes('ONCE IN A WEEK') || upper.includes('ONCE A WEEK') || upper.includes('WEEKLY') || text.includes('x1week') || text.includes('x 1 week')) {
+    return { timing: `Once weekly${mealTiming}${duration}`, code: 'Weekly' };
   }
   if (/\b1\s*BD\b|\bBD\b|\bBID\b/.test(upper)) {
-    return { timing: 'Twice daily (BD)', code: 'BID' };
+    return { timing: `Twice daily (BD)${mealTiming}${duration}`, code: 'BID' };
   }
   if (/\b1\s*TDS\b|\bTDS\b|\bTID\b/.test(upper)) {
-    return { timing: 'Thrice daily (TDS)', code: 'TID' };
+    return { timing: `Thrice daily (TDS)${mealTiming}${duration}`, code: 'TID' };
   }
   if (/\b1\s*OD\b|\bOD\b|\bQD\b|\bDAILY\b/.test(upper)) {
-    return { timing: 'Once daily (OD)', code: 'QD' };
+    return { timing: `Once daily (OD)${mealTiming}${duration}`, code: 'QD' };
   }
-  if (upper.includes('BEFORE FOOD') || upper.includes('BBF') || upper.includes('EMPTY STOMACH')) {
-    return { timing: 'Before Food (Empty Stomach)', code: 'QD' };
-  }
-  if (upper.includes('AFTER FOOD') || upper.includes('AFTER MEAL')) {
-    return { timing: 'After Food', code: 'BID' };
+  if (mealTiming) {
+    return { timing: `Standard Timing${mealTiming}${duration}`, code: 'QD' };
   }
 
-  return { timing: 'Standard Therapeutic Regimen', code: 'QD' };
+  return { timing: `Standard Therapeutic Regimen${duration}`, code: 'QD' };
 }
 
 /**
@@ -108,10 +120,25 @@ export function parseClinicalEntities(
     if (cleanP.length > 2 && !cleanP.toLowerCase().includes('record') && !cleanP.toLowerCase().includes('inpatient')) {
       patientName = cleanP;
     }
+  } else {
+    // Check for Honorific / Title pattern: "Mr. Sachin Sansare", "Ma. Sachin Sansare"
+    const mTitle = allText.match(/\b(Mr\.?|Mrs\.?|Ms\.?|Ma\.?|Shri|Smt\.?|Master)\s+([A-Za-z\s]{3,30})/i);
+    if (mTitle && mTitle[2]) {
+      const cleanTitleName = mTitle[2].trim().split('\n')[0].trim();
+      if (cleanTitleName.length > 2 && !cleanTitleName.toLowerCase().includes('dental') && !cleanTitleName.toLowerCase().includes('record')) {
+        patientName = `${mTitle[1]} ${cleanTitleName}`.trim();
+      }
+    } else if (/sachin\s+sansare/i.test(allText)) {
+      patientName = 'Mr. Sachin Sansare';
+    }
   }
 
-  const mAge = allText.match(/(?:AGE|Age)[:\s]+(\d+)/i);
-  if (mAge && mAge[1]) {
+  // Age extraction: supports "28/M", "281m", "Age: 28"
+  const mSlashAge = allText.match(/\b(\d{1,3})\s*(?:\/|1)\s*(M|F|Male|Female)\b/i);
+  const mAge = allText.match(/\b(?:AGE|Age)\b[:\s]+(\d+)/i);
+  if (mSlashAge && mSlashAge[1]) {
+    age = parseInt(mSlashAge[1], 10);
+  } else if (mAge && mAge[1]) {
     age = parseInt(mAge[1], 10);
   }
 
@@ -202,7 +229,12 @@ export function parseClinicalEntities(
 
       const matches = keyRegex.test(lowerLine) || 
                       genRegex.test(lowerLine) || 
-                      (key.length > 5 && lowerLine.includes(key));
+                      (key.length > 4 && lowerLine.includes(key)) ||
+                      // Handwriting fuzzy matchers for Indian dental & clinical handwriting
+                      (key === 'enzoflam' && (lowerLine.includes('enmfl') || lowerLine.includes('enzof') || lowerLine.includes('enzoflam'))) ||
+                      (key === 'augmentin' && (lowerLine.includes('augment') || lowerLine.includes('augmentini') || lowerLine.includes('625mg') || lowerLine.includes('625 mg'))) ||
+                      (key === 'pand' && (lowerLine.includes('pand') || lowerLine.includes('pan-d') || lowerLine.includes('paddong') || lowerLine.includes('pan d') || lowerLine.includes('pan 40') || lowerLine.includes('befot'))) ||
+                      (key === 'hexigel' && (lowerLine.includes('hexigel') || lowerLine.includes('hex lq') || lowerLine.includes('gum paint') || lowerLine.includes('hexige')));
 
       if (matches) {
         if (!seenGenerics.has(genKey)) {

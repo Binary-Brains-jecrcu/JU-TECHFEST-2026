@@ -315,9 +315,79 @@
     "category": "Anti-Inflammatory & Proteolytic Enzyme",
     "ndc": "00028-0200-10",
     "rxNorm": "3355",
-    "defaultDose": "1-1-1 After Food",
+    "defaultDose": "1 tab PO 1-0-1 After Food x 5 days",
     "route": "PO",
-    "frequency": "TID"
+    "frequency": "BID"
+  },
+  "enmfln": {
+    "name": "Enzoflam (Diclofenac + Paracetamol + Serratiopeptidase)",
+    "genericName": "Diclofenac / Paracetamol / Serratiopeptidase",
+    "category": "Anti-Inflammatory & Proteolytic Enzyme",
+    "ndc": "00028-0200-10",
+    "rxNorm": "3355",
+    "defaultDose": "1 tab PO 1-0-1 After Food x 5 days",
+    "route": "PO",
+    "frequency": "BID"
+  },
+  "hexigel": {
+    "name": "Hexigel (Chlorhexidine Gluconate 1% Gel)",
+    "genericName": "Chlorhexidine Gluconate",
+    "category": "Topical Oral Antiseptic & Anti-plaque Gel",
+    "ndc": "50383-0240-16",
+    "rxNorm": "2356",
+    "defaultDose": "Topical Oral Gum Massage 1-0-1 x 1 week",
+    "route": "Topical Oral",
+    "frequency": "BID"
+  },
+  "chlorhexidine": {
+    "name": "Hexigel (Chlorhexidine Gluconate 1% Gel)",
+    "genericName": "Chlorhexidine Gluconate",
+    "category": "Topical Oral Antiseptic & Anti-plaque Gel",
+    "ndc": "50383-0240-16",
+    "rxNorm": "2356",
+    "defaultDose": "Topical Oral Gum Massage 1-0-1 x 1 week",
+    "route": "Topical Oral",
+    "frequency": "BID"
+  },
+  "pand": {
+    "name": "Pan-D 40mg (Pantoprazole + Domperidone)",
+    "genericName": "Pantoprazole / Domperidone",
+    "category": "Proton Pump Inhibitor & Prokinetic Agent",
+    "ndc": "00008-0923-01",
+    "rxNorm": "40790",
+    "defaultDose": "40 mg PO 1-0-0 Before Food x 5 days",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "pan-d": {
+    "name": "Pan-D 40mg (Pantoprazole + Domperidone)",
+    "genericName": "Pantoprazole / Domperidone",
+    "category": "Proton Pump Inhibitor & Prokinetic Agent",
+    "ndc": "00008-0923-01",
+    "rxNorm": "40790",
+    "defaultDose": "40 mg PO 1-0-0 Before Food x 5 days",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "paddong": {
+    "name": "Pan-D 40mg (Pantoprazole + Domperidone)",
+    "genericName": "Pantoprazole / Domperidone",
+    "category": "Proton Pump Inhibitor & Prokinetic Agent",
+    "ndc": "00008-0923-01",
+    "rxNorm": "40790",
+    "defaultDose": "40 mg PO 1-0-0 Before Food x 5 days",
+    "route": "PO",
+    "frequency": "QD"
+  },
+  "augmentini": {
+    "name": "Augmentin 625mg (Amoxicillin/Clavulanate)",
+    "genericName": "Amoxicillin / Clavulanate Potassium",
+    "category": "Beta-Lactam Antibacterial / Beta-Lactamase Inhibitor",
+    "ndc": "00029-6086-12",
+    "rxNorm": "18631",
+    "defaultDose": "625 mg PO 1-0-1 After Food x 5 days",
+    "route": "PO",
+    "frequency": "BID"
   },
   "zerodol": {
     "name": "Zerodol TH 8 (Aceclofenac + Thiocolchicoside)",

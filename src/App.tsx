@@ -12,7 +12,8 @@ import {
   PrescriptionUploadModal 
 } from './components/DecisionModals';
 import { DEMO_SCENARIOS, PATIENT_PROFILES } from './data/mockData';
-import { SafetyAnalysisResult, PrescriptionDrug } from './types';
+import { SafetyAnalysisResult, PrescriptionDrug, PatientContext, SafetyFinding } from './types';
+import { generateClinicalFindings } from './utils/safetyChecker';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
 
 export function App() {
@@ -55,20 +56,38 @@ export function App() {
     }
   };
 
-  const handleLoadCustomPrescription = (fileName: string, drugs: PrescriptionDrug[]) => {
+  const handleLoadCustomPrescription = (
+    fileName: string, 
+    drugs: PrescriptionDrug[], 
+    patient?: PatientContext,
+    qwenReasoning?: string
+  ) => {
+    const activePatient = patient || currentAnalysis.patient;
+    const newFindings = generateClinicalFindings(drugs, activePatient);
+
     setCurrentAnalysis(prev => ({
       ...prev,
       orderId: `RX-${Math.floor(10000 + Math.random() * 90000)}`,
-      ingestedAt: 'Just now',
+      ingestedAt: 'Just now (PaddleOCR + Qwen-VL Live)',
       ingestionFile: {
         name: fileName,
         size: '1.4 MB',
-        type: 'Medication Order Ingestion',
-        status: 'OCR Extracted'
+        type: 'PaddleOCR + Qwen-VL Live Extraction',
+        status: 'Extracted & Verified'
       },
-      drugs: drugs
+      patient: activePatient,
+      drugs: drugs,
+      findings: newFindings,
+      metrics: {
+        analyzedCount: drugs.length,
+        criticalCount: newFindings.filter(f => f.severity === 'critical').length,
+        warningCount: newFindings.filter(f => f.severity === 'warning').length,
+        safeCount: newFindings.filter(f => f.severity === 'verified').length,
+        unverifiedCount: 0
+      },
+      requiresClinicalAction: newFindings.some(f => f.severity === 'critical')
     }));
-    showToast(`Prescription ${fileName} processed and loaded`);
+    showToast(`Prescription ${fileName} processed and loaded via PaddleOCR + Qwen-VL`);
   };
 
   const handleConfirmOverride = (justification: string) => {

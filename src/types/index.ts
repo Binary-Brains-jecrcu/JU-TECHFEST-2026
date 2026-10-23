@@ -1,3 +1,33 @@
+export interface MedGemmaTestCase {
+  scenario: string;
+  severity: string;
+  finding: string;
+  outcome: string;
+}
+
+export interface MedGemmaAllergyAnalysis {
+  status: string;
+  risk_level: string;
+  allergen_matched?: string;
+  reaction?: string;
+  cross_reactivity?: string;
+  clinical_action?: string;
+}
+
+export interface MedGemmaEvaluation {
+  model: string;
+  drug_name: string;
+  generic_name: string;
+  prescribed_dose: string;
+  status: string;
+  medical_rules: string[];
+  allergy_analysis: MedGemmaAllergyAnalysis;
+  clinical_test_cases: MedGemmaTestCase[];
+  audit_trail: string;
+  clinical_rationale: string;
+  read_only_guarantee: boolean;
+}
+
 export interface LynxVerdict {
   drug_name?: string;
   verdict: string;
@@ -24,6 +54,7 @@ export interface DoseFlag {
   safetyPrecaution?: string;
   audit_trail?: string;
   execution_path?: string;
+  medgemmaEvaluation?: MedGemmaEvaluation;
 }
 
 export interface PrescriptionDrug {
@@ -45,6 +76,7 @@ export interface PrescriptionDrug {
   safetyPrecaution?: string;
   audit_trail?: string;
   execution_path?: string;
+  medgemmaEvaluation?: MedGemmaEvaluation;
 }
 
 export interface AllergyItem {

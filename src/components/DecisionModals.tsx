@@ -30,9 +30,9 @@ import {
   Filter,
   Search
 } from 'lucide-react';
-import { PatientContext, PrescriptionDrug, SafetyAnalysisResult, LynxVerdict } from '../types';
+import { PatientContext, PrescriptionDrug, SafetyAnalysisResult, LynxVerdict, MedGemmaEvaluation } from '../types';
 import { PATIENT_PROFILES } from '../data/mockData';
-import { extractPrescriptionUnified, consultQwenForDosing } from '../utils/clientOcrEngine';
+import { extractPrescriptionUnified, consultQwenForDosing, consultMedGemmaForSafety } from '../utils/clientOcrEngine';
 import { evaluateRxNormDose } from '../utils/rxNormDoseEvaluator';
 
 /* ================= 1. OVERRIDE WITH JUSTIFICATION MODAL ================= */
@@ -389,6 +389,9 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
   const [showSettings, setShowSettings] = useState(false);
   const [optimizingIdx, setOptimizingIdx] = useState<number | null>(null);
   const [isOptimizingAll, setIsOptimizingAll] = useState(false);
+  const [medgemmaModalData, setMedgemmaModalData] = useState<MedGemmaEvaluation | null>(null);
+  const [evaluatingMedgemmaIdx, setEvaluatingMedgemmaIdx] = useState<number | null>(null);
+  const [isAuditingAllMedgemma, setIsAuditingAllMedgemma] = useState(false);
 
   // Manual drug list state
   const [manualDrugs, setManualDrugs] = useState<PrescriptionDrug[]>([
@@ -564,6 +567,55 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
       console.warn('Qwen batch optimization error:', err);
     } finally {
       setIsOptimizingAll(false);
+    }
+  };
+
+  const handleEvaluateMedGemma = async (idx: number) => {
+    if (!extractedData || !extractedData.drugs[idx]) return;
+    setEvaluatingMedgemmaIdx(idx);
+    try {
+      const drug = extractedData.drugs[idx];
+      const medRes = await consultMedGemmaForSafety(drug, extractedData.patient, extractedData.imagePreview);
+      const updatedDrugs = [...extractedData.drugs];
+      updatedDrugs[idx] = {
+        ...updatedDrugs[idx],
+        medgemmaEvaluation: medRes
+      };
+      setExtractedData({
+        ...extractedData,
+        drugs: updatedDrugs
+      });
+      setMedgemmaModalData(medRes);
+    } catch (err) {
+      console.warn('MedGemma evaluation error:', err);
+    } finally {
+      setEvaluatingMedgemmaIdx(null);
+    }
+  };
+
+  const handleAuditAllWithMedGemma = async () => {
+    if (!extractedData || extractedData.drugs.length === 0) return;
+    setIsAuditingAllMedgemma(true);
+    try {
+      const updatedDrugs = [...extractedData.drugs];
+      for (let i = 0; i < updatedDrugs.length; i++) {
+        const medRes = await consultMedGemmaForSafety(updatedDrugs[i], extractedData.patient, extractedData.imagePreview);
+        updatedDrugs[i] = {
+          ...updatedDrugs[i],
+          medgemmaEvaluation: medRes
+        };
+      }
+      setExtractedData({
+        ...extractedData,
+        drugs: updatedDrugs
+      });
+      if (updatedDrugs[0]?.medgemmaEvaluation) {
+        setMedgemmaModalData(updatedDrugs[0].medgemmaEvaluation);
+      }
+    } catch (err) {
+      console.warn('MedGemma batch audit error:', err);
+    } finally {
+      setIsAuditingAllMedgemma(false);
     }
   };
 
@@ -1016,7 +1068,17 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                               title="Ask Qwen AI to clinically audit and optimize doses for all extracted drugs"
                             >
                               <Sparkles className={`w-3 h-3 text-[#087F5B] ${isOptimizingAll ? 'animate-spin' : ''}`} />
-                              <span>{isOptimizingAll ? 'Qwen Auditing Doses...' : '✨ Qwen Dose Audit All'}</span>
+                              <span>{isOptimizingAll ? 'Qwen Auditing...' : '✨ Qwen Dose Audit'}</span>
+                            </button>
+                            <button
+                              type="button"
+                              onClick={handleAuditAllWithMedGemma}
+                              disabled={isAuditingAllMedgemma}
+                              className="text-[10px] text-indigo-700 hover:text-indigo-900 font-bold flex items-center gap-1 bg-indigo-50 hover:bg-indigo-100 px-2 py-0.5 rounded border border-indigo-200 transition-colors shadow-2xs"
+                              title="Ask google/medgemma-1.5-4b-it to extract medical rules, allergy cross-reactivity & previous clinical test cases for all drugs"
+                            >
+                              <Sparkles className={`w-3 h-3 text-indigo-600 ${isAuditingAllMedgemma ? 'animate-spin' : ''}`} />
+                              <span>{isAuditingAllMedgemma ? 'MedGemma Auditing...' : '🧬 MedGemma Rules & Tests'}</span>
                             </button>
                             <button
                               type="button"
@@ -1169,16 +1231,28 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                                           <div className="text-[9px] uppercase font-bold tracking-wider opacity-75">
                                             Potential Candidate Doses (Click to Apply):
                                           </div>
-                                          <button
-                                            type="button"
-                                            onClick={() => handleOptimizeDrugWithQwen(idx)}
-                                            disabled={optimizingIdx === idx}
-                                            className="text-[9px] text-[#087F5B] hover:text-[#075E4B] font-bold flex items-center gap-1 bg-white px-1.5 py-0.5 rounded border border-[#CBDAD4] hover:border-[#087F5B] transition-colors shadow-2xs"
-                                            title="Ask Qwen AI to clinically re-evaluate and optimize candidate doses"
-                                          >
-                                            <Sparkles className={`w-2.5 h-2.5 text-[#087F5B] ${optimizingIdx === idx ? 'animate-spin' : ''}`} />
-                                            <span>{optimizingIdx === idx ? 'Qwen Optimizing...' : '✨ Qwen Dose Copilot'}</span>
-                                          </button>
+                                          <div className="flex items-center gap-1.5 flex-wrap">
+                                            <button
+                                              type="button"
+                                              onClick={() => handleOptimizeDrugWithQwen(idx)}
+                                              disabled={optimizingIdx === idx}
+                                              className="text-[9px] text-[#087F5B] hover:text-[#075E4B] font-bold flex items-center gap-1 bg-white px-1.5 py-0.5 rounded border border-[#CBDAD4] hover:border-[#087F5B] transition-colors shadow-2xs"
+                                              title="Ask Qwen AI to clinically re-evaluate and optimize candidate doses"
+                                            >
+                                              <Sparkles className={`w-2.5 h-2.5 text-[#087F5B] ${optimizingIdx === idx ? 'animate-spin' : ''}`} />
+                                              <span>{optimizingIdx === idx ? 'Qwen...' : '✨ Qwen Dose'}</span>
+                                            </button>
+                                            <button
+                                              type="button"
+                                              onClick={() => handleEvaluateMedGemma(idx)}
+                                              disabled={evaluatingMedgemmaIdx === idx}
+                                              className="text-[9px] text-indigo-700 hover:text-indigo-900 font-bold flex items-center gap-1 bg-white px-1.5 py-0.5 rounded border border-[#CBDAD4] hover:border-indigo-400 transition-colors shadow-2xs"
+                                              title="Ask google/medgemma-1.5-4b-it to extract medical rules, allergy cross-reactivity & previous clinical test cases"
+                                            >
+                                              <Sparkles className={`w-2.5 h-2.5 text-indigo-600 ${evaluatingMedgemmaIdx === idx ? 'animate-spin' : ''}`} />
+                                              <span>{evaluatingMedgemmaIdx === idx ? 'MedGemma...' : '🧬 MedGemma'}</span>
+                                            </button>
+                                          </div>
                                         </div>
                                         <div className="flex flex-wrap gap-1">
                                           {drug.potentialDoses.map((potDose, pIdx) => {
@@ -1246,6 +1320,72 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                                         <span>{drug.safetyPrecaution || drug.doseFlag?.safetyPrecaution}</span>
                                       </div>
                                     )}
+                                  </div>
+                                )}
+
+                                {/* google/medgemma-1.5-4b-it Multimodal Clinical Assessment Card */}
+                                {drug.medgemmaEvaluation && (
+                                  <div className="mt-2 p-2.5 rounded-lg border border-indigo-200 bg-indigo-50/70 text-indigo-950 space-y-1.5 text-xs shadow-2xs">
+                                    <div className="flex items-center justify-between border-b border-indigo-200/60 pb-1">
+                                      <span className="font-bold flex items-center gap-1.5 text-[10px] text-indigo-900">
+                                        <Cpu className="w-3.5 h-3.5 text-indigo-600" />
+                                        <span>google/medgemma-1.5-4b-it Clinical Assessment</span>
+                                      </span>
+                                      <button
+                                        type="button"
+                                        onClick={() => setMedgemmaModalData(drug.medgemmaEvaluation!)}
+                                        className="text-[9px] text-indigo-700 hover:text-indigo-900 underline font-semibold cursor-pointer"
+                                      >
+                                        Full Monograph & Tests ↗
+                                      </button>
+                                    </div>
+
+                                    {/* Medical Rules */}
+                                    <div className="space-y-0.5">
+                                      <span className="font-bold text-[9px] text-indigo-900 uppercase tracking-wider block">
+                                        📜 Medical Rules & Clinical Standards ({drug.medgemmaEvaluation.medical_rules.length}):
+                                      </span>
+                                      <ul className="text-[10px] space-y-0.5 list-disc pl-3.5 text-indigo-900/90 leading-relaxed font-sans">
+                                        {drug.medgemmaEvaluation.medical_rules.map((r, rIdx) => (
+                                          <li key={rIdx}>{r}</li>
+                                        ))}
+                                      </ul>
+                                    </div>
+
+                                    {/* Allergy Cross-Reactivity */}
+                                    <div className="pt-1 border-t border-indigo-200/50 flex items-start gap-1.5 text-[10px]">
+                                      <ShieldAlert className="w-3.5 h-3.5 text-indigo-600 flex-shrink-0 mt-0.5" />
+                                      <div>
+                                        <span className="font-semibold text-indigo-950">MedGemma Allergy Analysis: </span>
+                                        <span className={drug.medgemmaEvaluation.allergy_analysis.risk_level.includes('CRITICAL') ? 'text-red-700 font-bold' : 'text-indigo-900'}>
+                                          {drug.medgemmaEvaluation.allergy_analysis.risk_level} — {drug.medgemmaEvaluation.allergy_analysis.cross_reactivity}
+                                        </span>
+                                      </div>
+                                    </div>
+
+                                    {/* Previous Clinical Test Cases */}
+                                    <div className="pt-1 border-t border-indigo-200/50">
+                                      <span className="font-bold text-[9px] text-indigo-900 uppercase tracking-wider block mb-1">
+                                        🧪 Previous Clinical Test Cases ({drug.medgemmaEvaluation.clinical_test_cases.length} Scenarios):
+                                      </span>
+                                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[9px]">
+                                        {drug.medgemmaEvaluation.clinical_test_cases.map((tc, tcIdx) => (
+                                          <div key={tcIdx} className="bg-white/80 p-1.5 rounded border border-indigo-100">
+                                            <div className="flex items-center justify-between font-bold text-indigo-950">
+                                              <span className="truncate">{tc.scenario}</span>
+                                              <span className={`px-1 py-0.2 rounded text-[8px] font-mono ${
+                                                tc.severity.includes('CRITICAL') ? 'bg-red-100 text-red-800' :
+                                                tc.severity.includes('WARNING') || tc.severity.includes('TITRATION') ? 'bg-amber-100 text-amber-800' :
+                                                'bg-emerald-100 text-emerald-800'
+                                              }`}>
+                                                {tc.severity}
+                                              </span>
+                                            </div>
+                                            <p className="text-[9px] text-gray-600 mt-0.5 line-clamp-2">{tc.outcome}</p>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
                                   </div>
                                 )}
 
@@ -1565,6 +1705,131 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
             )}
           </div>
         </div>
+
+        {/* MedGemma 1.5-4B Monograph & Clinical Test Cases Inspection Modal */}
+        {medgemmaModalData && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fade-in">
+            <div 
+              className="bg-white rounded-2xl border border-indigo-200 shadow-2xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="px-6 py-3.5 bg-gradient-to-r from-indigo-900 to-indigo-800 text-white flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Cpu className="w-5 h-5 text-indigo-300" />
+                  <div>
+                    <h3 className="text-sm font-bold flex items-center gap-2">
+                      <span>{medgemmaModalData.drug_name}</span>
+                      <span className="text-[10px] font-mono bg-indigo-700/80 px-2 py-0.5 rounded text-indigo-200">
+                        {medgemmaModalData.model}
+                      </span>
+                    </h3>
+                    <p className="text-[10px] text-indigo-200">
+                      Prescribed Dose: {medgemmaModalData.prescribed_dose} (Read-Only Guaranteed)
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setMedgemmaModalData(null)}
+                  className="p-1 rounded-lg text-indigo-200 hover:text-white hover:bg-white/10"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="p-6 overflow-y-auto space-y-4 text-xs">
+                {/* Medical Rules */}
+                <div className="bg-indigo-50/70 border border-indigo-100 rounded-xl p-3.5 space-y-2">
+                  <div className="font-bold text-indigo-900 flex items-center gap-1.5 uppercase tracking-wider text-[11px]">
+                    <FileText className="w-3.5 h-3.5 text-indigo-600" />
+                    <span>Authoritative Medical Rules & Clinical Standards</span>
+                  </div>
+                  <ul className="space-y-1.5 list-disc pl-4 text-indigo-950 font-sans text-[11px] leading-relaxed">
+                    {medgemmaModalData.medical_rules.map((rule, idx) => (
+                      <li key={idx} className="leading-relaxed">{rule}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Allergy Analysis & Cross Reactivity */}
+                <div className={`p-3.5 rounded-xl border space-y-1.5 ${
+                  medgemmaModalData.allergy_analysis.risk_level.includes('CRITICAL')
+                    ? 'bg-red-50 border-red-200 text-red-950'
+                    : 'bg-emerald-50 border-emerald-200 text-emerald-950'
+                }`}>
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold flex items-center gap-1.5 text-[11px]">
+                      <ShieldAlert className="w-3.5 h-3.5" />
+                      <span>MedGemma Allergy & Hypersensitivity Analysis</span>
+                    </span>
+                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                      medgemmaModalData.allergy_analysis.risk_level.includes('CRITICAL')
+                        ? 'bg-red-600 text-white'
+                        : 'bg-emerald-600 text-white'
+                    }`}>
+                      {medgemmaModalData.allergy_analysis.risk_level}
+                    </span>
+                  </div>
+                  <p className="text-[11px] leading-relaxed">
+                    <span className="font-semibold">Cross-Reactivity Mechanism: </span>
+                    {medgemmaModalData.allergy_analysis.cross_reactivity}
+                  </p>
+                  <p className="text-[11px] font-semibold">
+                    Clinical Action: {medgemmaModalData.allergy_analysis.clinical_action}
+                  </p>
+                </div>
+
+                {/* Clinical Test Cases */}
+                <div className="space-y-2">
+                  <div className="font-bold text-[#172B25] uppercase tracking-wider text-[11px] flex items-center justify-between">
+                    <span>Previous Clinical Test Cases & Scenarios ({medgemmaModalData.clinical_test_cases.length})</span>
+                    <span className="text-[10px] text-gray-500 font-normal">Deterministic Simulation</span>
+                  </div>
+                  <div className="space-y-2">
+                    {medgemmaModalData.clinical_test_cases.map((tc, tcIdx) => (
+                      <div key={tcIdx} className="bg-gray-50 border border-gray-200 rounded-xl p-3 space-y-1">
+                        <div className="flex items-center justify-between font-bold text-[#172B25]">
+                          <span>{tc.scenario}</span>
+                          <span className={`px-2 py-0.5 rounded text-[9px] font-mono font-bold ${
+                            tc.severity.includes('CRITICAL') ? 'bg-red-100 text-red-800' :
+                            tc.severity.includes('WARNING') || tc.severity.includes('TITRATION') ? 'bg-amber-100 text-amber-800' :
+                            'bg-emerald-100 text-emerald-800'
+                          }`}>
+                            {tc.severity}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-gray-700 leading-relaxed font-sans">
+                          <span className="font-semibold text-gray-900">Finding: </span>{tc.finding}
+                        </p>
+                        <p className="text-[11px] text-indigo-900 leading-relaxed font-sans">
+                          <span className="font-semibold">Outcome: </span>{tc.outcome}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Model Clinical Rationale & Audit Trail */}
+                <div className="p-3 bg-gray-100 rounded-xl border border-gray-200 text-[10px] font-mono text-gray-700 space-y-1">
+                  <div className="font-bold text-gray-900">Audit Rule Citation:</div>
+                  <div className="leading-relaxed">{medgemmaModalData.audit_trail}</div>
+                </div>
+              </div>
+
+              <div className="px-6 py-3 border-t border-gray-200 bg-gray-50 flex items-center justify-between">
+                <span className="text-[10px] font-mono text-gray-500">
+                  Model: google/medgemma-1.5-4b-it • Read-Only Preserved
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setMedgemmaModalData(null)}
+                  className="px-4 py-1.5 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-sm"
+                >
+                  Close Monograph
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
       </div>
     </div>

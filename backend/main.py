@@ -43,6 +43,11 @@ class CodeRxRuleRequest(BaseModel):
     drug_name: str
     patient: Optional[Dict[str, Any]] = None
 
+class MedGemmaEvaluateRequest(BaseModel):
+    drug: Dict[str, Any]
+    patient: Dict[str, Any]
+    imageBase64: Optional[str] = None
+
 @app.get("/api/health")
 def health():
     conn = get_db_connection()
@@ -108,6 +113,16 @@ def coderx_rules_endpoint(req: CodeRxRuleRequest):
         ]
 
     return {"drug_name": req.drug_name, "rules": rules}
+
+@app.post("/api/medgemma/evaluate")
+def evaluate_medgemma_endpoint(req: MedGemmaEvaluateRequest):
+    """
+    Evaluates an extracted prescription drug using MedGemma 1.5-4B:
+    Returns medical rules, allergy cross-reactivity analysis, and clinical test cases.
+    """
+    from medgemma_service import MedGemmaService
+    result = MedGemmaService.evaluate_drug_safety(req.drug, req.patient, req.imageBase64)
+    return result
 
 @app.post("/api/cds/evaluate")
 def evaluate_cds_endpoint(req: PrescriptionEvaluateRequest):

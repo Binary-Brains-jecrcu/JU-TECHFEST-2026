@@ -251,11 +251,24 @@ export const PrescriptionSafetyWorkspace: React.FC<WorkspaceProps> = ({
                       <div className="flex items-center gap-2.5">
                         <span className="w-2 h-2 rounded-full bg-[#087F5B]" />
                         <div>
-                          <div className="text-xs font-bold text-[#172B25]">
-                            {drug.name}
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-bold text-[#172B25]">
+                              {drug.name}
+                            </span>
+                            {drug.rxNorm && (
+                              <span className="text-[10px] font-mono bg-emerald-50 text-[#075E4B] border border-emerald-200 px-1.5 py-0.2 rounded font-medium">
+                                RxNorm: {drug.rxNorm}
+                              </span>
+                            )}
                           </div>
-                          <div className="text-[11px] text-[#64756D]">
-                            {drug.category}
+                          <div className="text-[11px] text-[#64756D] flex items-center gap-2">
+                            <span>{drug.category}</span>
+                            {drug.ndc && (
+                              <>
+                                <span>•</span>
+                                <span className="font-mono text-[10px]">NDC: {drug.ndc}</span>
+                              </>
+                            )}
                           </div>
                         </div>
                       </div>

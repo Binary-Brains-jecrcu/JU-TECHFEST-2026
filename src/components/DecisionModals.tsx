@@ -860,11 +860,18 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                               <div className="flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full bg-[#087F5B] flex-shrink-0" />
                                 <div>
-                                  <div className="text-xs font-bold text-[#172B25] flex items-center gap-1.5">
-                                    {drug.name}
-                                    <span className="text-[10px] font-mono text-[#64756D] font-normal">
-                                      (NDC: {drug.ndc})
-                                    </span>
+                                  <div className="text-xs font-bold text-[#172B25] flex items-center gap-1.5 flex-wrap">
+                                    <span>{drug.name}</span>
+                                    {drug.rxNorm && (
+                                      <span className="text-[10px] font-mono bg-emerald-50 text-[#075E4B] border border-emerald-200 px-1 py-0.2 rounded font-medium">
+                                        RxNorm: {drug.rxNorm}
+                                      </span>
+                                    )}
+                                    {drug.ndc && (
+                                      <span className="text-[10px] font-mono text-[#64756D] font-normal">
+                                        (NDC: {drug.ndc})
+                                      </span>
+                                    )}
                                   </div>
                                   <div className="text-[10px] text-[#64756D]">
                                     {drug.category}

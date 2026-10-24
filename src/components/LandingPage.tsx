@@ -401,24 +401,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchWorkspace }) =
                   Fluconazole causes potent hepatic inhibition of the microsomal 2C9 isoenzyme (CYP2C9), resulting in acute INR prolongation and severe life-threatening gastrointestinal or intracranial hemorrhage.
                 </div>
 
-                <div className="flex flex-wrap items-center justify-between gap-3 text-xs pt-1">
+                <div className="text-xs pt-1">
                   <span className="text-[#64756D]">
                     Recommendation: Substitute with non-systemic antifungal or preemptively reduce warfarin dose.
                   </span>
-                  <div className="flex gap-2">
-                    <button 
-                      onClick={() => onLaunchWorkspace()}
-                      className="px-3 py-1.5 bg-[#C62828] text-white rounded font-medium text-xs hover:bg-[#A31F1F]"
-                    >
-                      Withhold
-                    </button>
-                    <button 
-                      onClick={() => onLaunchWorkspace()}
-                      className="px-3 py-1.5 bg-white border border-[#CBDAD4] text-[#172B25] rounded font-medium text-xs hover:bg-gray-50"
-                    >
-                      Propose Alternative
-                    </button>
-                  </div>
                 </div>
               </div>
 
@@ -447,24 +433,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchWorkspace }) =
                   Metformin is excreted renally; with eGFR 30-44, total daily dose must not exceed 500mg daily due to elevated risk of lactic acidosis. Current order (1,000mg total) violates therapeutic threshold.
                 </div>
 
-                <div className="flex flex-wrap items-center justify-between gap-3 text-xs pt-1">
+                <div className="text-xs pt-1">
                   <span className="text-[#64756D]">
                     Recommendation: Titrate to Metformin 500mg once daily or switch to Linagliptin (no renal dose adjustment required).
                   </span>
-                  <div className="flex gap-2">
-                    <button 
-                      onClick={() => onLaunchWorkspace()}
-                      className="px-3 py-1.5 bg-[#D97706] text-white rounded font-medium text-xs hover:bg-[#B45309]"
-                    >
-                      Titrate Dose
-                    </button>
-                    <button 
-                      onClick={() => onLaunchWorkspace()}
-                      className="px-3 py-1.5 bg-white border border-[#CBDAD4] text-[#172B25] rounded font-medium text-xs hover:bg-gray-50"
-                    >
-                      Request Renal Consult
-                    </button>
-                  </div>
                 </div>
               </div>
 

@@ -768,26 +768,26 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
           {activeTab === 'scan' ? (
             <div className="space-y-4">
               
-              {/* File Upload Dropzone */}
-              <div>
-                <label className="border-2 border-dashed border-[#B6E8D3] hover:border-[#087F5B] bg-[#F7FAF8] hover:bg-[#F0F7F4] rounded-xl p-6 text-center cursor-pointer flex flex-col items-center justify-center transition-all group w-full">
-                  <input
-                    type="file"
-                    accept=".pdf,.png,.jpg,.jpeg,.webp"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                  />
-                  <div className="w-12 h-12 rounded-full bg-[#DDF5EA] text-[#087F5B] flex items-center justify-center mb-2 group-hover:scale-105 transition-transform shadow-sm">
-                    <Upload className="w-6 h-6" />
+              {/* File Upload Zone */}
+              <label className="border-2 border-dashed border-[#B6E8D3] hover:border-[#087F5B] bg-[#F7FAF8] hover:bg-[#F0F7F4] rounded-xl p-4 text-center cursor-pointer flex items-center justify-center gap-3.5 transition-all group">
+                <input
+                  type="file"
+                  accept=".pdf,.png,.jpg,.jpeg,.webp"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                />
+                <div className="w-10 h-10 rounded-full bg-[#DDF5EA] text-[#087F5B] flex items-center justify-center group-hover:scale-105 transition-transform shrink-0">
+                  <Upload className="w-5 h-5" />
+                </div>
+                <div className="text-left">
+                  <div className="text-xs font-bold text-[#172B25]">
+                    {uploadedFile ? uploadedFile.name : 'Upload Prescription Scan or Photo'}
                   </div>
-                  <div className="text-sm font-bold text-[#172B25]">
-                    {uploadedFile ? uploadedFile.name : 'Click to Upload Prescription Scan or Photo'}
+                  <div className="text-[10px] text-[#64756D]">
+                    PDF, JPG, PNG, WEBP • Direct PaddleOCR + Qwen-VL Vision extraction
                   </div>
-                  <div className="text-xs text-[#64756D] mt-1">
-                    Supports PDF, JPG, PNG, WEBP (Camera photos &amp; hospital records)
-                  </div>
-                </label>
-              </div>
+                </div>
+              </label>
 
               {/* Processing Progress Bar */}
               {isProcessing && (
@@ -841,7 +841,7 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                     )}
                   </div>
 
-                  <div className="relative border border-[#CBDAD4] rounded-lg overflow-hidden bg-white min-h-[160px] max-h-[380px] flex items-center justify-center">
+                  <div className="relative border border-[#CBDAD4] rounded-lg overflow-hidden bg-white min-h-[220px] max-h-[380px] flex items-center justify-center">
                     {previewUrl ? (
                       <img
                         src={previewUrl}
@@ -849,9 +849,10 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                         className="w-full h-auto object-contain block"
                       />
                     ) : (
-                      <div className="text-center p-8 text-[#64756D] text-xs">
-                        <UploadCloud className="w-8 h-8 mx-auto mb-2 text-[#CBDAD4]" />
-                        Upload a prescription scan above to begin AI handwriting extraction
+                      <div className="py-16 text-center text-[#64756D] space-y-1.5">
+                        <FileText className="w-8 h-8 mx-auto text-[#CBDAD4]" />
+                        <p className="text-xs font-semibold text-[#172B25]">No document uploaded</p>
+                        <p className="text-[10px] text-gray-400">Upload a prescription scan above to preview</p>
                       </div>
                     )}
 
@@ -887,10 +888,10 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                     })}
                   </div>
 
-                  {/* Manual Run button if not already extracted */}
-                  {!extractedData && !isProcessing && (
+                  {/* Manual Run button if uploaded and not already extracted */}
+                  {!extractedData && !isProcessing && previewUrl && (
                     <button
-                      onClick={() => runExtraction({ sampleId: selectedSampleId || 'page_018' })}
+                      onClick={() => runExtraction({ previewUrl, fileName: uploadedFile?.name })}
                       className="w-full py-2 bg-[#087F5B] hover:bg-[#075E4B] text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all"
                     >
                       <Sparkles className="w-3.5 h-3.5" />
@@ -1418,7 +1419,7 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                         Ready for Clinical Extraction
                       </div>
                       <p className="text-[11px] max-w-xs">
-                        Select a verified test prescription above or browse the 70-page benchmark dataset. PaddleOCR and Qwen-VL will extract active drugs, patient allergy context, and calculate safety findings.
+                        Upload a prescription scan above to begin. PaddleOCR and Qwen-VL will extract active drugs, patient allergy context, and calculate safety findings.
                       </p>
                     </div>
                   )}

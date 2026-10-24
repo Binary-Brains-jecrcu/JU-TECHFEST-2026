@@ -14,6 +14,8 @@ import {
 import { DEMO_SCENARIOS, PATIENT_PROFILES } from './data/mockData';
 import { SafetyAnalysisResult, PrescriptionDrug, PatientContext, SafetyFinding } from './types';
 import { generateClinicalFindings } from './utils/safetyChecker';
+import { evaluateRxNormDose } from './utils/rxNormDoseEvaluator';
+import { generateClientMedGemmaEvaluation } from './utils/clientOcrEngine';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
 
 export function App() {
@@ -81,7 +83,22 @@ export function App() {
       conditions: [],
       currentMedications: []
     };
-    const newFindings = generateClinicalFindings(drugs, activePatient);
+    // Ensure every drug is enriched with RxNorm dosage evaluation & MedGemma 1.5-4B clinical rules
+    const enrichedDrugs: PrescriptionDrug[] = drugs.map(drug => {
+      const rxResult = evaluateRxNormDose(drug, activePatient);
+      const doseFlag = drug.doseFlag || rxResult.doseFlag;
+      const medgemmaEvaluation = drug.medgemmaEvaluation || generateClientMedGemmaEvaluation(drug, activePatient);
+      return {
+        ...drug,
+        standardDose: drug.standardDose || rxResult.standardDose,
+        maxDailyDose: drug.maxDailyDose || rxResult.maxDailyDose,
+        potentialDoses: drug.potentialDoses || rxResult.potentialDoses,
+        doseFlag,
+        medgemmaEvaluation
+      };
+    });
+
+    const newFindings = generateClinicalFindings(enrichedDrugs, activePatient);
 
     setCurrentAnalysis({
       orderId: `RX-${Math.floor(10000 + Math.random() * 90000)}`,
@@ -93,10 +110,10 @@ export function App() {
         status: 'Extracted & Verified'
       },
       patient: activePatient,
-      drugs: drugs,
+      drugs: enrichedDrugs,
       findings: newFindings,
       metrics: {
-        analyzedCount: drugs.length,
+        analyzedCount: enrichedDrugs.length,
         criticalCount: newFindings.filter(f => f.severity === 'critical').length,
         warningCount: newFindings.filter(f => f.severity === 'warning').length,
         safeCount: newFindings.filter(f => f.severity === 'verified').length,

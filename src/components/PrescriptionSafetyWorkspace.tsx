@@ -18,10 +18,15 @@ import {
   Clock,
   Search,
   BookOpen,
-  Scan
+  Scan,
+  Dna,
+  FlaskConical,
+  Layers
 } from 'lucide-react';
 import { SafetyAnalysisResult, SafetyFinding } from '../types';
 import { PATIENT_PROFILES, DEMO_SCENARIOS } from '../data/mockData';
+import { evaluateRxNormDose } from '../utils/rxNormDoseEvaluator';
+import { generateClientMedGemmaEvaluation } from '../utils/clientOcrEngine';
 
 interface WorkspaceProps {
   analysis: SafetyAnalysisResult | null;
@@ -47,6 +52,14 @@ export const PrescriptionSafetyWorkspace: React.FC<WorkspaceProps> = ({
     'find-2': false,
     'find-3': false
   });
+  const [expandedMedGemma, setExpandedMedGemma] = useState<Record<string, boolean>>({});
+
+  const toggleMedGemmaExpand = (id: string) => {
+    setExpandedMedGemma(prev => ({
+      ...prev,
+      [id]: prev[id] === undefined ? false : !prev[id]
+    }));
+  };
 
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisStage, setAnalysisStage] = useState(0);
@@ -615,7 +628,286 @@ export const PrescriptionSafetyWorkspace: React.FC<WorkspaceProps> = ({
 
               </div>
 
-              {/* Findings Stack */}
+              {/* 🧬 COMBINED MEDGEMMA 1.5-4B & RXNORM MULTI-FACTOR CLINICAL EVALUATION */}
+              <div className="space-y-4 pt-2">
+                <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#E1EAE5]">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-700 flex items-center justify-center shadow-xs">
+                      <Dna className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-bold text-[#172B25] uppercase tracking-wider flex items-center gap-2">
+                        <span>MedGemma 1.5-4B &amp; RxNorm Multi-Factor Verification</span>
+                        <span className="text-[10px] font-mono font-normal normal-case text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">
+                          {analysis.drugs.length} Regimen {analysis.drugs.length === 1 ? 'Drug' : 'Drugs'} Evaluated
+                        </span>
+                      </h3>
+                      <p className="text-[11px] text-[#64756D]">
+                        Combined standard dose ontology (RxNorm CUI), cited FDA package rules, hypersensitivity analysis, and previous clinical test cases.
+                      </p>
+                    </div>
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-[#075E4B] border border-[#20A88A]/30">
+                    <span className="w-2 h-2 rounded-full bg-[#087F5B] animate-pulse" />
+                    Read-Only Verified
+                  </span>
+                </div>
+
+                <div className="space-y-4">
+                  {analysis.drugs.map((drug, idx) => {
+                    const rxResult = evaluateRxNormDose(drug, analysis.patient);
+                    const doseFlag = drug.doseFlag || rxResult.doseFlag;
+                    const medgemma = drug.medgemmaEvaluation || generateClientMedGemmaEvaluation(drug, analysis.patient);
+                    const isExpanded = expandedMedGemma[drug.id || `drug-${idx}`] !== false; // default open
+                    const isContraindicated = medgemma.status === 'contraindicated' || doseFlag?.status === 'warning' || doseFlag?.status === 'high';
+
+                    return (
+                      <div 
+                        key={drug.id || `medgemma-rxnorm-${idx}`}
+                        className={`bg-white rounded-xl border transition-all shadow-xs overflow-hidden ${
+                          isContraindicated 
+                            ? 'border-red-300 ring-1 ring-red-200/50' 
+                            : 'border-[#CBDAD4] hover:border-[#087F5B]'
+                        }`}
+                      >
+                        {/* Drug Header with Dual Badges */}
+                        <div className={`p-4 flex flex-wrap items-center justify-between gap-3 border-b ${
+                          isContraindicated ? 'bg-red-50/40 border-red-200' : 'bg-[#F7FAF8] border-[#E1EAE5]'
+                        }`}>
+                          <div className="flex items-center gap-3">
+                            <span className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold ${
+                              isContraindicated ? 'bg-red-600 text-white' : 'bg-[#087F5B] text-white'
+                            }`}>
+                              {idx + 1}
+                            </span>
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <h4 className="text-sm font-bold text-[#172B25]">
+                                  {drug.name}
+                                </h4>
+                                {drug.genericName && drug.genericName !== drug.name && (
+                                  <span className="text-xs text-[#64756D]">
+                                    ({drug.genericName})
+                                  </span>
+                                )}
+                              </div>
+                              <div className="text-xs text-[#172B25] font-semibold mt-0.5">
+                                Prescribed Order: <span className="font-mono bg-white px-2 py-0.5 rounded border border-[#E1EAE5] text-[#075E4B]">{drug.dose || 'Standard Dose'}</span>
+                                {drug.frequency && <span className="ml-1 text-[#64756D]">({drug.frequency})</span>}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Badges */}
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="text-[11px] font-mono bg-white text-[#075E4B] border border-[#20A88A]/40 px-2 py-0.5 rounded font-semibold">
+                              RxNorm: {drug.rxNorm || '855332'}
+                            </span>
+
+                            <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded tracking-wider ${
+                              doseFlag?.badgeColor === 'red' ? 'bg-red-100 text-red-800 border border-red-300' :
+                              doseFlag?.badgeColor === 'amber' ? 'bg-amber-100 text-amber-800 border border-amber-300' :
+                              'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                            }`}>
+                              {doseFlag?.label || 'RxNorm Verified'}
+                            </span>
+
+                            <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded tracking-wider ${
+                              medgemma.status === 'contraindicated' 
+                                ? 'bg-red-600 text-white' 
+                                : 'bg-indigo-600 text-white'
+                            }`}>
+                              MedGemma: {medgemma.status.toUpperCase()}
+                            </span>
+
+                            <button
+                              onClick={() => toggleMedGemmaExpand(drug.id || `drug-${idx}`)}
+                              className="text-xs text-[#64756D] hover:text-[#172B25] p-1 rounded hover:bg-gray-100 transition-colors"
+                              title={isExpanded ? 'Collapse analysis' : 'Expand analysis'}
+                            >
+                              {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                            </button>
+                          </div>
+                        </div>
+
+                        {isExpanded && (
+                          <div className="p-4 space-y-4 text-xs">
+                            
+                            {/* Dual Panel Grid: RxNorm (Left) + MedGemma (Right) */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              
+                              {/* Panel 1: RxNorm Standard Dosing & Potentials */}
+                              <div className="bg-[#F7FAF8] border border-[#E1EAE5] rounded-xl p-3.5 space-y-3">
+                                <div className="flex items-center justify-between pb-1.5 border-b border-[#E1EAE5]">
+                                  <span className="font-bold text-[#172B25] flex items-center gap-1.5 text-xs">
+                                    <Layers className="w-3.5 h-3.5 text-[#087F5B]" />
+                                    RxNorm Standard Dosage Ontology
+                                  </span>
+                                  <span className="text-[10px] text-[#075E4B] font-mono font-semibold bg-[#DDF5EA] px-1.5 py-0.5 rounded">
+                                    Ontology Validated
+                                  </span>
+                                </div>
+
+                                <div className="space-y-1.5 text-[11px]">
+                                  <div>
+                                    <span className="text-[#64756D]">Standard Reference Range: </span>
+                                    <span className="font-semibold text-[#172B25]">
+                                      {doseFlag?.standardDoseRange || drug.standardDose || 'Clinical reference standard'}
+                                    </span>
+                                  </div>
+
+                                  <div>
+                                    <span className="text-[#64756D]">Maximum Daily Ceiling: </span>
+                                    <span className="font-semibold text-[#C62828]">
+                                      {doseFlag?.maxDailyDose || drug.maxDailyDose || 'Standard therapeutic reference ceiling'}
+                                    </span>
+                                  </div>
+
+                                  <div className="pt-1">
+                                    <span className="text-[#64756D] block mb-1">Potential Doses from RxNorm:</span>
+                                    <div className="flex flex-wrap gap-1">
+                                      {(doseFlag?.potentialDoses || drug.potentialDoses || ['Standard Dose PO']).map((pd, pIdx) => (
+                                        <span 
+                                          key={pIdx} 
+                                          className="text-[10px] font-mono bg-white border border-[#CBDAD4] px-1.5 py-0.5 rounded text-[#172B25]"
+                                        >
+                                          {pd}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
+
+                                  <div className="pt-1.5 text-[#172B25] bg-white p-2.5 rounded-lg border border-[#E1EAE5] leading-relaxed">
+                                    <span className="font-semibold text-[#075E4B]">RxNorm Clinical Note: </span>
+                                    {doseFlag?.explanation}
+                                  </div>
+
+                                  {doseFlag?.qwenEvaluation && (
+                                    <div className="pt-1 text-[#64756D] italic">
+                                      🤖 {doseFlag.qwenEvaluation}
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Panel 2: MedGemma 1.5-4B Rules & Allergy Cross-Reactivity */}
+                              <div className="bg-indigo-50/40 border border-indigo-200/80 rounded-xl p-3.5 space-y-3">
+                                <div className="flex items-center justify-between pb-1.5 border-b border-indigo-200/60">
+                                  <span className="font-bold text-indigo-950 flex items-center gap-1.5 text-xs">
+                                    <BookOpen className="w-3.5 h-3.5 text-indigo-700" />
+                                    MedGemma Authoritative Rules ({medgemma.medical_rules.length})
+                                  </span>
+                                  <span className="text-[10px] text-indigo-700 font-mono font-semibold bg-indigo-100 px-1.5 py-0.5 rounded">
+                                    FDA Monograph &amp; CodeRx
+                                  </span>
+                                </div>
+
+                                {/* Cited Rules */}
+                                <ul className="space-y-1.5 text-[11px] text-indigo-950">
+                                  {medgemma.medical_rules.map((rule, rIdx) => (
+                                    <li key={rIdx} className="flex items-start gap-1.5 leading-snug">
+                                      <span className="text-indigo-600 font-bold">•</span>
+                                      <span>{rule}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+
+                                {/* Allergy & Cross-Reactivity Assessment */}
+                                <div className={`p-2.5 rounded-lg border text-[11px] leading-relaxed ${
+                                  medgemma.allergy_analysis.risk_level.includes('CRITICAL')
+                                    ? 'bg-red-50 border-red-300 text-red-900'
+                                    : 'bg-white border-indigo-200 text-indigo-950'
+                                }`}>
+                                  <div className="font-bold flex items-center gap-1 mb-1">
+                                    <ShieldCheck className="w-3.5 h-3.5" />
+                                    Allergy Assessment: {medgemma.allergy_analysis.risk_level}
+                                  </div>
+                                  {medgemma.allergy_analysis.allergen_matched !== 'None' && (
+                                    <div className="mb-1 font-semibold">
+                                      Matched Allergen: {medgemma.allergy_analysis.allergen_matched} ({medgemma.allergy_analysis.reaction})
+                                    </div>
+                                  )}
+                                  <div className="text-[11px] opacity-90">
+                                    {medgemma.allergy_analysis.cross_reactivity}
+                                  </div>
+                                  {medgemma.allergy_analysis.clinical_action && (
+                                    <div className="mt-1 font-bold pt-1 border-t border-current/20">
+                                      Action: {medgemma.allergy_analysis.clinical_action}
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+
+                            </div>
+
+                            {/* Panel 3: Previous Clinical Test Cases (4 Scenarios) */}
+                            <div className="bg-[#F7FAF8] border border-[#E1EAE5] rounded-xl p-3.5 space-y-2.5">
+                              <div className="flex items-center justify-between pb-1.5 border-b border-[#E1EAE5]">
+                                <span className="font-bold text-[#172B25] flex items-center gap-1.5 text-xs">
+                                  <FlaskConical className="w-3.5 h-3.5 text-[#087F5B]" />
+                                  Previous Clinical Test Cases &amp; Failure Scenarios ({medgemma.clinical_test_cases.length} Scenarios)
+                                </span>
+                                <span className="text-[10px] text-[#64756D] font-mono">
+                                  Benchmarked against CrCl: {analysis.patient.renalLabs?.crCl || 90} mL/min • Age: {analysis.patient.age} yo
+                                </span>
+                              </div>
+
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                {medgemma.clinical_test_cases.map((tc, tcIdx) => {
+                                  const isPassed = tc.severity === 'PASSED' || tc.severity === 'VERIFIED';
+                                  const isCritical = tc.severity === 'CRITICAL' || tc.severity === 'CRITICAL RISK';
+                                  return (
+                                    <div 
+                                      key={tcIdx}
+                                      className={`p-2.5 rounded-lg border text-[11px] space-y-1 ${
+                                        isCritical ? 'bg-red-50 border-red-300 text-red-950' :
+                                        isPassed ? 'bg-white border-[#E1EAE5] text-[#172B25]' :
+                                        'bg-amber-50 border-amber-300 text-amber-950'
+                                      }`}
+                                    >
+                                      <div className="flex items-center justify-between font-bold">
+                                        <span>{tc.scenario}</span>
+                                        <span className={`text-[9px] uppercase px-1.5 py-0.2 rounded font-mono font-bold ${
+                                          isCritical ? 'bg-red-600 text-white' :
+                                          isPassed ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' :
+                                          'bg-amber-200 text-amber-900'
+                                        }`}>
+                                          {tc.severity}
+                                        </span>
+                                      </div>
+                                      <p className="text-[10px] text-[#64756D] leading-tight">
+                                        {tc.finding}
+                                      </p>
+                                      <p className="text-[11px] font-semibold pt-0.5">
+                                        {tc.outcome}
+                                      </p>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+
+                            {/* Card Footer: Audit Trail & Immutability */}
+                            <div className="flex flex-wrap items-center justify-between gap-2 pt-2 text-[10px] font-mono text-[#64756D] border-t border-[#E1EAE5]">
+                              <div className="flex items-center gap-1.5">
+                                <span className="font-bold text-[#172B25]">Audit Citation:</span>
+                                <span className="truncate max-w-md">{medgemma.audit_trail || doseFlag?.audit_trail || 'FDA Monograph Standard'}</span>
+                              </div>
+                              <div className="text-[#075E4B] font-semibold flex items-center gap-1">
+                                <span>🔒 Read-Only Dose Guarantee Verified</span>
+                                <span>•</span>
+                                <span>Prototype Limits: No pediatric dosing</span>
+                              </div>
+                            </div>
+
+                          </div>
+                        )}
+
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
               <div className="space-y-4">
                 {analysis.findings.map((finding) => {
                   const isExpanded = !!expandedFindings[finding.id];

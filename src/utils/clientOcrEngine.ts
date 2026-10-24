@@ -689,7 +689,7 @@ export async function consultMedGemmaForSafety(
   return generateClientMedGemmaEvaluation(drug, patient);
 }
 
-function generateClientMedGemmaEvaluation(drug: PrescriptionDrug, patient: PatientContext): MedGemmaEvaluation {
+export function generateClientMedGemmaEvaluation(drug: PrescriptionDrug, patient: PatientContext): MedGemmaEvaluation {
   const dClean = `${drug.name} ${drug.genericName}`.toLowerCase();
   const crCl = patient.renalLabs?.crCl || 90;
   const age = patient.age || 35;

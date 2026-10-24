@@ -67,7 +67,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchWorkspace }) =
             {/* Hero CTA Button */}
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <button
-                onClick={() => onLaunchWorkspace('RX-78492')}
+                onClick={() => onLaunchWorkspace()}
                 className="bg-[#087F5B] hover:bg-[#075E4B] text-white font-semibold text-sm px-6 py-3.5 rounded-xl transition-all shadow-sm flex items-center gap-2 group"
               >
                 <span>Launch Clinical Safety Check</span>
@@ -103,7 +103,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchWorkspace }) =
 
               {/* Drag & Drop Visual Area */}
               <div 
-                onClick={() => onLaunchWorkspace('RX-78492')}
+                onClick={() => onLaunchWorkspace()}
                 className="border-2 border-dashed border-[#B6E8D3] hover:border-[#087F5B] bg-[#F7FAF8] rounded-xl p-6 text-center cursor-pointer transition-colors group"
               >
                 <div className="w-12 h-12 mx-auto rounded-full bg-[#DDF5EA] text-[#087F5B] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
@@ -363,7 +363,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchWorkspace }) =
 
               <div className="pt-2">
                 <button
-                  onClick={() => onLaunchWorkspace('RX-78492')}
+                  onClick={() => onLaunchWorkspace()}
                   className="w-full text-xs font-semibold text-[#075E4B] bg-white border border-[#CBDAD4] hover:bg-gray-50 py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-sm"
                 >
                   <span>Open Full Order in Workspace</span>
@@ -407,13 +407,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchWorkspace }) =
                   </span>
                   <div className="flex gap-2">
                     <button 
-                      onClick={() => onLaunchWorkspace('RX-78492')}
+                      onClick={() => onLaunchWorkspace()}
                       className="px-3 py-1.5 bg-[#C62828] text-white rounded font-medium text-xs hover:bg-[#A31F1F]"
                     >
                       Withhold
                     </button>
                     <button 
-                      onClick={() => onLaunchWorkspace('RX-78492')}
+                      onClick={() => onLaunchWorkspace()}
                       className="px-3 py-1.5 bg-white border border-[#CBDAD4] text-[#172B25] rounded font-medium text-xs hover:bg-gray-50"
                     >
                       Propose Alternative
@@ -453,13 +453,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchWorkspace }) =
                   </span>
                   <div className="flex gap-2">
                     <button 
-                      onClick={() => onLaunchWorkspace('RX-78492')}
+                      onClick={() => onLaunchWorkspace()}
                       className="px-3 py-1.5 bg-[#D97706] text-white rounded font-medium text-xs hover:bg-[#B45309]"
                     >
                       Titrate Dose
                     </button>
                     <button 
-                      onClick={() => onLaunchWorkspace('RX-78492')}
+                      onClick={() => onLaunchWorkspace()}
                       className="px-3 py-1.5 bg-white border border-[#CBDAD4] text-[#172B25] rounded font-medium text-xs hover:bg-gray-50"
                     >
                       Request Renal Consult
@@ -624,13 +624,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchWorkspace }) =
 
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
             <button
-              onClick={() => onLaunchWorkspace('RX-78492')}
+              onClick={() => onLaunchWorkspace()}
               className="bg-[#087F5B] hover:bg-[#075E4B] text-white text-sm font-semibold py-3 px-6 rounded-xl transition-all shadow-sm"
             >
               Verify Your First Regimen
             </button>
             <button
-              onClick={() => onLaunchWorkspace('RX-78492')}
+              onClick={() => onLaunchWorkspace()}
               className="bg-white border border-[#CBDAD4] hover:bg-gray-50 text-[#172B25] text-sm font-semibold py-3 px-6 rounded-xl transition-all shadow-sm"
             >
               Book Enterprise Demonstration

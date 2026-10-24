@@ -24,7 +24,7 @@ import { SafetyAnalysisResult, SafetyFinding } from '../types';
 import { PATIENT_PROFILES, DEMO_SCENARIOS } from '../data/mockData';
 
 interface WorkspaceProps {
-  analysis: SafetyAnalysisResult;
+  analysis: SafetyAnalysisResult | null;
   onSelectScenario: (scenarioId: string) => void;
   onUpdateAnalysis: (updated: SafetyAnalysisResult) => void;
   onOpenOverrideModal: () => void;
@@ -94,6 +94,85 @@ export const PrescriptionSafetyWorkspace: React.FC<WorkspaceProps> = ({
         return 'bg-gray-600 text-white';
     }
   };
+
+  if (!analysis) {
+    return (
+      <div className="max-w-[1440px] mx-auto px-4 lg:px-8 py-8 space-y-6">
+        {/* Workspace Header */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#E1EAE5]">
+          <div>
+            <div className="flex items-center gap-3">
+              <h1 className="text-2xl font-bold text-[#172B25] tracking-tight font-sans">
+                Prescription Safety &amp; Verification
+              </h1>
+              <span className="bg-[#F7FAF8] text-[#64756D] border border-[#CBDAD4] text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                Awaiting Prescription Scan
+              </span>
+            </div>
+            <p className="text-sm text-[#64756D] mt-1 max-w-3xl">
+              Automated multi-factor screening of active drug regimens against patient health profiles, renal clearance thresholds, and cross-sensitivities.
+            </p>
+          </div>
+        </div>
+
+        {/* Empty State Banner */}
+        <div className="bg-white rounded-2xl border-2 border-dashed border-[#CBDAD4] p-10 md:p-14 text-center max-w-3xl mx-auto shadow-sm space-y-6">
+          <div className="w-16 h-16 rounded-2xl bg-[#DDF5EA] border border-[#20A88A]/40 text-[#075E4B] flex items-center justify-center mx-auto shadow-sm">
+            <UploadCloud className="w-8 h-8" />
+          </div>
+
+          <div className="space-y-2">
+            <h2 className="text-xl font-bold text-[#172B25]">
+              No Prescription Scanned Yet
+            </h2>
+            <p className="text-sm text-[#64756D] max-w-lg mx-auto leading-relaxed">
+              Scan or upload a prescription order to begin. The clinical engine will extract patient details, identify prescribed medications, and evaluate safety warnings specifically for that prescription.
+            </p>
+          </div>
+
+          <div className="pt-2">
+            <button
+              onClick={onOpenUploadModal}
+              className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#087F5B] hover:bg-[#075E4B] text-white text-sm font-semibold rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer group"
+            >
+              <Scan className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <span>Scan Prescription Image</span>
+            </button>
+          </div>
+
+          <div className="pt-6 border-t border-[#E1EAE5] grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+            <div className="p-3.5 rounded-xl bg-[#F7FAF8] border border-[#E1EAE5]">
+              <div className="text-xs font-bold text-[#172B25] flex items-center gap-1.5 mb-1">
+                <FileCheck2 className="w-4 h-4 text-[#087F5B]" />
+                <span>1. Vision OCR Ingestion</span>
+              </div>
+              <p className="text-[11px] text-[#64756D] leading-normal">
+                PaddleOCR &amp; Qwen-VL extract medication names, potencies, frequencies, and patient demographics.
+              </p>
+            </div>
+            <div className="p-3.5 rounded-xl bg-[#F7FAF8] border border-[#E1EAE5]">
+              <div className="text-xs font-bold text-[#172B25] flex items-center gap-1.5 mb-1">
+                <UserCheck className="w-4 h-4 text-[#087F5B]" />
+                <span>2. Patient Context</span>
+              </div>
+              <p className="text-[11px] text-[#64756D] leading-normal">
+                Patient profile, allergies, and renal lab values are populated directly from the prescription record.
+              </p>
+            </div>
+            <div className="p-3.5 rounded-xl bg-[#F7FAF8] border border-[#E1EAE5]">
+              <div className="text-xs font-bold text-[#172B25] flex items-center gap-1.5 mb-1">
+                <ShieldCheck className="w-4 h-4 text-[#087F5B]" />
+                <span>3. Targeted CDS Alerts</span>
+              </div>
+              <p className="text-[11px] text-[#64756D] leading-normal">
+                Clinical safety findings and MedGemma monographs are generated strictly for the scanned drugs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-[1440px] mx-auto px-4 lg:px-8 py-6 space-y-6">

@@ -18,7 +18,7 @@ import { CheckCircle2, AlertCircle } from 'lucide-react';
 
 export function App() {
   const [currentView, setCurrentView] = useState<'workspace' | 'landing' | 'history' | 'database' | 'about'>('landing');
-  const [currentAnalysis, setCurrentAnalysis] = useState<SafetyAnalysisResult>(DEMO_SCENARIOS['RX-78492']);
+  const [currentAnalysis, setCurrentAnalysis] = useState<SafetyAnalysisResult | null>(null);
   
   // Modals
   const [isOverrideModalOpen, setIsOverrideModalOpen] = useState(false);
@@ -48,10 +48,10 @@ export function App() {
 
   const handleSelectPatient = (patientId: string) => {
     if (PATIENT_PROFILES[patientId]) {
-      setCurrentAnalysis(prev => ({
+      setCurrentAnalysis(prev => prev ? ({
         ...prev,
         patient: PATIENT_PROFILES[patientId]
-      }));
+      }) : prev);
       showToast(`Switched active patient to ${PATIENT_PROFILES[patientId].name}`);
     }
   };
@@ -62,11 +62,28 @@ export function App() {
     patient?: PatientContext,
     qwenReasoning?: string
   ) => {
-    const activePatient = patient || currentAnalysis.patient;
+    const activePatient = patient || currentAnalysis?.patient || {
+      id: 'PT-NEW',
+      name: 'Prescription Patient',
+      gender: 'Adult',
+      age: 45,
+      dob: '01-Jan-1980',
+      weightKg: 70,
+      unit: 'Outpatient Prescription Review',
+      allergies: [],
+      renalLabs: {
+        eGFR: 90,
+        eGFRCategory: 'Normal',
+        serumCr: 1.0,
+        crCl: 90,
+        timestamp: 'Current'
+      },
+      conditions: [],
+      currentMedications: []
+    };
     const newFindings = generateClinicalFindings(drugs, activePatient);
 
-    setCurrentAnalysis(prev => ({
-      ...prev,
+    setCurrentAnalysis({
       orderId: `RX-${Math.floor(10000 + Math.random() * 90000)}`,
       ingestedAt: 'Just now (PaddleOCR + Qwen-VL Live)',
       ingestionFile: {
@@ -85,17 +102,18 @@ export function App() {
         safeCount: newFindings.filter(f => f.severity === 'verified').length,
         unverifiedCount: 0
       },
-      requiresClinicalAction: newFindings.some(f => f.severity === 'critical')
-    }));
+      requiresClinicalAction: newFindings.some(f => f.severity === 'critical'),
+      auditHash: `SHA256-${Math.random().toString(36).substring(2, 10).toUpperCase()}`
+    });
     setCurrentView('workspace');
     showToast(`Prescription ${fileName} processed and loaded via PaddleOCR + Qwen-VL`);
   };
 
   const handleConfirmOverride = (justification: string) => {
-    setCurrentAnalysis(prev => ({
+    setCurrentAnalysis(prev => prev ? ({
       ...prev,
       requiresClinicalAction: false
-    }));
+    }) : prev);
     setIsOverrideModalOpen(false);
     showToast('Clinical safety override logged with justification. Dispense approved.');
   };
@@ -135,6 +153,9 @@ export function App() {
             onLaunchWorkspace={(scenarioId) => {
               if (scenarioId && DEMO_SCENARIOS[scenarioId]) {
                 setCurrentAnalysis(DEMO_SCENARIOS[scenarioId]);
+              } else {
+                setCurrentAnalysis(null);
+                setIsUploadModalOpen(true);
               }
               setCurrentView('workspace');
             }}

@@ -1764,13 +1764,22 @@ def parse_clinical_entities_handwriting(ocr_lines, tokens):
     detected_drugs = []
     seen_generics = set()
 
-    for line in ocr_lines:
+    for i, line in enumerate(ocr_lines):
         lower_line = line.lower()
         if re.search(r'^\s*(?:rx\s*id|reg\s*no|date|opd|investigations|bp\s*\d|lab\s*test)', lower_line):
             continue
 
-        # Extract timing / frequency from this line or adjacent text
+        # Extract timing / frequency from this line or adjacent lines
         dose_freq_str, freq_code = parse_indian_frequency(line)
+        if dose_freq_str == "Standard Therapeutic Timing":
+            if i + 1 < len(ocr_lines):
+                n_str, n_code = parse_indian_frequency(ocr_lines[i + 1])
+                if n_str != "Standard Therapeutic Timing":
+                    dose_freq_str, freq_code = n_str, n_code
+            if dose_freq_str == "Standard Therapeutic Timing" and i + 2 < len(ocr_lines):
+                n_str, n_code = parse_indian_frequency(ocr_lines[i + 2])
+                if n_str != "Standard Therapeutic Timing":
+                    dose_freq_str, freq_code = n_str, n_code
         m_dose = re.search(r'(\d+(?:\.\d+)?\s*(?:mg|mcg|g|ml|iu|k\b))', line, re.I)
 
         # Word-by-word token matching with fuzzy lookup

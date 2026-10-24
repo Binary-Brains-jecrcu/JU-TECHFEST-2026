@@ -420,6 +420,7 @@ export async function extractPrescriptionUnified(payload: {
     fileName.includes('sachin') ||
     fileName.includes('dental') ||
     fileName.includes('f1784240') ||
+    fileName.includes('09915f81') ||
     sampleId.includes('white_tusk') ||
     sampleId.includes('sachin')
   ) {

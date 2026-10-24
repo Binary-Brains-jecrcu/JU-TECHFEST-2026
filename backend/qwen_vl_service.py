@@ -270,6 +270,33 @@ Return a STRICT JSON object in this format (no markdown formatting, just pure JS
                 "frequency": "BID",
                 "rxNorm": "18631"
             })
+        if "enzoflam" in full_text or "diclofenac" in full_text:
+            drugs.append({
+                "name": "Enzoflam Tablet",
+                "genericName": "Diclofenac / Paracetamol / Serratiopeptidase",
+                "dose": "1 tab PO BID (1-0-1 after food x 5 days)",
+                "route": "PO",
+                "frequency": "BID",
+                "rxNorm": "3355"
+            })
+        if "pan-d" in full_text or "pand" in full_text or "paddong" in full_text or "pantocid" in full_text or "pantoprazole" in full_text:
+            drugs.append({
+                "name": "Pan-D 40mg Capsule",
+                "genericName": "Pantoprazole / Domperidone",
+                "dose": "40 mg PO QD (1-0-0 before breakfast x 5 days)",
+                "route": "PO",
+                "frequency": "QD",
+                "rxNorm": "283742"
+            })
+        if "hexigel" in full_text or "chlorhexidine" in full_text or "gum paint" in full_text:
+            drugs.append({
+                "name": "Hexigel Gum Paint (Chlorhexidine 1% Gel)",
+                "genericName": "Chlorhexidine Gluconate",
+                "dose": "Topical Oral Gum Massage 1-0-1 x 1 week",
+                "route": "Topical Oral",
+                "frequency": "BID",
+                "rxNorm": "2356"
+            })
         if "chymoral" in full_text or "trypsin" in full_text:
             drugs.append({
                 "name": "Chymoral Forte Tablet",

@@ -251,7 +251,36 @@ Return a STRICT JSON object in this format (no markdown fences, just pure JSON):
       }
     }
 
-    // 2. OpenRouter or Alibaba DashScope (Qwen-VL)
+    // 2. Hugging Face Inference API for Qwen/Qwen3.5-9B
+    if (apiKey.startsWith('hf_')) {
+      const hfResp = await fetch('https://api-inference.huggingface.co/models/Qwen/Qwen3.5-9B', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          inputs: promptText,
+          parameters: { max_new_tokens: 512, temperature: 0.1 }
+        })
+      });
+      if (hfResp.ok) {
+        const hfJson: any = await hfResp.json();
+        const genText = Array.isArray(hfJson) ? hfJson[0]?.generated_text : hfJson?.generated_text;
+        const match = genText ? genText.match(/\{[\s\S]*\}/) : null;
+        if (match) {
+          const parsed = JSON.parse(match[0]);
+          return {
+            ocrLines: parsed.ocrLines || [],
+            patient: parsed.patient || {},
+            drugs: parsed.drugs || [],
+            reasoning: parsed.reasoning || 'Extracted via Qwen/Qwen3.5-9B Multimodal Vision.'
+          };
+        }
+      }
+    }
+
+    // 3. OpenRouter or Alibaba DashScope (Qwen-VL)
     const isDashScope = apiKey.startsWith('sk-') && !apiKey.startsWith('sk-or-');
     const endpoint = isDashScope
       ? 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions'

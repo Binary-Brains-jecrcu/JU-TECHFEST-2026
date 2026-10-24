@@ -2,6 +2,7 @@ import os
 import json
 import base64
 import time
+import tempfile
 from typing import Dict, Any, Optional, List
 from fastapi import FastAPI, HTTPException, Body, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
@@ -59,7 +60,7 @@ def health():
         "status": "healthy",
         "framework": "FastAPI + Uvicorn",
         "sqlite_golden_dataset": f"Active ({d_count} drugs indexed)",
-        "qwen_vl": "Qwen/Qwen2.5-VL-72B-Instruct",
+        "qwen_vl": "Qwen/Qwen3.5-9B",
         "medgemma": "google/medgemma-1.5-4b-it",
         "lynx_guard": "PatronusAI/Lynx-8B",
         "legal_disclaimer": LEGAL_DISCLAIMER,
@@ -82,6 +83,33 @@ async def vision_ingest_endpoint(payload: Dict[str, Any] = Body(...)):
         return ocr_result
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Vision Ingestion Failure: {str(e)}")
+
+@app.post("/api/qwen/extract")
+def qwen_extract_endpoint(payload: Dict[str, Any] = Body(...)):
+    """
+    Qwen-VL Vision-Language Direct Extraction Endpoint:
+    Processes prescription image with Qwen3.5-9B and fuses with PaddleOCR text line hints.
+    """
+    img_b64 = payload.get("imageBase64") or payload.get("image")
+    if not img_b64:
+        raise HTTPException(status_code=400, detail="Missing 'imageBase64' in payload.")
+
+    from qwen_vl_service import QwenVLService
+    paddle_hints = payload.get("ocrLines") or payload.get("hints") or []
+    api_key = payload.get("apiKey")
+
+    t_path = os.path.join(tempfile.gettempdir(), f"qwen_direct_{int(time.time()*1000)}.png")
+    clean_b64 = img_b64.split(",")[1] if "," in img_b64 else img_b64
+    try:
+        with open(t_path, "wb") as f:
+            f.write(base64.b64decode(clean_b64))
+        result = QwenVLService.extract_with_qwen(t_path, paddle_ocr_lines=paddle_hints, api_key=api_key)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Qwen extraction failed: {str(e)}")
+    finally:
+        if os.path.isfile(t_path):
+            os.remove(t_path)
 
 @app.post("/api/coderx/rules")
 def coderx_rules_endpoint(req: CodeRxRuleRequest):

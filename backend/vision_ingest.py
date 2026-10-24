@@ -85,55 +85,60 @@ def ingest_prescription_image(image_bytes_or_b64: str, api_key: Optional[str] = 
         or get_hf_token()
     )
 
-    if effective_key and os.path.isfile(t_path):
+    if os.path.isfile(t_path):
         try:
-            from prescription_server import call_qwen_cloud_vision
-            cloud_res = call_qwen_cloud_vision(t_path, effective_key, ocr_hints=ocr_lines)
-            if cloud_res:
-                match = re.search(r'\{[\s\S]*\}', cloud_res)
-                if match:
-                    parsed_qwen = json.loads(match.group(0))
-                    
-                    # Merge Qwen-VL patient findings
-                    if parsed_qwen.get("patient"):
-                        qp = parsed_qwen["patient"]
-                        if qp.get("name") and qp["name"] != "Patient Name":
-                            patient_info["name"] = qp["name"]
-                        if qp.get("age"):
-                            patient_info["age"] = qp["age"]
-                        if qp.get("gender") and qp["gender"] != "Unknown":
-                            patient_info["gender"] = qp["gender"]
-                        if qp.get("allergies"):
-                            patient_info["allergies"] = qp["allergies"]
+            from qwen_vl_service import QwenVLService
+            parsed_qwen = QwenVLService.extract_with_qwen(
+                t_path,
+                paddle_ocr_lines=ocr_lines,
+                api_key=effective_key
+            )
+            if parsed_qwen:
+                # Merge Qwen-VL patient findings
+                if parsed_qwen.get("patient"):
+                    qp = parsed_qwen["patient"]
+                    if qp.get("name") and qp["name"] not in ("Patient Name", "Prescription Patient"):
+                        patient_info["name"] = qp["name"]
+                    if qp.get("age"):
+                        patient_info["age"] = qp["age"]
+                    if qp.get("gender") and qp["gender"] not in ("Unknown", "Adult"):
+                        patient_info["gender"] = qp["gender"]
+                    if qp.get("allergies"):
+                        patient_info["allergies"] = qp["allergies"]
 
-                    # Merge Qwen-VL transcribed lines
-                    if parsed_qwen.get("ocrLines") and isinstance(parsed_qwen["ocrLines"], list):
-                        for q_line in parsed_qwen["ocrLines"]:
-                            if q_line and q_line not in ocr_lines:
-                                ocr_lines.append(q_line)
+                if parsed_qwen.get("doctorOrClinic"):
+                    doctor_or_clinic = parsed_qwen["doctorOrClinic"]
 
-                    # Merge Qwen-VL drugs into regimen (preventing generic duplicates)
-                    existing_generics = {d.get("genericName", "").lower() for d in detected_drugs}
-                    for qd in parsed_qwen.get("drugs", []):
-                        qd_name = qd.get("name", "")
-                        qd_gen = qd.get("genericName", qd_name).lower()
-                        if qd_gen not in existing_generics:
-                            existing_generics.add(qd_gen)
-                            detected_drugs.append({
-                                "name": qd.get("name", "Prescribed Agent"),
-                                "genericName": qd.get("genericName", qd_name),
-                                "category": qd.get("category", "Prescribed Pharmacotherapy"),
-                                "dose": qd.get("dose", "1 tab PO QD"),
-                                "route": qd.get("route", "PO"),
-                                "frequency": qd.get("frequency", "QD"),
-                                "ndc": qd.get("ndc", ""),
-                                "rxNorm": qd.get("rxNorm", "")
-                            })
+                # Merge Qwen-VL transcribed lines
+                if parsed_qwen.get("ocrLines") and isinstance(parsed_qwen["ocrLines"], list):
+                    for q_line in parsed_qwen["ocrLines"]:
+                        if q_line and q_line not in ocr_lines:
+                            ocr_lines.append(q_line)
 
-                    if parsed_qwen.get("reasoning"):
-                        qwen_reasoning = f"Qwen-VL Vision-Language: {parsed_qwen['reasoning']} | {qwen_reasoning}"
+                # Merge Qwen-VL drugs into regimen (preventing generic duplicates)
+                existing_generics = {d.get("genericName", "").lower() for d in detected_drugs}
+                existing_names = {d.get("name", "").lower() for d in detected_drugs}
+                for qd in parsed_qwen.get("drugs", []):
+                    qd_name = qd.get("name", "")
+                    qd_gen = qd.get("genericName", qd_name).lower()
+                    if qd_gen not in existing_generics and qd_name.lower() not in existing_names:
+                        existing_generics.add(qd_gen)
+                        existing_names.add(qd_name.lower())
+                        detected_drugs.append({
+                            "name": qd.get("name", "Prescribed Agent"),
+                            "genericName": qd.get("genericName", qd_name),
+                            "category": qd.get("category", "Prescribed Pharmacotherapy"),
+                            "dose": qd.get("dose", "1 tab PO QD"),
+                            "route": qd.get("route", "PO"),
+                            "frequency": qd.get("frequency", "QD"),
+                            "ndc": qd.get("ndc", ""),
+                            "rxNorm": qd.get("rxNorm", "")
+                        })
+
+                if parsed_qwen.get("reasoning"):
+                    qwen_reasoning = f"{parsed_qwen['reasoning']} | {qwen_reasoning}"
         except Exception as e:
-            print(f"Qwen-VL cloud call note: {e}")
+            print(f"Qwen-VL integration note: {e}")
 
     # Fallback reasoning if no external vision key was supplied
     if not qwen_reasoning:

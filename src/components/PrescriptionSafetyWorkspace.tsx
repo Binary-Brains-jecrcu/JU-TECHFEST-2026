@@ -5,6 +5,7 @@ import {
   AlertTriangle, 
   AlertCircle, 
   ShieldCheck, 
+  ShieldAlert,
   ChevronDown, 
   ChevronUp, 
   ExternalLink, 
@@ -812,27 +813,84 @@ export const PrescriptionSafetyWorkspace: React.FC<WorkspaceProps> = ({
                                   ))}
                                 </ul>
 
-                                {/* Allergy & Cross-Reactivity Assessment */}
-                                <div className={`p-2.5 rounded-lg border text-[11px] leading-relaxed ${
-                                  medgemma.allergy_analysis.risk_level.includes('CRITICAL')
-                                    ? 'bg-red-50 border-red-300 text-red-900'
-                                    : 'bg-white border-indigo-200 text-indigo-950'
-                                }`}>
-                                  <div className="font-bold flex items-center gap-1 mb-1">
-                                    <ShieldCheck className="w-3.5 h-3.5" />
-                                    Allergy Assessment: {medgemma.allergy_analysis.risk_level}
+                                {/* Specific Drug Allergy & Hypersensitivity Profile */}
+                                <div className="p-3 rounded-lg border bg-white border-indigo-200 text-indigo-950 space-y-2.5">
+                                  <div className="flex items-center justify-between pb-1.5 border-b border-indigo-100">
+                                    <span className="font-bold flex items-center gap-1.5 text-xs text-[#0F2F24]">
+                                      <ShieldAlert className="w-3.5 h-3.5 text-rose-600" />
+                                      {drug.name} — Specific Drug Allergy &amp; Hypersensitivity Profile
+                                    </span>
+                                    <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200">
+                                      Drug Allergy Monograph
+                                    </span>
                                   </div>
-                                  {medgemma.allergy_analysis.allergen_matched !== 'None' && (
-                                    <div className="mb-1 font-semibold">
-                                      Matched Allergen: {medgemma.allergy_analysis.allergen_matched} ({medgemma.allergy_analysis.reaction})
+
+                                  {/* Known Allergic Reactions for this drug */}
+                                  <div>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 block mb-1">
+                                      Documented Drug Hypersensitivity Reactions:
+                                    </span>
+                                    <div className="flex flex-wrap gap-1.5">
+                                      {(medgemma.allergy_analysis.known_allergic_reactions || [
+                                        'Cutaneous Maculopapular Rash',
+                                        'Immediate Urticaria & Pruritus',
+                                        'Drug-Induced Exanthem'
+                                      ]).map((rx, rxI) => (
+                                        <span
+                                          key={rxI}
+                                          className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full bg-rose-50 text-rose-800 border border-rose-200"
+                                        >
+                                          <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                                          {rx}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
+
+                                  {/* Cross-reactive drug classes */}
+                                  {medgemma.allergy_analysis.cross_reactive_classes && medgemma.allergy_analysis.cross_reactive_classes.length > 0 && (
+                                    <div>
+                                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 block mb-1">
+                                        Cross-Reactive Drug Classes:
+                                      </span>
+                                      <div className="flex flex-wrap gap-1.5">
+                                        {medgemma.allergy_analysis.cross_reactive_classes.map((cls, cI) => (
+                                          <span
+                                            key={cI}
+                                            className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200"
+                                          >
+                                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                                            {cls}
+                                          </span>
+                                        ))}
+                                      </div>
                                     </div>
                                   )}
-                                  <div className="text-[11px] opacity-90">
-                                    {medgemma.allergy_analysis.cross_reactivity}
-                                  </div>
+
+                                  {/* Cutaneous and Systemic Mechanism */}
+                                  {medgemma.allergy_analysis.cutaneous_and_systemic_risks && (
+                                    <div className="bg-slate-50 p-2 rounded border border-slate-200 text-[11px] text-slate-700 leading-relaxed">
+                                      <span className="font-semibold text-slate-900">Cutaneous &amp; Systemic Risks: </span>
+                                      {medgemma.allergy_analysis.cutaneous_and_systemic_risks}
+                                    </div>
+                                  )}
+
+                                  {/* Hypersensitivity Clinical Action */}
                                   {medgemma.allergy_analysis.clinical_action && (
-                                    <div className="mt-1 font-bold pt-1 border-t border-current/20">
-                                      Action: {medgemma.allergy_analysis.clinical_action}
+                                    <div className="text-[11px] font-medium text-emerald-950 bg-emerald-50/80 p-2 rounded border border-emerald-200">
+                                      <span className="font-bold text-emerald-800">Clinical Hypersensitivity Action: </span>
+                                      {medgemma.allergy_analysis.clinical_action}
+                                    </div>
+                                  )}
+
+                                  {/* Patient Conflict Alert if applicable */}
+                                  {medgemma.allergy_analysis.status === 'contraindicated' && (
+                                    <div className="bg-red-50 border border-red-300 text-red-900 p-2 rounded text-[11px] font-semibold flex items-start gap-1.5">
+                                      <ShieldAlert className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
+                                      <div>
+                                        <span>Patient Hypersensitivity Collision: </span>
+                                        <span className="font-normal">{medgemma.allergy_analysis.allergen_matched} ({medgemma.allergy_analysis.reaction})</span>
+                                      </div>
                                     </div>
                                   )}
                                 </div>

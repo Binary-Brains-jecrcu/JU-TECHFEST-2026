@@ -1352,15 +1352,36 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                                       </ul>
                                     </div>
 
-                                    {/* Allergy Cross-Reactivity */}
-                                    <div className="pt-1 border-t border-indigo-200/50 flex items-start gap-1.5 text-[10px]">
-                                      <ShieldAlert className="w-3.5 h-3.5 text-indigo-600 flex-shrink-0 mt-0.5" />
-                                      <div>
-                                        <span className="font-semibold text-indigo-950">MedGemma Allergy Analysis: </span>
-                                        <span className={drug.medgemmaEvaluation.allergy_analysis.risk_level.includes('CRITICAL') ? 'text-red-700 font-bold' : 'text-indigo-900'}>
-                                          {drug.medgemmaEvaluation.allergy_analysis.risk_level} — {drug.medgemmaEvaluation.allergy_analysis.cross_reactivity}
-                                        </span>
+                                    {/* Specific Drug Allergy & Hypersensitivity Profile */}
+                                    <div className="pt-1.5 border-t border-indigo-200/50 space-y-1 text-[10px]">
+                                      <div className="flex items-center gap-1.5 font-bold text-indigo-950">
+                                        <ShieldAlert className="w-3.5 h-3.5 text-rose-600 flex-shrink-0" />
+                                        <span>Specific Drug Allergy &amp; Hypersensitivity Monograph:</span>
                                       </div>
+                                      {drug.medgemmaEvaluation.allergy_analysis.known_allergic_reactions && (
+                                        <div className="flex flex-wrap gap-1 pl-5">
+                                          {drug.medgemmaEvaluation.allergy_analysis.known_allergic_reactions.map((rx, rxI) => (
+                                            <span key={rxI} className="px-1.5 py-0.5 rounded-full bg-rose-50 text-rose-800 border border-rose-200 text-[9px]">
+                                              • {rx}
+                                            </span>
+                                          ))}
+                                        </div>
+                                      )}
+                                      {drug.medgemmaEvaluation.allergy_analysis.cross_reactive_classes && (
+                                        <div className="flex flex-wrap gap-1 pl-5">
+                                          {drug.medgemmaEvaluation.allergy_analysis.cross_reactive_classes.map((cls, cI) => (
+                                            <span key={cI} className="px-1.5 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-[9px]">
+                                              ⟷ {cls}
+                                            </span>
+                                          ))}
+                                        </div>
+                                      )}
+                                      {drug.medgemmaEvaluation.allergy_analysis.clinical_action && (
+                                        <p className="text-[9px] text-gray-700 pl-5 leading-tight">
+                                          <span className="font-semibold text-emerald-800">Action: </span>
+                                          {drug.medgemmaEvaluation.allergy_analysis.clinical_action}
+                                        </p>
+                                      )}
                                     </div>
 
                                     {/* Previous Clinical Test Cases */}

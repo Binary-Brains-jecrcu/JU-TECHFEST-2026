@@ -8,6 +8,10 @@ export interface MedGemmaTestCase {
 export interface MedGemmaAllergyAnalysis {
   status: string;
   risk_level: string;
+  drug_name?: string;
+  known_allergic_reactions?: string[];
+  cross_reactive_classes?: string[];
+  cutaneous_and_systemic_risks?: string;
   allergen_matched?: string;
   reaction?: string;
   cross_reactivity?: string;

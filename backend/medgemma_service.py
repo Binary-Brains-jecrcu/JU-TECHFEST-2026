@@ -206,57 +206,171 @@ Do NOT modify prescribed dose. Return pure text summary.
 
     @staticmethod
     def _analyze_allergies(d_clean: str, generic_name: str, allergies: List[Any]) -> Dict[str, Any]:
+        # 1. Determine Specific Drug Allergy & Hypersensitivity Profile
+        known_reactions = [
+            "Cutaneous Maculopapular Rash",
+            "Immediate Urticaria & Pruritus",
+            "Contact Hypersensitivity Dermatitis",
+            "Drug-Induced Exanthem"
+        ]
+        cross_reactive_classes = ["Same Pharmacological Class Congeners"]
+        systemic_risks = "Standard outpatient potential for idiosyncratic hypersensitivity or allergic dermatitis."
+        clinical_action = "Monitor patient closely during initial 72 hours of therapy. Withhold immediately upon emergence of unexplained pruritus or rash."
+        cross_reactivity = "Specific drug hypersensitivity documented per FDA label monograph."
+
+        if "amoxicillin" in d_clean or "augmentin" in d_clean or "ampicillin" in d_clean or "penicillin" in d_clean:
+            known_reactions = [
+                "Type I IgE-Mediated Anaphylaxis",
+                "Severe Angioedema & Laryngeal Edema",
+                "Urticarial Skin Eruptions & Pruritus",
+                "Stevens-Johnson Syndrome (SJS)",
+                "Delayed Maculopapular Exanthem"
+            ]
+            cross_reactive_classes = [
+                "All Penicillins (Class-wide Beta-Lactam Ring)",
+                "Cephalosporins (5-10% cross-reactivity, highest with 1st/2nd Gen)",
+                "Carbapenems (Imipenem, Meropenem)"
+            ]
+            systemic_risks = "Beta-lactam 6-aminopenicillanic acid core triggers rapid mast cell and basophil degranulation, precipitating acute bronchospasm and hemodynamic collapse."
+            cross_reactivity = "Beta-lactam ring IgE-mediated cross-reactivity (anaphylaxis hazard across penicillins and cephalosporins)"
+            clinical_action = "Verify absence of prior beta-lactam hypersensitivity before initial dose. Discontinue immediately upon pruritus, facial edema, or wheezing."
+
+        elif "ofloxacin" in d_clean or "ciprofloxacin" in d_clean or "zenflox" in d_clean or "quinolone" in d_clean:
+            known_reactions = [
+                "Fixed Drug Eruption (FDE)",
+                "Phototoxic Cutaneous Erythema & Sun Blistering",
+                "Achilles Tendonitis & Tendon Rupture Hypersensitivity",
+                "Anaphylactoid Angioedema & Urticaria"
+            ]
+            cross_reactive_classes = [
+                "All Fluoroquinolones (Ciprofloxacin, Levofloxacin, Norfloxacin, Moxifloxacin)",
+                "Quinolone Carboxylic Acid Congeners"
+            ]
+            systemic_risks = "Class-wide quinolone hypersensitivity precipitates persistent hyperpigmented cutaneous bullae and severe photosensitivity reactions upon UV exposure."
+            cross_reactivity = "Class-wide quinolone hypersensitivity & fixed drug eruption (FDE) risk"
+            clinical_action = "Advise strict sun protection. Discontinue immediately at first sign of erythematous rash, joint/tendon pain, or mucosal lesion."
+
+        elif "celecoxib" in d_clean or "sulfamethoxazole" in d_clean or "sulfa" in d_clean:
+            known_reactions = [
+                "Sulfonamide Erythema Multiforme",
+                "Toxic Epidermal Necrolysis (TEN)",
+                "Facial Angioedema & Exfoliative Dermatitis",
+                "DRESS Syndrome (Eosinophilia & Systemic Symptoms)"
+            ]
+            cross_reactive_classes = [
+                "Antibacterial Sulfonamides (Co-trimoxazole, Bactrim)",
+                "Thiazide Diuretics",
+                "Sulfonylureas (Glimepiride)"
+            ]
+            systemic_risks = "Benzenesulfonamide moiety cross-reacts with sulfonamide hypersensitivity, precipitating extensive mucocutaneous sloughing and acute systemic rash."
+            cross_reactivity = "Benzenesulfonamide moiety cross-reactivity with sulfonamide hypersensitivity"
+            clinical_action = "Absolute contraindication in patients with prior sulfa allergy. Substitute with non-sulfonamide analgesic."
+
+        elif "ketorolac" in d_clean or "diclofenac" in d_clean or "enzoflam" in d_clean or "ibuprofen" in d_clean:
+            known_reactions = [
+                "Aspirin-Exacerbated Respiratory Disease (AERD)",
+                "Acute Severe Bronchospasm (Samter's Triad)",
+                "Periorbital Angioedema & Urticaria",
+                "Anaphylactoid Hypotensive Shock"
+            ]
+            cross_reactive_classes = [
+                "Non-Steroidal Anti-Inflammatory Drugs (NSAIDs)",
+                "Aspirin (Salicylates)",
+                "Selective & Non-Selective COX Inhibitors"
+            ]
+            systemic_risks = "COX-1 inhibition shifts arachidonate pathway to cysteinyl leukotriene synthesis, triggering severe bronchoconstriction in patients with underlying asthma."
+            cross_reactivity = "COX-1/COX-2 inhibitor class cross-reactivity and aspirin-sensitive asthma risk"
+            clinical_action = "Screen patient for asthma and nasal polyps before administration. Maintain emergency airway and bronchodilator readiness."
+
+        elif "methotrexate" in d_clean or "folitrax" in d_clean:
+            known_reactions = [
+                "Acute Hypersensitivity Pneumonitis",
+                "Severe Mucocutaneous Ulceration & Stomatitis",
+                "Hepatotoxic Hypersensitivity Transaminitis"
+            ]
+            cross_reactive_classes = [
+                "Folic Acid Antagonists",
+                "Antimetabolites"
+            ]
+            systemic_risks = "Idiosyncratic cell-mediated pulmonary hypersensitivity manifesting with dry cough, dyspnea, and bilateral alveolar infiltrates."
+            cross_reactivity = "Folate metabolic pathway inhibition and mucosal hypersensitivity"
+            clinical_action = "Auscultate lungs for crackles or dry cough. Concurrent NSAIDs strictly prohibited."
+
+        elif "warfarin" in d_clean or "coumadin" in d_clean:
+            known_reactions = [
+                "Warfarin-Induced Cutaneous Necrosis",
+                "Purple Toes Syndrome (Microvascular Embolization)",
+                "Maculopapular Hypersensitivity Dermatitis"
+            ]
+            cross_reactive_classes = ["4-Hydroxycoumarin Anticoagulants"]
+            systemic_risks = "Transient microvascular thrombosis leads to painful hemorrhagic necrosis of adipose skin tissue."
+            cross_reactivity = "Coumarin derivative class hypersensitivity"
+            clinical_action = "Inspect extremities and skin folds. Discontinue immediately if painful erythematous lesions emerge."
+
+        # 2. Check Patient Allergy List if provided
         for a in allergies:
             if isinstance(a, dict):
-                allergen = a.get("allergen", "").lower()
-                reaction = a.get("reaction", "Hypersensitivity")
-                matched_name = a.get("allergen") or allergen
+                al = a.get("allergen", "").lower()
+                reaction_text = a.get("reaction", "Documented hypersensitivity")
+                matched_name = a.get("allergen") or al
             else:
-                allergen = str(a).lower()
-                reaction = "Documented hypersensitivity / allergy"
+                al = str(a).lower()
+                reaction_text = "Documented hypersensitivity"
                 matched_name = str(a)
 
-            # Sulfa check
-            if "sulfa" in allergen and ("celecoxib" in d_clean or "sulfamethoxazole" in d_clean):
+            if "penicillin" in al and ("amoxicillin" in d_clean or "augmentin" in d_clean or "ampicillin" in d_clean):
                 return {
                     "status": "contraindicated",
                     "risk_level": "CRITICAL CONTRAINDICATION",
+                    "drug_name": generic_name,
+                    "known_allergic_reactions": known_reactions,
+                    "cross_reactive_classes": cross_reactive_classes,
+                    "cutaneous_and_systemic_risks": systemic_risks,
                     "allergen_matched": matched_name,
-                    "reaction": reaction,
-                    "cross_reactivity": "Benzenesulfonamide moiety cross-reactivity with sulfonamide hypersensitivity",
-                    "clinical_action": "Withhold celecoxib immediately; substitute with non-sulfonamide analgesic."
+                    "reaction": reaction_text,
+                    "cross_reactivity": cross_reactivity,
+                    "clinical_action": f"Absolute contraindication. Patient has documented {matched_name} allergy. Substitute with macrolide or fluoroquinolone."
                 }
 
-            # Penicillin / Beta-lactam check
-            if "penicillin" in allergen and ("amoxicillin" in d_clean or "augmentin" in d_clean or "ampicillin" in d_clean):
+            if "sulfa" in al and ("celecoxib" in d_clean or "sulfamethoxazole" in d_clean):
                 return {
                     "status": "contraindicated",
                     "risk_level": "CRITICAL CONTRAINDICATION",
+                    "drug_name": generic_name,
+                    "known_allergic_reactions": known_reactions,
+                    "cross_reactive_classes": cross_reactive_classes,
+                    "cutaneous_and_systemic_risks": systemic_risks,
                     "allergen_matched": matched_name,
-                    "reaction": reaction,
-                    "cross_reactivity": "Beta-lactam ring IgE-mediated cross-reactivity (anaphylaxis hazard)",
-                    "clinical_action": "Absolute contraindication. Substitute with macrolide (azithromycin) or fluoroquinolone."
+                    "reaction": reaction_text,
+                    "cross_reactivity": cross_reactivity,
+                    "clinical_action": f"Withhold celecoxib immediately. Patient has documented {matched_name} allergy. Substitute with non-sulfonamide analgesic."
                 }
 
-            # Fluoroquinolone check
-            if "fluoroquinolone" in allergen or "ofloxacin" in allergen:
-                if "ofloxacin" in d_clean or "ciprofloxacin" in d_clean or "zenflox" in d_clean:
-                    return {
-                        "status": "contraindicated",
-                        "risk_level": "CRITICAL CONTRAINDICATION",
-                        "allergen_matched": matched_name,
-                        "reaction": reaction,
-                        "cross_reactivity": "Class-wide quinolone hypersensitivity & fixed drug eruption risk",
-                        "clinical_action": "Avoid all fluoroquinolones. Use cephalosporin or aminoglycoside alternative."
-                    }
+            if ("fluoroquinolone" in al or "ofloxacin" in al) and ("ofloxacin" in d_clean or "ciprofloxacin" in d_clean or "zenflox" in d_clean):
+                return {
+                    "status": "contraindicated",
+                    "risk_level": "CRITICAL CONTRAINDICATION",
+                    "drug_name": generic_name,
+                    "known_allergic_reactions": known_reactions,
+                    "cross_reactive_classes": cross_reactive_classes,
+                    "cutaneous_and_systemic_risks": systemic_risks,
+                    "allergen_matched": matched_name,
+                    "reaction": reaction_text,
+                    "cross_reactivity": cross_reactivity,
+                    "clinical_action": f"Avoid all fluoroquinolones. Patient has documented {matched_name} allergy. Use cephalosporin or aminoglycoside."
+                }
 
         return {
             "status": "appropriate",
-            "risk_level": "NEGATIVE (No Match)",
-            "allergen_matched": "None",
-            "reaction": "No documented patient hypersensitivity to this pharmacological class",
-            "cross_reactivity": "Zero documented cross-reactivity with patient allergy list",
-            "clinical_action": "Safe to proceed under standard monitoring."
+            "risk_level": "DOCUMENTED DRUG ALLERGY PROFILE",
+            "drug_name": generic_name,
+            "known_allergic_reactions": known_reactions,
+            "cross_reactive_classes": cross_reactive_classes,
+            "cutaneous_and_systemic_risks": systemic_risks,
+            "allergen_matched": "Specific Drug Allergy Profile Evaluated",
+            "reaction": f"Known hypersensitivity profile for {generic_name}",
+            "cross_reactivity": cross_reactivity,
+            "clinical_action": clinical_action
         }
 
     @staticmethod

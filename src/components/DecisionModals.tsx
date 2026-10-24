@@ -392,6 +392,7 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
   const [medgemmaModalData, setMedgemmaModalData] = useState<MedGemmaEvaluation | null>(null);
   const [evaluatingMedgemmaIdx, setEvaluatingMedgemmaIdx] = useState<number | null>(null);
   const [isAuditingAllMedgemma, setIsAuditingAllMedgemma] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
   // Manual drug list state
   const [manualDrugs, setManualDrugs] = useState<PrescriptionDrug[]>([
@@ -421,23 +422,31 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setUploadedFile(file);
-      setSelectedSampleId('');
-      setExtractedData(null);
-      
+  const processUploadedFile = (file: File) => {
+    setUploadedFile(file);
+    setSelectedSampleId('');
+    setExtractedData(null);
+
+    const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+    if (!isPdf) {
       const objectUrl = URL.createObjectURL(file);
       setPreviewUrl(objectUrl);
-      
-      // Convert to base64 and execute scan
-      const reader = new FileReader();
-      reader.onload = (uploadEvent) => {
-        const base64Data = uploadEvent.target?.result as string;
-        runExtraction({ imageBase64: base64Data, fileName: file.name });
-      };
-      reader.readAsDataURL(file);
+    } else {
+      // Clear preview until PDF.js renders crisp 2x page canvas
+      setPreviewUrl('');
+    }
+
+    const reader = new FileReader();
+    reader.onload = (uploadEvent) => {
+      const base64Data = uploadEvent.target?.result as string;
+      runExtraction({ imageBase64: base64Data, fileName: file.name, file });
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      processUploadedFile(e.target.files[0]);
     }
   };
 
@@ -466,20 +475,39 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
     runExtraction({ sampleId, fileName: `${sampleId}.png` });
   };
 
-  const runExtraction = async (payload: { imageBase64?: string; sampleId?: string; fileName?: string }) => {
+  const runExtraction = async (payload: {
+    imageBase64?: string;
+    sampleId?: string;
+    fileName?: string;
+    file?: File;
+    arrayBuffer?: ArrayBuffer;
+    previewUrl?: string;
+  }) => {
+    const isPdf =
+      payload.fileName?.toLowerCase().endsWith('.pdf') ||
+      payload.file?.type === 'application/pdf';
+
     setIsProcessing(true);
     setActiveStep(1);
-    setStatusMessage('PaddleOCR (PP-OCRv6): Optical detection, line segmentation & angle orientation...');
+    setStatusMessage(
+      isPdf
+        ? 'Mozilla PDF.js v3.11: Extracting digital vector text layer & rendering page canvas...'
+        : 'PaddleOCR (PP-OCRv6): Optical detection, line segmentation & angle orientation...'
+    );
 
     const stepTimer = setTimeout(() => {
       setActiveStep(2);
-      setStatusMessage('Qwen-VL Vision-Language: Active chemical resolution, dose mapping & Sig parsing...');
-    }, 1200);
+      setStatusMessage(
+        qwenApiKey?.startsWith('AIza')
+          ? 'Google Gemini Flash Vision: Multimodal chemical resolution & Sig parsing...'
+          : 'Qwen-VL Vision-Language: Active chemical resolution, dose mapping & Sig parsing...'
+      );
+    }, 1100);
 
     const stepTimer2 = setTimeout(() => {
       setActiveStep(3);
       setStatusMessage('Clinical Ontology Grounding: RxNorm, NDC matching & contraindication synthesis...');
-    }, 2400);
+    }, 2200);
 
     try {
       const data = await extractPrescriptionUnified({
@@ -769,7 +797,23 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
             <div className="space-y-4">
               
               {/* File Upload Zone */}
-              <label className="border-2 border-dashed border-[#B6E8D3] hover:border-[#087F5B] bg-[#F7FAF8] hover:bg-[#F0F7F4] rounded-xl p-4 text-center cursor-pointer flex items-center justify-center gap-3.5 transition-all group">
+              <label
+                onDragOver={(e) => { e.preventDefault(); e.stopPropagation(); setIsDragging(true); }}
+                onDragLeave={(e) => { e.preventDefault(); e.stopPropagation(); setIsDragging(false); }}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setIsDragging(false);
+                  if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                    processUploadedFile(e.dataTransfer.files[0]);
+                  }
+                }}
+                className={`border-2 border-dashed ${
+                  isDragging
+                    ? 'border-[#087F5B] bg-[#EAF7F0]'
+                    : 'border-[#B6E8D3] hover:border-[#087F5B] bg-[#F7FAF8] hover:bg-[#F0F7F4]'
+                } rounded-xl p-4 text-center cursor-pointer flex items-center justify-center gap-3.5 transition-all group`}
+              >
                 <input
                   type="file"
                   accept=".pdf,.png,.jpg,.jpeg,.webp"
@@ -781,10 +825,10 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                 </div>
                 <div className="text-left">
                   <div className="text-xs font-bold text-[#172B25]">
-                    {uploadedFile ? uploadedFile.name : 'Upload Prescription Scan or Photo'}
+                    {uploadedFile ? uploadedFile.name : 'Upload or Drag & Drop Prescription (PDF or Image)'}
                   </div>
                   <div className="text-[10px] text-[#64756D]">
-                    PDF, JPG, PNG, WEBP • Direct PaddleOCR + Qwen-VL Vision extraction
+                    PDF, JPG, PNG, WEBP • Mozilla PDF.js Tier 1 & Google Gemini / Qwen Vision Tier 2
                   </div>
                 </div>
               </label>
@@ -804,11 +848,11 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                   <div className="grid grid-cols-3 gap-2 text-[11px]">
                     <div className={`p-2 rounded-lg border flex items-center gap-1.5 ${activeStep >= 1 ? 'bg-white border-[#087F5B] text-[#075E4B] font-semibold' : 'bg-gray-50 border-gray-200 text-gray-400'}`}>
                       <Scan className="w-3.5 h-3.5" />
-                      <span>1. PaddleOCR Detection</span>
+                      <span>1. PDF.js / Optical Engine</span>
                     </div>
                     <div className={`p-2 rounded-lg border flex items-center gap-1.5 ${activeStep >= 2 ? 'bg-white border-[#087F5B] text-[#075E4B] font-semibold' : 'bg-gray-50 border-gray-200 text-gray-400'}`}>
                       <Cpu className="w-3.5 h-3.5" />
-                      <span>2. Qwen-VL Reasoning</span>
+                      <span>2. Vision AI Reasoning</span>
                     </div>
                     <div className={`p-2 rounded-lg border flex items-center gap-1.5 ${activeStep >= 3 ? 'bg-white border-[#087F5B] text-[#075E4B] font-semibold' : 'bg-gray-50 border-gray-200 text-gray-400'}`}>
                       <ShieldCheck className="w-3.5 h-3.5" />
@@ -848,11 +892,17 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                         alt="Prescription Scan"
                         className="w-full h-auto object-contain block"
                       />
+                    ) : isProcessing ? (
+                      <div className="py-16 text-center text-[#087F5B] space-y-2">
+                        <Loader2 className="w-8 h-8 animate-spin mx-auto text-[#087F5B]" />
+                        <p className="text-xs font-bold text-[#172B25]">Rendering Document Preview...</p>
+                        <p className="text-[10px] text-gray-500">Mozilla PDF.js 2x High-Resolution Canvas</p>
+                      </div>
                     ) : (
                       <div className="py-16 text-center text-[#64756D] space-y-1.5">
                         <FileText className="w-8 h-8 mx-auto text-[#CBDAD4]" />
                         <p className="text-xs font-semibold text-[#172B25]">No document uploaded</p>
-                        <p className="text-[10px] text-gray-400">Upload a prescription scan above to preview</p>
+                        <p className="text-[10px] text-gray-400">Upload or drag & drop a PDF / image prescription to preview</p>
                       </div>
                     )}
 
@@ -928,30 +978,49 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                           </div>
                         </div>
 
-                        <span className="text-[10px] text-[#087F5B] font-mono font-semibold bg-white px-2 py-0.5 rounded border border-[#CBDAD4]">
-                          {extractedData.processingTimeMs} ms
-                        </span>
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          {extractedData.engine && (
+                            <span className="text-[10px] text-[#075E4B] font-semibold bg-emerald-50 px-2 py-0.5 rounded border border-[#B6E8D3] truncate max-w-[200px]" title={extractedData.engine}>
+                              {extractedData.engine.split('+')[0].trim()}
+                            </span>
+                          )}
+                          <span className="text-[10px] text-[#087F5B] font-mono font-semibold bg-white px-2 py-0.5 rounded border border-[#CBDAD4]">
+                            {extractedData.processingTimeMs} ms
+                          </span>
+                        </div>
                       </div>
 
                       {/* Architecture Query Router Execution Path Banner */}
                       {extractedData.route_taken && (
                         <div className={`p-2.5 rounded-xl border flex items-center justify-between text-xs transition-all ${
-                          extractedData.route_taken.includes('Fast Path')
+                          extractedData.route_taken.includes('PDF.js')
+                            ? 'bg-blue-50/80 border-blue-300 text-blue-950'
+                            : extractedData.route_taken.includes('Fast Path')
                             ? 'bg-emerald-50/80 border-emerald-300 text-emerald-950'
                             : 'bg-purple-50/80 border-purple-300 text-purple-950'
                         }`}>
                           <div className="flex items-center gap-2">
                             <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 ${
-                              extractedData.route_taken.includes('Fast Path')
+                              extractedData.route_taken.includes('PDF.js')
+                                ? 'bg-blue-700 text-white'
+                                : extractedData.route_taken.includes('Fast Path')
                                 ? 'bg-emerald-700 text-white'
                                 : 'bg-purple-700 text-white'
                             }`}>
-                              {extractedData.route_taken.includes('Fast Path') ? '⚡ Fast Path' : '🟣 Slow Path'}
+                              {extractedData.route_taken.includes('PDF.js')
+                                ? '📄 Tier 1 PDF.js'
+                                : extractedData.route_taken.includes('Fast Path')
+                                ? '⚡ Fast Path'
+                                : '🟣 Slow Path'}
                             </span>
                             <span className="font-bold text-[11px]">{extractedData.route_taken}</span>
                           </div>
                           <span className="text-[10px] font-mono opacity-80">
-                            {extractedData.route_taken.includes('Fast Path') ? 'SQLite GoldenDataset • Deterministic' : 'MedGemma + Lynx-8B Guard'}
+                            {extractedData.route_taken.includes('PDF.js')
+                              ? 'Mozilla PDF.js In-Browser • $0.00 • 50ms'
+                              : extractedData.route_taken.includes('Fast Path')
+                              ? 'SQLite GoldenDataset • Deterministic'
+                              : 'MedGemma + Lynx-8B Guard'}
                           </span>
                         </div>
                       )}

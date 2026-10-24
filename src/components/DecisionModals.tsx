@@ -333,8 +333,19 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<'scan' | 'benchmark' | 'manual'>('scan');
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string>('/prescriptions/ekacare/page_018.png');
-  const [selectedSampleId, setSelectedSampleId] = useState<string>('page_018');
+  const [previewUrl, setPreviewUrl] = useState<string>('');
+  const [selectedSampleId, setSelectedSampleId] = useState<string>('');
+  
+  // Reset state when modal is opened or closed so nothing appears by default
+  useEffect(() => {
+    if (!isOpen) {
+      setPreviewUrl('');
+      setSelectedSampleId('');
+      setUploadedFile(null);
+      setExtractedData(null);
+      setIsProcessing(false);
+    }
+  }, [isOpen]);
   
   // Pipeline Progress State
   const [isProcessing, setIsProcessing] = useState(false);
@@ -768,109 +779,32 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
           {activeTab === 'scan' ? (
             <div className="space-y-4">
               
-              {/* Preset Selector & File Upload Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-2.5">
-                {/* Upload tile */}
-                <label className="border-2 border-dashed border-[#B6E8D3] hover:border-[#087F5B] bg-[#F7FAF8] hover:bg-[#F0F7F4] rounded-xl p-2.5 text-center cursor-pointer flex flex-col items-center justify-center transition-all group">
+              {/* File Upload Row */}
+              <div className="bg-[#F7FAF8] border-2 border-dashed border-[#B6E8D3] hover:border-[#087F5B] rounded-xl p-4 transition-all">
+                <label className="flex flex-col sm:flex-row items-center justify-between gap-3 cursor-pointer">
                   <input
                     type="file"
                     accept=".pdf,.png,.jpg,.jpeg,.webp"
                     onChange={handleFileUpload}
                     className="hidden"
                   />
-                  <div className="w-7 h-7 rounded-full bg-[#DDF5EA] text-[#087F5B] flex items-center justify-center mb-1 group-hover:scale-105 transition-transform">
-                    <Upload className="w-3.5 h-3.5" />
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#DDF5EA] text-[#087F5B] flex items-center justify-center flex-shrink-0">
+                      <Upload className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-[#172B25]">
+                        {uploadedFile ? uploadedFile.name : 'Upload Prescription Scan (PNG, JPG, PDF)'}
+                      </div>
+                      <div className="text-[11px] text-[#64756D]">
+                        Upload a scanned prescription image to trigger PaddleOCR optical detection and live multimodal AI reasoning.
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-xs font-bold text-[#172B25]">
-                    Upload Custom Scan
-                  </div>
-                  <div className="text-[10px] text-[#64756D]">
-                    PDF, JPG, PNG
-                  </div>
+                  <span className="px-3.5 py-1.5 bg-[#087F5B] hover:bg-[#075E4B] text-white text-xs font-bold rounded-lg shadow-sm whitespace-nowrap">
+                    {uploadedFile ? 'Change Image' : 'Select Prescription'}
+                  </span>
                 </label>
-
-                {/* White Tusk Dental Clinic Real Rx */}
-                <div 
-                  onClick={() => handleSelectSample('white_tusk_dental')}
-                  className={`p-2.5 rounded-xl border cursor-pointer transition-all ${
-                    selectedSampleId === 'white_tusk_dental'
-                      ? 'border-[#087F5B] bg-[#F0F7F4] ring-1 ring-[#087F5B]'
-                      : 'border-[#E1EAE5] bg-white hover:border-[#CBDAD4]'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-0.5">
-                    <span className="text-[10px] font-bold text-[#087F5B] uppercase tracking-wider">🦷 The White Tusk</span>
-                    <span className="text-[9px] font-semibold px-1 py-0.2 bg-emerald-100 text-emerald-800 rounded">Dental Clinic</span>
-                  </div>
-                  <div className="text-xs font-bold text-[#172B25] truncate">Sachin Sansare (28M)</div>
-                  <div className="text-[10px] text-[#64756D] truncate mt-0.5">Augmentin + Enzoflam + Pan-D + Hexigel</div>
-                </div>
-
-                {/* Afsar Polyclinic Real Rx */}
-                <div 
-                  onClick={() => handleSelectSample('sample_rx_afsar_polyclinic')}
-                  className={`p-2.5 rounded-xl border cursor-pointer transition-all ${
-                    selectedSampleId === 'sample_rx_afsar_polyclinic'
-                      ? 'border-[#087F5B] bg-[#F0F7F4] ring-1 ring-[#087F5B]'
-                      : 'border-[#E1EAE5] bg-white hover:border-[#CBDAD4]'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-0.5">
-                    <span className="text-[10px] font-bold text-[#087F5B] uppercase tracking-wider">🏥 Afsar Polyclinic</span>
-                    <span className="text-[9px] font-semibold px-1 py-0.2 bg-emerald-100 text-emerald-800 rounded">Gastroenteritis</span>
-                  </div>
-                  <div className="text-xs font-bold text-[#172B25] truncate">Shaik Rehan (17M)</div>
-                  <div className="text-[10px] text-[#64756D] truncate mt-0.5">Zenflox + Rabemac DSR + Zincovit + Electral + Cital</div>
-                </div>
-
-                {/* Verified Presets */}
-                <div 
-                  onClick={() => handleSelectSample('page_018')}
-                  className={`p-2.5 rounded-xl border cursor-pointer transition-all ${
-                    selectedSampleId === 'page_018'
-                      ? 'border-[#087F5B] bg-[#F0F7F4] ring-1 ring-[#087F5B]'
-                      : 'border-[#E1EAE5] bg-white hover:border-[#CBDAD4]'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-0.5">
-                    <span className="text-[10px] font-bold text-amber-700 uppercase tracking-wider">✍️ Doctor Cursive</span>
-                    <span className="text-[9px] font-semibold px-1 py-0.2 bg-red-100 text-red-700 rounded">MTX Toxicity</span>
-                  </div>
-                  <div className="text-xs font-bold text-[#172B25] truncate">Page 18: Folitrax + Retoz</div>
-                  <div className="text-[10px] text-[#64756D] truncate mt-0.5">Methotrexate + NSAID Bone Marrow Hazard</div>
-                </div>
-
-                <div 
-                  onClick={() => handleSelectSample('page_007')}
-                  className={`p-2.5 rounded-xl border cursor-pointer transition-all ${
-                    selectedSampleId === 'page_007'
-                      ? 'border-[#087F5B] bg-[#F0F7F4] ring-1 ring-[#087F5B]'
-                      : 'border-[#E1EAE5] bg-white hover:border-[#CBDAD4]'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-0.5">
-                    <span className="text-[10px] font-bold text-amber-700 uppercase tracking-wider">✍️ Handwritten Note</span>
-                    <span className="text-[9px] font-semibold px-1 py-0.2 bg-red-100 text-red-700 rounded">FDE Allergy</span>
-                  </div>
-                  <div className="text-xs font-bold text-[#172B25] truncate">Page 07: Fixed Drug Eruption</div>
-                  <div className="text-[10px] text-[#64756D] truncate mt-0.5">'Avoid Norfloxacin/Ciprofloxacin' note</div>
-                </div>
-
-                <div 
-                  onClick={() => handleSelectSample('page_015')}
-                  className={`p-2.5 rounded-xl border cursor-pointer transition-all ${
-                    selectedSampleId === 'page_015'
-                      ? 'border-[#087F5B] bg-[#F0F7F4] ring-1 ring-[#087F5B]'
-                      : 'border-[#E1EAE5] bg-white hover:border-[#CBDAD4]'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-0.5">
-                    <span className="text-[10px] font-bold text-[#087F5B] uppercase tracking-wider">Nephropathy Precaution</span>
-                    <span className="text-[9px] font-semibold px-1 py-0.2 bg-amber-100 text-amber-800 rounded">CKD 3b</span>
-                  </div>
-                  <div className="text-xs font-bold text-[#172B25] truncate">Page 15: Type 2 DM + Cr-1.94</div>
-                  <div className="text-[10px] text-[#64756D] truncate mt-0.5">Renal diet & Avoid Painkillers rule</div>
-                </div>
               </div>
 
               {/* Processing Progress Bar */}
@@ -925,49 +859,80 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                     )}
                   </div>
 
-                  <div className="relative border border-[#CBDAD4] rounded-lg overflow-hidden bg-white max-h-[380px] flex items-center justify-center">
-                    <img
-                      src={previewUrl}
-                      alt="Prescription Scan"
-                      className="w-full h-auto object-contain block"
-                    />
+                  <div className="relative border border-[#CBDAD4] rounded-lg overflow-hidden bg-white min-h-[300px] max-h-[380px] flex items-center justify-center">
+                    {previewUrl ? (
+                      <>
+                        <img
+                          src={previewUrl}
+                          alt="Prescription Scan"
+                          className="w-full h-auto object-contain block"
+                        />
 
-                    {/* PaddleOCR Bounding Boxes Overlay */}
-                    {showBoundingBoxes && extractedData && extractedData.ocrTokens && extractedData.ocrTokens.map((tok, idx) => {
-                      if (!tok.box || tok.box.length < 4) return null;
-                      const [x1, y1, x2, y2] = tok.box;
-                      const imgW = extractedData.imageWidth || 800;
-                      const imgH = extractedData.imageHeight || 1000;
-                      
-                      const left = (Math.min(x1, x2) / imgW) * 100;
-                      const top = (Math.min(y1, y2) / imgH) * 100;
-                      const width = (Math.abs(x2 - x1) / imgW) * 100;
-                      const height = (Math.abs(y2 - y1) / imgH) * 100;
+                        {/* PaddleOCR Bounding Boxes Overlay */}
+                        {showBoundingBoxes && extractedData && extractedData.ocrTokens && extractedData.ocrTokens.map((tok, idx) => {
+                          if (!tok.box || tok.box.length < 4) return null;
+                          const [x1, y1, x2, y2] = tok.box;
+                          const imgW = extractedData.imageWidth || 800;
+                          const imgH = extractedData.imageHeight || 1000;
+                          
+                          const left = (Math.min(x1, x2) / imgW) * 100;
+                          const top = (Math.min(y1, y2) / imgH) * 100;
+                          const width = (Math.abs(x2 - x1) / imgW) * 100;
+                          const height = (Math.abs(y2 - y1) / imgH) * 100;
 
-                      return (
-                        <div
-                          key={idx}
-                          style={{
-                            left: `${left}%`,
-                            top: `${top}%`,
-                            width: `${Math.max(width, 3)}%`,
-                            height: `${Math.max(height, 2)}%`,
-                          }}
-                          className="absolute border border-emerald-500 bg-emerald-500/15 pointer-events-auto hover:bg-emerald-500/40 hover:z-20 group transition-all"
-                          title={`${tok.text} (${Math.round(tok.confidence * 100)}% conf)`}
-                        >
-                          <div className="hidden group-hover:block absolute bottom-full left-0 bg-[#172B25] text-white text-[9px] px-1.5 py-0.5 rounded shadow-md whitespace-nowrap z-30 pointer-events-none">
-                            {tok.text} • {Math.round(tok.confidence * 100)}%
-                          </div>
+                          return (
+                            <div
+                              key={idx}
+                              style={{
+                                left: `${left}%`,
+                                top: `${top}%`,
+                                width: `${Math.max(width, 3)}%`,
+                                height: `${Math.max(height, 2)}%`,
+                              }}
+                              className="absolute border border-emerald-500 bg-emerald-500/15 pointer-events-auto hover:bg-emerald-500/40 hover:z-20 group transition-all"
+                              title={`${tok.text} (${Math.round(tok.confidence * 100)}% conf)`}
+                            >
+                              <div className="hidden group-hover:block absolute bottom-full left-0 bg-[#172B25] text-white text-[9px] px-1.5 py-0.5 rounded shadow-md whitespace-nowrap z-30 pointer-events-none">
+                                {tok.text} • {Math.round(tok.confidence * 100)}%
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </>
+                    ) : (
+                      <label className="p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-gray-50 transition-colors w-full h-full min-h-[260px]">
+                        <input
+                          type="file"
+                          accept=".pdf,.png,.jpg,.jpeg,.webp"
+                          onChange={handleFileUpload}
+                          className="hidden"
+                        />
+                        <div className="w-12 h-12 rounded-full bg-[#DDF5EA] text-[#087F5B] flex items-center justify-center mb-2">
+                          <UploadCloud className="w-6 h-6" />
                         </div>
-                      );
-                    })}
+                        <span className="text-xs font-bold text-[#172B25]">No Document Selected</span>
+                        <span className="text-[11px] text-[#64756D] mt-1 max-w-[220px]">
+                          Upload a prescription file (PNG, JPG, PDF) to preview and extract
+                        </span>
+                      </label>
+                    )}
                   </div>
 
-                  {/* Manual Run button if not already extracted */}
-                  {!extractedData && !isProcessing && (
+                  {/* Manual Run button if image loaded but not yet extracted */}
+                  {previewUrl && !extractedData && !isProcessing && (
                     <button
-                      onClick={() => runExtraction({ sampleId: selectedSampleId || 'page_018' })}
+                      onClick={() => {
+                        if (uploadedFile) {
+                          const reader = new FileReader();
+                          reader.onload = (uploadEvent) => {
+                            const base64Data = uploadEvent.target?.result as string;
+                            runExtraction({ imageBase64: base64Data, fileName: uploadedFile.name });
+                          };
+                          reader.readAsDataURL(uploadedFile);
+                        } else if (previewUrl) {
+                          runExtraction({ imageBase64: previewUrl, sampleId: selectedSampleId || undefined });
+                        }
+                      }}
                       className="w-full py-2 bg-[#087F5B] hover:bg-[#075E4B] text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all"
                     >
                       <Sparkles className="w-3.5 h-3.5" />
@@ -1489,13 +1454,13 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                       </div>
                     </>
                   ) : (
-                    <div className="h-full border border-dashed border-[#CBDAD4] rounded-xl p-8 flex flex-col items-center justify-center text-center text-[#64756D] space-y-2">
-                      <Scan className="w-8 h-8 text-[#087F5B]/50 animate-pulse" />
-                      <div className="text-xs font-semibold text-[#172B25]">
-                        Ready for Clinical Extraction
+                    <div className="h-full min-h-[300px] border border-dashed border-[#CBDAD4] rounded-xl p-8 flex flex-col items-center justify-center text-center text-[#64756D] space-y-2.5">
+                      <Scan className="w-10 h-10 text-[#087F5B]/40" />
+                      <div className="text-sm font-bold text-[#172B25]">
+                        No Prescription Scanned Yet
                       </div>
-                      <p className="text-[11px] max-w-xs">
-                        Select a verified test prescription above or browse the 70-page benchmark dataset. PaddleOCR and Qwen-VL will extract active drugs, patient allergy context, and calculate safety findings.
+                      <p className="text-[11px] text-gray-500 max-w-sm leading-relaxed">
+                        Upload a prescription on the left to begin optical extraction. The verified clinical entities, RxNorm standard doses, patient demographics, and MedGemma safety rules will appear here after scanning.
                       </p>
                     </div>
                   )}

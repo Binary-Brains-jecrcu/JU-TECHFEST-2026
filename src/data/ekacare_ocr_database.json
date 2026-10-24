@@ -10621,25 +10621,25 @@
     ],
     "patient": {
       "id": "PT-89015",
-      "name": "Eleanor Vance",
-      "gender": "Female",
-      "age": 58,
-      "dob": "22-Sep-23",
+      "name": "Prescription Patient",
+      "gender": "Adult",
+      "age": 45,
+      "dob": "Unspecified",
       "weightKg": 64,
       "unit": "Rheumatology & General Medicine",
       "allergies": [
         {
-          "id": "al-0",
-          "allergen": "Sulfa Drugs",
-          "reaction": "Anaphylactoid Rash",
-          "severity": "severe"
+          "id": "al-nkda",
+          "allergen": "No Known Drug Allergies (NKDA)",
+          "reaction": "Standard outpatient monitoring",
+          "severity": "mild"
         }
       ],
       "renalLabs": {
-        "eGFR": 65,
+        "eGFR": 90,
         "eGFRCategory": "Preserved Renal Function",
         "serumCr": 0.9,
-        "crCl": 65,
+        "crCl": 90,
         "timestamp": "Today (08:30 AM)"
       },
       "conditions": [

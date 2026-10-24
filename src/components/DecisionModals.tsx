@@ -336,17 +336,6 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
   const [previewUrl, setPreviewUrl] = useState<string>('');
   const [selectedSampleId, setSelectedSampleId] = useState<string>('');
   
-  // Reset state when modal is opened or closed so nothing appears by default
-  useEffect(() => {
-    if (!isOpen) {
-      setPreviewUrl('');
-      setSelectedSampleId('');
-      setUploadedFile(null);
-      setExtractedData(null);
-      setIsProcessing(false);
-    }
-  }, [isOpen]);
-  
   // Pipeline Progress State
   const [isProcessing, setIsProcessing] = useState(false);
   const [activeStep, setActiveStep] = useState<1 | 2 | 3>(1);
@@ -779,31 +768,24 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
           {activeTab === 'scan' ? (
             <div className="space-y-4">
               
-              {/* File Upload Row */}
-              <div className="bg-[#F7FAF8] border-2 border-dashed border-[#B6E8D3] hover:border-[#087F5B] rounded-xl p-4 transition-all">
-                <label className="flex flex-col sm:flex-row items-center justify-between gap-3 cursor-pointer">
+              {/* File Upload Dropzone */}
+              <div>
+                <label className="border-2 border-dashed border-[#B6E8D3] hover:border-[#087F5B] bg-[#F7FAF8] hover:bg-[#F0F7F4] rounded-xl p-6 text-center cursor-pointer flex flex-col items-center justify-center transition-all group w-full">
                   <input
                     type="file"
                     accept=".pdf,.png,.jpg,.jpeg,.webp"
                     onChange={handleFileUpload}
                     className="hidden"
                   />
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#DDF5EA] text-[#087F5B] flex items-center justify-center flex-shrink-0">
-                      <Upload className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <div className="text-xs font-bold text-[#172B25]">
-                        {uploadedFile ? uploadedFile.name : 'Upload Prescription Scan (PNG, JPG, PDF)'}
-                      </div>
-                      <div className="text-[11px] text-[#64756D]">
-                        Upload a scanned prescription image to trigger PaddleOCR optical detection and live multimodal AI reasoning.
-                      </div>
-                    </div>
+                  <div className="w-12 h-12 rounded-full bg-[#DDF5EA] text-[#087F5B] flex items-center justify-center mb-2 group-hover:scale-105 transition-transform shadow-sm">
+                    <Upload className="w-6 h-6" />
                   </div>
-                  <span className="px-3.5 py-1.5 bg-[#087F5B] hover:bg-[#075E4B] text-white text-xs font-bold rounded-lg shadow-sm whitespace-nowrap">
-                    {uploadedFile ? 'Change Image' : 'Select Prescription'}
-                  </span>
+                  <div className="text-sm font-bold text-[#172B25]">
+                    {uploadedFile ? uploadedFile.name : 'Click to Upload Prescription Scan or Photo'}
+                  </div>
+                  <div className="text-xs text-[#64756D] mt-1">
+                    Supports PDF, JPG, PNG, WEBP (Camera photos &amp; hospital records)
+                  </div>
                 </label>
               </div>
 
@@ -859,80 +841,56 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                     )}
                   </div>
 
-                  <div className="relative border border-[#CBDAD4] rounded-lg overflow-hidden bg-white min-h-[300px] max-h-[380px] flex items-center justify-center">
+                  <div className="relative border border-[#CBDAD4] rounded-lg overflow-hidden bg-white min-h-[160px] max-h-[380px] flex items-center justify-center">
                     {previewUrl ? (
-                      <>
-                        <img
-                          src={previewUrl}
-                          alt="Prescription Scan"
-                          className="w-full h-auto object-contain block"
-                        />
-
-                        {/* PaddleOCR Bounding Boxes Overlay */}
-                        {showBoundingBoxes && extractedData && extractedData.ocrTokens && extractedData.ocrTokens.map((tok, idx) => {
-                          if (!tok.box || tok.box.length < 4) return null;
-                          const [x1, y1, x2, y2] = tok.box;
-                          const imgW = extractedData.imageWidth || 800;
-                          const imgH = extractedData.imageHeight || 1000;
-                          
-                          const left = (Math.min(x1, x2) / imgW) * 100;
-                          const top = (Math.min(y1, y2) / imgH) * 100;
-                          const width = (Math.abs(x2 - x1) / imgW) * 100;
-                          const height = (Math.abs(y2 - y1) / imgH) * 100;
-
-                          return (
-                            <div
-                              key={idx}
-                              style={{
-                                left: `${left}%`,
-                                top: `${top}%`,
-                                width: `${Math.max(width, 3)}%`,
-                                height: `${Math.max(height, 2)}%`,
-                              }}
-                              className="absolute border border-emerald-500 bg-emerald-500/15 pointer-events-auto hover:bg-emerald-500/40 hover:z-20 group transition-all"
-                              title={`${tok.text} (${Math.round(tok.confidence * 100)}% conf)`}
-                            >
-                              <div className="hidden group-hover:block absolute bottom-full left-0 bg-[#172B25] text-white text-[9px] px-1.5 py-0.5 rounded shadow-md whitespace-nowrap z-30 pointer-events-none">
-                                {tok.text} • {Math.round(tok.confidence * 100)}%
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </>
+                      <img
+                        src={previewUrl}
+                        alt="Prescription Scan"
+                        className="w-full h-auto object-contain block"
+                      />
                     ) : (
-                      <label className="p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-gray-50 transition-colors w-full h-full min-h-[260px]">
-                        <input
-                          type="file"
-                          accept=".pdf,.png,.jpg,.jpeg,.webp"
-                          onChange={handleFileUpload}
-                          className="hidden"
-                        />
-                        <div className="w-12 h-12 rounded-full bg-[#DDF5EA] text-[#087F5B] flex items-center justify-center mb-2">
-                          <UploadCloud className="w-6 h-6" />
-                        </div>
-                        <span className="text-xs font-bold text-[#172B25]">No Document Selected</span>
-                        <span className="text-[11px] text-[#64756D] mt-1 max-w-[220px]">
-                          Upload a prescription file (PNG, JPG, PDF) to preview and extract
-                        </span>
-                      </label>
+                      <div className="text-center p-8 text-[#64756D] text-xs">
+                        <UploadCloud className="w-8 h-8 mx-auto mb-2 text-[#CBDAD4]" />
+                        Upload a prescription scan above to begin AI handwriting extraction
+                      </div>
                     )}
+
+                    {/* PaddleOCR Bounding Boxes Overlay */}
+                    {showBoundingBoxes && extractedData && extractedData.ocrTokens && extractedData.ocrTokens.map((tok, idx) => {
+                      if (!tok.box || tok.box.length < 4) return null;
+                      const [x1, y1, x2, y2] = tok.box;
+                      const imgW = extractedData.imageWidth || 800;
+                      const imgH = extractedData.imageHeight || 1000;
+                      
+                      const left = (Math.min(x1, x2) / imgW) * 100;
+                      const top = (Math.min(y1, y2) / imgH) * 100;
+                      const width = (Math.abs(x2 - x1) / imgW) * 100;
+                      const height = (Math.abs(y2 - y1) / imgH) * 100;
+
+                      return (
+                        <div
+                          key={idx}
+                          style={{
+                            left: `${left}%`,
+                            top: `${top}%`,
+                            width: `${Math.max(width, 3)}%`,
+                            height: `${Math.max(height, 2)}%`,
+                          }}
+                          className="absolute border border-emerald-500 bg-emerald-500/15 pointer-events-auto hover:bg-emerald-500/40 hover:z-20 group transition-all"
+                          title={`${tok.text} (${Math.round(tok.confidence * 100)}% conf)`}
+                        >
+                          <div className="hidden group-hover:block absolute bottom-full left-0 bg-[#172B25] text-white text-[9px] px-1.5 py-0.5 rounded shadow-md whitespace-nowrap z-30 pointer-events-none">
+                            {tok.text} • {Math.round(tok.confidence * 100)}%
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
 
-                  {/* Manual Run button if image loaded but not yet extracted */}
-                  {previewUrl && !extractedData && !isProcessing && (
+                  {/* Manual Run button if not already extracted */}
+                  {!extractedData && !isProcessing && (
                     <button
-                      onClick={() => {
-                        if (uploadedFile) {
-                          const reader = new FileReader();
-                          reader.onload = (uploadEvent) => {
-                            const base64Data = uploadEvent.target?.result as string;
-                            runExtraction({ imageBase64: base64Data, fileName: uploadedFile.name });
-                          };
-                          reader.readAsDataURL(uploadedFile);
-                        } else if (previewUrl) {
-                          runExtraction({ imageBase64: previewUrl, sampleId: selectedSampleId || undefined });
-                        }
-                      }}
+                      onClick={() => runExtraction({ sampleId: selectedSampleId || 'page_018' })}
                       className="w-full py-2 bg-[#087F5B] hover:bg-[#075E4B] text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all"
                     >
                       <Sparkles className="w-3.5 h-3.5" />
@@ -1454,13 +1412,13 @@ export const PrescriptionUploadModal: React.FC<UploadModalProps> = ({
                       </div>
                     </>
                   ) : (
-                    <div className="h-full min-h-[300px] border border-dashed border-[#CBDAD4] rounded-xl p-8 flex flex-col items-center justify-center text-center text-[#64756D] space-y-2.5">
-                      <Scan className="w-10 h-10 text-[#087F5B]/40" />
-                      <div className="text-sm font-bold text-[#172B25]">
-                        No Prescription Scanned Yet
+                    <div className="h-full border border-dashed border-[#CBDAD4] rounded-xl p-8 flex flex-col items-center justify-center text-center text-[#64756D] space-y-2">
+                      <Scan className="w-8 h-8 text-[#087F5B]/50 animate-pulse" />
+                      <div className="text-xs font-semibold text-[#172B25]">
+                        Ready for Clinical Extraction
                       </div>
-                      <p className="text-[11px] text-gray-500 max-w-sm leading-relaxed">
-                        Upload a prescription on the left to begin optical extraction. The verified clinical entities, RxNorm standard doses, patient demographics, and MedGemma safety rules will appear here after scanning.
+                      <p className="text-[11px] max-w-xs">
+                        Select a verified test prescription above or browse the 70-page benchmark dataset. PaddleOCR and Qwen-VL will extract active drugs, patient allergy context, and calculate safety findings.
                       </p>
                     </div>
                   )}

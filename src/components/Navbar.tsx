@@ -68,21 +68,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Plus className="w-4 h-4" />
             <span>New Check</span>
           </button>
-
-          {/* Clinician Profile */}
-          <div className="hidden sm:flex items-center gap-2.5 pl-2 border-l border-[#E1EAE5]">
-            <div className="w-8 h-8 rounded-full bg-[#DDF5EA] text-[#075E4B] font-bold text-xs flex items-center justify-center border border-[#20A88A]/40">
-              SV
-            </div>
-            <div className="flex flex-col text-left">
-              <span className="text-xs font-semibold text-[#172B25] leading-none">
-                Dr. Sarah Vance, PharmD
-              </span>
-              <span className="text-[10px] text-[#64756D] mt-0.5">
-                PH-8831
-              </span>
-            </div>
-          </div>
         </div>
 
       </div>

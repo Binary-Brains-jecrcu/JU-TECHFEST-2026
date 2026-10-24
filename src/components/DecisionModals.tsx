@@ -106,8 +106,8 @@ export const OverrideModal: React.FC<OverrideModalProps> = ({
 
           <div className="bg-[#DDF5EA]/50 border border-[#B6E8D3] rounded-lg p-3 text-[11px] text-[#075E4B] flex items-center justify-between">
             <div>
-              <span className="font-bold">Credential Sign-Off:</span> Dr. Sarah Vance, PharmD
-              <div className="text-[10px] text-[#64756D]">License: PH-8831 • Inpatient Pharmacy Lead</div>
+              <span className="font-bold">Credential Sign-Off:</span> Attending Clinical Pharmacist
+              <div className="text-[10px] text-[#64756D]">Clinical Pharmacotherapy Lead</div>
             </div>
             <UserCheck className="w-4 h-4 text-[#087F5B]" />
           </div>
